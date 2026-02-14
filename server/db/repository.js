@@ -72,7 +72,7 @@ async function generateInvoiceNumber(tenantId) {
 // =====================================================
 
 export async function getTenants() {
-  const result = await query('SELECT * FROM emr.tenants ORDER BY name');
+  const result = await query('SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name');
   return result.rows;
 }
 

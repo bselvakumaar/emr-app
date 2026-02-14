@@ -6,18 +6,23 @@
   # Build the React frontend
   command   = "npm run build"
   publish   = "client/dist"
-  # Netlify Functions directory (contains our Express wrapper)
-  functions = "server"
+  # Netlify Functions directory (dedicated folder, not the server dir)
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Bundle functions with esbuild to include all server dependencies
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["server/**"]
 
 # =====================================================
 # Redirect all /api/* requests to the serverless function
 # =====================================================
 [[redirects]]
   from   = "/api/*"
-  to     = "/.netlify/functions/lambda/:splat"
+  to     = "/.netlify/functions/api/api/:splat"
   status = 200
   force  = true
 
