@@ -61,11 +61,9 @@ export default function App() {
   }, [allowedViews, view]);
 
   useEffect(() => {
-    if (!tenant) {
-      return;
-    }
-    document.documentElement.style.setProperty('--primary', tenant.theme.primary);
-    document.documentElement.style.setProperty('--accent', tenant.theme.accent);
+    if (!tenant) return;
+    // Tenant theme colors are available as tenant.theme.primary / accent
+    // but we use the design-system palette instead
   }, [tenant]);
 
   async function loadTenants() {
@@ -219,7 +217,7 @@ export default function App() {
         />
       )}
 
-      {view === 'dashboard' && <DashboardPage metrics={metrics} />}
+      {view === 'dashboard' && <DashboardPage metrics={metrics} activeUser={activeUser} />}
 
       {view === 'patients' && (
         <PatientsPage

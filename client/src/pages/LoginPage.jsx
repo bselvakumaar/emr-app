@@ -1,27 +1,38 @@
 export default function LoginPage({ tenants, onLogin, loading, error }) {
   return (
-    <div className="main-panel" style={{ maxWidth: 620, margin: '2rem auto' }}>
-      <article className="panel">
-        <h2>EMR Login</h2>
-        <p>First workflow: select tenant and login.</p>
-        <form className="form-grid" onSubmit={onLogin}>
-          <select name="tenantId" defaultValue="" required>
-            <option value="" disabled>Select Tenant</option>
-            <option value="superadmin">Platform Superadmin</option>
-            {tenants.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
-          </select>
-          <input name="email" placeholder="Email" required />
-          <input name="password" type="password" placeholder="Password" required />
-          <button type="submit">Login</button>
+    <div className="login-wrapper">
+      <div className="login-card">
+        <div className="login-brand">
+          <div className="login-brand-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
+          </div>
+          <h2>EMR System</h2>
+          <p>Multi-Tenant Healthcare Platform</p>
+        </div>
+
+        <form className="login-form" onSubmit={onLogin}>
+          <div className="login-field">
+            <select name="tenantId" defaultValue="" required>
+              <option value="" disabled>Select Organization</option>
+              <option value="superadmin">Platform Superadmin</option>
+              {tenants.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+            </select>
+          </div>
+          <div className="login-field">
+            <input name="email" type="email" placeholder="Email address" required autoComplete="email" />
+          </div>
+          <div className="login-field">
+            <input name="password" type="password" placeholder="Password" required autoComplete="current-password" />
+          </div>
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? 'Signing in...' : 'Sign In'}
+          </button>
         </form>
-        <ul className="list" style={{ marginTop: '1rem' }}>
-          <li>Superadmin: superadmin@emr.local / Admin@123</li>
-          <li>Tenant Admin: anita@sch.local / Anita@123</li>
-          <li>Patient: meena@sch.local / Meena@123</li>
-        </ul>
-        {loading && <p>Authenticating...</p>}
-        {error && <div className="error-box">{error}</div>}
-      </article>
+
+        {error && <div className="login-error" style={{ marginTop: '0.75rem' }}>{error}</div>}
+      </div>
     </div>
   );
 }
