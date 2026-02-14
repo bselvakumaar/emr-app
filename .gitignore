@@ -3,3 +3,4 @@ node_modules/
 server.log
 debug_login.log
 dist/
+.netlify/

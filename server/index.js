@@ -1011,9 +1011,21 @@ app.use((err, _req, res, _next) => {
 // START SERVER
 // =====================================================
 
-app.listen(PORT, () => {
-  console.log(`✅ EMR API v2.0 listening on http://localhost:${PORT}`);
-  console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`   Database: PostgreSQL`);
-  console.log(`   Authentication: JWT`);
-});
+// Export the app for serverless use (Netlify Functions)
+export { app };
+export default app;
+
+// Only start listening when running directly (not when imported as a module)
+const isDirectRun = process.argv[1] && (
+  process.argv[1].endsWith('index.js') ||
+  process.argv[1].endsWith('server/index.js')
+);
+
+if (isDirectRun) {
+  app.listen(PORT, () => {
+    console.log(`✅ EMR API v2.0 listening on http://localhost:${PORT}`);
+    console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`   Database: PostgreSQL`);
+    console.log(`   Authentication: JWT`);
+  });
+}
