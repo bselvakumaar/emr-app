@@ -1029,6 +1029,11 @@ if (isDirectRun) {
   // SERVE FRONTEND (Production)
   // =====================================================
 
+  // Handle 404 for API routes specifically
+  app.all('/api/*', (req, res) => {
+    res.status(404).json({ error: 'API route not found' });
+  });
+
   // Serve static files from the React app
   app.use(express.static(path.join(__dirname, '../client/dist')));
 
