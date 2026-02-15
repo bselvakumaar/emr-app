@@ -15,6 +15,12 @@ const app = express();
 const PORT = Number(process.env.PORT || 4000);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Only start listening when running directly (not when imported as a module)
+const isDirectRun = process.argv[1] && (
+  process.argv[1].endsWith('index.js') ||
+  process.argv[1].endsWith('server/index.js')
+);
+
 app.use(cors());
 app.use(express.json());
 
@@ -996,10 +1002,12 @@ app.get('/api/realtime-tick', requireTenant, async (req, res) => {
 // ERROR HANDLING
 // =====================================================
 
-// 404 handler
-app.use((_req, res) => {
-  res.status(404).json({ error: 'Route not found' });
-});
+// 404 handler (Only for serverless/API mode. In direct run, we handle frontend below)
+if (!isDirectRun) {
+  app.use((_req, res) => {
+    res.status(404).json({ error: 'Route not found' });
+  });
+}
 
 // Global error handler
 app.use((err, _req, res, _next) => {
@@ -1018,11 +1026,7 @@ app.use((err, _req, res, _next) => {
 export { app };
 export default app;
 
-// Only start listening when running directly (not when imported as a module)
-const isDirectRun = process.argv[1] && (
-  process.argv[1].endsWith('index.js') ||
-  process.argv[1].endsWith('server/index.js')
-);
+
 
 if (isDirectRun) {
   // =====================================================
