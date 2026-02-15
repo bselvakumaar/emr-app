@@ -152,6 +152,13 @@ p {
   box-shadow: 0 0 0 2px rgba(16, 185, 129, .25);
 }
 
+.tenant-logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
 .brand-block h1 {
   font-size: 0.9rem;
   font-weight: 700;
