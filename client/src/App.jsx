@@ -302,16 +302,16 @@ export default function App() {
 
         {view === 'emr' && (
           <EmrPage
+            tenant={tenant}
             patients={patients}
-            providers={providers}
+            providers={employees.filter(e => e.department === 'Nursing' || e.department === 'Surgery' || e.department === 'Consultation')} // Simple filter
             encounters={encounters}
             onCreateEncounter={(e) => {
               e.preventDefault();
               const fd = new FormData(e.target);
               withRefresh(() => api.addEncounter({
-                tenantId: session.tenantId, userId: activeUser.id,
-                patientId: fd.get('patientId'), providerId: fd.get('providerId'), type: fd.get('type'),
-                complaint: fd.get('complaint'), diagnosis: fd.get('diagnosis'), notes: fd.get('notes')
+                tenantId: session.tenantId, userId: activeUser.id, patientId: fd.get('patientId'), providerId: fd.get('providerId'),
+                type: fd.get('type'), complaint: fd.get('complaint'), diagnosis: fd.get('diagnosis'), notes: fd.get('notes')
               }));
             }}
           />
@@ -319,18 +319,18 @@ export default function App() {
 
         {view === 'billing' && (
           <BillingPage
+            tenant={tenant}
             patients={patients}
             invoices={invoices}
             onIssueInvoice={(e) => {
               e.preventDefault();
               const fd = new FormData(e.target);
-              withRefresh(() => api.addInvoice({
-                tenantId: session.tenantId, userId: activeUser.id,
-                patientId: fd.get('patientId'), description: fd.get('description'),
-                amount: Number(fd.get('amount')), taxPercent: Number(fd.get('taxPercent') || 0)
+              withRefresh(() => api.createInvoice({
+                tenantId: session.tenantId, userId: activeUser.id, patientId: fd.get('patientId'),
+                description: fd.get('description'), amount: fd.get('amount'), taxPercent: fd.get('taxPercent')
               }));
             }}
-            onMarkPaid={(invoiceId) => withRefresh(() => api.markInvoicePaid(invoiceId, { tenantId: session.tenantId, userId: activeUser.id }))}
+            onMarkPaid={(id) => withRefresh(() => api.payInvoice(id, session.tenantId, activeUser.id))}
           />
         )}
 

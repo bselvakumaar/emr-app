@@ -209,6 +209,12 @@ export async function getPatients(tenantId) {
     const records = patient.clinical_records || [];
     return {
       ...patient,
+      firstName: patient.first_name,
+      lastName: patient.last_name,
+      dob: patient.date_of_birth,
+      bloodGroup: patient.blood_group,
+      emergencyContact: patient.emergency_contact,
+      medicalHistory: patient.medical_history,
       caseHistory: records.filter(r => r.section === 'caseHistory').map(r => r.content),
       medications: records.filter(r => r.section === 'medications').map(r => r.content),
       prescriptions: records.filter(r => r.section === 'prescriptions').map(r => r.content),
@@ -239,6 +245,12 @@ export async function getPatientById(id, tenantId) {
 
   return {
     ...patient,
+    firstName: patient.first_name,
+    lastName: patient.last_name,
+    dob: patient.date_of_birth,
+    bloodGroup: patient.blood_group,
+    emergencyContact: patient.emergency_contact,
+    medicalHistory: patient.medical_history,
     caseHistory: records.filter(r => r.section === 'caseHistory').map(r => r.content),
     medications: records.filter(r => r.section === 'medications').map(r => r.content),
     prescriptions: records.filter(r => r.section === 'prescriptions').map(r => r.content),
@@ -296,7 +308,21 @@ export async function createPatient({ tenantId, userId, firstName, lastName, dob
     details: { mrn: patient.mrn },
   });
 
-  return patient;
+  return {
+    ...patient,
+    firstName: patient.first_name,
+    lastName: patient.last_name,
+    dob: patient.date_of_birth,
+    bloodGroup: patient.blood_group,
+    emergencyContact: patient.emergency_contact,
+    medicalHistory: patient.medical_history,
+    caseHistory: [],
+    medications: [],
+    prescriptions: [],
+    recommendations: [],
+    feedbacks: [],
+    testReports: [],
+  };
 }
 
 export async function addClinicalRecord({ tenantId, userId, patientId, section, content }) {

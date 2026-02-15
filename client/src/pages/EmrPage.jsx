@@ -1,6 +1,6 @@
 import { patientName } from '../utils/format.js';
 
-function printEncounter(enc, patients, providers) {
+function printEncounter(enc, patients, providers, tenant) {
   const pName = patientName(enc.patientId, patients);
   const providerName = providers.find(p => p.id === enc.providerId)?.name || 'Unknown';
   const w = window.open('', '_blank', 'width=800,height=600');
@@ -25,7 +25,7 @@ function printEncounter(enc, patients, providers) {
   @media print { body { padding:20px; } }
 </style></head><body>
   <div class="header">
-    <div class="brand"><h1>🏥 EMR System</h1><p>Medical Encounter Report</p></div>
+    <div class="brand"><h1>🏥 ${tenant?.name || 'EMR System'}</h1><p>Medical Encounter Report</p></div>
     <div class="report-meta"><h2>CLINICAL REPORT</h2><p>${new Date(enc.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</p></div>
   </div>
   <div class="info-grid">
@@ -43,7 +43,7 @@ function printEncounter(enc, patients, providers) {
   w.print();
 }
 
-export default function EmrPage({ patients, providers, encounters, onCreateEncounter }) {
+export default function EmrPage({ tenant, patients, providers, encounters, onCreateEncounter }) {
   return (
     <section className="view">
       <article className="panel">
@@ -70,7 +70,7 @@ export default function EmrPage({ patients, providers, encounters, onCreateEncou
               <td><span className={`status-badge encounter-${e.type?.toLowerCase()}`}>{e.type}</span></td>
               <td>{e.complaint}</td>
               <td>{e.diagnosis}</td>
-              <td><button className="action-btn print-btn" onClick={() => printEncounter(e, patients, providers)} title="Print Report">🖨️</button></td>
+              <td><button className="action-btn print-btn" onClick={() => printEncounter(e, patients, providers, tenant)} title="Print Report">🖨️</button></td>
             </tr>)}</tbody>
           </table>
         </article>

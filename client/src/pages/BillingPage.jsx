@@ -1,6 +1,6 @@
 import { currency, patientName } from '../utils/format.js';
 
-function printInvoice(invoice, patients) {
+function printInvoice(invoice, patients, tenant) {
   const pName = patientName(invoice.patientId, patients);
   const w = window.open('', '_blank', 'width=800,height=600');
   w.document.write(`<!DOCTYPE html><html><head><title>Invoice ${invoice.number}</title>
@@ -26,7 +26,7 @@ function printInvoice(invoice, patients) {
   @media print { body { padding:20px; } }
 </style></head><body>
   <div class="header">
-    <div class="brand"><h1>🏥 EMR System</h1><p>Electronic Medical Records</p></div>
+    <div class="brand"><h1>🏥 ${tenant?.name || 'EMR System'}</h1><p>Electronic Medical Records</p></div>
     <div class="invoice-meta"><h2>INVOICE</h2><p><strong>${invoice.number}</strong></p><p>${new Date(invoice.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</p></div>
   </div>
   <div class="details">
@@ -49,7 +49,7 @@ function printInvoice(invoice, patients) {
   w.print();
 }
 
-export default function BillingPage({ patients, invoices, onIssueInvoice, onMarkPaid }) {
+export default function BillingPage({ tenant, patients, invoices, onIssueInvoice, onMarkPaid }) {
   return (
     <section className="view">
       <article className="panel">
@@ -70,7 +70,7 @@ export default function BillingPage({ patients, invoices, onIssueInvoice, onMark
             <td><span className={`status-badge status-${i.status}`}>{i.status}</span></td>
             <td className="action-cell">
               {i.status !== 'paid' && <button className="action-btn" onClick={() => onMarkPaid(i.id)}>Mark Paid</button>}
-              <button className="action-btn print-btn" onClick={() => printInvoice(i, patients)} title="Print Invoice">🖨️</button>
+              <button className="action-btn print-btn" onClick={() => printInvoice(i, patients, tenant)} title="Print Invoice">🖨️</button>
             </td>
           </tr>)}</tbody>
         </table>
