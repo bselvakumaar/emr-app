@@ -449,6 +449,8 @@ export async function getAppointments(tenantId) {
     providerId: row.provider_id,
     start: row.scheduled_start,
     end: row.scheduled_end,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
   }));
 }
 
@@ -581,6 +583,9 @@ export async function getEncounters(tenantId) {
     providerId: row.provider_id,
     type: row.encounter_type,
     complaint: row.chief_complaint,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    visitDate: row.visit_date,
   }));
 }
 

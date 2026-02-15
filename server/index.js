@@ -21,6 +21,12 @@ const isDirectRun = process.argv[1] === fileURLToPath(import.meta.url);
 app.use(cors());
 app.use(express.json());
 
+// DEBUG: Log all requests
+app.use((req, res, next) => {
+  console.log(`[REQUEST] ${req.method} ${req.path}`);
+  next();
+});
+
 // Test database connection on startup
 testConnection();
 
