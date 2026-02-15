@@ -4,7 +4,7 @@ export default function LoginPage({ tenants, onLogin, loading, error }) {
       <div className="login-card">
         <div className="login-brand">
           <div className="login-brand-icon">
-            <img src="/logo.png" alt="EMR Logo" style={{ width: '40px', height: '40px' }} />
+            <img src="/logo.svg" alt="EMR Logo" style={{ width: '48px', height: '48px' }} />
           </div>
           <h2>EMR System</h2>
           <p>Multi-Tenant Healthcare Platform</p>
