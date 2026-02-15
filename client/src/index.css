@@ -383,12 +383,12 @@ p {
 .login-brand h2 {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--gray-800);
   letter-spacing: -.02em;
 }
 
 .login-brand p {
-  color: rgba(255, 255, 255, .5);
+  color: var(--gray-500);
   font-size: 0.85rem;
   margin-top: 0.35rem;
 }
@@ -408,9 +408,9 @@ p {
   width: 100%;
   padding: 0.7rem 0.85rem;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, .12);
-  background: rgba(255, 255, 255, .06);
-  color: #fff;
+  border: 1px solid var(--gray-300);
+  background: var(--gray-50);
+  color: var(--gray-900);
   font: inherit;
   font-size: 0.88rem;
   transition: all var(--transition);
@@ -418,19 +418,19 @@ p {
 }
 
 .login-field select option {
-  background: var(--gray-800);
-  color: #fff;
+  background: #fff;
+  color: var(--gray-900);
 }
 
 .login-field select:focus,
 .login-field input:focus {
   border-color: var(--primary-500);
   box-shadow: 0 0 0 3px rgba(16, 185, 129, .15);
-  background: rgba(255, 255, 255, .09);
+  background: #fff;
 }
 
 .login-field input::placeholder {
-  color: rgba(255, 255, 255, .35);
+  color: var(--gray-400);
 }
 
 .login-btn {
