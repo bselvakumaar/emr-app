@@ -1,19 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80">
   <defs>
-    <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
     </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="1" stdDeviation="1" flood-opacity="0.3"/>
+    </filter>
   </defs>
   
-  <!-- Icon: Abstract Pulse/Flow -->
-  <g transform="translate(10, 10)">
-    <circle cx="30" cy="30" r="30" fill="url(#flowGrad)" opacity="0.1"/>
-    <path d="M10 30 h10 l5 -10 l10 20 l5 -10 h10" stroke="url(#flowGrad)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="30" cy="30" r="24" stroke="url(#flowGrad)" stroke-width="2" fill="none"/>
+  <!-- Icon: Shield with Pulse -->
+  <g transform="translate(5, 5) scale(0.9)">
+    <!-- Shield Shape -->
+    <path d="M35 5 q 35 0 35 30 q 0 25 -35 40 q -35 -15 -35 -40 q 0 -30 35 -30 Z" fill="url(#shieldGrad)" filter="url(#shadow)"/>
+    <!-- Pulse Line (White) -->
+    <path d="M15 35 h10 l5 -10 l10 20 l5 -10 h15" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Cross overlay (subtle) -->
+    <path d="M35 15 v10 M35 45 v10" stroke="white" stroke-width="2" opacity="0.5"/>
   </g>
   
   <!-- Text -->
-  <text x="80" y="45" font-family="'Inter', sans-serif" font-size="32" font-weight="bold" fill="#1e293b">MedFlow</text>
-  <text x="215" y="45" font-family="'Inter', sans-serif" font-size="32" font-weight="300" fill="#64748b">EMR</text>
+  <text x="85" y="50" font-family="'Segoe UI', sans-serif" font-size="34" font-weight="700" fill="#0f172a" letter-spacing="-1">MedFlow</text>
+  <text x="225" y="50" font-family="'Segoe UI', sans-serif" font-size="34" font-weight="300" fill="#64748b">EMR</text>
+  
+  <!-- Tagline -->
+  <text x="88" y="70" font-family="sans-serif" font-size="10" fill="#94a3b8" letter-spacing="1">SECURE HEALTH DATA</text>
 </svg>

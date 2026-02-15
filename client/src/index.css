@@ -364,15 +364,8 @@ p {
 }
 
 .login-brand-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: 1rem;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, .15), 0 8px 20px rgba(0, 0, 0, .2);
+  display: inline-block;
 }
 
 .login-brand h2 {
