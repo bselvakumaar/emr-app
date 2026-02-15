@@ -3,7 +3,7 @@
  * Updated version for PostgreSQL backend
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 // Token management
 const TOKEN_KEY = 'emr_auth_token';
@@ -63,26 +63,26 @@ export function isAuthenticated() {
  */
 async function apiRequest(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
-  
+
   const headers = {
     'Content-Type': 'application/json',
     ...options.headers,
   };
-  
+
   // Add JWT token if available
   const token = getToken();
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  
+
   const config = {
     ...options,
     headers,
   };
-  
+
   try {
     const response = await fetch(url, config);
-    
+
     // Handle 401 Unauthorized - token expired or invalid
     if (response.status === 401) {
       // Only clear auth and redirect if we actually have a token
@@ -93,15 +93,15 @@ async function apiRequest(endpoint, options = {}) {
       }
       throw new Error('Session expired. Please login again.');
     }
-    
+
     // Parse JSON response
     const data = await response.json();
-    
+
     // Handle error responses
     if (!response.ok) {
       throw new Error(data.error || data.message || 'API request failed');
     }
-    
+
     return data;
   } catch (error) {
     console.error('API request error:', error);
@@ -122,10 +122,10 @@ export async function login(tenantId, email, password) {
     method: 'POST',
     body: JSON.stringify({ tenantId, email, password }),
   });
-  
+
   // Store authentication data
   storeAuth(data.token, data.user, { tenantId: data.tenantId, role: data.role });
-  
+
   return data;
 }
 
@@ -362,58 +362,58 @@ const apiClient = {
   getStoredUser,
   getStoredSession,
   clearAuth,
-  
+
   // Health
   checkHealth,
-  
+
   // Tenants
   getTenants,
   createTenant,
   updateTenantSettings,
-  
+
   // Users
   getUsers,
   createUser,
-  
+
   // Bootstrap
   getBootstrapData,
-  
+
   // Superadmin
   getSuperadminOverview,
-  
+
   // Patients
   createPatient,
   addClinicalRecord,
   getPatientPrintData,
-  
+
   // Walk-ins
   createWalkin,
   convertWalkinToPatient,
-  
+
   // Appointments
   createAppointment,
   createSelfAppointment,
   updateAppointmentStatus,
   rescheduleAppointment,
-  
+
   // Encounters
   createEncounter,
-  
+
   // Invoices
   createInvoice,
   payInvoice,
-  
+
   // Inventory
   createInventoryItem,
   updateInventoryStock,
-  
+
   // Employees
   createEmployee,
   createEmployeeLeave,
-  
+
   // Reports
   getReportSummary,
-  
+
   // Realtime
   getRealtimeTick,
 };
