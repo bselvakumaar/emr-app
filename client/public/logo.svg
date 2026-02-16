@@ -1,28 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80">
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0891b2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
     </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="1" dy="1" stdDeviation="1" flood-opacity="0.3"/>
-    </filter>
   </defs>
   
-  <!-- Icon: Shield with Pulse -->
-  <g transform="translate(5, 5) scale(0.9)">
-    <!-- Shield Shape -->
-    <path d="M35 5 q 35 0 35 30 q 0 25 -35 40 q -35 -15 -35 -40 q 0 -30 35 -30 Z" fill="url(#shieldGrad)" filter="url(#shadow)"/>
-    <!-- Pulse Line (White) -->
-    <path d="M15 35 h10 l5 -10 l10 20 l5 -10 h15" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- Cross overlay (subtle) -->
-    <path d="M35 15 v10 M35 45 v10" stroke="white" stroke-width="2" opacity="0.5"/>
+  <!-- Medical Cross with Heartbeat -->
+  <g transform="translate(10, 10)">
+    <!-- Cross -->
+    <rect x="15" y="5" width="10" height="30" fill="url(#logoGradient)" rx="2"/>
+    <rect x="5" y="15" width="30" height="10" fill="url(#logoGradient)" rx="2"/>
+    
+    <!-- Heartbeat line -->
+    <path d="M 0 20 L 8 20 L 12 10 L 16 30 L 20 20 L 28 20 L 32 15 L 36 25 L 40 20" 
+          stroke="url(#logoGradient)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Digital dots -->
+    <circle cx="38" cy="8" r="2" fill="#0891b2" opacity="0.6"/>
+    <circle cx="38" cy="32" r="2" fill="#7c3aed" opacity="0.6"/>
   </g>
   
   <!-- Text -->
-  <text x="85" y="50" font-family="'Segoe UI', sans-serif" font-size="34" font-weight="700" fill="#0f172a" letter-spacing="-1">MedFlow</text>
-  <text x="225" y="50" font-family="'Segoe UI', sans-serif" font-size="34" font-weight="300" fill="#64748b">EMR</text>
-  
-  <!-- Tagline -->
-  <text x="88" y="70" font-family="sans-serif" font-size="10" fill="#94a3b8" letter-spacing="1">SECURE HEALTH DATA</text>
+  <text x="65" y="28" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-size="24" font-weight="700" fill="#1e293b">
+    MedFlow
+  </text>
+  <text x="65" y="45" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="500" fill="#64748b" letter-spacing="2">
+    EMR
+  </text>
 </svg>

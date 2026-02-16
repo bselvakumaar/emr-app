@@ -1353,33 +1353,7 @@ export async function getDoctorPayouts(tenantId) {
   return result.rows;
 }
 
-export async function dispensePrescription({ id, tenantId, userId, itemId, quantity }) {
-  const prescription = await query(
-    `UPDATE emr.prescriptions 
-     SET status = 'Dispensed', updated_at = NOW() 
-     WHERE id = $1 AND tenant_id = $2 
-     RETURNING *`,
-    [id, tenantId]
-  );
 
-  if (prescription.rowCount === 0) {
-    throw new Error('Prescription not found or already processed');
-  }
-
-  // If linked to inventory item, deduct stock
-  if (itemId && quantity) {
-    await updateInventoryStock({
-      tenantId,
-      itemId,
-      quantity: -Math.abs(quantity), // Ensure negative for deduction
-      type: 'issue',
-      reference: `Rx Dispense: ${prescription.rows[0].drug_name}`,
-      userId
-    });
-  }
-
-  return prescription.rows[0];
-}
 
 export async function getPrescriptionById(id, tenantId) {
   const sql = `

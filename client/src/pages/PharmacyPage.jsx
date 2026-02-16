@@ -5,8 +5,6 @@ import { api } from '../api.js';
 export default function PharmacyPage({ tenant, providers, onRestock, onDispense }) {
     const [prescriptions, setPrescriptions] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    // Filter state
     const [statusFilter, setStatusFilter] = useState('Pending');
 
     useEffect(() => {
@@ -16,17 +14,18 @@ export default function PharmacyPage({ tenant, providers, onRestock, onDispense 
     const loadPrescriptions = async () => {
         setLoading(true);
         try {
-            // Assuming getPrescriptions supports filters
             const allPrescriptions = await api.getPrescriptions(tenant.id, { status: statusFilter });
-            setPrescriptions(allPrescriptions);
+            setPrescriptions(allPrescriptions || []);
         } catch (err) {
             console.error(err);
+            setPrescriptions([]);
         } finally {
             setLoading(false);
         }
     };
 
     const handleDispense = async (prescription) => {
+        // eslint-disable-next-line
         if (!confirm('Dispense this prescription? This will reduce inventory stock.')) return;
         try {
             const response = await api.dispensePrescription(prescription.id, {
@@ -57,28 +56,32 @@ export default function PharmacyPage({ tenant, providers, onRestock, onDispense 
                 </div>
 
                 {loading ? <p>Loading prescriptions...</p> : (
-                    <table style={{ background: '#fff' }}>
+                    <table style={{ background: '#fff', width: '100%', borderCollapse: 'collapse' }}>
                         <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Patient</th>
-                                <th>Medication</th>
-                                <th>Dosage</th>
-                                <th>Instructions</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                            <tr style={{ borderBottom: '2px solid #e2e8f0', textAlign: 'left' }}>
+                                <th style={{ padding: '10px' }}>Date</th>
+                                <th style={{ padding: '10px' }}>Patient</th>
+                                <th style={{ padding: '10px' }}>Medication</th>
+                                <th style={{ padding: '10px' }}>Dosage</th>
+                                <th style={{ padding: '10px' }}>Status</th>
+                                <th style={{ padding: '10px' }}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {prescriptions.length === 0 && <tr><td colSpan="7" style={{ textAlign: 'center', padding: '20px', color: '#666' }}>No prescriptions found.</td></tr>}
-                            {Array.isArray(prescriptions) && prescriptions.map(p => (
-                                <tr key={p.id}>
-                                    <td>{new Date(p.createdAt || p.created_at).toLocaleDateString()}</td>
-                                    <td>{p.patient_name || p.patientId}</td>
-                                    <td style={{ fontWeight: '500' }}>{p.drug_name}</td>
-                                    <td>{p.dosage}</td>
-                                    <td style={{ fontSize: '12px', color: '#64748b' }}>{p.instructions}</td>
-                                    <td>
+                            {prescriptions.length === 0 && (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+                                        No prescriptions found.
+                                    </td>
+                                </tr>
+                            )}
+                            {prescriptions.map(p => (
+                                <tr key={p.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                                    <td style={{ padding: '10px' }}>{new Date(p.createdAt || p.created_at).toLocaleDateString()}</td>
+                                    <td style={{ padding: '10px' }}>{p.patient_name || p.patientId}</td>
+                                    <td style={{ padding: '10px', fontWeight: '500' }}>{p.drug_name}</td>
+                                    <td style={{ padding: '10px' }}>{p.dosage}</td>
+                                    <td style={{ padding: '10px' }}>
                                         <span style={{
                                             padding: '4px 10px',
                                             borderRadius: '12px',
@@ -90,9 +93,15 @@ export default function PharmacyPage({ tenant, providers, onRestock, onDispense 
                                             {p.status}
                                         </span>
                                     </td>
-                                    <td>
+                                    <td style={{ padding: '10px' }}>
                                         {p.status === 'Pending' && (
-                                            <button className="action-btn" style={{ color: '#16a34a', borderColor: '#16a34a' }} onClick={() => handleDispense(p)}>Dispense</button>
+                                            <button
+                                                className="action-btn"
+                                                style={{ padding: '4px 12px', borderRadius: '6px', background: 'white', border: '1px solid #16a34a', color: '#16a34a', cursor: 'pointer' }}
+                                                onClick={() => handleDispense(p)}
+                                            >
+                                                Dispense
+                                            </button>
                                         )}
                                     </td>
                                 </tr>
@@ -101,8 +110,6 @@ export default function PharmacyPage({ tenant, providers, onRestock, onDispense 
                     </table>
                 )}
             </article>
-
-            {/* Could add Inventory Quick View here */}
         </section>
     );
 }

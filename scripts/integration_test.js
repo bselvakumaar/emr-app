@@ -126,7 +126,7 @@ async function runTests() {
                 body: JSON.stringify({
                     patientId,
                     providerId,
-                    type: 'OPD',
+                    type: 'Out-patient',
                     complaint: 'Testing pharmacy workflow',
                     diagnosis: 'Healthy'
                 })
@@ -231,6 +231,86 @@ async function runTests() {
             items = await itemsRes.json();
             item = items.find(i => i.id === inventoryItemId);
             if (item.stock !== initialStock - 10) throw new Error(`Stock mismatch: expected ${initialStock - 10}, got ${item.stock}`);
+        });
+
+        let invoiceId = '';
+
+        // 8. Billing Workflow (Create Invoice)
+        await testStep('Create Invoice', async () => {
+            const res = await fetch(`${BASE_URL}/invoices`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'x-tenant-id': tenantId
+                },
+                body: JSON.stringify({
+                    patientId,
+                    description: 'Consultation & Medicine',
+                    amount: 500,
+                    taxPercent: 5,
+                    paymentMethod: 'Pending'
+                })
+            });
+            const data = await res.json();
+            if (!data.id) {
+                const err = new Error('Failed to create invoice');
+                err.responseBody = JSON.stringify(data);
+                throw err;
+            }
+            invoiceId = data.id;
+            if (data.status !== 'issued') throw new Error('Initial invoice status should be issued');
+        });
+
+        // 9. Billing Workflow (Pay Invoice)
+        await testStep('Pay Invoice', async () => {
+            const res = await fetch(`${BASE_URL}/invoices/${invoiceId}/pay`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'x-tenant-id': tenantId
+                },
+                body: JSON.stringify({
+                    paymentMethod: 'Cash'
+                })
+            });
+            const data = await res.json();
+            if (data.status !== 'paid') {
+                const err = new Error('Invoice status should be paid');
+                err.responseBody = JSON.stringify(data);
+                throw err;
+            }
+        });
+
+        // 10. Lab Workflow (Add Test Report)
+        await testStep('Add Lab Report', async () => {
+            const res = await fetch(`${BASE_URL}/patients/${patientId}/clinical`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'x-tenant-id': tenantId
+                },
+                body: JSON.stringify({
+                    section: 'testReports',
+                    payload: {
+                        date: new Date().toISOString().split('T')[0],
+                        testName: 'Complete Blood Count',
+                        result: 'Normal',
+                        notes: 'All parameters within range'
+                    }
+                })
+            });
+            const data = await res.json();
+
+            // Verify it was added
+            const report = data.medicalHistory.testReports.find(r => r.testName === 'Complete Blood Count');
+            if (!report) {
+                const err = new Error('Lab report not found in patient record');
+                err.responseBody = JSON.stringify(data);
+                throw err;
+            }
         });
 
         console.log('\n✨ ALL TESTS PASSED! ✨');
