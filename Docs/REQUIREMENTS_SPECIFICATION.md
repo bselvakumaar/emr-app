@@ -38,14 +38,15 @@ The system encompasses the full patient journey from registration and appointmen
 
 ### 2.4 Clinical Operations (EMR)
 - **REQ-EMR-01**: **Encounter Documentation**. Digital forms to record Chief Complaints, Vitals (BP, HR), Diagnosis, and Clinical Notes.
-- **REQ-EMR-02**: **CPOE (Prescriptions)**. Computerized provider order entry for medications (Name, Dosage, Duration, Frequency).
-- **REQ-EMR-03**: **History Tracking**. View past encounters during active consultation.
-- **REQ-EMR-04**: **Inpatient Management**. Manage admissions, ward/bed status, and discharge summaries.
+- **REQ-EMR-02**: **CPOE (Prescriptions)**. Computerized provider order entry for medications (Name, Dosage, Duration, Frequency) with usage protocol tracking.
+- **REQ-EMR-03**: **History Tracking**. Integrated longitudinal clinical record journal showing visits, diagnoses, and medications in a single view.
+- **REQ-EMR-04**: **Inpatient Management**. Manage admissions, ward/bed occupancy, and streamlined discharge protocol summaries.
+- **REQ-EMR-05**: **Clinical Output**. Generation of premium, professional digital prescriptions (PDF/Print) with clinic branding.
 
 ### 2.5 Pharmacy & Inventory
-- **REQ-PHM-01**: **Dispensing**. Retrieve prescriptions by Patient ID and mark medications as dispensed.
-- **REQ-INV-01**: **Stock Management**. Track inventory levels, batch numbers, and expiry dates.
-- **REQ-INV-02**: **Low Stock Alerts**. Visual indicators for items below reorder thresholds.
+- **REQ-PHM-01**: **Dispensing Queue**. Unified queue for pharmacists to monitor and finalize medication issuance with real-time status tracking (`Pending` -> `Dispensed`).
+- **REQ-INV-01**: **Stock Intelligence**. Monitor inventory units with visual meters indicating stock vs. reorder points.
+- **REQ-INV-02**: **Logistics Registry**. Track resource categories (Pharmaceuticals, Consumables, etc.) and automate low-stock flagging.
 
 ### 2.6 Billing & Finance
 - **REQ-BIL-01**: **Invoicing**. Generate distinct invoices for Consultations, Pharmacy, and Lab services.

@@ -96,12 +96,19 @@ app.post('/api/login', async (req, res) => {
 
     user = await repo.getUserByEmail(email, tenantId);
 
-    if (!user || !user.is_active) {
+    if (!user) {
+      console.log(`[LOGIN] User not found: ${email} for tenant: ${tenantId}`);
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    if (!user.is_active) {
+      console.log(`[LOGIN] User inactive: ${email}`);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const isValidPassword = await comparePassword(password, user.password_hash);
     if (!isValidPassword) {
+      console.log(`[LOGIN] Password mismatch for: ${email}`);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -1076,6 +1083,17 @@ app.post('/api/attendance', requireTenant, requirePermission('employees'), async
   try {
     /* Expected body: { employeeId, date, timeIn, timeOut, status } */
     const record = await repo.recordAttendance({ ...req.body, tenantId: req.tenantId });
+
+    await repo.createAuditLog({
+      tenantId: req.tenantId,
+      userId: req.user.id,
+      userName: req.user.name,
+      action: 'attendance.record',
+      entityName: 'attendance',
+      entityId: record.id,
+      details: { employeeId: req.body.employeeId, status: req.body.status },
+    });
+
     res.status(201).json(record);
   } catch (error) {
     console.error('Error recording attendance:', error);
@@ -1083,14 +1101,47 @@ app.post('/api/attendance', requireTenant, requirePermission('employees'), async
   }
 });
 
-app.post('/api/expenses', requireTenant, requirePermission('inventory'), async (req, res) => {
+app.get('/api/attendance', requireTenant, requirePermission('employees'), async (req, res) => {
+  try {
+    const date = req.query.date || new Date().toISOString().slice(0, 10);
+    const records = await repo.getAttendance(req.tenantId, date);
+    res.json(records);
+  } catch (error) {
+    console.error('Error fetching attendance:', error);
+    res.status(500).json({ error: 'Failed to fetch attendance' });
+  }
+});
+
+app.post('/api/expenses', requireTenant, requirePermission('billing'), async (req, res) => {
   try {
     /* Expected body: { category, description, amount, date, paymentMethod, reference } */
     const expense = await repo.addExpense({ ...req.body, tenantId: req.tenantId, recordedBy: req.user.id });
+
+    await repo.createAuditLog({
+      tenantId: req.tenantId,
+      userId: req.user.id,
+      userName: req.user.name,
+      action: 'expense.create',
+      entityName: 'expense',
+      entityId: expense.id,
+      details: { category: req.body.category, amount: req.body.amount, paymentMethod: req.body.paymentMethod },
+    });
+
     res.status(201).json(expense);
   } catch (error) {
     console.error('Error adding expense:', error);
     res.status(500).json({ error: 'Failed to record expense' });
+  }
+});
+
+app.get('/api/expenses', requireTenant, requirePermission('billing'), async (req, res) => {
+  try {
+    const month = req.query.month || null;
+    const expenses = await repo.getExpenses(req.tenantId, { month });
+    res.json(expenses);
+  } catch (error) {
+    console.error('Error fetching expenses:', error);
+    res.status(500).json({ error: 'Failed to fetch expenses' });
   }
 });
 

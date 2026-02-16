@@ -1,76 +1,36 @@
-/**
- * Check existing users in database
- */
 
-import dotenv from 'dotenv';
 import pkg from 'pg';
-
-const { Client } = pkg;
+const { Pool } = pkg;
+import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
 
 dotenv.config();
 
-async function checkUsers() {
-  console.log('🔍 Checking users in database...\n');
-  
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
-  });
-  
-  try {
-    await client.connect();
-    
-    // Get all users
-    const result = await client.query(`
-      SELECT id, tenant_id, email, name, role, is_active 
-      FROM emr.users 
-      ORDER BY role, email
-    `);
-    
-    if (result.rows.length === 0) {
-      console.log('❌ No users found in database!');
-      console.log('   Run: node scripts/load_test_data.js\n');
-    } else {
-      console.log(`✅ Found ${result.rows.length} users:\n`);
-      
-      result.rows.forEach(user => {
-        const tenant = user.tenant_id || 'SUPERADMIN';
-        const active = user.is_active ? '✓' : '✗';
-        console.log(`   ${active} ${user.role.padEnd(15)} | ${user.email.padEnd(30)} | Tenant: ${tenant}`);
-      });
-      
-      // Check for superadmin specifically
-      const superadmin = result.rows.find(u => u.role === 'Superadmin');
-      if (superadmin) {
-        console.log('\n✅ Superadmin user exists:');
-        console.log(`   Email: ${superadmin.email}`);
-        console.log(`   Active: ${superadmin.is_active ? 'Yes' : 'No'}`);
-      } else {
-        console.log('\n❌ No Superadmin user found!');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+
+async function check() {
+  const result = await pool.query('SELECT name, email, role, password_hash FROM emr.users WHERE email IN ($1, $2, $3)', [
+    'superadmin@emr.local',
+    'anita@sch.local',
+    'rajesh@sch.local'
+  ]);
+
+  console.log('User Hashes:');
+  for (const user of result.rows) {
+    const passwords = ['Admin@123', 'Anita@123', 'Rajesh@123'];
+    let matched = 'NONE';
+    for (const p of passwords) {
+      if (await bcrypt.compare(p, user.password_hash)) {
+        matched = p;
+        break;
       }
     }
-    
-    // Check password hash format
-    const hashCheck = await client.query(`
-      SELECT email, role, 
-             CASE 
-               WHEN password_hash LIKE '$2a$%' OR password_hash LIKE '$2b$%' THEN 'bcrypt ✓'
-               ELSE 'NOT HASHED ✗'
-             END as hash_type
-      FROM emr.users 
-      LIMIT 5
-    `);
-    
-    console.log('\n🔐 Password Hash Check:');
-    hashCheck.rows.forEach(u => {
-      console.log(`   ${u.email.padEnd(30)} | ${u.hash_type}`);
-    });
-    
-  } catch (error) {
-    console.error('❌ Error:', error.message);
-  } finally {
-    await client.end();
+    console.log(`- ${user.name} (${user.email}): Hash starts with ${user.password_hash.substring(0, 10)}... Matches known: ${matched}`);
   }
+  process.exit(0);
 }
 
-checkUsers();
+check();

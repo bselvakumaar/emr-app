@@ -1,106 +1,67 @@
-# EMR Application (React + PostgreSQL)
+# MedFlow EMR Application (Premium v2.0)
 
-This project is a multi-tenant Electronic Medical Records (EMR) system built with **React** (Vite), **Express.js**, and **PostgreSQL** (Neon). It features a robust multi-tenant architecture with role-based access control (RBAC).
+This project is a high-end, multi-tenant Electronic Medical Records (EMR) system built with **React** (Vite), **Express.js**, and **PostgreSQL**. It features a robust multi-tenant architecture with role-based access control (RBAC) and a premium glassmorphic UI.
 
 ## 🚀 Project Documentation
-For a deep dive into the specific implementation patterns and requirements:
+We have reconciled our documentation into three primary authoritative guides:
 
-- **Requirements**: [REQUIREMENTS_SPECIFICATION.md](docs/REQUIREMENTS_SPECIFICATION.md)
-- **Technical Design**: [TECHNICAL_DESIGN_ARCHITECTURE.md](docs/TECHNICAL_DESIGN_ARCHITECTURE.md)
-- **Data Flow Diagrams**: [DATA_FLOW_DIAGRAMS.md](docs/DATA_FLOW_DIAGRAMS.md)
-- **Implementation Handbook**: [TECHNICAL_HANDBOOK.md](docs/TECHNICAL_HANDBOOK.md)
+- **[Scope & Requirements](docs/SCOPE_AND_REQUIREMENTS.md)**: Product definition, functional specs, and business scope.
+- **[Technical Design](docs/TECHNICAL_DESIGN.md)**: Architecture, data flow diagrams, database schema, and implementation handbook.
+- **[User Manual](docs/USER_MANUAL.md)**: Step-by-step role-based workflows and AI assistant guide.
+- **[Testing Guide](docs/TESTING_GUIDE.md)**: UAT workflow validation and infrastructure checklists.
 
 ---
 
-## Structure
+## 🏗️ Core Technology Stack
 
-- `client/`: React UI (Vite)
-- `server/`: Express API with PostgreSQL Repository
-- `server/db/`: Database connection and **Repository layer** (replaced JSON mock)
-- `database/`: Full SQL schema and seed scripts
+- **Frontend**: React 18, Vanilla CSS (Premium Glassmorphism), Vite.
+- **Backend**: Express.js REST API.
+- **Database**: PostgreSQL (Fully implemented repository layer).
+- **Session**: JWT-based stateless authentication with BCrypt hashing.
 
-## Run
+---
 
-Install dependencies:
+## 🛠️ Development Setup
 
-```powershell
-npm install
-```
+1. **Install dependencies**:
+   ```powershell
+   npm install
+   ```
 
-Start frontend + backend together:
+2. **Database Configuration**:
+   - Ensure you have a `.env` file with `DATABASE_URL` and `JWT_SECRET`.
+   - Use `npm run fix-passwords` if transitioning from legacy hash formats.
 
-```powershell
-npm run dev
-```
+3. **Run locally**:
+   ```powershell
+   npm run dev
+   ```
 
-- React UI: `http://localhost:5173`
-- API: `http://localhost:4000/api`
+- **Frontend**: `http://localhost:5173`
+- **Backend API**: `http://localhost:4000/api`
 
-## Login-first Workflow
+---
 
-Use tenant + email login on the first screen:
+## 🔑 Access Credentials
 
-- Superadmin: Tenant `Platform Superadmin`, Email `superadmin@emr.local`
-- Tenant Admin: Tenant `Selva Care Hospital`, Email `anita@sch.local`
-- Patient: Tenant `Selva Care Hospital`, Email `meena@sch.local`
+| Role | Tenant | Email | Password |
+|------|--------|-------|----------|
+| Superadmin | — | superadmin@emr.local | Admin@123 |
+| Admin | Selva Care | anita@sch.local | Anita@123 |
+| Doctor | Selva Care | rajesh@sch.local | Rajesh@123 |
+| Patient | Selva Care | meena@sch.local | Meena@123 |
 
-Build frontend:
+---
 
-```powershell
-npm run build
-```
+## 📦 System Modules
 
-## Backend API (mock)
+- **Dashboard**: Real-time glassmorphic metrics and clinical overview.
+- **EMR (Clinical Workspace)**: Dual-pane consultation ledger with longitudinal journal.
+- **Appointments**: Grid-based scheduling and walk-in queue management.
+- **Pharmacy & Inventory**: Stock visual intelligence and focused dispensation.
+- **Billing**: Branded invoice generation and payment registry.
+- **HR & Employees**: Shift management and leave tracking.
+- **Superadmin**: Global tenant lifecycle and platform monitoring.
 
-- `GET /api/health`
-- `POST /api/login`
-- `GET /api/tenants`
-- `POST /api/tenants`
-- `GET /api/users?tenantId=...`
-- `POST /api/users`
-- `GET /api/bootstrap?tenantId=...`
-- `GET /api/superadmin/overview`
-- `GET /api/reports/summary?tenantId=...`
-- `GET /api/realtime-tick?tenantId=...`
-- `POST /api/patients`
-- `PATCH /api/patients/:id/clinical`
-- `GET /api/patients/:id/print/:docType?tenantId=...`
-- `POST /api/appointments`
-- `POST /api/appointments/self`
-- `PATCH /api/appointments/:id/status`
-- `PATCH /api/appointments/:id/reschedule`
-- `POST /api/walkins`
-- `POST /api/walkins/:id/convert`
-- `POST /api/encounters`
-- `POST /api/invoices`
-- `PATCH /api/invoices/:id/pay`
-- `POST /api/inventory-items`
-- `PATCH /api/inventory-items/:id/stock`
-- `POST /api/employees`
-- `POST /api/employees/:id/leaves`
-- `PATCH /api/tenants/:id/settings`
-
-## Implemented UI Modules
-
-- Dashboard
-- Superadmin
-- Patients
-  - Formal health profile
-  - Case history, medication, prescription, recommendations, feedbacks, test reports
-  - Print invoice / health record / test reports
-- Appointments
-  - Staff scheduling + workflow statuses (`requested`, `scheduled`, `checked_in`, `completed`, `cancelled`, `no_show`)
-  - Patient self-appointment request flow
-  - Walk-in entry and conversion to patient
-- EMR (encounters)
-- Billing
-- Inventory
-- Employees (HR, shifts, salary, leave)
-- Reports
-- Admin (tenant settings + tenant user creation)
-
-## Notes
-
-- Multi-tenant context, tenant theming, and RBAC are active in UI and API payloads.
-- Current backend is mock JSON storage to keep fast iteration.
-- You can later swap `server/data/db.json` operations with PostgreSQL repository calls while keeping the API contract stable.
+---
+*Note: This system is fully integrated with a production-grade PostgreSQL repository. Legacy mock JSON data has been deprecated.*

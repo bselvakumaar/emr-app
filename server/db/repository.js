@@ -1044,6 +1044,7 @@ export async function getReportSummary(tenantId) {
     `SELECT
       (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,
       (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,
+      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,
       (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices
     `,
     [tenantId, today]
@@ -1093,6 +1094,7 @@ export async function getReportSummary(tenantId) {
     periodical: {
       dailyAppointments: parseInt(periodicalResult.rows[0].daily_appointments),
       openAppointments: parseInt(periodicalResult.rows[0].open_appointments),
+      activeLabTests: parseInt(periodicalResult.rows[0].active_lab_tests),
       pendingInvoices: parseInt(periodicalResult.rows[0].pending_invoices),
     },
     monthlyComparison: {
@@ -1213,14 +1215,14 @@ export async function getBootstrapData(tenantId, userId) {
     inventory,
     permissions: {
       Superadmin: ['superadmin', 'dashboard', 'reports', 'tenants', 'users', 'patients', 'appointments', 'emr', 'inventory', 'billing'],
-      Admin: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy', 'billing', 'inventory', 'employees', 'reports', 'admin', 'users'],
+      Admin: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy', 'billing', 'inventory', 'employees', 'reports', 'accounts', 'admin', 'users'],
       Doctor: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy', 'reports'],
       Nurse: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy'],
       Lab: ['dashboard', 'patients', 'reports'],
       Pharmacy: ['dashboard', 'pharmacy', 'inventory', 'reports'],
       'Support Staff': ['dashboard', 'patients', 'appointments'],
       'Front Office': ['dashboard', 'patients', 'appointments'],
-      Billing: ['dashboard', 'billing', 'reports'],
+      Billing: ['dashboard', 'billing', 'accounts', 'reports'],
       Inventory: ['dashboard', 'inventory', 'pharmacy', 'reports'],
       Patient: ['dashboard', 'appointments', 'patients'],
     },

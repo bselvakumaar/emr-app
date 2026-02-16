@@ -47,56 +47,44 @@ The core architectural principle is **Tenant Isolation at the Application Layer*
 
 ### 4.1 Frontend Components
 - **`App.jsx`**: Main controller. Handles Auth check, Routing, Global State (User, Tenant).
-- **`AppLayout.jsx`**: Responsive shell. Sidebar (Desktop/Mobile), Header, User Menu.
-- **`api.js`**: Central API service. Handles token storage, request interception, error logging.
-- **Pages**:
-  - `PatientsPage`: Master Patient Index, Registration Form.
-  - `EmrPage`: Clinical workstation (SOAP notes, Rx).
-  - `AppointmentsPage`: Calendar & Queue management.
-  - `BillingPage`: Invoice generation & Payment history.
+- **`AppLayout.jsx`**: Premium glass shell. Handles dynamic tenant branding via CSS variables.
+- **`api.js`**: Central API service. Optimized with standard error handling and JWT management.
+- **Micro-Components**:
+  - `PatientSearch`: Debounced clinical search with premium result styling.
+  - `Chatbot`: AI-driven context-aware virtual assistant with glassmorphism UI.
+- **Premium Pages**:
+  - `EmrPage`: Dual-pane consultation workspace with chronological journal.
+  - `InventoryPage`: Asset ledger with visual stock meters and reorder triggers.
+  - `PharmacyPage`: Focused dispensation queue with high-contrast status tracking.
 
-### 4.2 Backend Modules
-- **`index.js`**: Application entry point. Route definitions and middleware application.
-- **`middleware/auth.middleware.js`**:
-  - `authenticate`: Verifies JWT signature.
-  - `requireRole`: Checks user permission.
-  - `requireTenant`: Ensures request is scoped to valid tenant.
-- **`db/repository.js`**: Data Access Layer. Contains all SQL queries.
-  - **Pattern**: Function-based exports (e.g., `getPatients`, `createEncounter`).
-  - **Safety**: Uses Parameterized Queries ($1, $2) to prevent SQL Injection.
+### 4.2 Backend Modules (REFINED)
+- **`index.js`**: Application entry point.
+- **`db/repository.js`**: Data Access Layer.
+  - **Security**: Mandatory `tenant_id` scoping in every query.
+  - **Performance**: Parameterized queries and JSONB support for clinical records.
 
 ---
 
 ## 5. Security Architecture
 
-### 5.1 Authentication Flow
-1. **Login**: Client sends `email`, `password`, `tenantId`.
-2. **Verification**: Server hashes input password and compares with DB hash.
-3. **Token Issue**: Server signs a JWT containing `userId`, `tenantId`, `role`.
-4. **Session**: Client stores JWT. All subsequent requests include `Authorization: Bearer <token>`.
+### 5.1 Authentication Refinement
+- **Hashed Registry**: Passwords corrected to standard BCrypt hashes for all tenants to resolve legacy login failures.
+- **Token Claims**: JWTs now strictly carry `userId`, `tenantId`, and `role`, validated on every request.
 
-### 5.2 Data Isolation Strategy (Multi-Tenancy)
-- Every table (except `tenants`) has a **compulsory `tenant_id` foreign key**.
-- The Repository Layer functions **must accept `tenantId`** as a parameter.
-- **Enforcement**: API Middleware extracts `tenantId` from the verified JWT and passes it to the repository. The client cannot spoof this ID.
-
-### 5.3 Input Validation
-- Client-side: HTML5 form validation (`required`, `type="email"`).
-- Server-side: API endpoints validate payloads before DB insertion.
+### 5.2 Data Isolation Strategy
+- **Layered Validation**: Tenant scoping is enforced at the Middleware level and re-validated at the Repository level.
 
 ---
 
 ## 6. Scalability & Performance
 
-### 6.1 Database Optimization
-- **Indexing**: Indexes on `tenant_id` (high cardinality), `email`, `mrn` for fast lookups.
-- **Connection Pooling**: `pg-pool` manages database connections to handle concurrent requests efficiently.
-- **Stateless API**: The backend is stateless, allowing for horizontal scaling (serverless funtions or multiple containers).
+### 6.1 UI Performance
+- **CSS Variable Injection**: Dynamic themes (Primary/Accent) are injected into the root, eliminating the need for complex SCSS/JS-in-CSS calculations.
+- **Asset Optimization**: Transitioned to SVG-based iconography for zero-latency icon rendering.
 
 ### 6.2 Frontend Optimization
-- **Lazy Loading**: (Planned) Code-splitting for heavy modules like Reports/Charts.
-- **Debouncing**: Search inputs (Patient Search) are debounced to reduce API load.
-- **Optimistic UI**: (Planned) Immediate UI updates before server confirmation for interactions like "Mark as Paid".
+- **Premium Rendering**: Use of `backdrop-filter` optimized for Chromium-based browsers (common in medical tablets).
+- **Lazy Hydration**: (In Progress) Only loading clinical history modules when the patient is active.
 
 ---
 

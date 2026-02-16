@@ -76,14 +76,20 @@ The backend is cleanly divided into:
 
 ---
 
-## 7. Common Workflows
+## 8. Premium Design System Implementation
+
+The v2.0 update introduces the **Premium Glassmorphism** system.
+
+- **Variable Injection**: Themes are managed in `AppLayout.jsx` by setting `--tenant-primary` and `--tenant-accent` on the root container.
+- **Glass Utility**: Use the `.premium-glass` class on any panel to apply the standardized blur and border treatment.
+- **Micro-Animations**: Transitions use `cubic-bezier(0.16, 1, 0.3, 1)` for a "premium" tactile feel during page switches.
+
+---
+
+## 9. Common Workflows (Updated)
 
 - **Adding a New Module**:
-  1. Add the metadata to `client/src/config/modules.js`.
-  2. Create the Page component in `client/src/pages/`.
-  3. Add the route/view logic in `client/src/App.jsx`.
-  4. Ensure any new APIs support `tenant_id` filtering.
-
-- **Debugging 500 Errors**:
-  - Check the server console logs for `TypeError` or `Duplicate export`.
-  - Ensure any new utility functions in `repository.js` have the `export` keyword.
+  1. Add metadata to `client/src/config/modules.js`.
+  2. Create Page component in `client/src/pages/`.
+  3. Wrap main panels in `.premium-glass` for consistency.
+  4. Register the route in `client/src/App.jsx`.

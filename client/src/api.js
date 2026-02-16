@@ -83,10 +83,14 @@ async function apiRequest(endpoint, options = {}) {
   try {
     const response = await fetch(url, config);
 
-    // Handle 401 Unauthorized - token expired or invalid
+    // Handle 401 Unauthorized
     if (response.status === 401) {
+      // If it's a login attempt, don't say "Session expired"
+      if (endpoint === '/login') {
+        throw new Error('Invalid email or password');
+      }
+
       // Only clear auth and redirect if we actually have a token
-      // This prevents redirect loops on initial load
       if (getToken()) {
         clearAuth();
         window.location.href = '/'; // Redirect to login
@@ -199,11 +203,20 @@ export async function recordAttendance(data) {
   });
 }
 
+export async function getAttendance(tenantId, date) {
+  return await apiRequest(`/attendance?tenantId=${tenantId}&date=${date}`);
+}
+
 export async function addExpense(data) {
   return await apiRequest('/expenses', {
     method: 'POST',
     body: JSON.stringify(data),
   });
+}
+
+export async function getExpenses(tenantId, month) {
+  const params = month ? `?tenantId=${tenantId}&month=${month}` : `?tenantId=${tenantId}`;
+  return await apiRequest(`/expenses${params}`);
 }
 
 export async function getFinancials(tenantId, month) {
@@ -494,6 +507,9 @@ const apiClient = {
   // HR & Accounts
   recordAttendance,
   addExpense,
+  getAttendance,
+  getExpenses,
+  getFinancials,
 
   // Realtime
   getRealtimeTick,

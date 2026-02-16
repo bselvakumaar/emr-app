@@ -222,7 +222,7 @@ export default function App() {
           />
         )}
 
-        {view === 'dashboard' && <DashboardPage metrics={metrics} activeUser={activeUser} />}
+        {view === 'dashboard' && <DashboardPage metrics={metrics} activeUser={activeUser} setView={setView} />}
 
         {view === 'patients' && (
           <PatientsPage
@@ -423,6 +423,7 @@ export default function App() {
 
         {view === 'employees' && (
           <EmployeesPage
+            tenant={tenant}
             employees={employees}
             employeeLeaves={employeeLeaves}
             onCreateEmployee={(e) => {

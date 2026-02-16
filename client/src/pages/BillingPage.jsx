@@ -11,46 +11,47 @@ function printInvoice(invoice, patients, tenant) {
     <head>
       <title>Invoice - ${invoice.number}</title>
       <style>
-        body { font-family: 'Inter', system-ui, sans-serif; padding: 40px; color: #1e293b; line-height: 1.6; }
-        .header { display: flex; justify-content: space-between; border-bottom: 2px solid #10b981; padding-bottom: 20px; margin-bottom: 40px; }
-        .clinic-info h1 { color: #059669; margin: 0; font-size: 24px; }
-        .clinic-info p { margin: 2px 0; color: #64748b; font-size: 13px; }
-        .bill-label { font-size: 32px; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.025em; }
-        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-        .meta-box h4 { font-size: 11px; text-transform: uppercase; color: #94a3b8; margin: 0 0 8px; letter-spacing: 0.1em; }
-        .meta-box p { font-size: 15px; font-weight: 600; color: #334155; }
-        table { width: 100%; border-collapse: collapse; margin: 30px 0; }
-        th { text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; color: #64748b; font-size: 11px; text-transform: uppercase; }
-        td { padding: 16px 12px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        .amount-col { text-align: right; font-weight: 600; }
-        .totals { margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 20px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-        .total-row { display: flex; justify-content: space-between; width: 250px; font-size: 14px; color: #64748b; }
-        .grand-total { border-top: 2px solid #059669; padding-top: 12px; margin-top: 8px; color: #1e293b; font-size: 20px; font-weight: 800; }
-        .footer { margin-top: 80px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 20px; }
-        @media print { body { padding: 20px; } }
+        body { font-family: 'Inter', system-ui, sans-serif; padding: 40px; color: #1e293b; line-height: 1.6; background: #fff; }
+        .header { display: flex; justify-content: space-between; border-bottom: 3px solid #10b981; padding-bottom: 25px; margin-bottom: 40px; }
+        .clinic-info h1 { color: #059669; margin: 0; font-size: 28px; font-weight: 900; }
+        .clinic-info p { margin: 4px 0; color: #64748b; font-size: 13px; }
+        .bill-label { font-size: 36px; font-weight: 900; color: #0f172a; margin: 0; letter-spacing: -0.05em; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+        .meta-box h4 { font-size: 10px; text-transform: uppercase; color: #94a3b8; margin: 0 0 10px; letter-spacing: 0.15em; font-weight: 800; }
+        .meta-box p { font-size: 16px; font-weight: 700; color: #1e293b; margin: 0; }
+        .meta-box .sub { font-weight: 500; color: #64748b; font-size: 13px; margin-top: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 40px 0; }
+        th { text-align: left; padding: 15px; border-bottom: 2px solid #f1f5f9; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; }
+        td { padding: 20px 15px; border-bottom: 1px solid #f8fafc; font-size: 15px; color: #334155; font-weight: 500; }
+        .amount-col { text-align: right; font-weight: 700; color: #0f172a; }
+        .totals { margin-top: 40px; border-top: 1px solid #f1f5f9; padding-top: 30px; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+        .total-row { display: flex; justify-content: space-between; width: 280px; font-size: 15px; color: #64748b; font-weight: 600; }
+        .grand-total { border-top: 2px solid #10b981; padding-top: 15px; margin-top: 10px; color: #0f172a; font-size: 22px; font-weight: 900; }
+        .footer { margin-top: 100px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 30px; font-weight: 500; }
+        @media print { body { padding: 0; } .header { border-bottom-width: 4px; } }
       </style>
     </head>
     <body onload="window.print(); window.close();">
       <div class="header">
         <div class="clinic-info">
           <h1>${tenant?.name || 'EMR Medical Center'}</h1>
-          <p>Certified Outpatient & Inpatient Services</p>
-          <p>Contact: +91 XXXXX XXXXX</p>
+          <p>Verified Healthcare Provider</p>
+          <p>Licence: EMR-TC-${tenant?.id?.slice(0, 8).toUpperCase()}</p>
         </div>
         <div style="text-align: right">
-          <h2 class="bill-label">INVOICE</h2>
-          <p style="color: #64748b; font-size: 13px;">#${invoice.number}</p>
+          <h2 class="bill-label">RECEIPT</h2>
+          <p style="color: #64748b; font-size: 14px; font-weight: 700; margin-top: 5px;">Ref: ${invoice.number}</p>
         </div>
       </div>
 
       <div class="meta-grid">
         <div class="meta-box">
-          <h4>Billed To</h4>
+          <h4>Billed Recipient</h4>
           <p>${pName}</p>
-          <p style="font-weight: 400; font-size: 13px;">Patient ID: ${invoice.patientId || 'N/A'}</p>
+          <div class="sub">Patient File No: ${invoice.patientId?.toUpperCase().slice(0, 12)}</div>
         </div>
         <div class="meta-box" style="text-align: right">
-          <h4>Invoice Date</h4>
+          <h4>Date of Issue</h4>
           <p>${new Date(invoice.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
         </div>
       </div>
@@ -58,28 +59,28 @@ function printInvoice(invoice, patients, tenant) {
       <table>
         <thead>
           <tr>
-            <th>Description of Services</th>
-            <th style="text-align: right">Amount (INR)</th>
+            <th>Description of Clinical Services / Items</th>
+            <th style="text-align: right">Line Total (INR)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>${invoice.description || 'Clinical Consultation & Services'}</td>
+            <td>${invoice.description || 'Medical Consultation & Facility Fees'}</td>
             <td class="amount-col">${currency(invoice.subtotal)}</td>
           </tr>
         </tbody>
       </table>
 
       <div class="totals">
-        <div class="total-row"><span>Subtotal</span><strong>${currency(invoice.subtotal)}</strong></div>
-        <div class="total-row"><span>GST / Tax</span><strong>${currency(invoice.tax)}</strong></div>
-        <div class="total-row grand-total"><span>Total Amount</span><span>${currency(invoice.total)}</span></div>
-        ${invoice.status === 'paid' ? '<div style="margin-top: 8px; color: #10b981; font-weight: 800; text-transform: uppercase; font-size: 12px;">✅ FULLY PAID</div>' : ''}
+        <div class="total-row"><span>Base Charges</span><span>${currency(invoice.subtotal)}</span></div>
+        <div class="total-row"><span>Institutional Tax (5%)</span><span>${currency(invoice.tax)}</span></div>
+        <div class="total-row grand-total"><span>Total Finalized</span><span>${currency(invoice.total)}</span></div>
+        ${invoice.status === 'paid' ? '<div style="margin-top: 15px; padding: 8px 20px; background: #dcfce7; border-radius: 8px; color: #15803d; font-weight: 900; text-transform: uppercase; font-size: 13px; letter-spacing: 0.1em;">✓ PAYMENT RECEIVED</div>' : ''}
       </div>
 
       <div class="footer">
-        <p>This is a computer-generated tax invoice. Registered with Health Authority.</p>
-        <p style="margin-top: 4px;">Thank you for choosing ${tenant?.name || 'us'}.</p>
+        <p>This document constitutes a legal tax invoice issued by ${tenant?.name}.</p>
+        <p style="margin-top: 6px;">Thank you for your trust in our healthcare services.</p>
       </div>
     </body>
     </html>
@@ -99,134 +100,248 @@ export default function BillingPage({ tenant, patients,
 
   return (
     <section className="view billing-workspace">
-      <div className="workspace-tabs" style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '12px' }}>
-        <button
-          className={`tab-btn ${activeView === 'list' ? 'active' : ''}`}
-          onClick={() => setActiveView('list')}
-        >
-          📄 Transaction Ledger
-        </button>
-        <button
-          className={`tab-btn ${activeView === 'create' ? 'active' : ''}`}
-          onClick={() => setActiveView('create')}
-          style={{ marginLeft: 'auto', background: '#3b82f6', color: 'white' }}
-        >
-          + Create New Invoice
-        </button>
+      <div className="workspace-header">
+        <div className="tab-group premium-glass">
+          <button
+            className={`tab-link ${activeView === 'list' ? 'active' : ''}`}
+            onClick={() => setActiveView('list')}
+          >
+            <span className="icon">💳</span> Financial Ledger
+          </button>
+          <button
+            className={`tab-link ${activeView === 'create' ? 'active' : ''}`}
+            onClick={() => setActiveView('create')}
+          >
+            <span className="icon">➕</span> New Statement
+          </button>
+        </div>
       </div>
 
-      {activeView === 'create' && (
-        <article className="panel" style={{ maxWidth: '600px', margin: '0 0 2rem' }}>
-          <div className="panel-header" style={{ marginBottom: '1.5rem' }}>
-            <h3 style={{ margin: 0, border: 'none' }}>Issue Patient Invoice</h3>
-            <p style={{ fontSize: '13px', color: '#64748b' }}>Enter medical services and costs to generate a bill.</p>
-          </div>
-          <form className="structured-form" onSubmit={(e) => {
-            onIssueInvoice(e);
-            setActiveView('list');
-          }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <PatientSearch tenantId={tenant.id} />
-
-              <div className="field">
-                <label style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748b' }}>Service Description</label>
-                <input name="description" placeholder="e.g. Consultation + Lab Tests" required />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <div className="field">
-                  <label style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748b' }}>Base Amount (₹)</label>
-                  <input name="amount" type="number" step="0.01" placeholder="0.00" required />
-                </div>
-                <div className="field">
-                  <label style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748b' }}>Tax Percent (%)</label>
-                  <input name="taxPercent" type="number" step="0.01" defaultValue="5" />
-                </div>
-              </div>
-
-              <div className="field">
-                <label style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748b' }}>Payment Method</label>
-                <select name="paymentMethod" defaultValue="Cash">
-                  <option value="Cash">Cash</option>
-                  <option value="Card">Card</option>
-                  <option value="UPI">UPI / Digital</option>
-                  <option value="Insurance">Insurance</option>
-                </select>
+      <div className="billing-content-grid">
+        {activeView === 'create' && (
+          <article className="panel create-invoice-card premium-glass">
+            <div className="panel-header-rich">
+              <div className="header-icon-box">💰</div>
+              <div className="header-text">
+                <h3>New Patient Statement</h3>
+                <p>Generate institutional bills for medical services rendered</p>
               </div>
             </div>
-            <button type="submit" className="primary-submit-btn" style={{ background: '#3b82f6', marginTop: '1.5rem' }}>
-              Generate & Finalize Invoice
-            </button>
-          </form>
-        </article>
-      )}
 
-      {activeView === 'list' && (
-        <article className="panel">
-          <table className="clinical-table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Invoice #</th>
-                <th>Patient Identity</th>
-                <th>Total Value</th>
-                <th>Status</th>
-                <th style={{ textAlign: 'right' }}>Financial Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedInvoices.length === 0 && (
-                <tr><td colSpan="6" style={{ textAlign: 'center', padding: '3rem', color: '#94a3b8' }}>No financial transactions found.</td></tr>
-              )}
-              {Array.isArray(sortedInvoices) && sortedInvoices.map((i) => (
-                <tr key={i.id}>
-                  <td style={{ fontSize: '12px', color: '#64748b' }}>
-                    {i.createdAt ? new Date(i.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}
-                  </td>
-                  <td><code style={{ background: '#f1f5f9', padding: '2px 4px', borderRadius: '4px', fontSize: '12px' }}>{i.number}</code></td>
-                  <td>
-                    <div
-                      style={{ fontWeight: 600, color: '#10b981', cursor: 'pointer' }}
-                      onClick={() => { setActivePatientId(i.patientId); setView('patients'); }}
-                    >
-                      {patientName(i.patientId, patients) || 'Patient Record'}
+            <form className="medical-form" onSubmit={(e) => {
+              onIssueInvoice(e);
+              setActiveView('list');
+            }}>
+              <div className="form-grid-premium">
+                <div className="form-section">
+                  <h4 className="form-section-title">Client Selection</h4>
+                  <PatientSearch tenantId={tenant.id} />
+                </div>
+
+                <div className="form-section">
+                  <h4 className="form-section-title">Billing Particulars</h4>
+                  <div className="form-group">
+                    <label>Service Description</label>
+                    <input name="description" placeholder="e.g. Specialty Consult + Radiology" required />
+                  </div>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Base Fee (₹)</label>
+                      <input name="amount" type="number" step="0.01" placeholder="0.00" required />
                     </div>
-                    <div style={{ fontSize: '11px', color: '#94a3b8' }}>ID: {i.patientId?.slice(0, 8)}</div>
-                  </td>
-                  <td style={{ fontWeight: 700, color: '#0f172a' }}>{currency(i.total)}</td>
-                  <td>
-                    <span className={`badge-status ${i.status}`} style={{
-                      background: i.status === 'paid' ? '#dcfce7' : '#fef9c3',
-                      color: i.status === 'paid' ? '#16a34a' : '#ca8a04',
-                      padding: '4px 10px', borderRadius: '20px', fontSize: '10px', fontWeight: 800
-                    }}>
-                      {i.status?.toUpperCase()}
-                    </span>
-                  </td>
-                  <td style={{ textAlign: 'right' }}>
-                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-                      {i.status !== 'paid' && (
-                        <button className="mini-action-btn" onClick={() => onMarkPaid(i.id)} style={{ color: '#10b981', borderColor: '#d1fae5' }}>Mark Paid</button>
-                      )}
-                      <button className="mini-action-btn" onClick={() => printInvoice(i, patients, tenant)} style={{ border: 'none', background: '#f8fafc' }}>🖨️ Print</button>
+                    <div className="form-group">
+                      <label>GST / VAT (%)</label>
+                      <input name="taxPercent" type="number" step="0.1" defaultValue="5" />
                     </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </article>
-      )}
+                  </div>
+                  <div className="form-group">
+                    <label>Payment Mode Preference</label>
+                    <select name="paymentMethod" defaultValue="Card">
+                      <option>Cash</option>
+                      <option>Card</option>
+                      <option>UPI / NetBanking</option>
+                      <option>Insurance Claim</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-actions-premium">
+                <button type="submit" className="save-btn-premium">Finalize Transaction</button>
+                <button type="button" className="cancel-btn-premium" onClick={() => setActiveView('list')}>Discard Statement</button>
+              </div>
+            </form>
+          </article>
+        )}
+
+        {activeView === 'list' && (
+          <article className="ledger-card premium-glass">
+            <div className="ledger-header">
+              <div className="title-stack">
+                <h3>Institutional Ledger</h3>
+                <p>Comprehensive monitoring of {sortedInvoices.length} recent financial transactions and departmental billings.</p>
+              </div>
+              <div className="ledger-stats analytics-cards">
+                <div className="stat-card premium-glass">
+                  <div className="card-icon color-emerald"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg></div>
+                  <div className="card-info">
+                    <span className="tiny-label">Realized Revenue</span>
+                    <strong className="val-main">{currency(sortedInvoices.filter(i => i.status === 'paid').reduce((sum, i) => sum + i.total, 0))}</strong>
+                  </div>
+                  <div className="mini-graph">
+                    <div className="bar" style={{ height: '40%', opacity: 0.3 }}></div>
+                    <div className="bar" style={{ height: '60%', opacity: 0.5 }}></div>
+                    <div className="bar" style={{ height: '80%', opacity: 0.7 }}></div>
+                    <div className="bar active" style={{ height: '100%' }}></div>
+                  </div>
+                </div>
+                <div className="stat-card premium-glass">
+                  <div className="card-icon color-amber"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg></div>
+                  <div className="card-info">
+                    <span className="tiny-label">Awaiting Settlement</span>
+                    <strong className="val-main">{currency(sortedInvoices.filter(i => i.status !== 'paid').reduce((sum, i) => sum + i.total, 0))}</strong>
+                  </div>
+                  <div className="mini-graph">
+                    <div className="bar-trend error" style={{ width: '65%' }}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="ledger-guidance">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="color-blue"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+              <span>Verify patient insurance eligibility before finalizing statements. Settled payments are finalized in real-time.</span>
+            </div>
+
+            <div className="table-wrapper">
+              <table className="premium-table">
+                <thead>
+                  <tr>
+                    <th>Entry Date</th>
+                    <th>Document ID</th>
+                    <th>Patient Account</th>
+                    <th>Gross Total</th>
+                    <th>State</th>
+                    <th style={{ textAlign: 'right' }}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedInvoices.length === 0 && (
+                    <tr><td colSpan="6" className="empty-table-msg">No transactions recorded in the current fiscal period.</td></tr>
+                  )}
+                  {Array.isArray(sortedInvoices) && sortedInvoices.map((i) => (
+                    <tr key={i.id} className={`ledger-row ${i.status}`}>
+                      <td className="date-cell">
+                        {i.createdAt ? new Date(i.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }) : 'Today'}
+                      </td>
+                      <td className="id-cell"><code>{i.number}</code></td>
+                      <td className="patient-cell">
+                        <div
+                          className="clickable-patient"
+                          onClick={() => { setActivePatientId(i.patientId); setView('patients'); }}
+                        >
+                          {patientName(i.patientId, patients) || 'Unknown File'}
+                        </div>
+                        <span className="tiny-id">REF-{i.patientId?.slice(0, 6).toUpperCase()}</span>
+                      </td>
+                      <td className="amount-cell">{currency(i.total)}</td>
+                      <td>
+                        <span className={`status-chip ${i.status}`}>
+                          {i.status === 'paid' ? 'Settled' : 'Outstanding'}
+                        </span>
+                      </td>
+                      <td className="actions-cell">
+                        <div className="action-button-group">
+                          {i.status !== 'paid' && (
+                            <button className="ledger-btn settle" onClick={() => onMarkPaid(i.id)}>
+                              Settle
+                            </button>
+                          )}
+                          <button className="ledger-btn print" onClick={() => printInvoice(i, patients, tenant)}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9V2h12v7" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 14h12v8H6z" /></svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </article>
+        )}
+      </div>
 
       <style>{`
-        .billing-workspace .tab-btn { padding: 8px 16px; border: none; background: transparent; color: #64748b; font-weight: 600; cursor: pointer; border-radius: 8px; transition: 0.2s; }
-        .billing-workspace .tab-btn.active { color: #3b82f6; background: #eff6ff; }
-        .primary-submit-btn { width: 100%; padding: 12px; border: none; border-radius: 8px; color: white; font-weight: 700; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(59,130,246,0.3); }
-        .clinical-table { width: 100%; border-collapse: collapse; }
-        .clinical-table th { text-align: left; padding: 12px; background: #f8fafc; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
-        .clinical-table td { padding: 12px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        .mini-action-btn { padding: 4px 12px; border: 1px solid #e2e8f0; background: white; border-radius: 6px; font-size: 12px; cursor: pointer; transition: 0.2s; font-weight: 600; }
-        .mini-action-btn:hover { border-color: #3b82f6; color: #3b82f6; }
+        .billing-workspace { animation: fade-in 0.5s ease-out; }
+        .workspace-header { margin-bottom: 1rem; }
+        .tab-group { display: flex; padding: 4px; width: fit-content; background: rgba(255,255,255,0.6); }
+        .tab-link { 
+          padding: 10px 20px; border: none; background: transparent; color: #64748b; 
+          font-size: 0.85rem; font-weight: 700; cursor: pointer; border-radius: 9px; 
+          transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+        }
+        .tab-link.active { background: white; color: var(--tenant-primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        
+        .premium-glass { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 25px rgba(0,0,0,0.03); }
+        
+        .panel-header-rich { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+        .header-icon-box { font-size: 1.75rem; background: #fff7ed; width: 54px; height: 54px; display: grid; place-items: center; border-radius: 14px; border: 1px solid #ffedd5; }
+        .header-text h3 { margin: 0; font-size: 1.35rem; font-weight: 900; color: #0f172a; }
+        .header-text p { margin: 4px 0 0; color: #64748b; font-size: 0.85rem; }
+
+        .create-invoice-card { max-width: 680px; padding: 2.5rem; }
+        .ledger-card { padding: 0; overflow: hidden; }
+        
+        .ledger-header { padding: 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; }
+        .title-stack h3 { margin: 0; font-size: 1.25rem; font-weight: 900; color: #0f172a; }
+        .title-stack p { margin: 4px 0 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600; }
+        
+        .ledger-stats.analytics-cards { display: flex; gap: 1.5rem; }
+        .stat-card { 
+          display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem; 
+          border-radius: 1.25rem; position: relative; overflow: hidden; min-width: 240px;
+        }
+        .card-icon { width: 44px; height: 44px; background: #f8fafc; border-radius: 10px; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .card-info { flex: 1; display: flex; flex-direction: column; }
+        .tiny-label { font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        .val-main { font-size: 1.15rem; font-weight: 900; color: #0f172a; margin-top: 2px; }
+        
+        .mini-graph { position: absolute; bottom: 0; right: 0; left: 0; height: 30px; display: flex; align-items: flex-end; gap: 4px; padding: 0 10px; opacity: 0.15; pointer-events: none; }
+        .mini-graph .bar { flex: 1; background: currentColor; border-radius: 4px 4px 0 0; }
+        .mini-graph .bar-trend { height: 4px; background: #eab308; border-radius: 10px; }
+        .mini-graph .bar-trend.error { background: #f59e0b; }
+
+        .ledger-guidance { 
+          margin: 0 2rem 1rem; padding: 0.75rem 1.25rem; background: #f0f9ff; 
+          border-radius: 10px; display: flex; align-items: center; gap: 10px;
+          font-size: 0.75rem; font-weight: 600; color: #0369a1; border: 1px solid #e0f2fe;
+        }
+
+        .table-wrapper { width: 100%; border-top: 1px solid transparent; }
+        .premium-table { width: 100%; border-collapse: collapse; }
+        .premium-table th { text-align: left; padding: 1.25rem 1.5rem; background: #f8fafc; color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; border-bottom: 1px solid #f1f5f9; }
+        .premium-table td { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f8fafc; font-size: 14px; }
+        
+        .date-cell { font-weight: 700; color: #64748b; }
+        .id-cell code { background: #f1f5f9; color: #475569; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+        .patient-cell { display: flex; flex-direction: column; }
+        .clickable-patient { font-weight: 800; color: var(--tenant-primary); cursor: pointer; transition: 0.2s; }
+        .clickable-patient:hover { text-decoration: underline; color: #0f172a; }
+        .tiny-id { font-size: 10px; color: #cbd5e1; font-weight: 700; margin-top: 2px; }
+        .amount-cell { font-weight: 900; color: #0f172a; font-size: 15px; }
+
+        .status-chip { font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.02em; }
+        .status-chip.paid { background: #dcfce7; color: #16a34a; }
+        .status-chip.pending { background: #fef9c3; color: #ca8a04; }
+
+        .action-button-group { display: flex; gap: 8px; justify-content: flex-end; }
+        .ledger-btn { height: 32px; border: 1px solid #e2e8f0; border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; background: white; }
+        .ledger-btn.settle { color: #10b981; border-color: #d1fae5; background: #f0fdf4; padding: 0 12px; }
+        .ledger-btn.settle:hover { background: #10b981; color: white; border-color: #10b981; }
+        .ledger-btn.print { width: 32px; color: #64748b; }
+        .ledger-btn.print:hover { background: #f1f5f9; color: #0f172a; }
+
+        .empty-table-msg { text-align: center; padding: 4rem; color: #94a3b8; font-weight: 600; font-style: italic; }
       `}</style>
     </section>
   );
