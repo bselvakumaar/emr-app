@@ -18,7 +18,7 @@ export default function AdminPage({ tenant, patients, onSaveSettings, onCreateUs
           <input name="name" placeholder="Name" required />
           <input name="email" placeholder="Email" required />
           <select name="role"><option>Admin</option><option>Doctor</option><option>Nurse</option><option>Front Office</option><option>Billing</option><option>Inventory</option><option>Patient</option></select>
-          <select name="patientId"><option value="">Link Patient (optional)</option>{patients.map((p) => <option key={p.id} value={p.id}>{p.mrn}</option>)}</select>
+          <select name="patientId"><option value="">Link Patient (optional)</option>{Array.isArray(patients) && patients.map((p) => <option key={p.id} value={p.id}>{p.mrn}</option>)}</select>
           <button type="submit">Create User</button>
         </form>
       </article>

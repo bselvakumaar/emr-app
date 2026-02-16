@@ -10,7 +10,10 @@ import AppointmentsPage from './pages/AppointmentsPage.jsx';
 import EmrPage from './pages/EmrPage.jsx';
 import BillingPage from './pages/BillingPage.jsx';
 import InventoryPage from './pages/InventoryPage.jsx';
+import InpatientPage from './pages/InpatientPage.jsx';
+import PharmacyPage from './pages/PharmacyPage.jsx';
 import EmployeesPage from './pages/EmployeesPage.jsx';
+import AccountsPage from './pages/AccountsPage.jsx';
 import ReportsPage from './pages/ReportsPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
 import Chatbot from './components/Chatbot.jsx';
@@ -229,18 +232,24 @@ export default function App() {
             activePatient={activePatient}
             activePatientId={activePatientId}
             setActivePatientId={setActivePatientId}
-            onCreatePatient={(e) => {
+            onCreatePatient={async (e) => {
               e.preventDefault();
               const fd = new FormData(e.target);
-              withRefresh(() => api.addPatient({
-                tenantId: session.tenantId, userId: activeUser.id,
-                firstName: fd.get('firstName'), lastName: fd.get('lastName'), dob: fd.get('dob'),
-                gender: fd.get('gender'), phone: fd.get('phone'), email: fd.get('email'),
-                address: fd.get('address'), bloodGroup: fd.get('bloodGroup'),
-                emergencyContact: fd.get('emergencyContact'), insurance: fd.get('insurance'),
-                chronicConditions: fd.get('chronicConditions'), allergies: fd.get('allergies'),
-                surgeries: fd.get('surgeries'), familyHistory: fd.get('familyHistory')
-              }));
+              await withRefresh(async () => {
+                const newPatient = await api.addPatient({
+                  tenantId: session.tenantId, userId: activeUser.id,
+                  firstName: fd.get('firstName'), lastName: fd.get('lastName'), dob: fd.get('dob'),
+                  gender: fd.get('gender'), phone: fd.get('phone'), email: fd.get('email'),
+                  address: fd.get('address'), bloodGroup: fd.get('bloodGroup'),
+                  emergencyContact: fd.get('emergencyContact'), insurance: fd.get('insurance'),
+                  chronicConditions: fd.get('chronicConditions'), allergies: fd.get('allergies'),
+                  surgeries: fd.get('surgeries'), familyHistory: fd.get('familyHistory')
+                });
+                if (newPatient && newPatient.id) {
+                  setActivePatientId(newPatient.id);
+                  setView('emr');
+                }
+              });
             }}
             onAddClinical={(e) => {
               e.preventDefault();
@@ -263,6 +272,8 @@ export default function App() {
             walkins={walkins}
             appointments={appointments}
             users={users}
+            setView={setView}
+            setActivePatientId={setActivePatientId}
             onCreateAppointment={(e) => {
               e.preventDefault();
               const fd = new FormData(e.target);
@@ -288,7 +299,15 @@ export default function App() {
                 providerId: fd.get('providerId'), start: fd.get('start'), end: fd.get('end'), reason: fd.get('reason')
               }));
             }}
-            onConvertWalkin={(walkinId) => withRefresh(() => api.convertWalkin(walkinId, { tenantId: session.tenantId, userId: activeUser.id }))}
+            onConvertWalkin={async (walkinId) => {
+              await withRefresh(async () => {
+                const newPatient = await api.convertWalkin(walkinId, { tenantId: session.tenantId, userId: activeUser.id });
+                if (newPatient && newPatient.id) {
+                  setActivePatientId(newPatient.id);
+                  setView('patients');
+                }
+              });
+            }}
             onSetAppointmentStatus={(appointmentId, status) => withRefresh(() => api.setAppointmentStatus(appointmentId, { tenantId: session.tenantId, userId: activeUser.id, status }))}
             onReschedule={(appointment) => {
               const start = window.prompt('New start (YYYY-MM-DDTHH:mm)', appointment.start);
@@ -304,16 +323,62 @@ export default function App() {
           <EmrPage
             tenant={tenant}
             patients={patients}
-            providers={employees.filter(e => e.department === 'Nursing' || e.department === 'Surgery' || e.department === 'Consultation')} // Simple filter
+            providers={providers}
             encounters={encounters}
-            onCreateEncounter={(e) => {
-              e.preventDefault();
-              const fd = new FormData(e.target);
-              withRefresh(() => api.addEncounter({
-                tenantId: session.tenantId, userId: activeUser.id, patientId: fd.get('patientId'), providerId: fd.get('providerId'),
-                type: fd.get('type'), complaint: fd.get('complaint'), diagnosis: fd.get('diagnosis'), notes: fd.get('notes')
-              }));
+            onCreateEncounter={async (data) => {
+              try {
+                // 1. Create the main encounter record
+                await api.addEncounter({
+                  tenantId: session.tenantId,
+                  userId: activeUser.id,
+                  patientId: data.patientId,
+                  providerId: data.providerId,
+                  type: data.type,
+                  complaint: data.complaint,
+                  diagnosis: data.diagnosis,
+                  notes: data.notes,
+                  bp: data.bp, // Ensure backend handles these or they'll be ignored
+                  hr: data.hr
+                });
+
+                // 2. If there are medications, save them to clinical records as a prescription
+                if (data.medications && data.medications.length > 0) {
+                  await api.addPatientClinical(data.patientId, {
+                    tenantId: session.tenantId,
+                    userId: activeUser.id,
+                    section: 'prescriptions',
+                    payload: {
+                      date: new Date().toISOString().slice(0, 10),
+                      vitals: { bp: data.bp, hr: data.hr },
+                      medications: data.medications,
+                      notes: data.notes,
+                      providerId: data.providerId
+                    }
+                  });
+                }
+
+                refreshTenantData();
+              } catch (err) {
+                console.error('Encounter error:', err);
+                throw err;
+              }
             }}
+            onDischarge={() => refreshTenantData()}
+          />
+        )}
+
+        {view === 'inpatient' && (
+          <InpatientPage
+            tenant={tenant}
+            providers={providers}
+            onDischarge={() => refreshTenantData()}
+          />
+        )}
+
+        {view === 'pharmacy' && (
+          <PharmacyPage
+            tenant={tenant}
+            onDispense={() => refreshTenantData()}
           />
         )}
 
@@ -322,15 +387,21 @@ export default function App() {
             tenant={tenant}
             patients={patients}
             invoices={invoices}
+            setView={setView}
+            setActivePatientId={setActivePatientId}
             onIssueInvoice={(e) => {
               e.preventDefault();
               const fd = new FormData(e.target);
               withRefresh(() => api.createInvoice({
                 tenantId: session.tenantId, userId: activeUser.id, patientId: fd.get('patientId'),
-                description: fd.get('description'), amount: fd.get('amount'), taxPercent: fd.get('taxPercent')
+                description: fd.get('description'), amount: fd.get('amount'),
+                taxPercent: fd.get('taxPercent'), paymentMethod: fd.get('paymentMethod')
               }));
             }}
-            onMarkPaid={(id) => withRefresh(() => api.payInvoice(id, session.tenantId, activeUser.id))}
+            onMarkPaid={(id) => {
+              const method = window.prompt('Payment Method (Cash, Card, UPI, Insurance)?', 'Cash');
+              if (method) withRefresh(() => api.payInvoice(id, session.tenantId, activeUser.id, method));
+            }}
           />
         )}
 
@@ -364,6 +435,15 @@ export default function App() {
                 salary: Number(fd.get('salary'))
               }));
             }}
+            onRecordAttendance={(e) => {
+              e.preventDefault();
+              const fd = new FormData(e.target);
+              withRefresh(() => api.recordAttendance({
+                tenantId: session.tenantId, employeeId: fd.get('employeeId'),
+                date: fd.get('date'), timeIn: fd.get('timeIn'),
+                timeOut: fd.get('timeOut'), status: fd.get('status')
+              }));
+            }}
             onApplyLeave={(e) => {
               e.preventDefault();
               const fd = new FormData(e.target);
@@ -374,7 +454,9 @@ export default function App() {
           />
         )}
 
-        {view === 'reports' && <ReportsPage reportSummary={reportSummary} />}
+        {view === 'accounts' && <AccountsPage tenant={tenant} />}
+
+        {view === 'reports' && <ReportsPage reportSummary={reportSummary} tenant={tenant} />}
 
         {view === 'admin' && (
           <AdminPage

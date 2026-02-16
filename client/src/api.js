@@ -94,12 +94,20 @@ async function apiRequest(endpoint, options = {}) {
       throw new Error('Session expired. Please login again.');
     }
 
-    // Parse JSON response
-    const data = await response.json();
+    // Parse JSON response safely
+    let data = {};
+    const text = await response.text();
+    if (text) {
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error('Failed to parse JSON:', text);
+      }
+    }
 
     // Handle error responses
     if (!response.ok) {
-      throw new Error(data.error || data.message || 'API request failed');
+      throw new Error(data.error || data.message || `API request failed: ${response.status}`);
     }
 
     return data;
@@ -181,6 +189,28 @@ export async function createUser(data) {
 }
 
 // =====================================================
+// HR & ACCOUNTS
+// =====================================================
+
+export async function recordAttendance(data) {
+  return await apiRequest('/attendance', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function addExpense(data) {
+  return await apiRequest('/expenses', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function getFinancials(tenantId, month) {
+  return await apiRequest(`/reports/financials?tenantId=${tenantId}&month=${month}`);
+}
+
+// =====================================================
 // BOOTSTRAP
 // =====================================================
 
@@ -216,6 +246,18 @@ export async function addClinicalRecord(patientId, tenantId, section, payload) {
 
 export async function getPatientPrintData(patientId, docType, tenantId) {
   return await apiRequest(`/patients/${patientId}/print/${docType}?tenantId=${tenantId}`);
+}
+
+export async function searchPatients(tenantId, filters = {}) {
+  // Filter out null/undefined/empty string values
+  const queryParams = { tenantId };
+  if (filters.text) queryParams.text = filters.text;
+  if (filters.date) queryParams.date = filters.date;
+  if (filters.type) queryParams.type = filters.type;
+  if (filters.status) queryParams.status = filters.status;
+
+  const params = new URLSearchParams(queryParams);
+  return await apiRequest(`/patients/search?${params.toString()}`);
 }
 
 // =====================================================
@@ -272,8 +314,21 @@ export async function rescheduleAppointment(appointmentId, data) {
 // ENCOUNTERS
 // =====================================================
 
+export async function getEncounters(tenantId) {
+  // We'll rely on server exposing this or use bootstrap data if not. 
+  // Let's assume we will add GET /api/encounters for InpatientPage.
+  return await apiRequest(`/encounters?tenantId=${tenantId}`);
+}
+
 export async function createEncounter(data) {
   return await apiRequest('/encounters', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function dischargePatient(encounterId, data) {
+  return await apiRequest(`/encounters/${encounterId}/discharge`, {
     method: 'POST',
     body: JSON.stringify(data),
   });
@@ -290,10 +345,10 @@ export async function createInvoice(data) {
   });
 }
 
-export async function payInvoice(invoiceId, tenantId) {
+export async function payInvoice(invoiceId, tenantId, userId, paymentMethod = 'Cash') {
   return await apiRequest(`/invoices/${invoiceId}/pay`, {
     method: 'PATCH',
-    body: JSON.stringify({ tenantId }),
+    body: JSON.stringify({ tenantId, userId, paymentMethod }),
   });
 }
 
@@ -341,6 +396,10 @@ export async function getReportSummary(tenantId) {
   return await apiRequest(`/reports/summary?tenantId=${tenantId}`);
 }
 
+export async function getDoctorPayouts(tenantId) {
+  return await apiRequest(`/reports/payouts?tenantId=${tenantId}`);
+}
+
 // =====================================================
 // REALTIME
 // =====================================================
@@ -350,7 +409,23 @@ export async function getRealtimeTick(tenantId) {
 }
 
 // =====================================================
-// EXPORT ALL
+// PRESCRIPTIONS
+// =====================================================
+
+export async function getPrescriptions(tenantId, filters = {}) {
+  const params = new URLSearchParams({ tenantId, ...Object.fromEntries(Object.entries(filters).filter(([_, v]) => v != null)) });
+  return await apiRequest(`/prescriptions?${params.toString()}`);
+}
+
+export async function dispensePrescription(id, data) {
+  return await apiRequest(`/prescriptions/${id}/dispense`, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+}
+
+// =====================================================
+// EXPORTS & COMPATIBILITY
 // =====================================================
 
 const apiClient = {
@@ -413,6 +488,12 @@ const apiClient = {
 
   // Reports
   getReportSummary,
+  getDoctorPayouts,
+  getFinancials,
+
+  // HR & Accounts
+  recordAttendance,
+  addExpense,
 
   // Realtime
   getRealtimeTick,
@@ -427,7 +508,12 @@ apiClient.addPatientClinical = addClinicalRecord;
 apiClient.getPatientPrintDoc = getPatientPrintData;
 apiClient.convertWalkin = convertWalkinToPatient;
 apiClient.setAppointmentStatus = updateAppointmentStatus;
+apiClient.getEncounters = getEncounters;
 apiClient.addEncounter = createEncounter;
+apiClient.dischargePatient = dischargePatient;
+apiClient.searchPatients = searchPatients;
+apiClient.getPrescriptions = getPrescriptions;
+apiClient.dispensePrescription = dispensePrescription;
 apiClient.addInvoice = createInvoice;
 apiClient.markInvoicePaid = payInvoice;
 apiClient.addInventory = createInventoryItem;

@@ -13,7 +13,7 @@ import { query } from './connection.js';
 /**
  * Generate audit log entry
  */
-async function createAuditLog({ tenantId, userId, userName, action, entityName, entityId, details, ipAddress, userAgent }) {
+export async function createAuditLog({ tenantId, userId, userName, action, entityName, entityId, details, ipAddress, userAgent }) {
   const sql = `
     INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -38,7 +38,7 @@ async function createAuditLog({ tenantId, userId, userName, action, entityName, 
 /**
  * Generate unique MRN for patient
  */
-async function generateMRN(tenantId) {
+export async function generateMRN(tenantId) {
   const tenantResult = await query('SELECT code FROM emr.tenants WHERE id = $1', [tenantId]);
   const tenantCode = tenantResult.rows[0]?.code || 'UNK';
 
@@ -54,7 +54,7 @@ async function generateMRN(tenantId) {
 /**
  * Generate unique invoice number
  */
-async function generateInvoiceNumber(tenantId) {
+export async function generateInvoiceNumber(tenantId) {
   const tenantResult = await query('SELECT code FROM emr.tenants WHERE id = $1', [tenantId]);
   const tenantCode = tenantResult.rows[0]?.code || 'UNK';
 
@@ -200,6 +200,7 @@ export async function getPatients(tenantId) {
     WHERE p.tenant_id = $1
     GROUP BY p.id
     ORDER BY p.created_at DESC
+    LIMIT 100
   `;
 
   const result = await query(sql, [tenantId]);
@@ -226,6 +227,73 @@ export async function getPatients(tenantId) {
   });
 }
 
+export async function searchPatients(tenantId, { text, date, type, status, limit = 50 }) {
+  let sql = `
+    SELECT DISTINCT p.*,
+           e.encounter_type as latest_encounter_type,
+           e.status as latest_encounter_status,
+           e.visit_date as latest_visit_date
+    FROM emr.patients p
+    LEFT JOIN LATERAL (
+      SELECT * FROM emr.encounters 
+      WHERE patient_id = p.id 
+      ORDER BY visit_date DESC LIMIT 1
+    ) e ON true
+    WHERE p.tenant_id = $1
+  `;
+
+  const params = [tenantId];
+  let paramIdx = 2;
+
+  if (text) {
+    // Simple text search across common fields
+    sql += ` AND (
+      p.first_name ILIKE $${paramIdx} OR 
+      p.last_name ILIKE $${paramIdx} OR 
+      p.mrn ILIKE $${paramIdx} OR
+      p.phone ILIKE $${paramIdx}
+    )`;
+    params.push(`%${text}%`);
+    paramIdx++;
+  }
+
+  if (date) {
+    // Search by visit date or DOB
+    sql += ` AND (DATE(e.visit_date) = $${paramIdx} OR p.date_of_birth = $${paramIdx})`;
+    params.push(date);
+    paramIdx++;
+  }
+
+  if (type) {
+    sql += ` AND e.encounter_type = $${paramIdx}`;
+    params.push(type);
+    paramIdx++;
+  }
+
+  if (status) {
+    if (status === 'Admitted') {
+      sql += ` AND e.status = 'open' AND e.encounter_type = 'IPD'`;
+    } else if (status === 'Discharged') {
+      // Patients whose last IPD encounter is closed
+      sql += ` AND e.status = 'closed' AND e.encounter_type = 'IPD'`;
+    }
+  }
+
+  sql += ` ORDER BY p.created_at DESC LIMIT 50`;
+
+  const result = await query(sql, params);
+
+  return result.rows.map(p => ({
+    ...p,
+    firstName: p.first_name,
+    lastName: p.last_name,
+    dob: p.date_of_birth,
+    bloodGroup: p.blood_group,
+    emergencyContact: p.emergency_contact,
+    medicalHistory: p.medical_history,
+  }));
+}
+
 export async function getPatientById(id, tenantId) {
   const sql = `
     SELECT p.*,
@@ -250,13 +318,14 @@ export async function getPatientById(id, tenantId) {
     dob: patient.date_of_birth,
     bloodGroup: patient.blood_group,
     emergencyContact: patient.emergency_contact,
-    medicalHistory: patient.medical_history,
-    caseHistory: records.filter(r => r.section === 'caseHistory').map(r => r.content),
-    medications: records.filter(r => r.section === 'medications').map(r => r.content),
-    prescriptions: records.filter(r => r.section === 'prescriptions').map(r => r.content),
-    recommendations: records.filter(r => r.section === 'recommendations').map(r => r.content),
-    feedbacks: records.filter(r => r.section === 'feedbacks').map(r => r.content),
-    testReports: records.filter(r => r.section === 'testReports').map(r => r.content),
+    medicalHistory: {
+      ...patient.medical_history,
+      clinicalRecords: records,
+      caseHistory: records.filter(r => r.section === 'caseHistory').map(r => r.payload || r.content),
+      medications: records.filter(r => r.section === 'medications').map(r => r.payload || r.content),
+      prescriptions: records.filter(r => r.section === 'prescriptions').map(r => r.payload || r.content),
+      testReports: records.filter(r => r.section === 'testReports').map(r => r.payload || r.content),
+    },
     clinical_records: undefined,
   };
 }
@@ -569,23 +638,23 @@ export async function rescheduleAppointment({ appointmentId, tenantId, userId, s
 }
 
 // =====================================================
-// ENCOUNTERS (EMR)
-// =====================================================
 
+
+// Encounters
 export async function getEncounters(tenantId) {
-  const result = await query(
-    'SELECT * FROM emr.encounters WHERE tenant_id = $1 ORDER BY visit_date DESC',
-    [tenantId]
-  );
+  const sql = `
+    SELECT e.*, p.first_name, p.last_name, u.name as provider_name
+    FROM emr.encounters e
+    LEFT JOIN emr.patients p ON e.patient_id = p.id
+    LEFT JOIN emr.users u ON e.provider_id = u.id
+    WHERE e.tenant_id = $1
+    ORDER BY e.created_at DESC
+  `;
+  const result = await query(sql, [tenantId]);
   return result.rows.map(row => ({
     ...row,
-    patientId: row.patient_id,
-    providerId: row.provider_id,
-    type: row.encounter_type,
-    complaint: row.chief_complaint,
-    createdAt: row.created_at,
-    updatedAt: row.updated_at,
-    visitDate: row.visit_date,
+    patientName: `${row.first_name} ${row.last_name}`,
+    providerName: row.provider_name
   }));
 }
 
@@ -623,6 +692,41 @@ export async function createEncounter({ tenantId, userId, patientId, providerId,
   };
 }
 
+export async function dischargePatient({ tenantId, userId, encounterId, diagnosis, notes }) {
+  const sql = `
+    UPDATE emr.encounters
+    SET status = 'closed',
+        diagnosis = COALESCE($1, diagnosis),
+        notes = COALESCE($2, notes),
+        updated_at = NOW()
+    WHERE id = $3 AND tenant_id = $4 AND encounter_type = 'IPD' AND status = 'open'
+    RETURNING *
+  `;
+
+  const result = await query(sql, [diagnosis || null, notes || null, encounterId, tenantId]);
+
+  if (result.rows.length === 0) {
+    throw new Error('Active IPD encounter not found');
+  }
+
+  const encounter = result.rows[0];
+
+  await createAuditLog({
+    tenantId,
+    userId,
+    action: 'encounter.discharge',
+    entityName: 'encounter',
+    entityId: encounterId,
+    details: { diagnosis, notes }
+  });
+
+  return {
+    ...encounter,
+    type: encounter.encounter_type,
+    complaint: encounter.chief_complaint,
+  };
+}
+
 // =====================================================
 // INVOICES
 // =====================================================
@@ -645,15 +749,20 @@ export async function getInvoices(tenantId) {
   }));
 }
 
-export async function createInvoice({ tenantId, userId, patientId, description, amount, taxPercent = 0 }) {
+export async function createInvoice({ tenantId, userId, patientId, description, amount, taxPercent = 0, paymentMethod = null }) {
   const invoiceNumber = await generateInvoiceNumber(tenantId);
   const subtotal = parseFloat(amount);
   const tax = subtotal * (parseFloat(taxPercent) / 100);
   const total = subtotal + tax;
 
+  // If payment method is provided, we consider it paid immediately
+  const isPaidNow = paymentMethod && paymentMethod !== 'Pending';
+  const status = isPaidNow ? 'paid' : 'issued';
+  const paidAmount = isPaidNow ? total : 0;
+
   const sql = `
     INSERT INTO emr.invoices (tenant_id, patient_id, invoice_number, description, subtotal, tax, total, paid, status)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, 0, 'issued')
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *
   `;
 
@@ -665,6 +774,8 @@ export async function createInvoice({ tenantId, userId, patientId, description, 
     subtotal,
     tax,
     total,
+    paidAmount,
+    status
   ]);
 
   const invoice = result.rows[0];
@@ -672,10 +783,10 @@ export async function createInvoice({ tenantId, userId, patientId, description, 
   await createAuditLog({
     tenantId,
     userId,
-    action: 'invoice.issue',
+    action: isPaidNow ? 'invoice.create_paid' : 'invoice.issue',
     entityName: 'invoice',
     entityId: invoice.id,
-    details: { invoiceNumber },
+    details: { invoiceNumber, paymentMethod, total },
   });
 
   return {
@@ -688,10 +799,11 @@ export async function createInvoice({ tenantId, userId, patientId, description, 
     tax: parseFloat(invoice.tax),
     total: parseFloat(invoice.total),
     paid: parseFloat(invoice.paid),
+    paymentMethod // Return it back for UI immediately
   };
 }
 
-export async function payInvoice({ invoiceId, tenantId, userId }) {
+export async function payInvoice({ invoiceId, tenantId, userId, paymentMethod = 'Cash' }) {
   const sql = `
     UPDATE emr.invoices
     SET paid = total, status = 'paid', updated_at = NOW()
@@ -711,6 +823,7 @@ export async function payInvoice({ invoiceId, tenantId, userId }) {
     action: 'invoice.paid',
     entityName: 'invoice',
     entityId: invoiceId,
+    details: { paymentMethod }
   });
 
   const invoice = result.rows[0];
@@ -1099,13 +1212,16 @@ export async function getBootstrapData(tenantId, userId) {
     employeeLeaves,
     inventory,
     permissions: {
-      Superadmin: ['superadmin', 'dashboard', 'reports'],
-      Admin: ['dashboard', 'patients', 'appointments', 'emr', 'billing', 'inventory', 'employees', 'reports', 'admin'],
-      Doctor: ['dashboard', 'patients', 'appointments', 'emr', 'reports'],
-      Nurse: ['dashboard', 'patients', 'appointments', 'emr'],
+      Superadmin: ['superadmin', 'dashboard', 'reports', 'tenants', 'users', 'patients', 'appointments', 'emr', 'inventory', 'billing'],
+      Admin: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy', 'billing', 'inventory', 'employees', 'reports', 'admin', 'users'],
+      Doctor: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy', 'reports'],
+      Nurse: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy'],
+      Lab: ['dashboard', 'patients', 'reports'],
+      Pharmacy: ['dashboard', 'pharmacy', 'inventory', 'reports'],
+      'Support Staff': ['dashboard', 'patients', 'appointments'],
       'Front Office': ['dashboard', 'patients', 'appointments'],
       Billing: ['dashboard', 'billing', 'reports'],
-      Inventory: ['dashboard', 'inventory', 'reports'],
+      Inventory: ['dashboard', 'inventory', 'pharmacy', 'reports'],
       Patient: ['dashboard', 'appointments', 'patients'],
     },
   };
@@ -1145,6 +1261,7 @@ export default {
   // Encounters
   getEncounters,
   createEncounter,
+  dischargePatient,
 
   // Invoices
   getInvoices,
@@ -1175,8 +1292,6 @@ export default {
   createAuditLog,
 };
 
-// Export createAuditLog separately as well
-export { createAuditLog };
 // =====================================================
 // PRESCRIPTIONS & PHARMACY
 // =====================================================
@@ -1193,17 +1308,11 @@ export async function getPrescriptions(tenantId, filters = {}) {
     LEFT JOIN emr.users u ON e.provider_id = u.id
     WHERE pr.tenant_id = $1
   `;
+
   const params = [tenantId];
-  let paramIndex = 2;
-
   if (filters.status) {
-    sql += ` AND pr.status = $${paramIndex++}`;
+    sql += ` AND pr.status = $2`;
     params.push(filters.status);
-  }
-
-  if (filters.patientId) {
-    sql += ` AND p.id = $${paramIndex++}`;
-    params.push(filters.patientId);
   }
 
   sql += ` ORDER BY pr.created_at DESC`;
@@ -1212,12 +1321,72 @@ export async function getPrescriptions(tenantId, filters = {}) {
   return result.rows;
 }
 
+// =====================================================
+// DOCTOR PAYOUTS & ACCOUNTS
+// =====================================================
+
+export async function getDoctorPayouts(tenantId) {
+  // Calculate revenue per doctor based on paid invoices linked to their encounters
+  const sql = `
+    SELECT 
+      u.id as doctor_id,
+      u.name as doctor_name,
+      u.role,
+      COUNT(DISTINCT e.patient_id) as patient_count,
+      COUNT(DISTINCT e.id) as encounter_count,
+      COALESCE(SUM(i.total), 0) as total_revenue,
+      COALESCE(SUM(i.paid), 0) as collected_amount,
+      -- Assume 30% commission for visiting doctors/consultants
+      (COALESCE(SUM(i.paid), 0) * 0.30) as estimated_commission
+    FROM emr.users u
+    JOIN emr.encounters e ON u.id = e.provider_id
+    JOIN emr.invoices i ON e.id = i.encounter_id
+    WHERE u.tenant_id = $1 
+      AND u.role = 'Doctor'
+      AND i.status = 'paid'
+      AND i.created_at > (NOW() - INTERVAL '30 days')
+    GROUP BY u.id, u.name, u.role
+    ORDER BY total_revenue DESC
+  `;
+
+  const result = await query(sql, [tenantId]);
+  return result.rows;
+}
+
+export async function dispensePrescription({ id, tenantId, userId, itemId, quantity }) {
+  const prescription = await query(
+    `UPDATE emr.prescriptions 
+     SET status = 'Dispensed', updated_at = NOW() 
+     WHERE id = $1 AND tenant_id = $2 
+     RETURNING *`,
+    [id, tenantId]
+  );
+
+  if (prescription.rowCount === 0) {
+    throw new Error('Prescription not found or already processed');
+  }
+
+  // If linked to inventory item, deduct stock
+  if (itemId && quantity) {
+    await updateInventoryStock({
+      tenantId,
+      itemId,
+      quantity: -Math.abs(quantity), // Ensure negative for deduction
+      type: 'issue',
+      reference: `Rx Dispense: ${prescription.rows[0].drug_name}`,
+      userId
+    });
+  }
+
+  return prescription.rows[0];
+}
+
 export async function getPrescriptionById(id, tenantId) {
   const sql = `
-    SELECT pr.*, 
-           p.first_name || ' ' || p.last_name as patient_name,
-           p.mrn as patient_mrn,
-           u.name as doctor_name
+    SELECT pr.*,
+  p.first_name || ' ' || p.last_name as patient_name,
+  p.mrn as patient_mrn,
+  u.name as doctor_name
     FROM emr.prescriptions pr
     JOIN emr.encounters e ON pr.encounter_id = e.id
     JOIN emr.patients p ON e.patient_id = p.id
@@ -1230,11 +1399,11 @@ export async function getPrescriptionById(id, tenantId) {
 
 export async function createPrescription({ tenantId, encounter_id, drug_name, dosage, frequency, duration, instructions, is_followup, followup_date, followup_notes }) {
   const sql = `
-    INSERT INTO emr.prescriptions (
-      tenant_id, encounter_id, drug_name, dosage, frequency, duration, instructions, status, is_followup, followup_date, followup_notes
-    )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, 'Pending', $8, $9, $10)
-    RETURNING *
+    INSERT INTO emr.prescriptions(
+    tenant_id, encounter_id, drug_name, dosage, frequency, duration, instructions, status, is_followup, followup_date, followup_notes
+  )
+VALUES($1, $2, $3, $4, $5, $6, $7, 'Pending', $8, $9, $10)
+RETURNING *
   `;
   const result = await query(sql, [
     tenantId, encounter_id, drug_name, dosage || null, frequency || null, duration || null, instructions || null,
@@ -1248,7 +1417,7 @@ export async function updatePrescriptionStatus({ id, tenantId, userId, status })
     UPDATE emr.prescriptions
     SET status = $1, updated_at = NOW()
     WHERE id = $2 AND tenant_id = $3
-    RETURNING *
+RETURNING *
   `;
   const result = await query(sql, [status, id, tenantId]);
 
@@ -1256,7 +1425,7 @@ export async function updatePrescriptionStatus({ id, tenantId, userId, status })
     await createAuditLog({
       tenantId,
       userId,
-      action: `prescription.${status.toLowerCase()}`,
+      action: `prescription.${status.toLowerCase()} `,
       entityName: 'prescription',
       entityId: id,
       details: { status }
@@ -1285,3 +1454,5 @@ export async function dispensePrescription({ id, tenantId, userId, itemId, quant
 
   return prescription;
 }
+
+export * from './repo_financials.js';

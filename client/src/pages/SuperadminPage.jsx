@@ -37,7 +37,7 @@ export default function SuperadminPage({ superOverview, tenants, onCreateTenant,
       <article className="panel">
         <h3>Create Tenant User</h3>
         <form className="form-grid" onSubmit={onCreateUser}>
-          <select name="tenantId" required>{tenants.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}</select>
+          <select name="tenantId" required>{Array.isArray(tenants) && tenants.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}</select>
           <input name="name" placeholder="Name" required />
           <input name="email" placeholder="Email" required />
           <select name="role"><option>Admin</option><option>Doctor</option><option>Nurse</option><option>Front Office</option><option>Billing</option><option>Inventory</option><option>Patient</option></select>

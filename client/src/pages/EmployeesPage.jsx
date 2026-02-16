@@ -1,6 +1,6 @@
 import { currency } from '../utils/format.js';
 
-export default function EmployeesPage({ employees, employeeLeaves, onCreateEmployee, onApplyLeave }) {
+export default function EmployeesPage({ employees, employeeLeaves, onCreateEmployee, onRecordAttendance, onApplyLeave }) {
   return (
     <section className="view">
       <article className="panel">
@@ -19,6 +19,24 @@ export default function EmployeesPage({ employees, employeeLeaves, onCreateEmplo
           <thead><tr><th>Code</th><th>Name</th><th>Dept</th><th>Shift</th><th>Salary</th><th>Leave</th></tr></thead>
           <tbody>{employees.map((e) => <tr key={e.id}><td>{e.code}</td><td>{e.name}</td><td>{e.department}</td><td>{e.shift}</td><td>{currency(e.salary)}</td><td>{e.leaveBalance}</td></tr>)}</tbody>
         </table>
+      </article>
+
+      <article className="panel">
+        <h3>Daily Attendance</h3>
+        <form className="form-grid" onSubmit={onRecordAttendance}>
+          <select name="employeeId" required>
+            {employees.map((e) => <option key={e.id} value={e.id}>{e.code} - {e.name}</option>)}
+          </select>
+          <input name="date" type="date" defaultValue={new Date().toISOString().slice(0, 10)} required />
+          <input name="timeIn" type="time" placeholder="Check In" />
+          <input name="timeOut" type="time" placeholder="Check Out" />
+          <select name="status">
+            <option>Present</option>
+            <option>Absent</option>
+            <option>Half-Day</option>
+          </select>
+          <button type="submit">Mark Attendance</button>
+        </form>
       </article>
 
       <article className="panel">

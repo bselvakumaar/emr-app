@@ -1,13 +1,23 @@
-# EMR Application (React + Express)
+# EMR Application (React + PostgreSQL)
 
-This project is now structured as a React frontend with an API-ready Express backend using mock JSON persistence.
+This project is a multi-tenant Electronic Medical Records (EMR) system built with **React** (Vite), **Express.js**, and **PostgreSQL** (Neon). It features a robust multi-tenant architecture with role-based access control (RBAC).
+
+## 🚀 Project Documentation
+For a deep dive into the specific implementation patterns and requirements:
+
+- **Requirements**: [REQUIREMENTS_SPECIFICATION.md](docs/REQUIREMENTS_SPECIFICATION.md)
+- **Technical Design**: [TECHNICAL_DESIGN_ARCHITECTURE.md](docs/TECHNICAL_DESIGN_ARCHITECTURE.md)
+- **Data Flow Diagrams**: [DATA_FLOW_DIAGRAMS.md](docs/DATA_FLOW_DIAGRAMS.md)
+- **Implementation Handbook**: [TECHNICAL_HANDBOOK.md](docs/TECHNICAL_HANDBOOK.md)
+
+---
 
 ## Structure
 
 - `client/`: React UI (Vite)
-- `server/`: Express API + file-backed mock data
-- `server/data/db.json`: Mock datastore
-- `database/schema.sql`: PostgreSQL schema for Neon (`emr` schema)
+- `server/`: Express API with PostgreSQL Repository
+- `server/db/`: Database connection and **Repository layer** (replaced JSON mock)
+- `database/`: Full SQL schema and seed scripts
 
 ## Run
 

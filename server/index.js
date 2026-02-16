@@ -402,6 +402,19 @@ app.patch('/api/patients/:id/clinical', requireTenant, restrictPatientAccess, as
   }
 });
 
+app.get('/api/patients/search', requireTenant, async (req, res) => {
+  try {
+    const { text, date, type, status } = req.query;
+    console.log('Patient search:', { text, date, type, status });
+
+    const patients = await repo.searchPatients(req.tenantId, { text, date, type, status });
+    res.json(patients);
+  } catch (error) {
+    console.error('Error searching patients:', error);
+    res.status(500).json({ error: 'Failed to search patients' });
+  }
+});
+
 app.get('/api/patients/:id/print/:docType', requireTenant, restrictPatientAccess, async (req, res) => {
   try {
     const { id, docType } = req.params;
@@ -625,6 +638,20 @@ app.patch('/api/appointments/:id/reschedule', requireTenant, async (req, res) =>
 // ENCOUNTERS (EMR)
 // =====================================================
 
+// =====================================================
+// ENCOUNTERS (EMR)
+// =====================================================
+
+app.get('/api/encounters', requireTenant, async (req, res) => {
+  try {
+    const encounters = await repo.getEncounters(req.tenantId);
+    res.json(encounters);
+  } catch (error) {
+    console.error('Error fetching encounters:', error);
+    res.status(500).json({ error: 'Failed to fetch encounters' });
+  }
+});
+
 app.post('/api/encounters', requireTenant, requirePermission('emr'), async (req, res) => {
   try {
     const { patientId, providerId, type, complaint, diagnosis, notes } = req.body;
@@ -633,9 +660,9 @@ app.post('/api/encounters', requireTenant, requirePermission('emr'), async (req,
       return res.status(400).json({ error: 'patientId, providerId, and type are required' });
     }
 
-    const validTypes = ['OPD', 'IPD', 'emergency'];
+    const validTypes = ['Out-patient', 'In-patient', 'Emergency'];
     if (!validTypes.includes(type)) {
-      return res.status(400).json({ error: 'Invalid encounter type' });
+      return res.status(400).json({ error: `Invalid encounter type: ${type}. Must be one of ${validTypes.join(', ')}` });
     }
 
     const encounter = await repo.createEncounter({
@@ -656,13 +683,33 @@ app.post('/api/encounters', requireTenant, requirePermission('emr'), async (req,
   }
 });
 
+app.post('/api/encounters/:id/discharge', requireTenant, requirePermission('emr'), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { diagnosis, notes } = req.body;
+
+    const encounter = await repo.dischargePatient({
+      tenantId: req.tenantId,
+      userId: req.user.id,
+      encounterId: id,
+      diagnosis,
+      notes,
+    });
+
+    res.json(encounter);
+  } catch (error) {
+    console.error('Error discharging patient:', error);
+    res.status(500).json({ error: error.message || 'Failed to discharge patient' });
+  }
+});
+
 // =====================================================
 // INVOICES
 // =====================================================
 
 app.post('/api/invoices', requireTenant, requirePermission('billing'), async (req, res) => {
   try {
-    const { patientId, description, amount, taxPercent } = req.body;
+    const { patientId, description, amount, taxPercent, paymentMethod } = req.body;
 
     if (!patientId || amount == null) {
       return res.status(400).json({ error: 'patientId and amount are required' });
@@ -675,6 +722,7 @@ app.post('/api/invoices', requireTenant, requirePermission('billing'), async (re
       description,
       amount,
       taxPercent: taxPercent || 0,
+      paymentMethod
     });
 
     res.status(201).json(invoice);
@@ -687,11 +735,13 @@ app.post('/api/invoices', requireTenant, requirePermission('billing'), async (re
 app.patch('/api/invoices/:id/pay', requireTenant, requirePermission('billing'), async (req, res) => {
   try {
     const { id } = req.params;
+    const { paymentMethod } = req.body;
 
     const invoice = await repo.payInvoice({
       invoiceId: id,
       tenantId: req.tenantId,
       userId: req.user.id,
+      paymentMethod
     });
 
     res.json(invoice);
@@ -967,6 +1017,34 @@ app.post('/api/employees/:id/leaves', requireTenant, requirePermission('employee
 });
 
 // =====================================================
+// BOOTSTRAP
+// =====================================================
+
+app.get('/api/bootstrap', authenticate, async (req, res) => {
+  try {
+    const { tenantId, userId } = req.query;
+
+    // Safety check - use req.tenantId if from token, otherwise query
+    const targetTenantId = req.tenantId || tenantId;
+    const targetUserId = req.user?.id || userId;
+
+    if (!targetTenantId) {
+      return res.status(400).json({ error: 'Tenant context required' });
+    }
+
+    const data = await repo.getBootstrapData(targetTenantId, targetUserId);
+    res.json(data);
+  } catch (error) {
+    console.error('Error bootstrapping data:', error);
+    res.status(500).json({ error: 'Failed to bootstrap data' });
+  }
+});
+
+// =====================================================
+// TENANTS
+// =====================================================
+
+// =====================================================
 // REPORTS
 // =====================================================
 
@@ -977,6 +1055,54 @@ app.get('/api/reports/summary', requireTenant, requirePermission('reports'), asy
   } catch (error) {
     console.error('Error fetching report summary:', error);
     res.status(500).json({ error: 'Failed to fetch report summary' });
+  }
+});
+
+app.get('/api/reports/payouts', requireTenant, requirePermission('reports'), async (req, res) => {
+  try {
+    const payouts = await repo.getDoctorPayouts(req.tenantId);
+    res.json(payouts);
+  } catch (error) {
+    console.error('Error fetching doctor payouts:', error);
+    res.status(500).json({ error: 'Failed to fetch doctor payouts' });
+  }
+});
+
+// =====================================================
+// HR & ACCOUNTS
+// =====================================================
+
+app.post('/api/attendance', requireTenant, requirePermission('employees'), async (req, res) => {
+  try {
+    /* Expected body: { employeeId, date, timeIn, timeOut, status } */
+    const record = await repo.recordAttendance({ ...req.body, tenantId: req.tenantId });
+    res.status(201).json(record);
+  } catch (error) {
+    console.error('Error recording attendance:', error);
+    res.status(500).json({ error: 'Failed to record attendance' });
+  }
+});
+
+app.post('/api/expenses', requireTenant, requirePermission('inventory'), async (req, res) => {
+  try {
+    /* Expected body: { category, description, amount, date, paymentMethod, reference } */
+    const expense = await repo.addExpense({ ...req.body, tenantId: req.tenantId, recordedBy: req.user.id });
+    res.status(201).json(expense);
+  } catch (error) {
+    console.error('Error adding expense:', error);
+    res.status(500).json({ error: 'Failed to record expense' });
+  }
+});
+
+app.get('/api/reports/financials', requireTenant, requirePermission('reports'), async (req, res) => {
+  try {
+    /* Expected query: ?month=YYYY-MM-01 */
+    const month = req.query.month || new Date().toISOString().slice(0, 8) + '01';
+    const summary = await repo.getFinancialSummary(req.tenantId, month);
+    res.json(summary);
+  } catch (error) {
+    console.error('Error fetching financials:', error);
+    res.status(500).json({ error: 'Failed to fetch financials' });
   }
 });
 

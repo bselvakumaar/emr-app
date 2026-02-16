@@ -14,7 +14,9 @@ export default function LoginPage({ tenants, onLogin, loading, error }) {
             <select name="tenantId" defaultValue="" required>
               <option value="" disabled>Select Organization</option>
               <option value="superadmin">Platform Superadmin</option>
-              {tenants.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+              {Array.isArray(tenants) && tenants.map((t) => (
+                <option key={t.id} value={t.id}>{t.name}</option>
+              ))}
             </select>
           </div>
           <div className="login-field">

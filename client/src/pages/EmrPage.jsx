@@ -1,80 +1,360 @@
+import { useState, useMemo } from 'react';
+import PatientSearch from '../components/PatientSearch.jsx';
 import { patientName } from '../utils/format.js';
+import { api } from '../api.js';
 
-function printEncounter(enc, patients, providers, tenant) {
-  const pName = patientName(enc.patientId, patients);
-  const providerName = providers.find(p => p.id === enc.providerId)?.name || 'Unknown';
-  const w = window.open('', '_blank', 'width=800,height=600');
-  w.document.write(`<!DOCTYPE html><html><head><title>Medical Report - ${pName}</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Inter',system-ui,sans-serif; padding:40px; color:#1f2a35; }
-  .header { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:3px solid #059669; padding-bottom:20px; margin-bottom:30px; }
-  .brand h1 { color:#059669; font-size:24px; } .brand p { color:#64748b; font-size:13px; }
-  .report-meta { text-align:right; } .report-meta h2 { color:#059669; font-size:18px; }
-  .report-meta p { font-size:13px; color:#64748b; }
-  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:30px; }
-  .info-card { padding:16px; background:#f8fafc; border-radius:8px; border-left:4px solid #059669; }
-  .info-card label { font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:1px; font-weight:600; }
-  .info-card p { font-size:14px; margin-top:4px; font-weight:500; }
-  .section { margin-bottom:24px; }
-  .section h3 { font-size:14px; color:#059669; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #e2e8f0; }
-  .section p { font-size:14px; line-height:1.7; color:#334155; }
-  .badge { display:inline-block; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; }
-  .badge-opd { background:#dbeafe; color:#2563eb; } .badge-ipd { background:#fef3c7; color:#d97706; } .badge-emergency { background:#fee2e2; color:#dc2626; }
-  .footer { margin-top:40px; text-align:center; font-size:11px; color:#94a3b8; border-top:1px solid #e2e8f0; padding-top:15px; }
-  @media print { body { padding:20px; } }
-</style></head><body>
-  <div class="header">
-    <div class="brand"><h1>🏥 ${tenant?.name || 'EMR System'}</h1><p>Medical Encounter Report</p></div>
-    <div class="report-meta"><h2>CLINICAL REPORT</h2><p>${new Date(enc.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</p></div>
-  </div>
-  <div class="info-grid">
-    <div class="info-card"><label>Patient</label><p>${pName}</p></div>
-    <div class="info-card"><label>Provider</label><p>${providerName}</p></div>
-    <div class="info-card"><label>Encounter Type</label><p><span class="badge badge-${enc.type?.toLowerCase()}">${enc.type}</span></p></div>
-    <div class="info-card"><label>Status</label><p>${enc.status}</p></div>
-  </div>
-  <div class="section"><h3>Chief Complaint</h3><p>${enc.complaint || 'N/A'}</p></div>
-  <div class="section"><h3>Diagnosis</h3><p>${enc.diagnosis || 'N/A'}</p></div>
-  <div class="section"><h3>Clinical Notes</h3><p>${enc.notes || 'No additional notes'}</p></div>
-  <div class="footer"><p>This is a computer-generated medical report. For queries, contact the attending physician.</p></div>
-</body></html>`);
+function printPrescription(enc, patient, medications, provider, tenant) {
+  const w = window.open('', '_blank', 'width=800,height=900');
+  const dateStr = new Date(enc.createdAt || Date.now()).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+  w.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Prescription - ${patient.firstName}</title>
+      <style>
+        body { font-family: 'Inter', system-ui, sans-serif; padding: 40px; color: #1e293b; line-height: 1.6; }
+        .header { display: flex; justify-content: space-between; border-bottom: 2px solid #10b981; padding-bottom: 20px; margin-bottom: 30px; }
+        .clinic-info h1 { color: #059669; margin: 0; font-size: 24px; }
+        .clinic-info p { margin: 2px 0; color: #64748b; font-size: 13px; }
+        .rx-label { font-size: 48px; color: #059669; font-weight: bold; margin: 15px 0; font-family: serif; }
+        .patient-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #e2e8f0; }
+        .patient-grid div span { color: #94a3b8; font-size: 10px; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px; }
+        .patient-grid div strong { font-size: 14px; color: #1e293b; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th { text-align: left; padding: 10px; border-bottom: 2px solid #e2e8f0; color: #475569; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 12px 10px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+        .med-name { font-weight: 700; color: #0f172a; font-size: 14px; }
+        .instructions { font-size: 12px; color: #64748b; margin-top: 2px; font-style: italic; }
+        .footer { margin-top: 80px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .signature { text-align: center; border-top: 1px solid #cbd5e1; width: 180px; padding-top: 8px; }
+        @media print { body { padding: 20px; } }
+      </style>
+    </head>
+    <body onload="window.print(); window.close();">
+      <div class="header">
+        <div class="clinic-info">
+          <h1>${tenant?.name || 'Medical Center'}</h1>
+          <p>Certified Healthcare Facility</p>
+          <p>Tele: +91-XXXXXXXXXX</p>
+        </div>
+        <div style="text-align: right">
+          <p style="font-size: 13px; margin:0;"><strong>Date:</strong> ${dateStr}</p>
+          <p style="font-size: 11px; color:#94a3b8; margin:2px 0;"><strong>REF:</strong> ${enc.id ? enc.id.slice(0, 8).toUpperCase() : 'PENDING'}</p>
+        </div>
+      </div>
+
+      <div class="patient-grid">
+        <div><span>Patient Name</span><strong>${patient.firstName} ${patient.lastName}</strong></div>
+        <div><span>MRN Number</span><strong>${patient.mrn}</strong></div>
+        <div><span>Demographics</span><strong>${new Date().getFullYear() - new Date(patient.dob).getFullYear()}Y / ${patient.gender}</strong></div>
+        <div><span>Clinical Vitals</span><strong>BP: ${enc.bp || '120/80'} | HR: ${enc.hr || '72'} bpm</strong></div>
+      </div>
+
+      <div class="rx-label">℞</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Medication Details</th>
+            <th>Dosage / Frequency</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${medications.length > 0 ? medications.map(m => `
+            <tr>
+              <td>
+                <div class="med-name">${m.name}</div>
+                <div class="instructions">${m.instructions || 'Take as directed'}</div>
+              </td>
+              <td>${m.dosage}</td>
+              <td>${m.duration || '5 Days'}</td>
+            </tr>
+          `).join('') : '<tr><td colspan="3" style="text-align:center; color:#94a3b8">No medications recorded</td></tr>'}
+        </tbody>
+      </table>
+
+      <div style="margin-top: 25px; background: #fffbeb; padding: 15px; border-radius: 8px; border: 1px solid #fef3c7;">
+        <h4 style="margin:0 0 8px; font-size:11px; color:#d97706; text-transform:uppercase; letter-spacing:0.05em;">Doctor's Advice & Clinical Notes</h4>
+        <p style="margin:0; font-size:13px; color:#92400e; white-space: pre-wrap;">${enc.notes || 'No specific advice recorded.'}</p>
+      </div>
+
+      <div class="footer">
+        <div><p style="font-size: 10px; color: #94a3b8;">Digitally generated by ${tenant?.name || 'EMR System'}</p></div>
+        <div class="signature">
+          <strong style="font-size: 13px; color: #1e293b;">${provider?.name || 'Authorized Doctor'}</strong>
+          <p style="font-size: 10px; color: #64748b; margin: 2px 0;">Registration ID: MC-XXXXX</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `);
   w.document.close();
-  w.print();
 }
 
-export default function EmrPage({ tenant, patients, providers, encounters, onCreateEncounter }) {
-  return (
-    <section className="view">
-      <article className="panel">
-        <h3>Create Encounter</h3>
-        <form className="form-grid" onSubmit={onCreateEncounter}>
-          <select name="patientId" required>{patients.map((p) => <option key={p.id} value={p.id}>{p.mrn} - {p.firstName}</option>)}</select>
-          <select name="providerId" required>{providers.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</select>
-          <select name="type"><option>OPD</option><option>IPD</option><option>emergency</option></select>
-          <input name="complaint" placeholder="Complaint" required />
-          <input name="diagnosis" placeholder="Diagnosis" required />
-          <input name="notes" placeholder="Notes" />
-          <button type="submit">Save Encounter</button>
-        </form>
-      </article>
+export default function EmrPage({ tenant, patients, providers, encounters, onCreateEncounter, onDischarge }) {
+  const [activeTab, setActiveTab] = useState('active');
+  const [selectedPatientId, setSelectedPatientId] = useState('');
+  const [meds, setMeds] = useState([{ name: '', dosage: '', duration: '', instructions: '' }]);
 
-      {encounters && encounters.length > 0 && (
-        <article className="panel" style={{ marginTop: '1.5rem' }}>
-          <h3>Encounter History</h3>
-          <table>
-            <thead><tr><th>Date</th><th>Patient</th><th>Type</th><th>Complaint</th><th>Diagnosis</th><th>Actions</th></tr></thead>
-            <tbody>{encounters.map((e) => <tr key={e.id}>
-              <td>{new Date(e.createdAt).toLocaleDateString('en-IN')}</td>
-              <td>{patientName(e.patientId, patients)}</td>
-              <td><span className={`status-badge encounter-${e.type?.toLowerCase()}`}>{e.type}</span></td>
-              <td>{e.complaint}</td>
-              <td>{e.diagnosis}</td>
-              <td><button className="action-btn print-btn" onClick={() => printEncounter(e, patients, providers, tenant)} title="Print Report">🖨️</button></td>
-            </tr>)}</tbody>
+  const activeEncounters = useMemo(() => encounters.filter(e => e.status === 'open'), [encounters]);
+  const pastEncounters = useMemo(() => encounters.filter(e => e.status === 'closed'), [encounters]);
+
+  const selectedPatient = useMemo(() => patients.find(p => p.id === selectedPatientId), [patients, selectedPatientId]);
+  const patientHistory = useMemo(() => {
+    if (!selectedPatientId) return [];
+    return encounters.filter(e => e.patientId === selectedPatientId).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  }, [encounters, selectedPatientId]);
+
+  const handleAddMed = () => setMeds([...meds, { name: '', dosage: '', duration: '', instructions: '' }]);
+  const handleMedChange = (i, f, v) => {
+    const next = [...meds];
+    next[i][f] = v;
+    setMeds(next);
+  };
+  const handleRemoveMed = (i) => setMeds(meds.filter((_, idx) => idx !== i));
+
+  const [lastSaved, setLastSaved] = useState(null);
+
+  const handleEncounterSubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const validMeds = meds.filter(m => m.name);
+
+    const data = {
+      patientId: selectedPatientId,
+      providerId: fd.get('providerId'),
+      type: fd.get('type'),
+      complaint: fd.get('complaint'),
+      diagnosis: fd.get('diagnosis'),
+      notes: fd.get('notes'),
+      bp: fd.get('bp'),
+      hr: fd.get('hr'),
+      medications: validMeds
+    };
+
+    try {
+      await onCreateEncounter(data);
+      setLastSaved({ ...data, createdAt: new Date().toISOString() });
+      setMeds([{ name: '', dosage: '', duration: '', instructions: '' }]);
+      // Don't reset patient yet so they can see the print button
+    } catch (err) {
+      alert('Fail: ' + err.message);
+    }
+  };
+
+  if (lastSaved) {
+    return (
+      <div className="panel" style={{ textAlign: 'center', padding: '4rem' }}>
+        <div style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>✅</div>
+        <h2>Consultation Saved Successfully</h2>
+        <p style={{ color: '#64748b', marginBottom: '2rem' }}>The record for <strong>{patientName(lastSaved.patientId, patients)}</strong> has been finalized.</p>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+          <button className="action-btn" style={{ padding: '12px 24px', background: '#059669', color: 'white' }} onClick={() => {
+            printPrescription({ ...lastSaved, id: 'NEW' }, patients.find(p => p.id === lastSaved.patientId), lastSaved.medications, providers.find(p => p.id === lastSaved.providerId), tenant);
+          }}>
+            🖨️ Print Prescription Now
+          </button>
+          <button className="action-btn" style={{ padding: '12px 24px' }} onClick={() => {
+            setLastSaved(null);
+            setSelectedPatientId('');
+            setActiveTab('active');
+          }}>
+            Return to Dashboard
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <section className="view clinical-workspace">
+      <div className="workspace-tabs" style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '10px' }}>
+        <button className={`tab-btn ${activeTab === 'active' ? 'active' : ''}`} onClick={() => setActiveTab('active')}>Active Patient List</button>
+        <button className={`tab-btn ${activeTab === 'history' ? 'active' : ''}`} onClick={() => setActiveTab('history')}>Facility History</button>
+        <button className={`tab-btn ${activeTab === 'new' ? 'active' : ''}`} onClick={() => setActiveTab('new')} style={{ marginLeft: 'auto', background: '#10b981', color: 'white' }}>+ New Consultation</button>
+      </div>
+
+      {activeTab === 'new' && (
+        <div className="new-consultation-grid" style={{ display: 'grid', gridTemplateColumns: selectedPatient ? '350px 1fr' : '1fr', gap: '1.5rem' }}>
+
+          <aside className="panel" style={{ height: 'fit-content' }}>
+            <h4 style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase', marginBottom: '1rem' }}>Step 1: Identify Patient</h4>
+            <PatientSearch tenantId={tenant?.id} onSelect={(p) => setSelectedPatientId(p.id)} />
+
+            {selectedPatient && (
+              <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
+                <h4 style={{ fontSize: '11px', color: '#10b981', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Clinical Background</h4>
+                <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', fontSize: '13px' }}>
+                  <p style={{ margin: '0 0 8px' }}><strong>Allergies:</strong> <span style={{ color: '#ef4444' }}>{selectedPatient.medicalHistory?.allergies || 'NKDA'}</span></p>
+                  <p style={{ margin: '0 0 8px' }}><strong>Chronic:</strong> {selectedPatient.medicalHistory?.chronicConditions || 'None'}</p>
+                </div>
+
+                <h4 style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase', margin: '1.5rem 0 0.75rem' }}>Recent Visits</h4>
+                <div className="mini-history" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {patientHistory.slice(0, 3).map(h => (
+                    <div key={h.id} style={{ fontSize: '12px', padding: '8px', border: '1px solid #f1f5f9', borderRadius: '6px' }}>
+                      <div style={{ color: '#94a3b8' }}>{new Date(h.createdAt).toLocaleDateString()}</div>
+                      <div style={{ fontWeight: '600' }}>{h.diagnosis}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </aside>
+
+          {selectedPatient && (
+            <form className="consultation-form panel" onSubmit={handleEncounterSubmit}>
+              <div className="form-section">
+                <h3 style={{ fontSize: '1.1rem', marginBottom: '1.25rem' }}>Electronic Consultation Record</h3>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <div className="field">
+                    <label>Assigned Provider</label>
+                    <select name="providerId" required>
+                      {providers.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                    </select>
+                  </div>
+                  <div className="field">
+                    <label>Encounter Type</label>
+                    <select name="type">
+                      <option value="Out-patient">Out-patient (OPD)</option>
+                      <option value="In-patient">In-patient (IPD)</option>
+                      <option value="Emergency">Emergency (ER)</option>
+                    </select>
+                  </div>
+                  <div className="field" style={{ display: 'flex', gap: '8px' }}>
+                    <div style={{ flex: 1 }}>
+                      <label>BP</label>
+                      <input name="bp" placeholder="120/80" />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <label>HR</label>
+                      <input name="hr" placeholder="72" />
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <div className="field">
+                    <label>Chief Complaint</label>
+                    <input name="complaint" required placeholder="Patient presents with..." />
+                  </div>
+                  <div className="field">
+                    <label>Provisional Diagnosis</label>
+                    <input name="diagnosis" required placeholder="Primary finding..." />
+                  </div>
+                </div>
+
+                <div className="prescription-module" style={{ background: '#f1f5f9', padding: '1.25rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <h4 style={{ margin: 0, color: '#059669', fontSize: '0.9rem' }}>℞ PRESCRIPTION</h4>
+                    <button type="button" className="add-btn" onClick={handleAddMed}>+ Add Medicine</button>
+                  </div>
+
+                  {meds.map((m, i) => (
+                    <div key={i} className="med-row" style={{ display: 'grid', gridTemplateColumns: '2fr 1.5fr 1fr 2fr 40px', gap: '8px', marginBottom: '8px' }}>
+                      <input placeholder="Drug Name" value={m.name} onChange={e => handleMedChange(i, 'name', e.target.value)} />
+                      <input placeholder="Dosage (e.g. 1-0-1)" value={m.dosage} onChange={e => handleMedChange(i, 'dosage', e.target.value)} />
+                      <input placeholder="Duration" value={m.duration} onChange={e => handleMedChange(i, 'duration', e.target.value)} />
+                      <input placeholder="Special Instructions" value={m.instructions} onChange={e => handleMedChange(i, 'instructions', e.target.value)} />
+                      <button type="button" onClick={() => handleRemoveMed(i)} style={{ background: '#fee2e2', color: '#ef4444', border: 'none', borderRadius: '4px' }}>✕</button>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="field">
+                  <label>Clinical Advice & Notes</label>
+                  <textarea name="notes" placeholder="Advice given to patient..." style={{ height: '80px' }}></textarea>
+                </div>
+
+                <button type="submit" style={{ width: '100%', padding: '14px', background: '#059669', color: 'white', fontSize: '1rem', marginTop: '1rem', borderRadius: '10px', boxShadow: '0 4px 6px rgba(5, 150, 105, 0.2)' }}>
+                  Complete Consultation & Finalize Rx
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      )}
+
+      {(activeTab === 'active' || activeTab === 'history') && (
+        <article className="panel">
+          <table className="clinical-table">
+            <thead>
+              <tr>
+                <th>Date / Time</th>
+                <th>Patient</th>
+                <th>Type</th>
+                <th>Diagnosis</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(activeTab === 'active' ? activeEncounters : pastEncounters).length > 0 ? (activeTab === 'active' ? activeEncounters : pastEncounters).map(e => {
+                const pat = patients.find(p => p.id === (e.patient_id || e.patientId));
+                const pDispName = pat ? `${pat.firstName} ${pat.lastName}` : (e.patientName || 'Registered Patient');
+
+                return (
+                  <tr key={e.id}>
+                    <td style={{ fontSize: '12px', color: '#64748b' }}>
+                      <strong>{new Date(e.created_at || e.createdAt || Date.now()).toLocaleDateString()}</strong><br />
+                      {new Date(e.created_at || e.createdAt || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </td>
+                    <td>
+                      <div
+                        style={{ fontWeight: 600, color: '#10b981', cursor: 'pointer' }}
+                        onClick={() => { setSelectedPatientId(e.patient_id || e.patientId); setActiveTab('new'); }}
+                      >
+                        {pDispName}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#94a3b8' }}>{pat?.mrn || (e.patient_id?.length > 8 ? e.patient_id.slice(0, 8) : e.patient_id) || 'N/A'}</div>
+                    </td>
+                    <td><span className={`status-badge ${(e.encounter_type || e.type || '').toLowerCase().replace('-', '')}`}>{e.encounter_type || e.type || 'General'}</span></td>
+                    <td>{e.diagnosis || 'Pending Assessment'}</td>
+                    <td>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <button className="action-btn" title="View/Print Rx" onClick={() => printPrescription(e, pat || { firstName: 'Patient' }, [], providers.find(p => p.id === (e.provider_id || e.providerId)), tenant)}>🖨️</button>
+                        {e.status === 'open' && (
+                          <button className="action-btn" style={{ borderColor: '#10b981', color: '#059669' }} onClick={() => { setSelectedPatientId(e.patient_id || e.patientId); setActiveTab('new'); }}>📝 Consult</button>
+                        )}
+                        {e.status === 'open' && (e.encounter_type === 'In-patient' || e.type === 'IPD' || e.type === 'In-patient') && (
+                          <button className="action-btn" onClick={() => onDischarge(e)} style={{ borderColor: '#f59e0b', color: '#d97706' }}>🚪 Discharge</button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              }) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: 'center', padding: '3rem', color: '#94a3b8' }}>
+                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📑</div>
+                    No {activeTab === 'active' ? 'active consultations' : 'facility history'} found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
           </table>
         </article>
       )}
+
+      <style>{`
+        .clinical-workspace { padding: 0.5rem; }
+        .tab-btn { padding: 8px 16px; border: none; background: transparent; color: #64748b; font-weight: 600; cursor: pointer; transition: 0.2s; border-radius: 6px; }
+        .tab-btn.active { color: #10b981; background: #ecfdf5; }
+        .tab-btn:hover:not(.active) { background: #f1f5f9; }
+        .add-btn { font-size: 11px; padding: 4px 10px; background: #059669; color: white; border-radius: 4px; border: none; cursor: pointer; }
+        .field label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px; }
+        .clinical-table { width: 100%; border-collapse: collapse; }
+        .clinical-table th { text-align: left; padding: 12px; background: #f8fafc; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+        .clinical-table td { padding: 12px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
+        .status-badge { padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+        .status-badge.outpatient, .status-badge.opd { background: #dbeafe; color: #2563eb; }
+        .status-badge.inpatient, .status-badge.ipd { background: #fef3c7; color: #d97706; }
+        .status-badge.emergency, .status-badge.er { background: #fee2e2; color: #dc2626; }
+        .action-btn { padding: 4px 10px; border: 1px solid #e2e8f0; background: white; border-radius: 6px; font-size: 12px; cursor: pointer; transition: 0.2s; }
+        .action-btn:hover { border-color: #10b981; color: #10b981; }
+      `}</style>
     </section>
   );
 }

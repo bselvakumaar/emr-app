@@ -129,8 +129,11 @@ export function requireTenant(req, res, next) {
 const PERMISSIONS = {
   Superadmin: ['superadmin', 'dashboard', 'reports', 'tenants', 'users', 'patients', 'appointments', 'emr', 'inventory', 'billing'],
   Admin: ['dashboard', 'patients', 'appointments', 'emr', 'billing', 'inventory', 'employees', 'reports', 'admin', 'users'],
-  Doctor: ['dashboard', 'patients', 'appointments', 'emr', 'reports'],
-  Nurse: ['dashboard', 'patients', 'appointments', 'emr'],
+  Doctor: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy', 'reports'],
+  Nurse: ['dashboard', 'patients', 'appointments', 'emr', 'inpatient', 'pharmacy'],
+  Lab: ['dashboard', 'patients', 'reports'],
+  Pharmacy: ['dashboard', 'pharmacy', 'inventory', 'reports'],
+  'Support Staff': ['dashboard', 'patients', 'appointments'],
   'Front Office': ['dashboard', 'patients', 'appointments'],
   Billing: ['dashboard', 'billing', 'reports'],
   Inventory: ['dashboard', 'inventory', 'reports'],
