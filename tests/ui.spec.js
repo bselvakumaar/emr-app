@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const CLIENT_URL = 'http://localhost:5174';
+const CLIENT_URL = 'http://localhost:5175';
 
 test.describe('UI Integrity & Login Tests', () => {
 
