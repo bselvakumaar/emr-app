@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function LoginPage({ onLogin }) {
+export default function LoginPage({ onLogin, tenants }) { // keys: tenants passed from App
   const [credentials, setCredentials] = useState({
     tenantId: '',
     email: '',
@@ -39,7 +39,8 @@ export default function LoginPage({ onLogin }) {
     try {
       // Use api.login to ensure token is stored correctly in localStorage
       // and consistent with api.js internal logic
-      const data = await import('../api').then(m => m.api.login(credentials.tenantId, credentials.email, credentials.password));
+      const { api } = await import('../api.js');
+      const data = await api.login(credentials.tenantId, credentials.email, credentials.password);
 
       // onLogin will handle state update in App.jsx
       onLogin(data);
@@ -74,9 +75,10 @@ export default function LoginPage({ onLogin }) {
   return (
     <div className="login-portal">
       <div className="login-container">
-        <div className="login-branding">
-          <div className="brand-content">
-            <div className="logo-section">
+        {/* Left Panel: Branding & Value Proposition */}
+        <section className="login-branding">
+          <div className="branding-glass">
+            <div className="logo-box">
               <img
                 src="/Medflow-logo.jpg"
                 alt="MedFlow EMR"
@@ -86,173 +88,139 @@ export default function LoginPage({ onLogin }) {
                   e.target.nextSibling.style.display = 'block';
                 }}
               />
-              <div className="medflow-logo-fallback" style={{ display: 'none' }}>
-                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="4" fill="url(#gradient)" />
-                  <path d="M8 12h8M12 8v8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="18" cy="6" r="2" fill="white" />
-                  <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#0F4C75" />
-                      <stop offset="100%" stopColor="#2E86AB" />
-                    </linearGradient>
-                  </defs>
+              <div className="logo-fallback" style={{ display: 'none' }}>
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </div>
-            <h1 className="brand-title">MedFlow EMR</h1>
-            <p className="brand-subtitle">Enterprise Healthcare Management</p>
-            <div className="brand-features">
-              <div className="feature-item">🏥 Hospital Management</div>
-              <div className="feature-item">👥 Patient Records</div>
-              <div className="feature-item">💊 Pharmacy System</div>
-              <div className="feature-item">📊 Analytics</div>
+
+            <div className="branding-text">
+              <h1 className="hero-title">MedFlow <span>EMR</span></h1>
+              <p className="hero-subtitle">The Intelligence Engine for Modern Healthcare</p>
+
+              <div className="trust-badges">
+                <div className="badge-item">
+                  <span className="badge-icon">🛡️</span>
+                  <span>HIPAA Compliant</span>
+                </div>
+                <div className="badge-item">
+                  <span className="badge-icon">⚡</span>
+                  <span>Real-time Analytics</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="login-form-section">
-          <div className="login-card">
-            <div className="card-header">
-              <h2>Welcome Back</h2>
-              <p>Sign in to your MedFlow account</p>
-            </div>
+        {/* Right Panel: Authentication Form */}
+        <section className="login-form-area">
+          <div className="auth-card">
+            <header className="auth-header">
+              <h2>Secure Access</h2>
+              <p>Welcome to the MedFlow Platform</p>
+            </header>
 
-            <form onSubmit={handleSubmit} className="login-form">
-              <div className="form-group">
-                <label className="form-label">
-                  Select Tenant <span className="required">*</span>
-                </label>
-                <div className="select-wrapper">
+            <form onSubmit={handleSubmit} className="auth-form">
+              <div className="form-field">
+                <label>Organization Context</label>
+                <div className="input-group">
                   <select
                     value={credentials.tenantId}
                     onChange={(e) => handleTenantChange(e.target.value)}
-                    className="form-select"
+                    className="premium-select"
                     required
                   >
-                    <option value="">Choose your organization</option>
+                    <option value="">Choose organization...</option>
                     <option value="superadmin">🛡️ Platform Superadmin</option>
-                    <option value="EHS">🏥 Enterprise Hospital Systems</option>
-                    <option value="PMC">⭐ Professional Medical Center</option>
-                    <option value="BHC">🩺 Basic Health Clinic</option>
+                    {tenants?.map((tenant) => (
+                      <option key={tenant.id} value={tenant.code || tenant.id}>
+                        {tenant.code === 'EHS' ? '🏥' : (tenant.code === 'PMC' ? '⭐' : (tenant.code === 'BHC' ? '🩺' : '🏢'))} {tenant.name}
+                      </option>
+                    ))}
                   </select>
-                  <span className="select-arrow">▼</span>
                 </div>
               </div>
 
-              <div className="form-group">
-                <label className="form-label">
-                  Email Address <span className="required">*</span>
-                </label>
+              <div className="form-field">
+                <label>Email Address</label>
                 <input
                   type="email"
                   value={credentials.email}
                   onChange={(e) => setCredentials(prev => ({ ...prev, email: e.target.value }))}
-                  className="form-input"
-                  placeholder="Enter your email"
+                  className="premium-input"
+                  placeholder="name@organization.com"
                   required
                 />
               </div>
 
-              <div className="form-group">
-                <label className="form-label">
-                  Password <span className="required">*</span>
-                </label>
+              <div className="form-field">
+                <label>Access Key</label>
                 <input
                   type="password"
                   value={credentials.password}
                   onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
-                  className="form-input"
-                  placeholder="Enter your password"
+                  className="premium-input"
+                  placeholder="••••••••"
                   required
                 />
               </div>
 
               {credentials.tenantId && (
-                <div className="demo-section">
-                  <button
-                    type="button"
-                    onClick={() => setShowDemoCredentials(!showDemoCredentials)}
-                    className="demo-toggle"
-                  >
-                    <span>🔑 Demo Credentials</span>
-                    <span className="demo-role">
-                      {credentials.tenantId === 'superadmin' ? 'Superadmin' :
-                        credentials.tenantId === 'EHS' ? 'Enterprise' :
-                          credentials.tenantId === 'PMC' ? 'Professional' : 'Basic'}
-                    </span>
-                    <span>{showDemoCredentials ? '▲' : '▼'}</span>
-                  </button>
+                <div className="demo-hint-box">
+                  <div className="demo-header" onClick={() => setShowDemoCredentials(!showDemoCredentials)}>
+                    <span className="icon">🔑</span>
+                    <span className="text">Development Credentials Available</span>
+                    <span className="toggle">{showDemoCredentials ? '−' : '+'}</span>
+                  </div>
 
                   {showDemoCredentials && (
-                    <div className="demo-details">
-                      <div className="demo-field">
-                        <label>Email:</label>
-                        <input
-                          type="text"
-                          value={demoCredentials[credentials.tenantId]?.email || ''}
-                          readOnly
-                          className="demo-input"
-                          onClick={() => copyToClipboard(demoCredentials[credentials.tenantId]?.email || '')}
-                        />
-                      </div>
-                      <div className="demo-field">
-                        <label>Password:</label>
-                        <input
-                          type="text"
-                          value={demoCredentials[credentials.tenantId]?.password || ''}
-                          readOnly
-                          className="demo-input"
-                          onClick={() => copyToClipboard(demoCredentials[credentials.tenantId]?.password || '')}
-                        />
+                    <div className="demo-body">
+                      <div className="credential-row" onClick={() => copyToClipboard(demoCredentials[credentials.tenantId]?.email)}>
+                        <code>{demoCredentials[credentials.tenantId]?.email}</code>
                       </div>
                       <button
                         type="button"
                         onClick={useDemoCredentials}
-                        className="demo-toggle"
-                        style={{ background: 'var(--success-green)', color: 'white', border: 'none' }}
+                        className="quick-auth-btn"
                       >
-                        🚀 Use Demo Login
+                        Auto-Fill & Launch
                       </button>
-                      <p className="demo-tip">Click on fields to copy credentials</p>
                     </div>
                   )}
                 </div>
               )}
 
               {error && (
-                <div className="error-message">
-                  <div className="error-icon">!</div>
-                  <span className="error-text">{error}</span>
+                <div className="auth-error">
+                  <span className="error-icon">✕</span>
+                  <p>{error}</p>
                 </div>
               )}
 
-              <button type="submit" disabled={isLoading} className="login-button">
+              <button type="submit" disabled={isLoading} className="login-action-btn">
                 {isLoading ? (
-                  <>
-                    <div className="button-spinner">
-                      <div className="spinner"></div>
-                    </div>
-                    Signing in...
-                  </>
+                  <span className="loader">Authenticating...</span>
                 ) : (
                   <>
-                    🔐 Sign In
+                    <span>Sign In to Dashboard</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
                   </>
                 )}
               </button>
             </form>
+
+            <footer className="auth-footer">
+              <p>Problems signing in? <a href="#">Contact Support</a></p>
+            </footer>
           </div>
-        </div>
+        </section>
       </div>
 
-      <div className="footer">
-        <p>© 2026 MedFlow Solutions Group. All rights reserved.</p>
-        <div className="footer-links">
-          <span>Security Policy</span>
-          <span>•</span>
-          <span>Compliance Center</span>
-        </div>
+      <div className="portal-footer">
+        <p>© 2026 MedFlow Systems. Secure Enterprise Environment.</p>
       </div>
     </div>
   );
