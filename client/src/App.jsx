@@ -110,16 +110,40 @@ export default function App() {
     }
   }
 
-  async function refreshTenantData(tenantId = session?.tenantId, userId = session?.user?.id) {
+  function normalizeRole(role) {
+    if (!role) return '';
+    const roleKey = role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+    if (roleKey === 'Front office') return 'Front Office';
+    if (roleKey === 'Support staff') return 'Support Staff';
+    if (roleKey === 'Hr') return 'HR';
+    return roleKey;
+  }
+
+  async function refreshTenantData(tenantId = session?.tenantId, userId = session?.user?.id, userRole = session?.user?.role) {
     if (!tenantId) {
       return;
     }
-    const [bootstrap, tenantUsers, reports] = await Promise.all([
+
+    const [bootstrap, tenantUsers] = await Promise.all([
       api.getBootstrap(tenantId, userId),
-      api.getUsers(tenantId),
-      api.getReportSummary(tenantId)
+      api.getUsers(tenantId)
     ]);
-    setPermissions(bootstrap.permissions || fallbackPermissions);
+
+    const effectivePermissions = bootstrap.permissions || fallbackPermissions;
+    const normalizedRole = normalizeRole(userRole);
+    const roleViews = effectivePermissions[normalizedRole] || effectivePermissions[userRole] || [];
+    const canReadReports = roleViews.includes('reports');
+
+    let reports = null;
+    if (canReadReports) {
+      try {
+        reports = await api.getReportSummary(tenantId);
+      } catch (err) {
+        console.warn('Report summary unavailable for current role/session:', err.message);
+      }
+    }
+
+    setPermissions(effectivePermissions);
     setUsers(tenantUsers || []);
     setPatients(bootstrap.patients || []);
     setAppointments(bootstrap.appointments || []);
@@ -131,7 +155,7 @@ export default function App() {
     setEmployeeLeaves(bootstrap.employeeLeaves || []);
     setInsuranceProviders(bootstrap.insuranceProviders || []);
     setClaims(bootstrap.claims || []);
-    setReportSummary(reports || null);
+    setReportSummary(reports);
     if (!activePatientId && bootstrap.patients?.length) {
       setActivePatientId(bootstrap.patients[0].id);
     }
@@ -165,7 +189,7 @@ export default function App() {
             if (session.user.role === 'Superadmin') {
               await refreshSuperadmin();
             } else {
-              await refreshTenantData(session.tenantId, session.user.id);
+              await refreshTenantData(session.tenantId, session.user.id, session.user.role);
             }
           } catch (e) {
             console.error('Failed to restore session data', e);
@@ -198,7 +222,7 @@ export default function App() {
       } else {
         setView('dashboard');
         // CRITICAL FIX: Fetch tenant data after login
-        await refreshTenantData(loginData.tenantId, loginData.user.id);
+        await refreshTenantData(loginData.tenantId, loginData.user.id, loginData.user.role);
       }
     } catch (err) {
       setError('Login failed: ' + (err.message || 'Unknown error'));
