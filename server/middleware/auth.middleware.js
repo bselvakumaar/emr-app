@@ -30,6 +30,7 @@ export async function authenticate(req, res, next) {
         // Special handling for multi-word roles if needed, though most here are single word or handled
         if (decoded.role === 'Front office') decoded.role = 'Front Office';
         if (decoded.role === 'Support staff') decoded.role = 'Support Staff';
+        if (decoded.role === 'Hr') decoded.role = 'HR';
       }
 
     } catch (error) {
@@ -63,7 +64,11 @@ export async function authenticate(req, res, next) {
 
     // Normalize role for consistency
     const userRole = user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase();
-    const finalRole = userRole === 'Front office' ? 'Front Office' : (userRole === 'Support staff' ? 'Support Staff' : userRole);
+    const finalRole = userRole === 'Front office'
+      ? 'Front Office'
+      : (userRole === 'Support staff'
+        ? 'Support Staff'
+        : (userRole === 'Hr' ? 'HR' : userRole));
 
     // Attach user info to request object
     req.user = {
@@ -254,7 +259,11 @@ export async function optionalAuth(req, res, next) {
     if (userResult.rows.length > 0) {
       const user = userResult.rows[0];
       const userRole = user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase();
-      const finalRole = userRole === 'Front office' ? 'Front Office' : (userRole === 'Support staff' ? 'Support Staff' : userRole);
+      const finalRole = userRole === 'Front office'
+        ? 'Front Office'
+        : (userRole === 'Support staff'
+          ? 'Support Staff'
+          : (userRole === 'Hr' ? 'HR' : userRole));
 
       req.user = {
         id: user.id,

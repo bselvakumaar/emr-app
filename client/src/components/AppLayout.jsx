@@ -50,7 +50,6 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
         <nav className="sidebar-nav">
           {accessibleModules.map((module) => {
             if (!moduleMeta[module]) return null;
-            const Icon = navIcons[module];
             return (
               <ModuleGate key={module} module={module} tenantId={tenant?.id}>
                 <button
@@ -88,32 +87,38 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
       {/* MAIN CONTENT */}
       <div className="main-content">
         <header className="premium-header">
-          <div className="flex items-center gap-4">
-            <button className="lg:hidden p-2 -ml-2" onClick={() => setMobileOpen(true)}>
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-            </button>
-            <div className="header-title">
-              <h1>{moduleMeta[view]?.title || 'Dashboard'}</h1>
+          <div className="header-shell">
+            <div className="flex items-center gap-4">
+              <button className="lg:hidden p-2 -ml-2" onClick={() => setMobileOpen(true)}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+              </button>
+              <div className="header-title">
+                <h1>{moduleMeta[view]?.title || 'Dashboard'}</h1>
+              </div>
             </div>
-          </div>
 
-          <div className="flex items-center gap-3">
-            <button onClick={() => setShowHelp(true)} className="premium-btn btn-ghost text-sm">
-              Help
-            </button>
-            <div className="badge success">Live System</div>
+            <div className="flex items-center gap-3">
+              <button onClick={() => setShowHelp(true)} className="premium-btn btn-ghost text-sm">
+                Help
+              </button>
+              <div className="badge success">Live System</div>
+            </div>
           </div>
         </header>
 
         {error && (
-          <div className="m-4 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            {error}
+          <div className="content-shell">
+            <div className="m-4 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              {error}
+            </div>
           </div>
         )}
 
         <div className="view-container">
-          {children}
+          <div className="content-shell">
+            {children}
+          </div>
         </div>
       </div>
 
@@ -123,7 +128,7 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
             <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
               <h3 className="font-bold text-lg">Help Guide</h3>
-              <button onClick={() => setShowHelp(false)} className="w-8 h-8 rounded-full hover:bg-slate-200 flex items-center justify-center">✕</button>
+              <button onClick={() => setShowHelp(false)} className="w-8 h-8 rounded-full hover:bg-slate-200 flex items-center justify-center">x</button>
             </div>
             <div className="p-6 overflow-y-auto prose prose-slate">
               <div dangerouslySetInnerHTML={{ __html: helpContent[activeUser?.role] || helpContent.default }} />

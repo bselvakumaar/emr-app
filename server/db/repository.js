@@ -864,7 +864,7 @@ export async function dischargePatient({ tenantId, userId, encounterId, diagnosi
         diagnosis = COALESCE($1, diagnosis),
         notes = COALESCE($2, notes),
         updated_at = NOW()
-    WHERE id = $3 AND tenant_id = $4 AND encounter_type = 'IPD' AND status = 'open'
+    WHERE id = $3 AND tenant_id = $4 AND encounter_type IN ('IPD', 'In-patient') AND status = 'open'
     RETURNING *
   `;
 
@@ -1535,6 +1535,7 @@ export async function getBootstrapData(tenantId, userId) {
     userRole = userRole.charAt(0).toUpperCase() + userRole.slice(1).toLowerCase();
     if (userRole === 'Front office') userRole = 'Front Office';
     if (userRole === 'Support staff') userRole = 'Support Staff';
+    if (userRole === 'Hr') userRole = 'HR';
   }
 
   // Also update the role on the user object itself for the frontend

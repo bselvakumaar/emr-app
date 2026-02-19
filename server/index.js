@@ -70,11 +70,12 @@ app.post('/api/login', async (req, res) => {
 
       // Normalize role for consistency
       const normalizedRole = user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase();
+      const finalRole = normalizedRole === 'Hr' ? 'HR' : normalizedRole;
 
       const token = generateToken({
         userId: user.id,
         tenantId: null,
-        role: normalizedRole,
+        role: finalRole,
         email: user.email,
       });
 
@@ -84,10 +85,10 @@ app.post('/api/login', async (req, res) => {
           id: user.id,
           name: user.name,
           email: user.email,
-          role: normalizedRole,
+          role: finalRole,
         },
         tenantId: null,
-        role: normalizedRole,
+        role: finalRole,
       });
     }
 
@@ -138,7 +139,11 @@ app.post('/api/login', async (req, res) => {
     // Normalize role for consistency
     const normalizedRole = user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase();
     // Special handling for multi-word roles
-    const finalRole = normalizedRole === 'Front office' ? 'Front Office' : (normalizedRole === 'Support staff' ? 'Support Staff' : normalizedRole);
+    const finalRole = normalizedRole === 'Front office'
+      ? 'Front Office'
+      : (normalizedRole === 'Support staff'
+        ? 'Support Staff'
+        : (normalizedRole === 'Hr' ? 'HR' : normalizedRole));
 
     const token = generateToken({
       userId: user.id,
@@ -1516,7 +1521,6 @@ app.use((err, _req, res, _next) => {
 // Export the app for serverless use (Netlify Functions)
 export { app };
 export default app;
-
 
 
 
