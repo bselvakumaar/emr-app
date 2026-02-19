@@ -1,8 +1,8 @@
 export default function ComparisonChart({ title, data, dataKey, color, todayValue, formatValue = (v) => v }) {
     if (!data || data.length === 0) {
         return (
-            <div className="oversight-section" style={{ minHeight: '200px', display: 'grid', placeItems: 'center' }}>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Insight generation in progress...</p>
+            <div className="oversight-section chart-placeholder">
+                <p className="chart-placeholder-copy">Insight generation in progress...</p>
             </div>
         );
     }
@@ -31,20 +31,20 @@ export default function ComparisonChart({ title, data, dataKey, color, todayValu
                 </div>
             </div>
 
-            <div style={{ padding: '24px' }}>
-                <div className="chart-stats-row" style={{ display: 'flex', gap: '32px', marginBottom: '24px' }}>
+            <div className="chart-inner">
+                <div className="chart-stats-row">
                     <div className="stat-pill">
                         <span className="label">Terminal Period</span>
                         <span className="value">{formatValue(currentMonth[dataKey])}</span>
                     </div>
                     <div className="stat-pill">
                         <span className="label">Cumulative Velocity</span>
-                        <span className="value" style={{ color: 'var(--text-secondary)' }}>{formatValue(total)}</span>
+                        <span className="value value-muted">{formatValue(total)}</span>
                     </div>
                 </div>
 
-                <div className="chart-viewport" style={{ position: 'relative', height: `${chartHeight}px` }}>
-                    <svg width="100%" height="100%" style={{ overflow: 'visible' }}>
+                <div className="chart-viewport" style={{ height: `${chartHeight}px` }}>
+                    <svg width="100%" height="100%" className="chart-svg">
                         {data.map((item, index) => {
                             const h = (item[dataKey] / max) * chartHeight;
                             const x = (index * (100 / data.length)) + '%';
@@ -76,16 +76,9 @@ export default function ComparisonChart({ title, data, dataKey, color, todayValu
                         })}
                     </svg>
                 </div>
-            </div>
-
-            <style>{`
-        .charting-widget { border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-        .text-success { color: var(--medical-success); font-weight: 700; }
-        .text-danger { color: var(--medical-danger); font-weight: 700; }
-        .stat-pill { display: flex; flex-direction: column; }
-        .stat-pill .label { font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-        .stat-pill .value { font-size: 1.25rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; }
-      `}</style>
-        </div>
+            </div>
+</div>
     );
 }
+
+

@@ -2203,3 +2203,405 @@ button {
     padding-right: 1rem;
   }
 }
+/* =========================================================
+   CENTRALIZED MODULE STYLES (MIGRATED FROM INLINE JSX STYLES)
+   ========================================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Patients + Appointments shared tab style */
+.tab-switcher-premium {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 4px;
+  background: var(--bg-app);
+  border-radius: 12px;
+  width: fit-content;
+  border: 1px solid var(--border-light);
+}
+
+.tab-item-premium {
+  padding: 8px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 9px;
+  transition: var(--transition);
+}
+
+.tab-item-premium.active {
+  background: white;
+  color: var(--medical-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Appointments */
+.appointments-intelligence-workspace { animation: fadeIn 0.8s ease-out; }
+.appointment-lattice-layout { display: grid; grid-template-columns: 1fr 420px; gap: 24px; align-items: start; }
+.btn-mini-action { background: white; border: 1px solid var(--border-light); color: var(--medical-secondary); font-size: 0.65rem; font-weight: 900; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: var(--transition); }
+.btn-mini-action:hover { background: var(--medical-secondary); color: white; border-color: var(--medical-secondary); }
+.status-badge-mini { font-size: 0.6rem; font-weight: 900; color: var(--medical-success); background: rgba(76, 175, 80, 0.1); padding: 2px 8px; border-radius: 4px; }
+.ledger-scroll-zone { padding: 20px; display: flex; flex-direction: column; gap: 12px; max-height: 500px; overflow-y: auto; }
+.ledger-scroll-zone.mini { max-height: 250px; }
+.clinical-strip-card { display: flex; align-items: center; padding: 14px; border-radius: 16px; background: var(--bg-app); border: 1px solid transparent; transition: var(--transition); }
+.clinical-strip-card:hover { background: white; border-color: var(--border-light); box-shadow: var(--shadow-sm); }
+.strip-time-block { width: 70px; border-right: 1px solid var(--border-light); margin-right: 16px; display: flex; flex-direction: column; }
+.strip-time-block strong { font-size: 0.85rem; color: var(--text-primary); }
+.strip-time-block span { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+.strip-body { flex: 1; }
+.patient-link { font-weight: 800; font-size: 0.9rem; color: var(--medical-primary); cursor: pointer; }
+.provider-meta { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+.walkin-entry-card { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; border: 1px solid var(--bg-app); }
+.entry-glyph { width: 32px; height: 32px; border-radius: 8px; background: var(--bg-app); display: grid; place-items: center; font-weight: 900; color: var(--text-muted); font-size: 0.75rem; }
+.entry-intel { flex: 1; }
+.entry-intel strong { display: block; font-size: 0.8rem; color: var(--text-primary); }
+.entry-intel span { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; }
+.live-tag { font-size: 0.6rem; font-weight: 900; color: var(--medical-danger); background: rgba(244, 67, 54, 0.1); padding: 2px 8px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
+.live-tag::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--medical-danger); animation: blink 1s infinite; }
+@keyframes blink { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
+
+/* Patients */
+.patients-intelligence-workspace { animation: fadeIn 0.8s ease-out; }
+.mpi-oversight-layout { display: grid; gap: 24px; }
+.mpi-oversight-layout.with-sidebar { grid-template-columns: 340px 1fr; }
+.mpi-oversight-layout.full { grid-template-columns: 1fr; }
+.search-context-body { padding: 20px; }
+.mini-patient-feed { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.mini-clinical-card { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; cursor: pointer; transition: var(--transition); border: 1px solid transparent; }
+.mini-clinical-card:hover { background: var(--bg-app); }
+.mini-clinical-card.active { background: white; border-color: var(--border-light); box-shadow: var(--shadow-sm); }
+.card-avatar { width: 36px; height: 36px; border-radius: 10px; background: var(--bg-app); font-weight: 900; color: var(--text-muted); display: grid; place-items: center; font-size: 0.8rem; }
+.active .card-avatar { background: var(--medical-primary); color: white; }
+.card-intel { flex: 1; }
+.card-intel strong { display: block; font-size: 0.85rem; color: var(--text-primary); }
+.mrn-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; opacity: 0.7; }
+.card-badge { font-size: 0.7rem; font-weight: 800; color: var(--medical-primary); background: rgba(26, 35, 126, 0.05); padding: 2px 8px; border-radius: 4px; }
+.profile-header-premium { padding: 32px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; background: white; }
+.profile-identity { display: flex; align-items: center; gap: 24px; }
+.profile-glyph { width: 80px; height: 80px; border-radius: 20px; background: var(--medical-primary); color: white; display: grid; place-items: center; font-size: 2rem; font-weight: 900; box-shadow: 0 8px 32px rgba(26, 35, 126, 0.15); }
+.name-cluster h2 { font-size: 1.8rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.02em; margin: 0; }
+.clinical-id-badge { background: var(--bg-app); border: 1px solid var(--border-light); padding: 4px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; color: var(--text-muted); margin-left: 12px; vertical-align: middle; }
+.meta-stats { margin-top: 10px; font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 12px; align-items: center; }
+.meta-stats .divider { opacity: 0.2; }
+.meta-stats strong { color: var(--text-primary); }
+.clinical-dashboard-content { display: grid; grid-template-columns: 240px 1fr; gap: 24px; }
+.vital-intel-card { padding: 24px; border-radius: 20px; background: white; border: 1px solid var(--border-light); margin-bottom: 16px; position: relative; overflow: hidden; }
+.vital-intel-card .v-label { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 8px; }
+.vital-intel-card .v-value { font-size: 1.8rem; font-weight: 900; color: var(--text-primary); }
+.vital-intel-card .v-value.smaller { font-size: 1.2rem; }
+.vital-intel-card p { font-size: 0.65rem; font-weight: 700; color: var(--medical-success); margin-top: 8px; }
+.vital-intel-card.pulse::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: var(--medical-danger); animation: linePulse 2s infinite; }
+@keyframes linePulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+.medical-alert-zone { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.zone-card { padding: 16px; border-radius: 16px; border: 1px solid transparent; }
+.zone-card.danger { background: #fee2e2; border-color: #fecaca; }
+.zone-card.warning { background: #fef3c7; border-color: #fef08a; }
+.zone-card h6 { font-size: 0.6rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.danger h6 { color: var(--medical-danger); }
+.warning h6 { color: #b45309; }
+.zone-card p { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+.journal-input-premium { padding: 20px; background: var(--bg-app); border-bottom: 1px solid var(--border-light); }
+.note-capture-form { display: grid; grid-template-columns: 180px 1fr 120px; gap: 12px; }
+.note-capture-form select, .note-capture-form input { border-radius: 10px; border: 1px solid var(--border-light); font-size: 0.85rem; padding: 10px; font-weight: 600; }
+.note-capture-form button { background: var(--medical-primary); color: white; border-radius: 10px; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.05em; border: none; cursor: pointer; }
+.journal-timeline-feed { padding: 24px; display: flex; flex-direction: column; gap: 24px; position: relative; }
+.timeline-entry { padding-left: 24px; position: relative; }
+.entry-marker { position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--border-light); border: 2px solid white; z-index: 2; }
+.timeline-entry::before { content: ''; position: absolute; left: 3px; top: 16px; bottom: -24px; width: 2px; background: var(--border-light); }
+.timeline-entry:last-child::before { display: none; }
+.entry-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.entry-header .tag { font-size: 0.6rem; font-weight: 900; text-transform: uppercase; color: var(--text-muted); }
+.entry-header .timestamp { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+.entry-payload { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); line-height: 1.6; }
+.timeline-entry.medications .entry-marker { background: var(--medical-secondary); }
+.timeline-entry.testReports .entry-marker { background: #f59e0b; }
+.timeline-entry.caseHistory .entry-marker { background: var(--medical-primary); }
+.registry-empty-state { text-align: center; padding: 120px 40px; }
+.glyph-container { width: 120px; height: 120px; background: var(--bg-app); border-radius: 50%; display: grid; place-items: center; margin: 0 auto 32px; color: var(--border-light); }
+.glyph-container svg { width: 60px; height: 60px; }
+
+/* EMR */
+.clinical-workspace { animation: fade-in 0.5s ease-out; }
+.clinical-workspace .workspace-header { margin-bottom: 2rem; }
+.clinical-workspace .tab-group { display: flex; padding: 4px; border-radius: 12px; background: rgba(255,255,255,0.6); width: fit-content; }
+.clinical-workspace .tab-link { padding: 10px 20px; border: none; background: transparent; color: #64748b; font-size: 0.85rem; font-weight: 700; cursor: pointer; border-radius: 9px; transition: 0.2s; display: flex; align-items: center; gap: 8px; }
+.clinical-workspace .tab-link.active { background: white; color: var(--tenant-primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+#new-consult-btn.active { color: #059669; }
+.consultation-layout-grid { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; align-items: start; }
+.premium-glass { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 25px rgba(0,0,0,0.03); }
+.clinical-sidebar { padding: 1.5rem; }
+.clinical-sidebar .sidebar-header h4 { margin: 0; font-size: 0.85rem; font-weight: 900; color: #0f172a; text-transform: uppercase; letter-spacing: 0.05em; }
+.clinical-sidebar .sidebar-header p { margin: 4px 0 1.25rem; font-size: 0.75rem; color: #94a3b8; font-weight: 700; }
+.subject-profile-card { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #f1f5f9; }
+.subject-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+.subject-avatar { width: 44px; height: 44px; background: #ecfdf5; color: #10b981; border-radius: 12px; display: grid; place-items: center; font-weight: 900; font-size: 1.25rem; }
+.subject-names { display: flex; flex-direction: column; }
+.subject-names strong { font-size: 14px; color: #0f172a; }
+.subject-names span { font-size: 11px; color: #94a3b8; font-weight: 800; letter-spacing: 0.05em; }
+.subject-criticals { display: flex; flex-direction: column; gap: 1rem; }
+.critical-item { background: #f8fafc; padding: 12px; border-radius: 10px; border-left: 3px solid #e2e8f0; }
+.critical-item label { display: block; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #94a3b8; margin-bottom: 4px; }
+.critical-item strong { font-size: 12px; color: #475569; }
+.critical-item.allergies { border-left-color: #f87171; background: #fef2f2; }
+.critical-item.allergies strong { color: #b91c1c; }
+.select-placeholder { height: 600px; display: grid; place-items: center; text-align: center; color: #94a3b8; font-weight: 600; font-size: 0.9rem; padding: 4rem; }
+.consultation-form { padding: 2.5rem; }
+.consult-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; }
+.consult-header .header-meta h3 { margin: 0; font-size: 1.5rem; font-weight: 900; color: #0f172a; letter-spacing: -0.025em; }
+.consult-header .header-meta p { margin: 4px 0 0; color: #64748b; font-size: 0.9rem; font-weight: 600; }
+.vitals-strip { display: flex; gap: 1rem; }
+.vital-input { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 8px 16px; display: flex; flex-direction: column; width: 90px; }
+.vital-input label { font-size: 9px; font-weight: 900; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+.vital-input input { border: none; background: transparent; width: 100%; font-weight: 800; color: #0f172a; font-size: 1.1rem; outline: none; margin-top: 2px; }
+.consult-form-grid, .consult-form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.form-group-rich label { display: block; font-size: 11px; font-weight: 800; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+.form-group-rich input, .form-group-rich select, .form-group-rich textarea { width: 100%; padding: 12px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem; font-weight: 600; color: #1e293b; outline: none; transition: 0.2s; }
+.form-group-rich input:focus, .form-group-rich textarea:focus { border-color: var(--tenant-primary); background: white; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); }
+.rx-module-premium { background: #fdfcfb; border: 1px solid #ffedd5; border-radius: 16px; padding: 1.5rem; margin: 2rem 0; }
+.rx-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.rx-header h4 { margin: 0; color: #c2410c; font-size: 0.9rem; font-weight: 900; letter-spacing: 0.05em; }
+.add-med-trigger { padding: 6px 14px; background: #fff7ed; border: 1px solid #ffedd5; color: #c2410c; border-radius: 8px; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+.add-med-trigger:hover { background: #ffedd5; }
+.rx-entry-row { display: grid; grid-template-columns: 1.5fr 1fr 80px 1.5fr 36px; gap: 10px; margin-bottom: 10px; }
+.rx-entry-row input { background: white; border: 1px solid #ffedd5; padding: 8px 12px; font-size: 13px; font-weight: 700; border-radius: 8px; outline: none; }
+.remove-med-btn { border: none; background: #fee2e2; color: #ef4444; border-radius: 8px; cursor: pointer; font-weight: 900; }
+.finalize-btn-premium { width: 100%; padding: 16px; background: var(--tenant-primary); color: white; border-radius: 14px; font-weight: 900; font-size: 1rem; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2); cursor: pointer; transition: 0.2s; }
+.finalize-btn-premium:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(16, 185, 129, 0.3); }
+.finish-card h2 { font-weight: 900; font-size: 2rem; color: #0f172a; margin: 1rem 0; }
+.finish-icon { font-size: 4rem; }
+.finish-subtext { color: #64748b; font-size: 1.1rem; margin-bottom: 3rem; }
+.finish-actions { display: flex; gap: 1rem; justify-content: center; }
+.finish-btn { padding: 14px 28px; border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.2s; border: 1px solid #e2e8f0; }
+.finish-btn.print { background: #059669; color: white; border: none; box-shadow: 0 10px 20px rgba(5, 150, 105, 0.2); }
+.finish-btn.dashboard { background: white; color: #1e293b; }
+.ledger-card { padding: 0; overflow: hidden; margin-top: 1rem; }
+.ledger-header { padding: 2rem; border-bottom: 1px solid #f1f5f9; }
+.ledger-header h3 { margin: 0; font-size: 1.25rem; font-weight: 900; }
+.ledger-header p { margin: 4px 0 0; color: #94a3b8; font-size: 0.85rem; font-weight: 700; }
+.table-wrapper { width: 100%; overflow-x: auto; }
+.date-cell { font-size: 13px; color: #64748b; line-height: 1.4; }
+.p-link { font-weight: 800; color: var(--tenant-primary); cursor: pointer; transition: 0.2s; }
+.p-link:hover { text-decoration: underline; color: #0f172a; }
+.diagnosis-cell { font-weight: 600; color: #475569; }
+.status-chip { font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.05em; }
+.status-chip.outpatient, .status-chip.opd { background: #eff6ff; color: #3b82f6; }
+.status-chip.inpatient, .status-chip.ipd { background: #fffbeb; color: #d97706; }
+.status-chip.emergency, .status-chip.er { background: #fef2f2; color: #ef4444; }
+.ledger-btn { padding: 6px 12px; border: 1px solid #e2e8f0; background: white; border-radius: 8px; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+.ledger-btn.print { color: #059669; }
+.ledger-btn.consult { color: #3b82f6; border-color: #dbeafe; background: #f0f7ff; }
+.empty-table-msg { text-align: center; padding: 5rem; color: #cbd5e1; font-weight: 600; font-style: italic; }
+
+/* Billing */
+.billing-workspace { animation: fade-in 0.5s ease-out; }
+.billing-workspace .workspace-header { margin-bottom: 1rem; }
+.billing-workspace .tab-group { display: flex; padding: 4px; width: fit-content; background: rgba(255,255,255,0.6); }
+.billing-workspace .tab-link { padding: 10px 20px; border: none; background: transparent; color: #64748b; font-size: 0.85rem; font-weight: 700; cursor: pointer; border-radius: 9px; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+.billing-workspace .tab-link.active { background: white; color: var(--tenant-primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.panel-header-rich { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+.header-icon-box { font-size: 1.75rem; background: #fff7ed; width: 54px; height: 54px; display: grid; place-items: center; border-radius: 14px; border: 1px solid #ffedd5; }
+.header-text h3 { margin: 0; font-size: 1.35rem; font-weight: 900; color: #0f172a; }
+.header-text p { margin: 4px 0 0; color: #64748b; font-size: 0.85rem; }
+.create-invoice-card { max-width: 680px; padding: 2.5rem; }
+.ledger-stats.analytics-cards { display: flex; gap: 1.5rem; }
+.stat-card { display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem; border-radius: 1.25rem; position: relative; overflow: hidden; min-width: 240px; }
+.card-info { flex: 1; display: flex; flex-direction: column; }
+.tiny-label { font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+.val-main { font-size: 1.15rem; font-weight: 900; color: #0f172a; margin-top: 2px; }
+.mini-graph { position: absolute; bottom: 0; right: 0; left: 0; height: 30px; display: flex; align-items: flex-end; gap: 4px; padding: 0 10px; opacity: 0.15; pointer-events: none; }
+.mini-graph .bar { flex: 1; background: currentColor; border-radius: 4px 4px 0 0; }
+.mini-graph .bar-trend { height: 4px; background: #eab308; border-radius: 10px; }
+.mini-graph .bar-trend.error { background: #f59e0b; }
+.ledger-guidance { margin: 0 2rem 1rem; padding: 0.75rem 1.25rem; background: #f0f9ff; border-radius: 10px; display: flex; align-items: center; gap: 10px; font-size: 0.75rem; font-weight: 600; color: #0369a1; border: 1px solid #e0f2fe; }
+.id-cell code { background: #f1f5f9; color: #475569; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.clickable-patient { font-weight: 800; color: var(--tenant-primary); cursor: pointer; transition: 0.2s; }
+.clickable-patient:hover { text-decoration: underline; color: #0f172a; }
+.tiny-id { font-size: 10px; color: #cbd5e1; font-weight: 700; margin-top: 2px; }
+.amount-cell { font-weight: 900; color: #0f172a; font-size: 15px; }
+.status-chip.paid { background: #dcfce7; color: #16a34a; }
+.status-chip.pending { background: #fef9c3; color: #ca8a04; }
+.ledger-btn.settle { color: #10b981; border-color: #d1fae5; background: #f0fdf4; padding: 0 12px; }
+.ledger-btn.settle:hover { background: #10b981; color: white; border-color: #10b981; }
+.ledger-btn.print { width: 32px; color: #64748b; }
+.ledger-btn.print:hover { background: #f1f5f9; color: #0f172a; }
+
+/* Inpatient */
+.ipd-workspace { animation: fade-in 0.5s ease-out; }
+.ipd-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+.ipd-header h2 { margin: 0; font-size: 1.75rem; font-weight: 900; color: #0f172a; letter-spacing: -0.025em; }
+.ipd-header p { margin: 4px 0 0; color: #64748b; font-size: 0.95rem; font-weight: 600; }
+.refresh-trigger { border: none; padding: 10px 20px; font-size: 0.8rem; font-weight: 800; color: #64748b; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px; border-radius: 12px; }
+.refresh-trigger:hover { background: #f8fafc; color: var(--tenant-primary); }
+.occupancy-ledger { padding: 0; overflow: hidden; }
+.patient-col { display: flex; align-items: center; gap: 12px; }
+.p-avatar { width: 36px; height: 36px; background: #eff6ff; color: #3b82f6; border-radius: 10px; display: grid; place-items: center; font-weight: 900; font-size: 1rem; }
+.p-info { display: flex; flex-direction: column; }
+.p-info strong { color: #0f172a; font-size: 14px; }
+.p-info span { font-size: 10px; color: #94a3b8; font-weight: 800; }
+.date-col strong { font-size: 13px; color: #475569; }
+.date-col span { font-size: 11px; color: #94a3b8; font-weight: 600; }
+.diag-col { font-weight: 600; color: #334155; font-size: 13px; max-width: 250px; }
+.live-status-chip { display: flex; align-items: center; gap: 6px; padding: 4px 12px; background: #f0fdf4; color: #16a34a; border-radius: 20px; font-size: 10px; font-weight: 900; text-transform: uppercase; border: 1px solid #10b98122; width: fit-content; }
+.discharge-btn-premium { background: white; border: 1px solid #fed7aa; color: #ea580c; padding: 8px 16px; border-radius: 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.2s; letter-spacing: 0.025em; }
+.discharge-btn-premium:hover { background: #fff7ed; border-color: #ea580c; transform: translateY(-1px); }
+.loading-stage { text-align: center; padding: 5rem; color: #94a3b8; }
+.pulse-loader { width: 40px; height: 40px; background: var(--tenant-primary); border-radius: 50%; display: inline-block; animation: pulse 2s infinite ease-in-out; margin-bottom: 1rem; }
+.empty-state-msg { text-align: center; padding: 5rem; color: #cbd5e1; font-weight: 700; font-style: italic; }
+
+/* PatientSearch */
+.premium-patient-search { position: relative; width: 100%; font-family: inherit; }
+.selection-token { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #ecfdf5; border: 1px solid #d1fae5; border-radius: 10px; margin-bottom: 12px; animation: slide-in 0.2s ease-out; }
+.token-info strong { color: #065f46; font-size: 13px; display: block; }
+.token-info span { color: #059669; font-size: 11px; font-weight: 700; }
+.token-close { background: transparent; border: none; color: #059669; font-size: 20px; cursor: pointer; padding: 0 4px; }
+.search-group { display: flex; flex-direction: column; gap: 8px; }
+.main-search-bar { position: relative; display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; transition: all 0.2s; }
+.main-search-bar:focus-within { border-color: var(--tenant-primary); background: white; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
+.search-icon { padding: 0 10px; font-size: 14px; opacity: 0.5; }
+.main-search-bar input { flex: 1; border: none; background: transparent; padding: 10px 0; font-size: 13px; outline: none; }
+.filter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.filter-item { display: flex; flex-direction: column; gap: 4px; }
+.filter-item label { font-size: 9px; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 0.05em; margin-left: 2px; }
+.filter-item select, .filter-item input { padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0; background: #f8fafc; font-size: 11px; font-weight: 600; cursor: pointer; }
+.search-dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: white; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 100; max-height: 320px; overflow-y: auto; }
+.dropdown-status { padding: 20px; text-align: center; color: #64748b; font-size: 12px; font-weight: 600; }
+.dropdown-empty { padding: 20px; text-align: center; color: #94a3b8; font-size: 12px; }
+.result-row { display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: 0.2s; align-items: center; }
+.result-row:hover { background: #f8fafc; }
+.result-avatar { width: 34px; height: 34px; border-radius: 8px; background: #f1f5f9; display: grid; place-items: center; font-weight: 800; color: #64748b; font-size: 12px; flex-shrink: 0; }
+.result-main { flex: 1; overflow: hidden; }
+.result-name { font-size: 13px; font-weight: 700; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.result-meta { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+.type-tag { font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+.type-tag.IPD { background: #fee2e2; color: #dc2626; }
+.type-tag.OPD { background: #dbeafe; color: #2563eb; }
+.type-tag.emergency { background: #fef3c7; color: #b45309; }
+@keyframes slide-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ComparisonChart */
+.charting-widget { border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.chart-placeholder { min-height: 200px; display: grid; place-items: center; }
+.chart-placeholder-copy { color: var(--text-muted); font-size: 0.9rem; }
+.chart-inner { padding: 24px; }
+.chart-stats-row { display: flex; gap: 32px; margin-bottom: 24px; }
+.text-success { color: var(--medical-success); font-weight: 700; }
+.text-danger { color: var(--medical-danger); font-weight: 700; }
+.stat-pill { display: flex; flex-direction: column; }
+.stat-pill .label { font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.stat-pill .value { font-size: 1.25rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; }
+.stat-pill .value.value-muted { color: var(--text-secondary); }
+.chart-viewport { position: relative; }
+.chart-svg { overflow: visible; }
+
+/* Responsive module adjustments */
+@media (max-width: 1200px) {
+  .appointment-lattice-layout,
+  .consultation-layout-grid,
+  .mpi-oversight-layout.with-sidebar,
+  .clinical-dashboard-content {
+    grid-template-columns: 1fr;
+  }
+
+  .ledger-stats.analytics-cards {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .note-capture-form,
+  .consult-form-grid,
+  .consult-form-grid-2,
+  .medical-alert-zone,
+  .chart-stats-row,
+  .filter-row {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .profile-header-premium,
+  .profile-identity,
+  .ipd-header,
+  .finish-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* SubscriptionCatalogManager */
+.subscription-catalog-manager {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.subscription-catalog-manager .catalog-header { text-align: center; margin-bottom: 2rem; }
+.subscription-catalog-manager .catalog-header h2 { font-size: 2rem; font-weight: 800; color: #1e293b; margin-bottom: 0.5rem; }
+.subscription-catalog-manager .catalog-header p { color: #64748b; font-size: 1rem; }
+.subscription-catalog-manager .catalog-tabs { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0; }
+.subscription-catalog-manager .tab { padding: 1rem 1.5rem; border: none; background: none; font-size: 1rem; font-weight: 600; color: #64748b; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; }
+.subscription-catalog-manager .tab.active { color: #1e293b; border-bottom-color: #3b82f6; }
+.subscription-catalog-manager .tab:hover { color: #1e293b; background: #f8fafc; }
+.subscription-catalog-manager .subscriptions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+.subscription-catalog-manager .subscription-card { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.3s; }
+.subscription-catalog-manager .subscription-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+.subscription-catalog-manager .popular-badge { position: absolute; top: 1rem; right: 1rem; background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+.subscription-catalog-manager .subscription-header { padding: 2rem; color: white; display: flex; align-items: center; gap: 1rem; }
+.subscription-catalog-manager .subscription-icon { font-size: 2.5rem; }
+.subscription-catalog-manager .subscription-info h3 { margin: 0; font-size: 1.5rem; font-weight: 800; }
+.subscription-catalog-manager .subscription-price { font-size: 1.25rem; font-weight: 700; opacity: 0.9; }
+.subscription-catalog-manager .subscription-body { padding: 2rem; }
+.subscription-catalog-manager .subscription-description { color: #64748b; margin-bottom: 1.5rem; line-height: 1.6; }
+.subscription-catalog-manager .features-list h4 { font-size: 1rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem; }
+.subscription-catalog-manager .feature-item { display: flex; align-items: flex-start; gap: 1rem; padding: 0.75rem; margin-bottom: 0.5rem; background: #f8fafc; border-radius: 8px; }
+.subscription-catalog-manager .feature-icon { font-size: 1.5rem; flex-shrink: 0; }
+.subscription-catalog-manager .feature-details { flex: 1; }
+.subscription-catalog-manager .feature-name { font-weight: 600; color: #1e293b; margin-bottom: 0.25rem; }
+.subscription-catalog-manager .feature-description { font-size: 0.875rem; color: #64748b; line-height: 1.4; }
+.subscription-catalog-manager .subscription-actions { padding: 2rem; display: flex; gap: 1rem; border-top: 1px solid #e2e8f0; }
+.subscription-catalog-manager .btn-edit, .subscription-catalog-manager .btn-apply { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+.subscription-catalog-manager .btn-edit { background: #f1f5f9; color: #1e293b; border: 1px solid #e2e8f0; }
+.subscription-catalog-manager .btn-edit:hover { background: #e2e8f0; }
+.subscription-catalog-manager .btn-apply { background: #10b981; color: white; flex: 1; }
+.subscription-catalog-manager .btn-apply:hover { background: #059669; }
+.subscription-catalog-manager .catalog-actions { display: flex; gap: 1rem; justify-content: center; padding: 2rem; border-top: 2px solid #e2e8f0; }
+.subscription-catalog-manager .btn-primary, .subscription-catalog-manager .btn-secondary { padding: 1rem 2rem; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+.subscription-catalog-manager .btn-primary { background: #10b981; color: white; }
+.subscription-catalog-manager .btn-primary:hover { background: #059669; }
+.subscription-catalog-manager .btn-secondary { background: #f1f5f9; color: #1e293b; border: 1px solid #e2e8f0; }
+.subscription-catalog-manager .btn-secondary:hover { background: #e2e8f0; }
+.subscription-catalog-manager .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.subscription-catalog-manager .feature-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; background: white; }
+.subscription-catalog-manager .feature-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.subscription-catalog-manager .feature-icon-large { font-size: 2rem; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-radius: 12px; }
+.subscription-catalog-manager .feature-tier { margin-top: 1rem; padding: 0.5rem; background: #f0fdf4; border-radius: 6px; font-size: 0.875rem; }
+.subscription-catalog-manager .bulk-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.subscription-catalog-manager .bulk-item { padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 8px; background: white; }
+.subscription-catalog-manager .bulk-info h4 { margin: 0 0 0.5rem 0; color: #1e293b; }
+.subscription-catalog-manager .bulk-info p { margin: 0; color: #64748b; font-size: 0.875rem; }
+.subscription-catalog-manager .btn-bulk-apply { width: 100%; padding: 0.75rem; background: #10b981; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+.subscription-catalog-manager .btn-bulk-apply:hover { background: #059669; }
+.subscription-catalog-manager .edit-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.subscription-catalog-manager .edit-modal { background: white; border-radius: 16px; padding: 2rem; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
+.subscription-catalog-manager .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.subscription-catalog-manager .modal-header h3 { margin: 0; color: #1e293b; }
+.subscription-catalog-manager .modal-header button { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b; }
+.subscription-catalog-manager .form-group { margin-bottom: 1.5rem; }
+.subscription-catalog-manager .form-group label { display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem; }
+.subscription-catalog-manager .form-group input,
+.subscription-catalog-manager .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px; font-family: inherit; }
+.subscription-catalog-manager .form-group textarea { min-height: 80px; resize: vertical; }
+.subscription-catalog-manager .feature-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; }
+.subscription-catalog-manager .feature-selector label { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.subscription-catalog-manager .feature-selector label:hover { background: #f8fafc; }
+.subscription-catalog-manager .feature-selector input[type="checkbox"] { margin: 0; }
+.subscription-catalog-manager .modal-actions { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem; }

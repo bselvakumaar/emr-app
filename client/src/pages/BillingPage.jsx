@@ -312,79 +312,8 @@ export default function BillingPage({ tenant, patients,
           </article>
         )}
       </div>
-
-      <style>{`
-        .billing-workspace { animation: fade-in 0.5s ease-out; }
-        .workspace-header { margin-bottom: 1rem; }
-        .tab-group { display: flex; padding: 4px; width: fit-content; background: rgba(255,255,255,0.6); }
-        .tab-link { 
-          padding: 10px 20px; border: none; background: transparent; color: #64748b; 
-          font-size: 0.85rem; font-weight: 700; cursor: pointer; border-radius: 9px; 
-          transition: all 0.2s; display: flex; align-items: center; gap: 8px;
-        }
-        .tab-link.active { background: white; color: var(--tenant-primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        
-        .premium-glass { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 25px rgba(0,0,0,0.03); }
-        
-        .panel-header-rich { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
-        .header-icon-box { font-size: 1.75rem; background: #fff7ed; width: 54px; height: 54px; display: grid; place-items: center; border-radius: 14px; border: 1px solid #ffedd5; }
-        .header-text h3 { margin: 0; font-size: 1.35rem; font-weight: 900; color: #0f172a; }
-        .header-text p { margin: 4px 0 0; color: #64748b; font-size: 0.85rem; }
-
-        .create-invoice-card { max-width: 680px; padding: 2.5rem; }
-        .ledger-card { padding: 0; overflow: hidden; }
-        
-        .ledger-header { padding: 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; }
-        .title-stack h3 { margin: 0; font-size: 1.25rem; font-weight: 900; color: #0f172a; }
-        .title-stack p { margin: 4px 0 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600; }
-        
-        .ledger-stats.analytics-cards { display: flex; gap: 1.5rem; }
-        .stat-card { 
-          display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem; 
-          border-radius: 1.25rem; position: relative; overflow: hidden; min-width: 240px;
-        }
-        .card-icon { width: 44px; height: 44px; background: #f8fafc; border-radius: 10px; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        .card-info { flex: 1; display: flex; flex-direction: column; }
-        .tiny-label { font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
-        .val-main { font-size: 1.15rem; font-weight: 900; color: #0f172a; margin-top: 2px; }
-        
-        .mini-graph { position: absolute; bottom: 0; right: 0; left: 0; height: 30px; display: flex; align-items: flex-end; gap: 4px; padding: 0 10px; opacity: 0.15; pointer-events: none; }
-        .mini-graph .bar { flex: 1; background: currentColor; border-radius: 4px 4px 0 0; }
-        .mini-graph .bar-trend { height: 4px; background: #eab308; border-radius: 10px; }
-        .mini-graph .bar-trend.error { background: #f59e0b; }
-
-        .ledger-guidance { 
-          margin: 0 2rem 1rem; padding: 0.75rem 1.25rem; background: #f0f9ff; 
-          border-radius: 10px; display: flex; align-items: center; gap: 10px;
-          font-size: 0.75rem; font-weight: 600; color: #0369a1; border: 1px solid #e0f2fe;
-        }
-
-        .table-wrapper { width: 100%; border-top: 1px solid transparent; }
-        .premium-table { width: 100%; border-collapse: collapse; }
-        .premium-table th { text-align: left; padding: 1.25rem 1.5rem; background: #f8fafc; color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; border-bottom: 1px solid #f1f5f9; }
-        .premium-table td { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f8fafc; font-size: 14px; }
-        
-        .date-cell { font-weight: 700; color: #64748b; }
-        .id-cell code { background: #f1f5f9; color: #475569; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
-        .patient-cell { display: flex; flex-direction: column; }
-        .clickable-patient { font-weight: 800; color: var(--tenant-primary); cursor: pointer; transition: 0.2s; }
-        .clickable-patient:hover { text-decoration: underline; color: #0f172a; }
-        .tiny-id { font-size: 10px; color: #cbd5e1; font-weight: 700; margin-top: 2px; }
-        .amount-cell { font-weight: 900; color: #0f172a; font-size: 15px; }
-
-        .status-chip { font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.02em; }
-        .status-chip.paid { background: #dcfce7; color: #16a34a; }
-        .status-chip.pending { background: #fef9c3; color: #ca8a04; }
-
-        .action-button-group { display: flex; gap: 8px; justify-content: flex-end; }
-        .ledger-btn { height: 32px; border: 1px solid #e2e8f0; border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; background: white; }
-        .ledger-btn.settle { color: #10b981; border-color: #d1fae5; background: #f0fdf4; padding: 0 12px; }
-        .ledger-btn.settle:hover { background: #10b981; color: white; border-color: #10b981; }
-        .ledger-btn.print { width: 32px; color: #64748b; }
-        .ledger-btn.print:hover { background: #f1f5f9; color: #0f172a; }
-
-        .empty-table-msg { text-align: center; padding: 4rem; color: #94a3b8; font-weight: 600; font-style: italic; }
-      `}</style>
-    </section>
+</section>
   );
 }
+
+

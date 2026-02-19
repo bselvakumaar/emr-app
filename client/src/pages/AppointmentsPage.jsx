@@ -221,45 +221,8 @@ export default function AppointmentsPage({
           )}
         </aside>
       </div>
-
-      <style>{`
-        .appointments-intelligence-workspace { animation: fadeIn 0.8s ease-out; }
-        
-        .tab-switcher-premium { display: flex; gap: 8px; margin-bottom: 24px; padding: 4px; background: var(--bg-app); border-radius: 12px; width: fit-content; border: 1px solid var(--border-light); }
-        .tab-item-premium { 
-          padding: 8px 20px; border: none; background: transparent; color: var(--text-muted); 
-          font-size: 0.8rem; font-weight: 800; cursor: pointer; border-radius: 9px; transition: var(--transition);
-        }
-        .tab-item-premium.active { background: white; color: var(--medical-primary); box-shadow: var(--shadow-sm); }
-
-        .appointment-lattice-layout { display: grid; grid-template-columns: 1fr 420px; gap: 24px; align-items: start; }
-        
-        .btn-mini-action { background: white; border: 1px solid var(--border-light); color: var(--medical-secondary); font-size: 0.65rem; font-weight: 900; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: var(--transition); }
-        .btn-mini-action:hover { background: var(--medical-secondary); color: white; border-color: var(--medical-secondary); }
-        .status-badge-mini { font-size: 0.6rem; font-weight: 900; color: var(--medical-success); background: rgba(76, 175, 80, 0.1); padding: 2px 8px; border-radius: 4px; }
-
-        .ledger-scroll-zone { padding: 20px; display: flex; flex-direction: column; gap: 12px; max-height: 500px; overflow-y: auto; }
-        .ledger-scroll-zone.mini { max-height: 250px; }
-        
-        .clinical-strip-card { display: flex; align-items: center; padding: 14px; border-radius: 16px; background: var(--bg-app); border: 1px solid transparent; transition: var(--transition); }
-        .clinical-strip-card:hover { background: white; border-color: var(--border-light); box-shadow: var(--shadow-sm); }
-        .strip-time-block { width: 70px; border-right: 1px solid var(--border-light); margin-right: 16px; display: flex; flex-direction: column; }
-        .strip-time-block strong { font-size: 0.85rem; color: var(--text-primary); }
-        .strip-time-block span { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
-        .strip-body { flex: 1; }
-        .patient-link { font-weight: 800; font-size: 0.9rem; color: var(--medical-primary); cursor: pointer; }
-        .provider-meta { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
-
-        .walkin-entry-card { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; border: 1px solid var(--bg-app); }
-        .entry-glyph { width: 32px; height: 32px; border-radius: 8px; background: var(--bg-app); display: grid; place-items: center; font-weight: 900; color: var(--text-muted); font-size: 0.75rem; }
-        .entry-intel { flex: 1; }
-        .entry-intel strong { display: block; font-size: 0.8rem; color: var(--text-primary); }
-        .entry-intel span { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; }
-
-        .live-tag { font-size: 0.6rem; font-weight: 900; color: var(--medical-danger); background: rgba(244, 67, 54, 0.1); padding: 2px 8px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
-        .live-tag::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--medical-danger); animation: blink 1s infinite; }
-        @keyframes blink { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
-      `}</style>
-    </div>
+</div>
   );
 }
+
+
