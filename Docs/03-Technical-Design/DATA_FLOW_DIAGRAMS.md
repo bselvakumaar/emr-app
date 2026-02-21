@@ -1,134 +1,100 @@
-# Data Flow Diagrams (DFD)
+# Data Flow Diagrams
 
-This document visualizes the **Data Flow** for core business processes within the MedFlow EMR system using Mermaid diagrams.
+Last updated: 2026-02-19
 
----
+Diagrams in this file align to active routes and middleware in `server/index.js` and `server/middleware`.
 
-## 1. System Context Diagram (Level 0)
-
-An overview of external entities and the MedFlow system boundary.
-
+## 1. System Context
 ```mermaid
 graph TD
-    User((Hospital Staff)) -->|Logs in, Manages Patients, Bills| MedFlow[MedFlow EMR System]
-    Patient((Patient)) -->|Registers, Books Appt| MedFlow
-    Admin((Tenant Admin)) -->|Configures Settings, Users| MedFlow
-    MedFlow -->|Stores Data| DB[(PostgreSQL Database)]
-    MedFlow -->|Sends Notifications| EmailServer(Mail Server)
+    Staff((Tenant Staff User)) -->|Web App| FE[React SPA]
+    Superadmin((Superadmin)) -->|Web App| FE
+    FE -->|HTTPS /api/* + JWT| API[Express API]
+    API -->|SQL| DB[(PostgreSQL emr schema)]
 ```
 
----
-
-## 2. Authentication Flow (Login Process)
-
-The sequence diagram for User Authentication and Session establishment.
-
+## 2. Login and Session Bootstrap
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Frontend as React Client
+    participant U as User
+    participant FE as React Client
     participant API as Express API
+    participant Repo as Repository
     participant DB as PostgreSQL
 
-    User->>Frontend: Enter Email, Password, Tenant
-    Frontend->>API: POST /api/login {email, password, tenantId}
-    API->>DB: SELECT * FROM users WHERE email=? AND tenant_id=?
-    DB-->>API: User Record (Hash)
-    API->>API: Verify Password (bcrypt)
-    alt Valid Credentials
-        API->>API: Generate JWT Token
-        API-->>Frontend: 200 OK {token, user, tenantId}
-        Frontend->>Frontend: Store Token
-        Frontend-->>User: Redirect to Dashboard
-    else Invalid Credentials
-        API-->>Frontend: 401 Unauthorized
-        Frontend-->>User: Show Error Message
-    end
+    U->>FE: Enter tenant/email/password
+    FE->>API: POST /api/login
+    API->>Repo: getTenantByCode (if tenant code)
+    Repo->>DB: SELECT tenant
+    API->>Repo: getUserByEmail
+    Repo->>DB: SELECT user
+    API->>API: compare bcrypt + create JWT
+    API-->>FE: token + user + tenantId
+    FE->>API: GET /api/bootstrap?tenantId&userId
+    API->>Repo: getBootstrapData
+    Repo->>DB: aggregate module datasets
+    API-->>FE: patients/appointments/encounters/etc + permissions
 ```
 
----
-
-## 3. Patient Registration Workflow
-
-The data flow from a new patient arrival to the creation of a digital medical record.
-
-```mermaid
-graph LR
-    Start(New Patient Arrives) --> Form[Reception fills Registration Form]
-    Form --> API_Call{Validate Input?}
-    API_Call -- No --> Error[Show Validation Error]
-    API_Call -- Yes --> P_API[POST /api/patients]
-    P_API --> Repo[Repository Layer]
-    Repo --> GenMRN[Generate Unique MRN]
-    GenMRN --> DB_Insert[(INSERT INTO patients)]
-    DB_Insert --> Success[Return New Patient Object]
-    Success --> UI_Update[Redirect to Patient Profile]
-```
-
----
-
-## 4. Clinical Consultation (EMR) Flow
-
-The interaction between a Doctor and the EMR module during a patient visit.
-
-```mermaid
-sequenceDiagram
-    participant Doctor
-    participant UI as EMR Page
-    participant API
-    participant DB
-
-    Doctor->>UI: Select Patient from Queue
-    UI->>API: GET /api/patients/:id/history
-    API->>DB: Query Encounters & Clinical Records
-    DB-->>UI: Historical Data (Timeline)
-
-    Doctor->>UI: Enter Vitals, Diagnosis, Notes
-    Doctor->>UI: Add Prescriptions (CPOE)
-    Doctor->>UI: Click "Submit Consultation"
-
-    UI->>API: POST /api/encounters {patient, vitals, dx, rx}
-    API->>DB: INSERT INTO encounters
-    API->>DB: INSERT INTO prescriptions
-    DB-->>API: Success
-    API-->>UI: 201 Created
-    UI-->>Doctor: Show Success & Print Button
-```
-
----
-
-## 5. Billing & Payment Process
-
-The flow of generating an invoice and recording a payment.
-
-```mermaid
-graph TD
-    Trigger[Consultation Completed / Lab Test Done] --> GenInvoice[Generate Draft Invoice]
-    GenInvoice --> Review[Billing Clerk Review]
-    Review --> Finalize[Finalize Invoice]
-    Finalize --> API_Inv[POST /api/invoices]
-    API_Inv --> DB_Inv[(INSERT INTO invoices)]
-    
-    Payment[Patient Makes Payment] --> PayUI[Enter Payment Details]
-    PayUI --> API_Pay[PATCH /api/invoices/:id/pay]
-    API_Pay --> DB_Update[(UPDATE invoices SET status='paid')]
-    DB_Update --> Receipt[Generate Receipt PDF]
-```
-
----
-
-## 6. Multi-Tenant Data Access
-
-Conceptual flow of how data privacy is enforced across tenants.
-
+## 3. Tenant-Scoped Request Flow
 ```mermaid
 flowchart TD
-    Req[Incoming API Request] --> Auth{Valid Token?}
-    Auth -- No --> 401[401 Unauthorized]
-    Auth -- Yes --> Decode[Extract tenantId from Token]
-    Decode --> Query[Construct SQL Query]
-    Query --> Filter{Filter by tenant_id?}
-    Filter -- Yes --> Exec[Execute: SELECT * FROM table WHERE tenant_id = $1]
-    Filter -- No --> Reject[Reject Unsafe Query]
-    Exec --> Result[Return Scoped Data]
+    A[Incoming /api request] --> B[authenticate]
+    B --> C{Tenant route?}
+    C -- Yes --> D[requireTenant]
+    D --> E[requirePermission/moduleGate]
+    E --> F[Route Handler]
+    F --> G[Repository SQL with tenant_id filter]
+    G --> H[JSON response]
+    C -- No --> F
+```
+
+## 4. Patient Registration and Clinical Updates
+```mermaid
+sequenceDiagram
+    participant FE as PatientsPage/EmrPage
+    participant API as Express API
+    participant Repo as repository.js
+    participant DB as PostgreSQL
+
+    FE->>API: POST /api/patients
+    API->>Repo: createPatient
+    Repo->>DB: INSERT emr.patients + MRN generation
+    API-->>FE: patient object
+
+    FE->>API: PATCH /api/patients/:id/clinical
+    API->>Repo: addClinicalRecord
+    Repo->>DB: INSERT emr.clinical_records
+    API-->>FE: record object
+```
+
+## 5. Financial Flow (Invoice to Payment)
+```mermaid
+flowchart LR
+    A[Billing UI] --> B[POST /api/invoices]
+    B --> C[createInvoice]
+    C --> D[(emr.invoices)]
+    D --> E[Pending/Partial State]
+    E --> F[PATCH /api/invoices/:id/pay]
+    F --> G[payInvoice]
+    G --> H[(emr.invoices status and paid)]
+```
+
+## 6. Reports and Analytics Flow
+```mermaid
+sequenceDiagram
+    participant FE as Dashboard/Reports
+    participant API as Express API
+    participant Repo as repository.js
+    participant DB as PostgreSQL
+
+    FE->>API: GET /api/reports/summary?tenantId=...
+    API->>Repo: getReportSummary
+    Repo->>DB: aggregate appointments/invoices/hr/lab metrics
+    API-->>FE: KPI payload
+
+    FE->>API: GET /api/reports/payouts?tenantId=...
+    API->>Repo: getDoctorPayouts
+    Repo->>DB: doctor encounter + invoice aggregates
+    API-->>FE: payout payload
 ```

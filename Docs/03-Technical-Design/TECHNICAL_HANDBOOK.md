@@ -1,95 +1,72 @@
-# EMR Technical Handbook & Implementation Guide
+# EMR Technical Handbook
 
-This document provides a clear, concise guide to the unique architectural patterns and recent implementations in this EMR application. Use this for onboarding or to understand how this project differs from standard React/Node implementations.
+Last updated: 2026-02-19
 
----
+This handbook is focused on implementation workflows and maintenance rules for contributors.
 
-## 1. Core Architecture Pattern: "Unified State Management"
+## 1. Where to Change What
+- Add/modify API contract: `server/index.js` and `server/db/repository.js`
+- Change auth or access policy: `server/middleware/auth.middleware.js`
+- Change subscription/feature gating: `server/middleware/featureFlag.middleware.js`
+- Change app navigation or module wiring: `client/src/App.jsx`, `client/src/config/modules.js`
+- Change page behavior: `client/src/pages/*.jsx`
+- Change client API calls: `client/src/api.js`
 
-Unlike projects that use Redux or heavy Context providers, this application uses a **Top-Down State Flow** managed in `client/src/App.jsx`.
+## 2. Frontend Flow Rules
+- Top-level state is intentionally centralized in `client/src/App.jsx`.
+- Most pages receive data/actions via props, then trigger API calls through handlers defined in `App.jsx`.
+- `view` in `App.jsx` controls active module rendering.
+- Navigation visibility is computed from:
+  - Backend permissions returned by `/api/bootstrap`
+  - Frontend fallback map in `client/src/config/modules.js`
 
-- **Source of Truth**: All critical data (active user, tenants, patients, encounters) is fetched and stored in `App.jsx`.
-- **Prop Drilling for Clarity**: Props are passed explicitly to pages (e.g., `PatientsPage`, `EmrPage`). This makes it extremely easy to trace where data comes from without searching through global stores.
-- **Unified Navigation**: The `view` state in `App.jsx` controls which module is visible, allowing for seamless deep-linking between modules (e.g., clicking a patient in Billing switches `view` to `mpi` and sets `activePatientId`).
+## 3. Backend Flow Rules
+- Keep route handlers thin: validate input, enforce middleware, call repository, return JSON.
+- Keep SQL and transformations in `server/db/repository.js`.
+- Enforce tenant context on tenant-scoped routes (`requireTenant`).
+- Enforce role/module access (`requirePermission`, `moduleGate`, and role checks).
+- Write audit entries for state-changing actions where traceability matters.
 
----
+## 4. Mandatory Guardrails
+- No raw string-interpolated SQL for user data; use parameterized queries.
+- Do not bypass tenant checks for tenant-scoped records.
+- Keep role names normalized consistently (`Front Office`, `Support Staff`, `HR`, etc.).
+- Preserve safe API response parsing in `client/src/api.js` (text then JSON parse fallback).
 
-## 2. Multi-Tenancy Implementation
+## 5. Change Playbooks
 
-This system is built for **Tenant Isolation** using a shared database schema.
+### Add a new module
+1. Add module metadata in `client/src/config/modules.js`.
+2. Add permissions in backend `PERMISSIONS` map (`server/middleware/auth.middleware.js`).
+3. Create page component in `client/src/pages/`.
+4. Register view rendering and handlers in `client/src/App.jsx`.
+5. Add backend routes and repository functions as needed.
+6. If subscription-gated, apply `moduleGate(...)`/feature checks in backend and `FeatureGate` in frontend.
 
-- **Database Layer**: Almost every table has a `tenant_id` column.
-- **Repository Filter**: `server/db/repository.js` functions always require a `tenantId` parameter to ensure a user from "Kidz Clinic" can never see data from "Omega Hospitals".
-- **API Security**: The `tenantId` is encoded in the JWT token. The server verifies that the requested `tenantId` matches the token's `tenantId`.
+### Add a new tenant-scoped entity
+1. Add repository CRUD with `tenant_id` filtering.
+2. Add API routes with `requireTenant`.
+3. Add audit logging for create/update/delete.
+4. Wire frontend calls in `client/src/api.js`.
+5. Add page integration and refresh flow in `client/src/App.jsx`.
 
----
+### Add a new report
+1. Add repository aggregation query in `server/db/repository.js`.
+2. Add route in `server/index.js` with `requirePermission('reports')`.
+3. Add API helper in `client/src/api.js`.
+4. Render in `client/src/pages/ReportsPage.jsx`.
 
-## 3. Mobile Responsiveness System
+## 6. Known Project Layout Notes
+- Legacy files exist and should not be used as primary implementation:
+  - `server/index_old.js`, `server/index_v2.js`
+  - `client/src/api_old.js`, `client/src/api_v2.js`
+- Main active entry points are:
+  - `server/index.js`
+  - `client/src/App.jsx`
+  - `client/src/api.js`
 
-We use a **Hybrid Responsive Strategy** that combines CSS Media Queries with React state.
-
-### The Slide-out Sidebar
-- **State**: `isMobileMenuOpen` in `AppLayout.jsx`.
-- **CSS**: Located in `index.css` under the `@media (max-width: 1024px)` breakpoint.
-- **Overlay**: A `sidebar-overlay` component blurs the background and closes the menu when clicked.
-- **Auto-Close**: Navigation buttons in the sidebar automatically call `setIsMobileMenuOpen(false)` when a new module is selected.
-
-### Layout Stacking
-- We use `display: grid` globally. On mobile, we override these grids with `grid-template-columns: 1fr !important` to stack horizontal layouts (like the MPI search + record view) into a vertical scroll.
-
----
-
-## 4. Facilities Entries (Clinical Record Journal)
-
-A key feature for clinicians is the **Federated Timeline**.
-
-- **Implementation**: Instead of showing medical history as separate tables, we map the patient's `clinical_records` array (from the database) into a single chronological journal.
-- **Data Shape**: Each entry contains a `section` (finding, med, diagnostic) and a `payload`/`content` string.
-- **Blank Handling**: To prevent "ghost" entries or empty UI boxes, the system uses logical fallbacks:
-  ```javascript
-  {clinicalRecords.length > 0 ? (
-    clinicalRecords.map(...)
-  ) : (
-    <div className="empty-state">No entries found</div>
-  )}
-  ```
-
----
-
-## 5. Defensive UI & API Safety
-
-This project prioritizes **System Stability** through multiple layers of safety:
-
-1. **Safe API Parsing**: `api.js` uses `.text()` then `JSON.parse()` within a try-catch to prevent "Unexpected end of JSON" crashes when the server returns empty responses.
-2. **UI Fallbacks**:
-   - Avatars use `(p.firstName || 'P')[0]` to prevent crashes on undefined names.
-   - Values use `|| 'N/A'` or `|| 'Not Checked'` to provide meaning to empty data fields.
-3. **Route Safety**: `AppLayout.jsx` checks if `moduleMeta[item]` exists before rendering a nav button, preventing crashes if a new role is added without metadata.
-
----
-
-## 6. Backend Repository Pattern
-
-The backend is cleanly divided into:
-- **`index.js`**: Route definitions and auth middleware.
-- **`repository.js`**: Pure database queries. **Crucial**: All utility functions (like `createAuditLog`) must be **exported** specifically to be used by the API layer.
-
----
-
-## 8. Premium Design System Implementation
-
-The v2.0 update introduces the **Premium Glassmorphism** system.
-
-- **Variable Injection**: Themes are managed in `AppLayout.jsx` by setting `--tenant-primary` and `--tenant-accent` on the root container.
-- **Glass Utility**: Use the `.premium-glass` class on any panel to apply the standardized blur and border treatment.
-- **Micro-Animations**: Transitions use `cubic-bezier(0.16, 1, 0.3, 1)` for a "premium" tactile feel during page switches.
-
----
-
-## 9. Common Workflows (Updated)
-
-- **Adding a New Module**:
-  1. Add metadata to `client/src/config/modules.js`.
-  2. Create Page component in `client/src/pages/`.
-  3. Wrap main panels in `.premium-glass` for consistency.
-  4. Register the route in `client/src/App.jsx`.
+## 7. Maintenance Checklist Before Merge
+1. Confirm tenant checks and permission checks exist on new routes.
+2. Confirm frontend and backend permission maps remain aligned.
+3. Confirm new API errors are handled in UI without hard crash.
+4. Confirm docs in this folder remain consistent with actual code paths.

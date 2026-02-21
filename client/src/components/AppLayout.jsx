@@ -68,7 +68,7 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
         </nav>
 
         <div className="sidebar-footer">
-          <div className="flex items-center gap-3 mb-4 px-2">
+          <div className="user-section">
             <div className="user-avatar">
               {activeUser?.name?.[0] || "U"}
             </div>
@@ -77,7 +77,7 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
               <div className="text-xs text-muted truncate">{activeUser?.role}</div>
             </div>
           </div>
-          <button onClick={onLogout} className="premium-btn btn-ghost w-full justify-start text-danger">
+          <button onClick={onLogout} className="logout-btn">
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
             Sign Out
           </button>

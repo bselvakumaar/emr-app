@@ -26,7 +26,7 @@ async function login(page, tenantCode, email) {
   await expect(tenantSelect).toHaveValue(tenantCode);
   await page.locator('input[type="email"]').fill(email);
   await page.locator('input[type="password"]').fill(PASSWORD);
-  await page.getByRole('button', { name: /Sign In to Dashboard/i }).click();
+  await page.getByRole('button', { name: /Sign In/i }).click();
 }
 
 for (const tenant of TENANTS) {

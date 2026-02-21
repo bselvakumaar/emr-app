@@ -1,5 +1,20 @@
 # Netlify Deployment Guide
 
+## Pre-Deployment Quality Gate (Required)
+
+Run this from project root before every deployment:
+
+```bash
+npm run test:release-gate
+```
+
+What it validates:
+- Role/tenant smoke login coverage (`test:e2e:smoke`)
+- FRD security regressions (tenant isolation, permissions, break-glass) (`test:e2e:frd`)
+- Integration workflow checks (`test:integration`)
+
+Deployment should proceed only if this command exits successfully.
+
 ## Configuration
 
 The app is deployed to Netlify at **[https://emr-sys.netlify.app/](https://emr-sys.netlify.app/)**.

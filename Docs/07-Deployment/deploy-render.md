@@ -1,5 +1,15 @@
 # Deploying to Render
 
+## Pre-Deployment Quality Gate (Required)
+
+Before deploying, run:
+
+```bash
+npm run test:release-gate
+```
+
+Proceed with deployment only when the gate passes.
+
 The easiest way to deploy is using the **Render Blueprint** included in this repository (`render.yaml`).
 
 ## Steps

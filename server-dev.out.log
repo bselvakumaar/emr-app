@@ -1,0 +1,5786 @@
+
+> emr-application@1.0.0 dev:server
+> node --watch server/index.js
+
+Restarting 'server/index.js'
+Server running on port 4000
+Environment: development
+Frontend bundle path: D:\Training\working\EMR-Application\client\dist
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT NOW() as now, current_database() as database',
+  duration: 2046,
+  rows: 1
+}
+✅ Database connection test successful
+   Database: emr
+   Server time: Thu Feb 19 2026 22:32:38 GMT+0530 (India Standard Time)
+[REQUEST] GET /api/tenants
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 2220,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 228,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 1268,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 749,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 229,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 446,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 230,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 227,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 448,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 227,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 228,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 227,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 227,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 229,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 447,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 228,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 272,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 251,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 234,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 240,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 452,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 266,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 228,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 232,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 232,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 452,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 229,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 227,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 232,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 453,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 224,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 2095,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 216,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 213,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 216,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 221,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 425,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 214,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 211,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 218,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 511,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 217,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 422,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 219,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 210,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 211,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 211,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 210,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 417,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 222,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 212,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 1039,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 209,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 213,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 634,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 212,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 224,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 212,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 213,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 211,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 417,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 209,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 218,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 222,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 216,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 217,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 1989,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 216,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] POST /api/login
+Restarting 'server/index.js'
+Server running on port 4000
+Environment: development
+Frontend bundle path: D:\Training\working\EMR-Application\client\dist
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT NOW() as now, current_database() as database',
+  duration: 2868,
+  rows: 1
+}
+✅ Database connection test successful
+   Database: emr
+   Server time: Thu Feb 19 2026 22:46:47 GMT+0530 (India Standard Time)
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 428,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 214,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 220,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 244,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 291,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 213,
+  rows: 1
+}
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 228,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 442,
+  rows: 3
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 540,
+  rows: 1
+}
+[REQUEST] GET /api/reports/summary
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 754,
+  rows: 1
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 420,
+  rows: 1
+}
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 440,
+  rows: 4
+}
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 1678,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 628,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 1684,
+  rows: 3
+}
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 268,
+  rows: 1
+}
+DEBUG: tenantId from query: d2b95ce3-5325-4bc9-b507-f95bf9c566f8 Type: string
+✅ Connected to PostgreSQL database
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 1847,
+  rows: 60
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 1861,
+  rows: 24
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 1890,
+  rows: 54
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 1940,
+  rows: 5
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 2130,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 2152,
+  rows: 36
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 454,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 2197,
+  rows: 9
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 482,
+  rows: 22
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 544,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 527,
+  rows: 72
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 228,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 233,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 221,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 246,
+  rows: 9
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 248,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 290,
+  rows: 3
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 298,
+  rows: 3
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 444,
+  rows: 36
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 467,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 474,
+  rows: 24
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 469,
+  rows: 1
+}
+DEBUG: tenantId from query: d2b95ce3-5325-4bc9-b507-f95bf9c566f8 Type: string
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 416,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 413,
+  rows: 4
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 752,
+  rows: 54
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 435,
+  rows: 22
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 930,
+  rows: 60
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 226,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 228,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 232,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 872,
+  rows: 72
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 230,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+DEBUG: tenantId from query: d2b95ce3-5325-4bc9-b507-f95bf9c566f8 Type: string
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 229,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 248,
+  rows: 9
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 267,
+  rows: 3
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 427,
+  rows: 3
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 441,
+  rows: 24
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 465,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 435,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 430,
+  rows: 1
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 637,
+  rows: 60
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 643,
+  rows: 54
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 470,
+  rows: 22
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 233,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 750,
+  rows: 36
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 228,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 671,
+  rows: 72
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 233,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 232,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 217,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 221,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 228,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 222,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 269,
+  rows: 3
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 289,
+  rows: 3
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 434,
+  rows: 24
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 466,
+  rows: 36
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 417,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 463,
+  rows: 1
+}
+DEBUG: tenantId from query: d2b95ce3-5325-4bc9-b507-f95bf9c566f8 Type: string
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 480,
+  rows: 60
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 487,
+  rows: 54
+}
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 496,
+  rows: 9
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 438,
+  rows: 4
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 216,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 431,
+  rows: 22
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 234,
+  rows: 4
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 216,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 1143,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 228,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 906,
+  rows: 72
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 225,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 214,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 228,
+  rows: 9
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 241,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 267,
+  rows: 3
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 273,
+  rows: 3
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 435,
+  rows: 54
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 437,
+  rows: 36
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 436,
+  rows: 1
+}
+DEBUG: tenantId from query: d2b95ce3-5325-4bc9-b507-f95bf9c566f8 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 447,
+  rows: 24
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 456,
+  rows: 60
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 465,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 412,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 412,
+  rows: 4
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 231,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 431,
+  rows: 22
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 227,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 215,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 752,
+  rows: 72
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 226,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 218,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 231,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 233,
+  rows: 9
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 267,
+  rows: 3
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 290,
+  rows: 3
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 431,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 439,
+  rows: 54
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 440,
+  rows: 1
+}
+DEBUG: tenantId from query: d2b95ce3-5325-4bc9-b507-f95bf9c566f8 Type: string
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 449,
+  rows: 60
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 451,
+  rows: 24
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 457,
+  rows: 36
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 403,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 397,
+  rows: 1
+}
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 430,
+  rows: 22
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 448,
+  rows: 72
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 234,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 233,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 233,
+  rows: 4
+}
+[REQUEST] GET /api/tenants
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 223,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 232,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 234,
+  rows: 9
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 281,
+  rows: 3
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 284,
+  rows: 3
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 442,
+  rows: 54
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 445,
+  rows: 36
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 454,
+  rows: 24
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 451,
+  rows: 1
+}
+DEBUG: tenantId from query: d2b95ce3-5325-4bc9-b507-f95bf9c566f8 Type: string
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 401,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 402,
+  rows: 4
+}
+[REQUEST] GET /api/tenants/d2b95ce3-5325-4bc9-b507-f95bf9c566f8/features
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 516,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 228,
+  rows: 1
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 447,
+  rows: 22
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 241,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 231,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 958,
+  rows: 60
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 423,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 213,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 227,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 868,
+  rows: 72
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 228,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 228,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 280,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 290,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 436,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 445,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 482,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 447,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 456,
+  rows: 4
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 670,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 682,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 741,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 747,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 229,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 858,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 225,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 943,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 536,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 863,
+  rows: 100
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 214,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 228,
+  rows: 1
+}
+[REQUEST] GET /api/reports/summary
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 215,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 243,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 248,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 413,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 416,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 473,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 482,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 489,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 472,
+  rows: 1
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 658,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 223,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 426,
+  rows: 29
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 224,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 1089,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 1943,
+  rows: 180
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 229,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 227,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 299,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 441,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 459,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 463,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 503,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 464,
+  rows: 4
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 656,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 586,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 676,
+  rows: 108
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 1143,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 272,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 453,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 956,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 1059,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 226,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 220,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 1262,
+  rows: 100
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 211,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 218,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 248,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 221,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 433,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 321,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 431,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 449,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 427,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 237,
+  rows: 4
+}
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 670,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 674,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 740,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 432,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 909,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 919,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 215,
+  rows: 1
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 223,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 1255,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 1102,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 896,
+  rows: 100
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 451,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 226,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 241,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 530,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 488,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 492,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 220,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 245,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 316,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 438,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 358,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 382,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 520,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 533,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 460,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 638,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 662,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 676,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 229,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 232,
+  rows: 1
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 431,
+  rows: 29
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 222,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 228,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 1069,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 404,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 849,
+  rows: 100
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 231,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 213,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 255,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 422,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 410,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 454,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 536,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 500,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 653,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 669,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 233,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 687,
+  rows: 151
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 640,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 233,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 230,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 1060,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 1081,
+  rows: 100
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 228,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 218,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 1297,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 221,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 281,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 294,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 418,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 383,
+  rows: 4
+}
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 467,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 427,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 666,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 682,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 212,
+  rows: 1
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 424,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 879,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 219,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 916,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 225,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 1113,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 215,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 226,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 225,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 745,
+  rows: 100
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 220,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 229,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 256,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 300,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 439,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 458,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 417,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 464,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 395,
+  rows: 4
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 895,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 1266,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 820,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 838,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 1318,
+  rows: 96
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 1395,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 552,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id IS NULL',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 355,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 284,
+  rows: 1
+}
+[REQUEST] GET /api/superadmin/overview
+[REQUEST] GET /api/users
+[REQUEST] GET /api/tenants
+[REQUEST] GET /api/admin/kill-switches
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 231,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 219,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 853,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 220,
+  rows: 1
+}
+DEBUG: tenantId from query: undefined Type: undefined
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 220,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants ORDER BY name',
+  duration: 214,
+  rows: 9
+}
+Executed query {
+  text: 'SELECT feature_flag, enabled FROM emr.global_kill_switches WHERE enabled = true',
+  duration: 216,
+  rows: 0
+}
+[REQUEST] GET /api/admin/kill-switches
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users ORDER BY name',
+  duration: 436,
+  rows: 69
+}
+[REQUEST] GET /api/users
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 220,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 231,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 215,
+  rows: 1
+}
+DEBUG: tenantId from query: undefined Type: undefined
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users ORDER BY name',
+  duration: 727,
+  rows: 69
+}
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT\n' +
+    '        (SELECT COUNT(*) FROM emr.users WHERE tenant_id = $1) as users,\n' +
+    '        (SELECT COUNT(*) FROM emr.patients WHERE tenant_id = $1) as patients,\n' +
+    '        (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1) as appointments,\n' +
+    '        (SELECT SUM(paid) FROM emr.invoices WHERE tenant_id = $1) as revenue\n' +
+    '      ',
+  duration: 220,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.tenants) as tenants,\n' +
+    '      (SELECT COUNT(*) FROM emr.users) as users,\n' +
+    '      (SELECT COUNT(*) FROM emr.patients) as patients,\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments) as appointments\n' +
+    '    ',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT\n' +
+    "      to_char(created_at, 'Mon') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    "    WHERE status = 'paid' AND created_at > current_date - interval '6 months'\n" +
+    "    GROUP BY to_char(created_at, 'Mon'), date_trunc('month', created_at)\n" +
+    "    ORDER BY date_trunc('month', created_at)\n" +
+    '  ',
+  duration: 215,
+  rows: 1
+}
+[REQUEST] GET /api/tenants
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 2159,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 233,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 212,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 701,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 935,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 1164,
+  rows: 4
+}
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 1901,
+  rows: 1
+}
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 1974,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 2127,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 2221,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 308,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 2432,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 2633,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 232,
+  rows: 1
+}
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 3173,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 3153,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 3383,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 328,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 334,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 918,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 654,
+  rows: 29
+}
+[REQUEST] GET /api/health
+[REQUEST] GET /api/tenants
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 1885,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 214,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 211,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 218,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 220,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 642,
+  rows: 30
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 885,
+  rows: 4
+}
+✅ Connected to PostgreSQL database
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 1100,
+  rows: 4
+}
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 1455,
+  rows: 1
+}
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 466,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 204,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 1531,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 1553,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 217,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 219,
+  rows: 4
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 1832,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 420,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 1866,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 1895,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 2005,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 2061,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 215,
+  rows: 1
+}
+✅ Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 399,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 291,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 3098,
+  rows: 108
+}
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 218,
+  rows: 1
+}
+[REQUEST] GET /api/reports/summary
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 212,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 627,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 480,
+  rows: 4
+}
+[REQUEST] GET /api/users
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 488,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 496,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 450,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 516,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 519,
+  rows: 30
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 631,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 688,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 720,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 700,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 215,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 678,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 228,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 218,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] POST /api/login
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 445,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 428,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 219,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 221,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 221,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 221,
+  rows: 1
+}
+[REQUEST] GET /api/users
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 230,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 232,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 234,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 236,
+  rows: 5
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 439,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 446,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 448,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 449,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 257,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 464,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 492,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 662,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 219,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 709,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 505,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 439,
+  rows: 29
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 221,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 913,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 213,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 505,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 215,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 576,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 220,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 220,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 286,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 223,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 272,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 358,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 415,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 436,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 389,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 390,
+  rows: 4
+}
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 411,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 489,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 649,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 227,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 696,
+  rows: 151
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 223,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 434,
+  rows: 29
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 934,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 244,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 216,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 235,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 229,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 899,
+  rows: 100
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 221,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 218,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 230,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 205,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 288,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 314,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 405,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 441,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 377,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 426,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 527,
+  rows: 100
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 645,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 221,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 672,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 696,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 472,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 275,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 946,
+  rows: 180
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 285,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 211,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 204,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 775,
+  rows: 100
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 232,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 219,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 221,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 285,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 203,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 218,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 223,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 397,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 406,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 404,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 338,
+  rows: 4
+}
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 464,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 473,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 475,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 665,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 220,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 226,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 702,
+  rows: 108
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 220,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 219,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 214,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 953,
+  rows: 180
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 805,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 215,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 217,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 213,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 212,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 854,
+  rows: 100
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 222,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 217,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 221,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 264,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 211,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 228,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 378,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 423,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 387,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 443,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 358,
+  rows: 4
+}
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 480,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 612,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 216,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 220,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 702,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 741,
+  rows: 108
+}
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 230,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 222,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 732,
+  rows: 29
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 958,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 227,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+[REQUEST] GET /api/tenants
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 221,
+  rows: 1
+}
+[REQUEST] POST /api/login
+Executed query {
+  text: 'SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name',
+  duration: 220,
+  rows: 9
+}
+DEBUG: Second tenant ID type: string
+DEBUG: Second tenant ID value: d2b95ce3-5325-4bc9-b507-f95bf9c566f8
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 219,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenants WHERE code = $1',
+  duration: 273,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 659,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.users WHERE LOWER(email) = LOWER($1) AND tenant_id = $2',
+  duration: 278,
+  rows: 1
+}
+Executed query {
+  text: 'UPDATE emr.users SET last_login = NOW() WHERE id = $1',
+  duration: 299,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    INSERT INTO emr.audit_logs (tenant_id, user_id, user_name, action, entity_name, entity_id, details, ip_address, user_agent)\n' +
+    '    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)\n' +
+    '    RETURNING *\n' +
+    '  ',
+  duration: 299,
+  rows: 1
+}
+[REQUEST] GET /api/bootstrap
+[REQUEST] GET /api/users
+[REQUEST] GET /api/reports/summary
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 218,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 299,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 222,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT\n' +
+    '      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND DATE(scheduled_start) = $2) as daily_appointments,\n' +
+    "      (SELECT COUNT(*) FROM emr.appointments WHERE tenant_id = $1 AND status IN ('requested', 'scheduled', 'checked_in')) as open_appointments,\n" +
+    "      (SELECT COUNT(*) FROM emr.clinical_records WHERE tenant_id = $1 AND section = 'testReports') as active_lab_tests,\n" +
+    "      (SELECT COUNT(*) FROM emr.invoices WHERE tenant_id = $1 AND status != 'paid') as pending_invoices\n" +
+    '    ',
+  duration: 224,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 220,
+  rows: 4
+}
+[REQUEST] GET /api/tenants/90a13c9a-4744-4db9-8105-1537d8e3fe50/features
+Executed query {
+  text: 'SELECT * FROM emr.inventory_items WHERE tenant_id = $1 ORDER BY name',
+  duration: 219,
+  rows: 5
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE id = $1',
+  duration: 293,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.insurance_providers WHERE tenant_id = $1 ORDER BY name',
+  duration: 393,
+  rows: 4
+}
+Executed query {
+  text: '\n' +
+    "    SELECT c.*, p.first_name || ' ' || p.last_name as patient_name, ip.name as provider_name\n" +
+    '    FROM emr.claims c\n' +
+    '    JOIN emr.patients p ON c.patient_id = p.id\n' +
+    '    JOIN emr.insurance_providers ip ON c.provider_id = ip.id\n' +
+    '    WHERE c.tenant_id = $1\n' +
+    '   ORDER BY c.created_at DESC',
+  duration: 400,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.walkins WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 476,
+  rows: 96
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(scheduled_start, 'YYYY-MM') as month,\n" +
+    '      COUNT(*) as count\n' +
+    '    FROM emr.appointments\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(scheduled_start, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 407,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 426,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT * FROM emr.employees WHERE tenant_id = $1 ORDER BY name',
+  duration: 654,
+  rows: 100
+}
+Executed query {
+  text: 'SELECT * FROM emr.invoices WHERE tenant_id = $1 ORDER BY created_at DESC',
+  duration: 663,
+  rows: 151
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 524,
+  rows: 29
+}
+[REQUEST] GET /api/users
+Executed query {
+  text: 'SELECT * FROM emr.appointments WHERE tenant_id = $1 ORDER BY scheduled_start DESC',
+  duration: 677,
+  rows: 108
+}
+Executed query {
+  text: 'SELECT * FROM emr.tenant_feature_status WHERE tenant_id = $1',
+  duration: 219,
+  rows: 4
+}
+Executed query {
+  text: 'SELECT * FROM emr.employee_leaves WHERE tenant_id = $1 ORDER BY from_date DESC',
+  duration: 848,
+  rows: 30
+}
+Executed query {
+  text: 'SELECT \n' +
+    "      TO_CHAR(created_at, 'YYYY-MM') as month,\n" +
+    '      SUM(paid) as amount\n' +
+    '    FROM emr.invoices\n' +
+    '    WHERE tenant_id = $1\n' +
+    "    GROUP BY TO_CHAR(created_at, 'YYYY-MM')\n" +
+    '    ORDER BY month',
+  duration: 283,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 214,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT e.*, p.first_name, p.last_name, u.name as provider_name\n' +
+    '    FROM emr.encounters e\n' +
+    '    LEFT JOIN emr.patients p ON e.patient_id = p.id\n' +
+    '    LEFT JOIN emr.users u ON e.provider_id = u.id\n' +
+    '    WHERE e.tenant_id = $1\n' +
+    '    ORDER BY e.created_at DESC\n' +
+    '  ',
+  duration: 908,
+  rows: 180
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active FROM emr.users WHERE id = $1',
+  duration: 217,
+  rows: 1
+}
+DEBUG: tenantId from query: 90a13c9a-4744-4db9-8105-1537d8e3fe50 Type: string
+Executed query {
+  text: 'SELECT SUM(tax) as total_tax FROM emr.invoices WHERE tenant_id = $1',
+  duration: 298,
+  rows: 1
+}
+Executed query {
+  text: 'SELECT id, tenant_id, email, name, role, patient_id, is_active, created_at FROM emr.users WHERE tenant_id = $1 ORDER BY name',
+  duration: 221,
+  rows: 29
+}
+Executed query {
+  text: 'SELECT \n' +
+    '      COUNT(*) as employees,\n' +
+    '      SUM(salary) as salary_outflow\n' +
+    '    FROM emr.employees\n' +
+    '    WHERE tenant_id = $1',
+  duration: 298,
+  rows: 1
+}
+Executed query {
+  text: '\n' +
+    '    SELECT p.*, \n' +
+    '           json_agg(DISTINCT cr.*) FILTER (WHERE cr.id IS NOT NULL) as clinical_records\n' +
+    '    FROM emr.patients p\n' +
+    '    LEFT JOIN emr.clinical_records cr ON p.id = cr.patient_id\n' +
+    '    WHERE p.tenant_id = $1\n' +
+    '    GROUP BY p.id\n' +
+    '    ORDER BY p.created_at DESC\n' +
+    '    LIMIT 100\n' +
+    '  ',
+  duration: 903,
+  rows: 100
+}
