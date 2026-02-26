@@ -44,7 +44,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
 
   const handleDeleteRole = async (roleId) => {
     if (!confirm('Are you sure you want to delete this role?')) return;
-    
+
     try {
       await axios.delete(`/api/roles/${roleId}`);
       fetchRoles();
@@ -83,16 +83,16 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                   </defs>
                 </svg>
               </div>
-              <img 
-                src="/Medflow-logo.jpg" 
-                alt="MedFlow EMR" 
+              <img
+                src="/medflow-header-logo.svg"
+                alt="MedFlow EMR"
                 className="role-logo-img"
                 onError={(e) => {
                   e.target.style.display = 'none';
                   e.target.nextSibling.style.display = 'block';
                 }}
               />
-              <div className="role-logo-fallback" style={{display: 'none'}}>
+              <div className="role-logo-fallback" style={{ display: 'none' }}>
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="24" height="24" rx="4" fill="url(#gradient)" />
                   <path d="M8 12h8M12 8v8" stroke="white" strokeWidth="2" strokeLinecap="round" />
@@ -112,7 +112,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
             </div>
           </div>
           <div className="action-buttons">
-            <button 
+            <button
               className="btn-primary"
               onClick={() => {
                 setEditingRole(null);
@@ -121,7 +121,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
             >
               ➕ Add Role
             </button>
-            <button 
+            <button
               className="btn-secondary"
               onClick={fetchRoles}
             >
@@ -136,7 +136,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
           <div className="modal">
             <div className="modal-header">
               <h2>{editingRole ? 'Edit Role' : 'Create New Role'}</h2>
-              <button 
+              <button
                 className="close-btn"
                 onClick={() => setShowCreateModal(false)}
               >
@@ -157,17 +157,17 @@ export default function RoleManagementPage({ tenant, activeUser }) {
               }}>
                 <div className="form-group">
                   <label>Role Name *</label>
-                  <input 
-                    type="text" 
-                    name="name" 
+                  <input
+                    type="text"
+                    name="name"
                     defaultValue={editingRole?.name || ''}
-                    required 
+                    required
                   />
                 </div>
                 <div className="form-group">
                   <label>Description</label>
-                  <textarea 
-                    name="description" 
+                  <textarea
+                    name="description"
                     rows="3"
                     defaultValue={editingRole?.description || ''}
                   />
@@ -195,11 +195,11 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                 </div>
                 <div className="form-group">
                   <label>
-                    <input 
-                      type="checkbox" 
-                      name="is_active" 
+                    <input
+                      type="checkbox"
+                      name="is_active"
                       defaultChecked={editingRole?.is_active !== false}
-                    /> 
+                    />
                     Active Role
                   </label>
                 </div>
@@ -222,7 +222,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
           <div className="modal">
             <div className="modal-header">
               <h2>{selectedRole.name}</h2>
-              <button 
+              <button
                 className="close-btn"
                 onClick={() => setSelectedRole(null)}
               >
@@ -233,7 +233,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
               <div className="role-details">
                 <h3>Role Information</h3>
                 <p>{selectedRole.description}</p>
-                
+
                 <h4>Permissions</h4>
                 <div className="permissions-list">
                   {selectedRole.permissions.map(permission => (
@@ -243,15 +243,15 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                     </div>
                   ))}
                 </div>
-                
+
                 <h4>Status</h4>
                 <div className="status-badge">
                   {selectedRole.is_active ? '🟢 Active' : '⚫ Inactive'}
                 </div>
               </div>
-              
+
               <div className="role-actions">
-                <button 
+                <button
                   className="btn-edit"
                   onClick={() => {
                     setEditingRole(selectedRole);
@@ -261,7 +261,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                 >
                   ✏️ Edit Role
                 </button>
-                <button 
+                <button
                   className="btn-delete"
                   onClick={() => {
                     handleDeleteRole(selectedRole.id);
@@ -270,7 +270,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                 >
                   🗑️ Delete Role
                 </button>
-                <button 
+                <button
                   className="btn-secondary"
                   onClick={() => setSelectedRole(null)}
                 >
@@ -311,11 +311,11 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                   {role.name}
                 </div>
               </div>
-              
+
               <div className="role-description">
                 {role.description}
               </div>
-              
+
               <div className="role-features">
                 {role.permissions.map(permission => (
                   <span key={permission} className="feature-tag">
@@ -323,7 +323,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                   </span>
                 ))}
               </div>
-              
+
               <div className="role-stats">
                 <div className="stat-item">
                   <div className="stat-value">{role.user_count || 0}</div>
@@ -334,9 +334,9 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                   <div className="stat-label">Permissions</div>
                 </div>
               </div>
-              
+
               <div className="role-actions">
-                <button 
+                <button
                   className="btn-edit"
                   onClick={() => {
                     setEditingRole(role);
@@ -345,7 +345,7 @@ export default function RoleManagementPage({ tenant, activeUser }) {
                 >
                   ✏️ Edit
                 </button>
-                <button 
+                <button
                   className="btn-delete"
                   onClick={() => handleDeleteRole(role.id)}
                 >

@@ -65,7 +65,7 @@ export default function DashboardPage({ metrics, activeUser, setView }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, minmax(0, 1fr))', gap: '1.5rem' }}>
+      <div className="grid grid-cols-12 gap-6" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, minmax(0, 1fr))', gap: '0.85rem' }}>
 
         {/* LEFT COLUMN (STATS & CHARTS) */}
         <div style={{ gridColumn: 'span 8' }}>

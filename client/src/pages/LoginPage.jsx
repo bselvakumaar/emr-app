@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function LoginPage({ onLogin, tenants }) { // keys: tenants passed from App
+export default function LoginPage({ onLogin, tenants }) {
   const [credentials, setCredentials] = useState({
     tenantId: '',
     email: '',
@@ -37,12 +37,8 @@ export default function LoginPage({ onLogin, tenants }) { // keys: tenants passe
     setError('');
 
     try {
-      // Use api.login to ensure token is stored correctly in localStorage
-      // and consistent with api.js internal logic
       const { api } = await import('../api.js');
       const data = await api.login(credentials.tenantId, credentials.email, credentials.password);
-
-      // onLogin will handle state update in App.jsx
       onLogin(data);
     } catch (err) {
       console.error('Login error:', err);
@@ -80,7 +76,7 @@ export default function LoginPage({ onLogin, tenants }) { // keys: tenants passe
           <div className="branding-glass">
             <div className="logo-box">
               <img
-                src="/Medflow-logo.jpg"
+                src="/medflow-logo-main.svg"
                 alt="MedFlow EMR"
                 className="medflow-logo"
                 onError={(e) => {
@@ -97,7 +93,8 @@ export default function LoginPage({ onLogin, tenants }) { // keys: tenants passe
 
             <div className="branding-text">
               <h1 className="hero-title">MedFlow <span>EMR</span></h1>
-              <p className="hero-subtitle">The Intelligence Engine for Modern Healthcare</p>
+              <p className="hero-tagline">Streamlining Patient Care.</p>
+              <p className="hero-subtitle">Efficient, Insightful, Connected.</p>
 
               <div className="trust-badges">
                 <div className="badge-item">
@@ -108,6 +105,10 @@ export default function LoginPage({ onLogin, tenants }) { // keys: tenants passe
                   <span className="badge-icon">⚡</span>
                   <span>Real-time Analytics</span>
                 </div>
+                <div className="badge-item">
+                  <span className="badge-icon">🏥</span>
+                  <span>Multi-Tenant</span>
+                </div>
               </div>
             </div>
           </div>
@@ -117,8 +118,14 @@ export default function LoginPage({ onLogin, tenants }) { // keys: tenants passe
         <section className="login-form-area">
           <div className="auth-card">
             <header className="auth-header">
+              <img
+                src="/medflow-header-logo.svg"
+                alt="MedFlow EMR"
+                className="auth-header-logo"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
               <h2>Secure Access</h2>
-              <p>Welcome to the MedFlow Platform</p>
+              <p>Sign in to the MedFlow Platform</p>
             </header>
 
             <form onSubmit={handleSubmit} className="auth-form">
