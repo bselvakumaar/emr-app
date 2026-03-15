@@ -99,6 +99,19 @@ export default function App() {
   }, [allowedViews, view]);
 
   useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      document.querySelector('.view-container')?.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [view]);
+
+  useEffect(() => {
     if (!tenant) return;
     // Tenant theme colors are available as tenant.theme.primary / accent
     // but we use the design-system palette instead
@@ -314,7 +327,7 @@ export default function App() {
           />
         )}
 
-        {view === 'dashboard' && <DashboardPage metrics={metrics} activeUser={activeUser} setView={setView} />}
+        {view === 'dashboard' && <DashboardPage metrics={metrics} activeUser={activeUser} setView={setView} tenants={tenants} />}
 
         {view === 'patients' && (
           <PatientsPage
@@ -419,7 +432,7 @@ export default function App() {
             encounters={encounters}
             onCreateEncounter={async (data) => {
               try {
-                // 1. Create the main encounter record
+                // 1. Create main encounter record
                 const encounterRes = await api.addEncounter({
                   tenantId: session.tenantId,
                   userId: activeUser.id,
@@ -594,7 +607,7 @@ export default function App() {
           />
         )}
 
-        {view === 'lab' && <LabPage tenant={tenant} />}
+        {view === 'lab' && <LabPage tenant={tenant} activeUser={activeUser} />}
 
         {view === 'support' && <SupportPage tenant={tenant} activeUser={activeUser} />}
 

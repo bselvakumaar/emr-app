@@ -1,200 +1,473 @@
-import { useState, useEffect } from "react";
+import { useMemo, useRef, useState } from "react";
 import { moduleMeta } from "../config/modules.js";
 import { helpContent } from "../config/helpContent.js";
 import { ModuleGate, useFeatureAccess } from "./FeatureGate.jsx";
-import { applyMedflowTheme, THEMES } from "../theme/medflowTheme.js";
+import {
+  Activity,
+  Bell,
+  Calendar,
+  ChevronRight,
+  Clock3,
+  FileText,
+  FlaskConical,
+  Grid2X2,
+  HelpCircle,
+  History,
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  MoreHorizontal,
+  Package,
+  Pill,
+  Receipt,
+  Search,
+  Settings,
+  Settings2,
+  ShieldCheck,
+  Stethoscope,
+  User,
+  UserCircle,
+  Users,
+  X,
+  Bed
+} from "lucide-react";
+import { ActionMenu, NotificationSystem, SmartSearch, StatusIndicator } from "./UXEnhanced.jsx";
 
 const navIcons = {
-  superadmin: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>,
-  dashboard: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>,
-  patients: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>,
-  appointments: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>,
-  emr: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>,
-  inpatient: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 13h20" /><path d="M22 13v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7" /><path d="M12 2a5 5 0 0 1 5 5v6H7V7a5 5 0 0 1 5-5z" /></svg>,
-  pharmacy: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg>,
-  billing: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /><path d="M16 14h2M8 14h2" /></svg>,
-  insurance: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>,
-  inventory: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /></svg>,
-  employees: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
-  accounts: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="20" height="12" rx="2" /><circle cx="12" cy="12" r="2" /><path d="M6 12h.01M18 12h.01" /></svg>,
-  reports: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>,
-  admin: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>,
-  lab: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" /><path d="M8.5 2h7" /><path d="M7 16h10" /></svg>,
+  superadmin: <ShieldCheck className="w-5 h-5" />,
+  dashboard: <LayoutDashboard className="w-5 h-5" />,
+  users: <UserCircle className="w-5 h-5" />,
+  patients: <Users className="w-5 h-5" />,
+  appointments: <Calendar className="w-5 h-5" />,
+  emr: <History className="w-5 h-5" />,
+  inpatient: <Bed className="w-5 h-5" />,
+  pharmacy: <Pill className="w-5 h-5" />,
+  billing: <Receipt className="w-5 h-5" />,
+  insurance: <ShieldCheck className="w-5 h-5" />,
+  inventory: <Package className="w-5 h-5" />,
+  employees: <UserCircle className="w-5 h-5" />,
+  accounts: <FileText className="w-5 h-5" />,
+  reports: <Activity className="w-5 h-5" />,
+  admin: <Settings className="w-5 h-5" />,
+  lab: <FlaskConical className="w-5 h-5" />
 };
+
+const moduleDescriptions = {
+  dashboard: "Operational overview and care activity",
+  users: "Clinical workspace",
+  patients: "Registration, search, demographics, and patient context",
+  appointments: "Scheduling, walk-ins, and provider calendars",
+  emr: "Clinical documentation, history, and treatment notes",
+  inpatient: "Bed management and admitted patient flow",
+  pharmacy: "Medication orders, dispensing, and stock visibility",
+  billing: "Invoices, collections, and payment reconciliation",
+  insurance: "Payers, claims, and coverage workflows",
+  inventory: "Clinical supplies, reorder levels, and availability",
+  employees: "Staff records, shifts, leave, and attendance",
+  accounts: "Financial documentation and ledger review",
+  reports: "Utilization, revenue, and performance insights",
+  admin: "Facility settings, users, and access controls",
+  lab: "Orders, samples, and result tracking",
+  superadmin: "Platform governance and multi-tenant administration",
+  support: "Operational support and issue management"
+};
+
+function formatRole(role) {
+  if (!role) return "Clinical User";
+  return role.replace(/_/g, " ");
+}
 
 export default function AppLayout({ tenant, activeUser, allowedViews, view, setView, onLogout, children, error }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [showHelp, setShowHelp] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    const stored = localStorage.getItem('medflow-theme');
-    return Object.values(THEMES).includes(stored) ? stored : THEMES.HEALING_TEAL;
-  });
-
+  const [activeDialog, setActiveDialog] = useState(null);
   const { getAccessibleModules } = useFeatureAccess(tenant?.id);
   const accessibleModules = getAccessibleModules(allowedViews);
+  const searchInputRef = useRef(null);
 
-  useEffect(() => {
-    applyMedflowTheme(theme);
-    localStorage.setItem('medflow-theme', theme);
-  }, [theme]);
+  const facilityName = tenant?.name || "MedFlow Care Platform";
+  const currentModule = moduleMeta[view]?.title || "Clinical Workspace";
+  const today = useMemo(
+    () =>
+      new Date().toLocaleDateString("en-IN", {
+        weekday: "short",
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      }),
+    []
+  );
 
-  return (
-    <div className="app-root transition-colors duration-500" style={{ backgroundColor: 'var(--bg-app)', minHeight: '100vh', display: 'flex' }}>
-      {/* MOBILE BACKDROP & DRAWER */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={() => setMobileOpen(false)} />
-          <nav className="relative w-72 max-w-[85vw] h-full flex flex-col bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-r border-white/20 dark:border-slate-800 shadow-2xl overflow-hidden shadow-teal-900/20">
-            <div className="p-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/50">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 shadow-lg flex items-center justify-center border border-white/20">
-                  <img src="/medflow-icon-white.svg" alt="MedFlow" width="20" height="20" />
-                </div>
-                <span className="font-extrabold text-lg text-slate-800 dark:text-white tracking-tight">{tenant?.name || "MedFlow EMR"}</span>
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-6">
+        <div className="premium-card max-w-lg w-full p-8">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-[var(--danger-soft)] text-[var(--danger)] flex items-center justify-center">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs font-extrabold uppercase tracking-[0.24em] text-[var(--danger)]">Application Notice</p>
+                <h2 className="text-2xl font-extrabold text-[var(--text-strong)]">Unable to load the workspace shell</h2>
               </div>
-              <button onClick={() => setMobileOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white">✕</button>
+              <p className="text-sm text-[var(--text-muted)]">{error}</p>
+              <button onClick={() => window.location.reload()} className="btn btn-primary">
+                Refresh workspace
+              </button>
             </div>
-            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-1">
-              {accessibleModules.map((module) => {
-                if (!moduleMeta[module]) return null;
-                return (
-                  <ModuleGate key={module} module={module} tenantId={tenant?.id}>
-                    <button
-                      className={`flex items-center gap-4 w-full p-3.5 rounded-2xl font-semibold text-sm transition-all ${view === module ? 'bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400 Pshadow-sm ring-1 ring-teal-500/20' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50'}`}
-                      onClick={() => {
-                        setView(module);
-                        setMobileOpen(false);
-                      }}
-                    >
-                      <span className={`w-5 h-5 ${view === module ? 'text-teal-600 dark:text-teal-400' : 'opacity-70'}`}>{navIcons[module]}</span>
-                      {moduleMeta[module].title}
-                    </button>
-                  </ModuleGate>
-                );
-              })}
-            </div>
-          </nav>
+          </div>
         </div>
-      )}
+      </div>
+    );
+  }
 
-      {/* DESKTOP SIDEBAR */}
-      <aside className="premium-sidebar">
-        <div className="sidebar-header border-b border-white/5 bg-black/10">
-          <div className="brand-logo flex items-center gap-3 text-white">
-            <div className="brand-icon w-10 h-10 rounded-2xl bg-gradient-to-br from-teal-400 to-teal-700 shadow-lg shadow-teal-900/30 border border-white/20 flex items-center justify-center">
-              <img src="/medflow-icon-white.svg" alt="MedFlow" width="22" height="22" />
+  const handleSearchResult = (result) => {
+    const targetViewByType = {
+      patient: "patients",
+      appointment: "appointments",
+      medication: allowedViews.includes("pharmacy") ? "pharmacy" : "emr"
+    };
+
+    const targetView = targetViewByType[result?.type];
+    if (targetView && allowedViews.includes(targetView)) {
+      setView(targetView);
+    }
+  };
+
+  const focusGlobalSearch = () => {
+    searchInputRef.current?.focus();
+  };
+
+  const openSettings = () => {
+    const target = allowedViews.includes("admin")
+      ? "admin"
+      : allowedViews.includes("employees")
+        ? "employees"
+        : allowedViews.includes("dashboard")
+          ? "dashboard"
+          : allowedViews[0];
+
+    if (target) {
+      setView(target);
+    }
+  };
+
+  const roleHelp = helpContent[activeUser?.role] || helpContent.default;
+
+  const navContent = (
+    <>
+      <div className="sidebar-header">
+        <div className="flex items-start gap-3">
+          <div className="w-12 h-12 rounded-2xl bg-white/12 border border-white/12 flex items-center justify-center shadow-lg">
+            <Stethoscope className="w-6 h-6 text-cyan-100" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-cyan-100/70 font-extrabold">Healthcare EMR</p>
+            <h1 className="text-lg font-extrabold text-white leading-tight truncate">{facilityName}</h1>
+            <p className="text-xs text-cyan-50/68 mt-1">Clinical operations, patient records, and service coordination</p>
+          </div>
+        </div>
+      </div>
+
+      <nav className="sidebar-nav">
+        <div className="mb-4 px-2">
+          <div className="rounded-2xl border border-white/10 bg-white/6 p-4">
+            <div className="flex items-center gap-3 text-white">
+              <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center">
+                <Grid2X2 className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.24em] text-cyan-100/60 font-bold">Current module</p>
+                <p className="text-sm font-bold">{currentModule}</p>
+              </div>
             </div>
-            <span className="font-extrabold tracking-tight text-[1.15rem] leading-none text-white drop-shadow-sm">{tenant?.name || "MedFlow"}</span>
+            <p className="mt-3 text-xs leading-5 text-cyan-50/72">
+              {moduleDescriptions[view] || "Patient-safe workflows organized for fast clinical access."}
+            </p>
           </div>
         </div>
 
-        <nav className="sidebar-nav">
+        <div className="space-y-1">
           {accessibleModules.map((module) => {
-            if (!moduleMeta[module]) return null;
+            const isActive = view === module;
+
             return (
               <ModuleGate key={module} module={module} tenantId={tenant?.id}>
                 <button
-                  className={`nav-item ${view === module ? 'active' : ''}`}
+                  className={`nav-item ${isActive ? "active" : ""}`}
                   onClick={() => {
                     setView(module);
                     setMobileOpen(false);
                   }}
                 >
-                  <span className="nav-icon">{navIcons[module]}</span>
-                  {moduleMeta[module].title}
+                  <span className="shrink-0">{navIcons[module]}</span>
+                  <span className="flex-1 text-left min-w-0">
+                    <span className="block font-semibold truncate">{moduleMeta[module]?.title || module}</span>
+                    <span className="block text-[11px] opacity-75 truncate">{moduleDescriptions[module] || "Clinical workspace"}</span>
+                  </span>
+                  <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${isActive ? "translate-x-0.5" : ""}`} />
                 </button>
               </ModuleGate>
             );
           })}
-        </nav>
+        </div>
+      </nav>
 
-        <div className="sidebar-footer">
-          <div className="user-section">
-            <div className="user-avatar">{activeUser?.name?.[0] || "U"}</div>
-            <div className="overflow-hidden">
-              <div className="text-sm font-bold truncate text-[var(--text-main)]">{activeUser?.name}</div>
-              <div className="text-xs text-muted truncate">{activeUser?.role}</div>
+      <div className="p-4 border-t border-white/10">
+        <div className="rounded-[22px] border border-white/10 bg-white/6 p-4">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-white/14 flex items-center justify-center text-white font-extrabold shrink-0">
+              {activeUser?.name?.[0]?.toUpperCase() || "U"}
             </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-sm font-bold text-white truncate">{activeUser?.name || "Clinical User"}</div>
+              <div className="text-xs text-cyan-100/68 truncate capitalize">{formatRole(activeUser?.role)}</div>
+            </div>
+            <ActionMenu
+              className="shrink-0"
+              trigger={
+                <div className="w-9 h-9 rounded-xl border border-white/10 bg-white/8 flex items-center justify-center text-white/90">
+                  <MoreHorizontal className="w-4 h-4" />
+                </div>
+              }
+              actions={[
+                { icon: User, label: "Profile", onClick: () => setActiveDialog("profile") },
+                { icon: Settings2, label: "Settings", onClick: openSettings },
+                { icon: Search, label: "Global Search", onClick: focusGlobalSearch },
+                { icon: HelpCircle, label: "Help", onClick: () => setActiveDialog("help") },
+                { icon: LogOut, label: "Sign Out", onClick: onLogout }
+              ]}
+            />
           </div>
-          <button onClick={onLogout} className="logout-btn sidebar-signout">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
-            Sign Out
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            <button
+              onClick={() => setActiveDialog("profile")}
+              className="flex items-center justify-center gap-1 rounded-xl border border-white/10 bg-white/8 px-1.5 py-1.5 text-[9px] font-medium text-white/75 hover:bg-white/12 transition-colors"
+            >
+              <User className="w-2.5 h-2.5" />
+              Profile
+            </button>
+            <button
+              onClick={openSettings}
+              className="flex items-center justify-center gap-1 rounded-xl border border-white/10 bg-white/8 px-1.5 py-1.5 text-[9px] font-medium text-white/75 hover:bg-white/12 transition-colors"
+            >
+              <Settings2 className="w-2.5 h-2.5" />
+              Settings
+            </button>
+            <button
+              onClick={() => setActiveDialog("help")}
+              className="flex items-center justify-center gap-1 rounded-xl border border-white/10 bg-white/8 px-1.5 py-1.5 text-[9px] font-medium text-white/75 hover:bg-white/12 transition-colors"
+            >
+              <HelpCircle className="w-2.5 h-2.5" />
+              Help
+            </button>
+          </div>
+          <button onClick={onLogout} className="btn mt-4 w-full !bg-white/10 !text-white !border-white/10 hover:!bg-white/16">
+            <LogOut className="w-4 h-4" />
+            Sign out
           </button>
         </div>
-      </aside>
+      </div>
+    </>
+  );
 
-          {/* MAIN CONTENT */}
-      <div className="main-content" style={{ backgroundColor: 'var(--bg-app)' }}>
-        <header className="premium-header backdrop-blur-md sticky top-0 z-40 border-b border-[rgba(255,255,255,0.1)] shadow-sm"
-                style={{ backgroundColor: `rgba(var(--bg-header-rgb, 15, 23, 42), 0.85)` }}>
-          <div className="header-shell h-16 px-6 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <button className="lg:hidden p-2 -ml-2 premium-header-icon-btn rounded-lg" onClick={() => setMobileOpen(true)}>
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+  return (
+    <div className="app-root">
+      {mobileOpen && (
+        <div className="fixed inset-0 z-[100] bg-slate-950/45 backdrop-blur-sm lg:hidden">
+          <div className="absolute inset-0" onClick={() => setMobileOpen(false)} />
+          <div className="relative w-[min(86vw,312px)] h-full premium-sidebar open">
+            <div className="absolute right-3 top-3 z-10">
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="w-10 h-10 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-white"
+              >
+                <X className="w-4 h-4" />
               </button>
-              <div className="header-title">
-                <h1 className="text-xl premium-header-title">{moduleMeta[view]?.title || 'Dashboard'}</h1>
+            </div>
+            {navContent}
+          </div>
+        </div>
+      )}
+
+      <aside className="premium-sidebar hidden lg:flex">{navContent}</aside>
+
+      <div className="main-content">
+        <header className="premium-header">
+          <div className="flex items-center justify-between gap-4 w-full">
+            <div className="flex items-center gap-4 min-w-0">
+              <button
+                className="lg:hidden w-11 h-11 rounded-2xl border border-[var(--border)] bg-white/80 text-[var(--text-main)] flex items-center justify-center"
+                onClick={() => setMobileOpen(true)}
+              >
+                <Menu className="w-5 h-5" />
+              </button>
+
+              <div className="min-w-0">
+                <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--text-soft)] font-extrabold">Clinical Workspace</p>
+                <h2 className="text-2xl font-extrabold text-[var(--text-strong)] truncate">{currentModule}</h2>
+                <p className="text-sm text-[var(--text-muted)] truncate">
+                  {moduleDescriptions[view] || "Efficient, patient-safe workflows for the care team."}
+                </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              {/* THEME SWITCHER - Refined grouped buttons */}
-              <div className="flex items-center bg-white/5 p-1 rounded-lg border border-white/10">
-                <button 
-                  onClick={() => setTheme(THEMES.HEALING_TEAL)} 
-                  className={`w-8 h-8 flex items-center justify-center rounded-md transition-all ${theme === THEMES.HEALING_TEAL ? 'theme-btn theme-teal' : 'text-white/60 hover:text-white/90'}`}
-                  title="Healing Teal"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 12h6l3-6 3 12 3-6h3" /></svg>
-                </button>
-                <button 
-                  onClick={() => setTheme(THEMES.TRUST_BLUE)} 
-                  className={`w-8 h-8 flex items-center justify-center rounded-md transition-all ${theme === THEMES.TRUST_BLUE ? 'theme-btn theme-blue' : 'text-white/60 hover:text-white/90'}`}
-                  title="Trust Blue"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 3l8 4v6c0 4.4-3.2 7.8-8 9-4.8-1.2-8-4.6-8-9V7l8-4z" /></svg>
-                </button>
-                <button 
-                  onClick={() => setTheme(THEMES.MEDICAL_SLATE)} 
-                  className={`w-8 h-8 flex items-center justify-center rounded-md transition-all ${theme === THEMES.MEDICAL_SLATE ? 'theme-btn theme-slate' : 'text-white/60 hover:text-white/90'}`}
-                  title="Medical Slate"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 7h16M4 12h16M4 17h16" /></svg>
-                </button>
+            <div className="flex items-center gap-2 xl:gap-3 min-w-0">
+              <div className="hidden xl:flex items-stretch gap-3 rounded-[20px] border border-[var(--border)] bg-[var(--surface-muted)] px-4 py-3 shadow-sm shrink-0">
+                <div className="flex items-center gap-3 min-w-[220px]">
+                  <div className="w-10 h-10 rounded-2xl bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--text-soft)] font-bold">System readiness</p>
+                    <p className="text-sm font-bold leading-5 text-[var(--text-main)]">Care services available</p>
+                  </div>
+                </div>
+                <div className="w-px self-stretch bg-[var(--border)]" />
+                <div className="grid grid-cols-2 gap-x-5 gap-y-1 text-xs min-w-[220px] content-center">
+                  <div className="min-w-[96px]">
+                    <div className="text-[var(--text-soft)]">Date</div>
+                    <div className="font-semibold leading-5 text-[var(--text-main)] mt-1 whitespace-normal break-words">{today}</div>
+                  </div>
+                  <div className="min-w-[72px]">
+                    <div className="text-[var(--text-soft)]">Role</div>
+                    <div className="font-semibold leading-5 text-[var(--text-main)] mt-1 capitalize whitespace-normal break-words">{formatRole(activeUser?.role)}</div>
+                  </div>
+                </div>
               </div>
 
-              <button onClick={() => setShowHelp(true)} className="px-3 py-2 rounded-xl text-xs uppercase tracking-wider premium-header-help-btn transition-all">Help Center</button>
-              <div className="px-3 py-1.5 rounded-pill text-[10px] uppercase tracking-tighter premium-header-live-badge flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full"></span>
-                System Live
+              <SmartSearch
+                placeholder="Search patient, MRN, provider, or record"
+                onSearch={handleSearchResult}
+                inputRef={searchInputRef}
+                className="hidden md:block flex-1 min-w-[220px] max-w-[380px] xl:max-w-[440px]"
+              />
+
+              <button
+                onClick={focusGlobalSearch}
+                className="hidden lg:flex p-2 text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors shrink-0"
+                title="Global Search"
+              >
+                <Search className="w-5 h-5" />
+              </button>
+
+              <div className="hidden sm:block">
+                <NotificationSystem />
               </div>
+
+              <button
+                onClick={() => setActiveDialog("help")}
+                className="hidden lg:flex p-2 text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors shrink-0"
+                title="Help"
+              >
+                <HelpCircle className="w-5 h-5" />
+              </button>
+
+              <ActionMenu
+                trigger={
+                  <div className="h-11 rounded-2xl border border-[var(--border)] bg-white/90 pl-3 pr-2 flex items-center justify-between gap-3 text-[var(--text-main)] shadow-sm hover:bg-[var(--surface-muted)] transition-colors shrink-0 min-w-[154px] xl:min-w-[168px]">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-8 h-8 rounded-xl bg-[var(--primary-soft)] text-[var(--primary)] flex items-center justify-center shrink-0">
+                        <User className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0 text-left">
+                        <div className="text-sm font-bold truncate">{activeUser?.name || "Clinical User"}</div>
+                        <div className="text-[11px] text-[var(--text-soft)] truncate capitalize">{formatRole(activeUser?.role)}</div>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-[var(--text-soft)] shrink-0" />
+                  </div>
+                }
+                actions={[
+                  { icon: User, label: "Profile", onClick: () => setActiveDialog("profile") },
+                  { icon: Settings2, label: "Settings", onClick: openSettings },
+                  { icon: Search, label: "Global Search", onClick: focusGlobalSearch },
+                  { icon: HelpCircle, label: "Help", onClick: () => setActiveDialog("help") },
+                  { icon: LogOut, label: "Sign Out", onClick: onLogout }
+                ]}
+              />
             </div>
           </div>
         </header>
 
         {error && (
-          <div className="content-shell">
-            <div className="m-4 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              {error}
+          <div className="px-7 pt-6">
+            <div className="premium-card border-[var(--danger)]/20 bg-[var(--danger-soft)] px-5 py-4">
+              <div className="flex items-center gap-3 text-[var(--danger)]">
+                <ShieldCheck className="w-5 h-5" />
+                <span className="font-semibold">{error}</span>
+              </div>
             </div>
           </div>
         )}
 
-        <div className="view-container">
-          <div className="content-shell">{children}</div>
-        </div>
+        <main className="view-container">
+          <div className="animate-slide-up">{children}</div>
+        </main>
       </div>
 
-      {showHelp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setShowHelp(false)}>
-          <div className="premium-modal rounded-xl w-full max-w-2xl max-h-[80vh] overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="p-4 premium-modal-header flex justify-between items-center">
-              <h3 className="font-bold text-lg">Help Guide</h3>
-              <button onClick={() => setShowHelp(false)} className="w-8 h-8 rounded-full hover:bg-black/10 flex items-center justify-center transition-colors">✕</button>
+      {activeDialog && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/40 backdrop-blur-sm p-4">
+          <div className="absolute inset-0" onClick={() => setActiveDialog(null)} />
+          <div className="relative premium-card w-full max-w-2xl p-6 md:p-7">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.24em] text-[var(--text-soft)] font-extrabold">
+                  {activeDialog === "profile" ? "User Profile" : "Help Center"}
+                </p>
+                <h3 className="text-2xl font-extrabold text-[var(--text-strong)] mt-2">
+                  {activeDialog === "profile" ? (activeUser?.name || "Clinical User") : `${currentModule} guidance`}
+                </h3>
+              </div>
+              <button
+                onClick={() => setActiveDialog(null)}
+                className="w-10 h-10 rounded-2xl border border-[var(--border)] bg-white flex items-center justify-center text-[var(--text-main)]"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
-            <div className="p-6 overflow-y-auto prose prose-slate premium-modal-body">
-              <div dangerouslySetInnerHTML={{ __html: helpContent[activeUser?.role] || helpContent.default }} />
+
+            {activeDialog === "profile" ? (
+              <div className="grid gap-4 md:grid-cols-2 mt-6">
+                <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-muted)] p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-soft)] font-bold">Name</p>
+                  <p className="mt-2 text-lg font-bold text-[var(--text-strong)]">{activeUser?.name || "Clinical User"}</p>
+                </div>
+                <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-muted)] p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-soft)] font-bold">Role</p>
+                  <p className="mt-2 text-lg font-bold text-[var(--text-strong)] capitalize">{formatRole(activeUser?.role)}</p>
+                </div>
+                <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-muted)] p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-soft)] font-bold">Facility</p>
+                  <p className="mt-2 text-lg font-bold text-[var(--text-strong)]">{facilityName}</p>
+                </div>
+                <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-muted)] p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-soft)] font-bold">Current Module</p>
+                  <p className="mt-2 text-lg font-bold text-[var(--text-strong)]">{currentModule}</p>
+                </div>
+              </div>
+            ) : (
+              <div className="mt-6 rounded-[22px] border border-[var(--border)] bg-[var(--surface-muted)] p-5 text-[var(--text-main)] leading-7 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-[var(--text-strong)] [&_h3]:mb-2 [&_p]:mb-3 [&_ul]:pl-5 [&_ul]:space-y-2 [&_li]:text-[var(--text-main)]"
+                dangerouslySetInnerHTML={{ __html: roleHelp }}
+              />
+            )}
+
+            <div className="mt-6 flex items-center justify-end gap-3">
+              {activeDialog === "help" && (
+                <button
+                  onClick={() => {
+                    setActiveDialog(null);
+                    focusGlobalSearch();
+                  }}
+                  className="btn btn-secondary"
+                >
+                  <Search className="w-4 h-4" />
+                  Search records
+                </button>
+              )}
+              <button onClick={() => setActiveDialog(null)} className="btn btn-primary">
+                Close
+              </button>
             </div>
           </div>
         </div>
