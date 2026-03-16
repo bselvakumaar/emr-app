@@ -1,6 +1,21 @@
 import { useState } from 'react';
 import PatientSearch from '../components/PatientSearch.jsx';
 import { currency, patientName } from '../utils/format.js';
+import '../styles/critical-care.css';
+import { 
+  Receipt, 
+  Wallet, 
+  Plus, 
+  Search, 
+  Printer, 
+  CheckCircle2, 
+  AlertCircle,
+  TrendingUp,
+  Activity,
+  CreditCard,
+  Building,
+  ArrowRight
+} from 'lucide-react';
 
 function printInvoice(invoice, patients, tenant) {
   const pName = patientName(invoice.patientId, patients);
@@ -11,47 +26,48 @@ function printInvoice(invoice, patients, tenant) {
     <head>
       <title>Invoice - ${invoice.number}</title>
       <style>
-        body { font-family: 'Inter', system-ui, sans-serif; padding: 40px; color: #1e293b; line-height: 1.6; background: #fff; }
-        .header { display: flex; justify-content: space-between; border-bottom: 3px solid #10b981; padding-bottom: 25px; margin-bottom: 40px; }
-        .clinic-info h1 { color: #059669; margin: 0; font-size: 28px; font-weight: 900; }
-        .clinic-info p { margin: 4px 0; color: #64748b; font-size: 13px; }
-        .bill-label { font-size: 36px; font-weight: 900; color: #0f172a; margin: 0; letter-spacing: -0.05em; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; padding: 40px; color: #1F2937; line-height: 1.6; background: #fff; }
+        .header { display: flex; justify-content: space-between; border-bottom: 4px solid #10B981; padding-bottom: 25px; margin-bottom: 40px; }
+        .clinic-info h1 { color: #10B981; margin: 0; font-size: 28px; font-weight: 900; text-transform: uppercase; }
+        .clinic-info p { margin: 4px 0; color: #64748B; font-size: 13px; font-weight: 600; }
+        .bill-label { font-size: 36px; font-weight: 900; color: #1F2937; margin: 0; letter-spacing: -0.05em; text-transform: uppercase; }
         .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px; }
-        .meta-box h4 { font-size: 10px; text-transform: uppercase; color: #94a3b8; margin: 0 0 10px; letter-spacing: 0.15em; font-weight: 800; }
-        .meta-box p { font-size: 16px; font-weight: 700; color: #1e293b; margin: 0; }
-        .meta-box .sub { font-weight: 500; color: #64748b; font-size: 13px; margin-top: 4px; }
+        .meta-box h4 { font-size: 10px; text-transform: uppercase; color: #94A3B8; margin: 0 0 10px; letter-spacing: 0.15em; font-weight: 900; }
+        .meta-box p { font-size: 16px; font-weight: 800; color: #1F2937; margin: 0; }
+        .meta-box .sub { font-weight: 600; color: #64748B; font-size: 13px; margin-top: 6px; text-transform: uppercase; }
         table { width: 100%; border-collapse: collapse; margin: 40px 0; }
-        th { text-align: left; padding: 15px; border-bottom: 2px solid #f1f5f9; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; }
-        td { padding: 20px 15px; border-bottom: 1px solid #f8fafc; font-size: 15px; color: #334155; font-weight: 500; }
-        .amount-col { text-align: right; font-weight: 700; color: #0f172a; }
-        .totals { margin-top: 40px; border-top: 1px solid #f1f5f9; padding-top: 30px; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
-        .total-row { display: flex; justify-content: space-between; width: 280px; font-size: 15px; color: #64748b; font-weight: 600; }
-        .grand-total { border-top: 2px solid #10b981; padding-top: 15px; margin-top: 10px; color: #0f172a; font-size: 22px; font-weight: 900; }
-        .footer { margin-top: 100px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 30px; font-weight: 500; }
-        @media print { body { padding: 0; } .header { border-bottom-width: 4px; } }
+        th { text-align: left; padding: 15px; border-bottom: 2px solid #E5E7EB; color: #94A3B8; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 900; }
+        td { padding: 20px 15px; border-bottom: 1px solid #F3F4F6; font-size: 15px; color: #374151; font-weight: 600; font-variant-numeric: tabular-nums; }
+        .amount-col { text-align: right; font-weight: 800; color: #1F2937; }
+        .totals { margin-top: 40px; border-top: 2px solid #F3F4F6; padding-top: 30px; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+        .total-row { display: flex; justify-content: space-between; width: 320px; font-size: 15px; color: #64748B; font-weight: 700; text-transform: uppercase; }
+        .grand-total { border-top: 3px solid #10B981; padding-top: 15px; margin-top: 10px; color: #1F2937; font-size: 24px; font-weight: 900; }
+        .footer { margin-top: 100px; text-align: center; font-size: 11px; color: #94A3B8; border-top: 1px solid #E5E7EB; padding-top: 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        @media print { body { padding: 0; } .header { border-bottom-width: 5px; } }
       </style>
     </head>
     <body onload="window.print(); window.close();">
       <div class="header">
         <div class="clinic-info">
           <h1>${tenant?.name || 'EMR Medical Center'}</h1>
-          <p>Verified Healthcare Provider</p>
-          <p>Licence: EMR-TC-${tenant?.id?.slice(0, 8).toUpperCase()}</p>
+          <p>Institutional Financial Ledger Node</p>
+          <p>Licence Ref: EMR-TC-${(tenant?.id || 'SYS').slice(0, 8).toUpperCase()}</p>
         </div>
         <div style="text-align: right">
-          <h2 class="bill-label">RECEIPT</h2>
-          <p style="color: #64748b; font-size: 14px; font-weight: 700; margin-top: 5px;">Ref: ${invoice.number}</p>
+          <h2 class="bill-label">Receipt</h2>
+          <p style="color: #64748B; font-size: 14px; font-weight: 800; margin-top: 5px; text-transform: uppercase;">Doc ID: ${invoice.number}</p>
         </div>
       </div>
 
       <div class="meta-grid">
         <div class="meta-box">
-          <h4>Billed Recipient</h4>
+          <h4>Billed Recipient Identity</h4>
           <p>${pName}</p>
-          <div class="sub">Patient File No: ${invoice.patientId?.toUpperCase().slice(0, 12)}</div>
+          <div class="sub">Clinical File MRN: ${(invoice.patientId || 'X').toUpperCase().slice(0, 12)}</div>
         </div>
         <div class="meta-box" style="text-align: right">
-          <h4>Date of Issue</h4>
+          <h4>Execution Temporal Stamp</h4>
           <p>${new Date(invoice.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
         </div>
       </div>
@@ -59,28 +75,28 @@ function printInvoice(invoice, patients, tenant) {
       <table>
         <thead>
           <tr>
-            <th>Description of Clinical Services / Items</th>
-            <th style="text-align: right">Line Total (INR)</th>
+            <th>Diagnostic Narrative / Therapeutic Shards</th>
+            <th style="text-align: right">Node Total (INR)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>${invoice.description || 'Medical Consultation & Facility Fees'}</td>
+            <td>${invoice.description || 'Institutional Consultation & Facility Services'}</td>
             <td class="amount-col">${currency(invoice.subtotal)}</td>
           </tr>
         </tbody>
       </table>
 
       <div class="totals">
-        <div class="total-row"><span>Base Charges</span><span>${currency(invoice.subtotal)}</span></div>
-        <div class="total-row"><span>Institutional Tax (5%)</span><span>${currency(invoice.tax)}</span></div>
+        <div class="total-row"><span>Base Clinical Shard</span><span>${currency(invoice.subtotal)}</span></div>
+        <div class="total-row"><span>Institutional Tax (5.0%)</span><span>${currency(invoice.tax)}</span></div>
         <div class="total-row grand-total"><span>Total Finalized</span><span>${currency(invoice.total)}</span></div>
-        ${invoice.status === 'paid' ? '<div style="margin-top: 15px; padding: 8px 20px; background: #dcfce7; border-radius: 8px; color: #15803d; font-weight: 900; text-transform: uppercase; font-size: 13px; letter-spacing: 0.1em;">✓ PAYMENT RECEIVED</div>' : ''}
+        ${invoice.status === 'paid' ? '<div style="margin-top: 20px; padding: 12px 28px; background: #F3F4F6; border: 2px solid #10B981; border-radius: 12px; color: #10B981; font-weight: 900; text-transform: uppercase; font-size: 14px; letter-spacing: 0.15em;">✓ PROTOCOL SETTLED</div>' : ''}
       </div>
 
       <div class="footer">
-        <p>This document constitutes a legal tax invoice issued by ${tenant?.name}.</p>
-        <p style="margin-top: 6px;">Thank you for your trust in our healthcare services.</p>
+        <p>This document constitutes a certified legal financial extract issued by the institutional node.</p>
+        <p style="margin-top: 8px;">Fiscal verification ID: ${(invoice.id || 'TX').slice(0, 16).toUpperCase()}</p>
       </div>
     </body>
     </html>
@@ -98,28 +114,37 @@ export default function BillingPage({ tenant, patients,
 
   const sortedInvoices = [...invoices].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+  const stats = {
+    revenue: invoices.filter(i => i.status === 'paid').reduce((acc, curr) => acc + curr.total, 0),
+    outstanding: invoices.filter(i => i.status !== 'paid').reduce((acc, curr) => acc + curr.total, 0),
+    pendingClearance: 3
+  };
+
   return (
-    <div className="page-shell-premium">
-      <div className="action-bar-premium">
-        <div className="panel-title-group">
-          <h2 className="panel-title-text">Financial Operations</h2>
-          <p className="panel-subtitle-text">Institutional Ledger & Revenue Flow</p>
+    <div className="page-shell-premium animate-fade-in">
+      <div className="page-header-premium mb-8">
+        <div>
+          <h1 className="flex items-center gap-3">
+             Financial Governance Ledger
+             <span className="text-[10px] bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full border border-emerald-200 uppercase tracking-tighter font-black">Revenue Node Active</span>
+          </h1>
+          <p className="dim-label">Institutional fiscal reconciliation and longitudinal settlement tracking</p>
         </div>
-        <div className="premium-tab-bar">
-          <button
-            className={`premium-tab-item ${activeView === 'list' ? 'active' : ''}`}
+        <div className="flex bg-white/50 backdrop-blur-sm p-1 rounded-2xl border border-slate-200 shadow-sm gap-1">
+          <button 
+            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeView === 'list' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
             onClick={() => setActiveView('list')}
           >
-            Financial Ledger
+            Ledger
           </button>
-          <button
-            className={`premium-tab-item ${activeView === 'create' ? 'active' : ''}`}
+          <button 
+            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeView === 'create' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
             onClick={() => setActiveView('create')}
           >
             New Statement
           </button>
-          <button
-            className={`premium-tab-item ${activeView === 'settlement' ? 'active' : ''}`}
+          <button 
+            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeView === 'settlement' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
             onClick={() => setActiveView('settlement')}
           >
             Bed Settlement
@@ -127,98 +152,134 @@ export default function BillingPage({ tenant, patients,
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
-        {activeView === 'create' && (
-          <article className="col-span-12 lg:col-span-8 lg:col-start-3 glass-panel p-10 animate-fade-in">
-            <div className="mb-10">
-              <h3 className="text-xl font-bold text-slate-900 tracking-tight">New Patient Statement</h3>
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">Generate institutional bills for medical services rendered</p>
-            </div>
+      <section className="vitals-monitor mb-10">
+        <div className="vital-node vital-node--safe shadow-sm">
+           <div className="flex justify-between items-start">
+              <span className="vital-label">Realized Revenue</span>
+              <TrendingUp className="w-4 h-4 text-emerald-500 opacity-50" />
+           </div>
+           <span className="vital-value tabular-nums mt-1 text-2xl">{currency(stats.revenue)}</span>
+           <p className="text-[10px] font-black text-emerald-600 mt-2 uppercase tracking-widest">Fiscal Cycle Influx</p>
+        </div>
 
-            <form className="space-y-10" onSubmit={(e) => {
+        <div className="vital-node vital-node--warning shadow-sm">
+           <div className="flex justify-between items-start">
+              <span className="vital-label">Accounts Receivable</span>
+              <CreditCard className="w-4 h-4 text-amber-500 opacity-50" />
+           </div>
+           <span className="vital-value tabular-nums mt-1 text-2xl">{currency(stats.outstanding)}</span>
+           <p className="text-[10px] font-black text-amber-600 mt-2 uppercase tracking-widest">Outstanding Shards</p>
+        </div>
+
+        <div className="vital-node vital-node--critical shadow-sm">
+           <div className="flex justify-between items-start">
+              <span className="vital-label">Awaiting Clearance</span>
+              <Building className="w-4 h-4 text-rose-500 opacity-50" />
+           </div>
+           <span className="vital-value tabular-nums mt-1 text-2xl">0{stats.pendingClearance}</span>
+           <p className="text-[10px] font-black text-rose-600 mt-2 uppercase tracking-widest">Blocked discharge nodes</p>
+        </div>
+      </section>
+
+      <div className="grid grid-cols-12 gap-8">
+        {activeView === 'create' && (
+          <article className="col-span-12 lg:col-span-8 lg:col-start-3 clinical-card p-12 transition-all">
+            <header className="mb-12">
+               <h3 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Authorized Statement Generation</h3>
+               <p className="dim-label uppercase tracking-widest text-[10px] mt-2 font-black">Fiscal provisioning protocol • Institutional Node</p>
+            </header>
+
+            <form className="space-y-12" onSubmit={(e) => {
               onIssueInvoice(e);
               setActiveView('list');
             }}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div className="space-y-4">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-50 pb-2">Client Selection</h4>
-                  <PatientSearch tenantId={tenant.id} />
+                  <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 border-b border-slate-50 pb-4">Recipient Identity Shard</h4>
+                  <div className="p-1 bg-slate-50 border border-slate-100 rounded-2xl">
+                     <PatientSearch tenantId={tenant.id} />
+                  </div>
                 </div>
 
-                <div className="space-y-6">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-50 pb-2">Financial Provisions</h4>
+                <div className="space-y-8">
+                  <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 border-b border-slate-50 pb-4">Fiscal Configuration</h4>
                   
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Service Narrative</label>
-                    <input name="description" className="input-field py-4" placeholder="e.g. Specialty Consult + Radiology" required />
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Clinical Service Narrative</label>
+                    <input name="description" className="input-field py-5 bg-slate-50 border-none rounded-2xl font-medium" placeholder="e.g. Specialty Consult + Diagnostic Protocol" required />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Base Fee (₹)</label>
-                      <input name="amount" type="number" step="0.01" className="input-field py-4 font-mono" placeholder="0.00" required />
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Base Node Fee (₹)</label>
+                      <input name="amount" type="number" step="0.01" className="input-field py-5 bg-slate-50 border-none rounded-2xl font-black tabular-nums text-lg" placeholder="0.00" required />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Tax Provision (%)</label>
-                      <input name="taxPercent" type="number" step="0.1" className="input-field py-4 font-mono" defaultValue="5" />
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Institutional Tax (%)</label>
+                      <input name="taxPercent" type="number" step="0.1" className="input-field py-5 bg-slate-50 border-none rounded-2xl font-black tabular-nums text-lg" defaultValue="5" />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Settlement Protocol</label>
-                    <select name="paymentMethod" className="input-field h-[54px]" defaultValue="Card">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Settlement Protocol</label>
+                    <select name="paymentMethod" className="input-field h-[64px] bg-slate-50 border-none rounded-2xl font-black text-slate-800" defaultValue="Card">
                       <option>Cash</option>
                       <option>Card</option>
                       <option>UPI / NetBanking</option>
-                      <option>Insurance Claim</option>
+                      <option>Insurance Claim Shard</option>
                     </select>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-10 border-t border-slate-100 flex justify-end gap-3">
-                <button type="button" className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600 transition-colors" onClick={() => setActiveView('list')}>Discard Transaction</button>
-                <button type="submit" className="btn-primary px-12 py-4 text-[10px] uppercase tracking-[0.2em] shadow-xl">Finalize & Issue Statement</button>
+              <div className="pt-10 border-t border-slate-50 flex justify-end gap-6 items-center">
+                <button type="button" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-rose-500 transition-colors" onClick={() => setActiveView('list')}>Abort Transaction</button>
+                <button type="submit" className="clinical-btn bg-slate-900 text-white px-12 py-6 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl hover:bg-slate-800 transition-all">FINALISE & AUTHORISE STATEMENT</button>
               </div>
             </form>
           </article>
         )}
 
         {activeView === 'settlement' && (
-          <article className="col-span-12 glass-panel p-10 animate-fade-in">
-            <div className="mb-10">
-              <h3 className="text-xl font-bold text-slate-900 tracking-tight">IPD Discharge & Settlement</h3>
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">Finalize financial clearance for patients awaiting clinical discharge</p>
-            </div>
+          <article className="col-span-12 clinical-card">
+            <header className="mb-12 border-b border-slate-50 pb-8 flex justify-between items-end">
+               <div>
+                  <h3 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Bed Occupancy Reconciliation</h3>
+                  <p className="dim-label uppercase tracking-widest text-[10px] mt-2 font-black">Discharge Clearance Ledger • Fiscal Control Node</p>
+               </div>
+               <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center">
+                  <CreditCard className="w-6 h-6" />
+               </div>
+            </header>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {patients.slice(0, 3).map(p => (
-                <div key={p.id} className="p-6 rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-all">
-                  <div className="flex justify-between items-start mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {patients.slice(0, 3).map((p, idx) => (
+                <div key={p.id} className="p-8 rounded-3xl border border-slate-100 bg-white shadow-sm hover:shadow-xl transition-all group animate-fade-in" style={{ animationDelay: `${idx * 50}ms` }}>
+                  <div className="flex justify-between items-start mb-8">
                     <div>
-                      <div className="text-sm font-extrabold text-slate-900 mb-1">{p.firstName} {p.lastName}</div>
-                      <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest">WARD-B • ROOM 10{Math.floor(Math.random() * 9)}</div>
+                      <div className="text-base font-black text-slate-900 mb-1">{p.firstName} {p.lastName}</div>
+                      <div className="text-[10px] text-slate-400 font-black uppercase tracking-[0.15em]">SHARD-B • CELL 10{idx + 1}</div>
                     </div>
-                    <span className="px-2 py-1 bg-amber-50 text-amber-600 border border-amber-100 rounded text-[9px] font-black uppercase tracking-widest">WAITING</span>
+                    <span className="px-3 py-1 bg-amber-50 text-amber-600 border border-amber-100 rounded-full text-[9px] font-black uppercase tracking-widest animate-pulse">Waiting Clearance</span>
                   </div>
                   
-                  <div className="p-4 bg-slate-50 rounded-xl mb-6 space-y-2">
-                     <div className="flex justify-between text-[11px] font-bold text-slate-500">
-                        <span>Bed Charges</span>
-                        <span className="text-slate-900 font-mono">₹{currency(12500)}</span>
+                  <div className="p-5 bg-slate-50 rounded-2xl mb-8 space-y-3">
+                     <div className="flex justify-between text-[11px] font-black text-slate-400 uppercase tracking-tighter">
+                        <span>Bed Node Duration</span>
+                        <span className="text-slate-900 tabular-nums">₹{currency(12500)}</span>
                      </div>
-                     <div className="flex justify-between text-[11px] font-bold text-slate-500">
-                        <span>Medications</span>
-                        <span className="text-slate-900 font-mono">₹{currency(4200)}</span>
+                     <div className="flex justify-between text-[11px] font-black text-slate-400 uppercase tracking-tighter">
+                        <span>Therapeutic Influx</span>
+                        <span className="text-slate-900 tabular-nums">₹{currency(4200)}</span>
                      </div>
-                     <div className="pt-2 border-t border-slate-200 flex justify-between text-xs font-black text-[var(--primary)] uppercase tracking-widest">
-                        <span>Total Due</span>
-                        <span>₹{currency(16700)}</span>
+                     <div className="pt-3 border-t border-slate-200 flex justify-between text-[13px] font-black text-emerald-600 uppercase tracking-widest">
+                        <span>AGGREGATE DUE</span>
+                        <span className="tabular-nums">₹{currency(16700)}</span>
                      </div>
                   </div>
 
-                  <button className="btn-primary w-full py-3 text-[10px] uppercase tracking-widest shadow-lg">
-                    Initiate Final Exit
+                  <button className="clinical-btn bg-slate-900 text-white w-full py-5 text-[10px] font-black uppercase tracking-[0.2em] shadow-xl group-hover:bg-emerald-600 transition-colors border-none rounded-2xl">
+                    AUTHORIZE FINAL EXIT
                   </button>
                 </div>
               ))}
@@ -227,65 +288,71 @@ export default function BillingPage({ tenant, patients,
         )}
 
         {activeView === 'list' && (
-          <article className="premium-panel col-span-12 animate-fade-in">
-            <div className="panel-header-standard">
-              <div className="panel-title-group">
-                <h3 className="panel-title-text">Institutional Ledger</h3>
-                <p className="panel-subtitle-text">Financial Node Monitoring</p>
-              </div>
-            </div>
+          <article className="clinical-card col-span-12 !p-0 overflow-hidden">
+            <header className="p-8 border-b border-slate-50 flex items-center justify-between">
+               <div>
+                  <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Institutional Fiscal Ledger</h3>
+                  <p className="dim-label uppercase tracking-widest text-[10px] mt-1 font-black">Sequential Transaction Node Monitoring</p>
+               </div>
+               <div className="w-11 h-11 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-300">
+                  <Activity className="w-5 h-5" />
+               </div>
+            </header>
 
-            <div className="ledger-guidance">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="color-blue"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-              <span>Verify patient insurance eligibility before finalizing statements. Settled payments are finalized in real-time.</span>
+            <div className="px-8 py-5 bg-slate-50/50 border-b border-slate-100 flex items-center gap-4">
+              <ShieldCheck className="w-4 h-4 text-emerald-500" />
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Verify clinical eligibility before finalizing fiscal shards. All settlements are non-reversible.</span>
             </div>
 
             <div className="premium-table-container">
               <table className="premium-table">
                 <thead>
                   <tr>
-                    <th>Entry Date</th>
-                    <th>Document ID</th>
-                    <th>Patient Account</th>
-                    <th>Gross Total</th>
-                    <th>State</th>
-                    <th style={{ textAlign: 'right' }}>Actions</th>
+                    <th className="tracking-widest">Temporal Node</th>
+                    <th className="tracking-widest">Statement ID</th>
+                    <th className="tracking-widest">Subject Account</th>
+                    <th className="tracking-widest">Gross Aggregate</th>
+                    <th className="tracking-widest">Settlement Shard</th>
+                    <th style={{ textAlign: 'right' }} className="tracking-widest">Governance</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-slate-50">
                   {sortedInvoices.length === 0 ? (
-                    <tr><td colSpan="6" className="text-center py-24 text-slate-400 italic font-medium">No transactions recorded in the current fiscal period.</td></tr>
-                  ) : sortedInvoices.map((i) => (
-                    <tr key={i.id}>
+                    <tr><td colSpan="6" className="text-center py-32 text-slate-400 italic font-medium">No recorded transactions identified in the current fiscal sector.</td></tr>
+                  ) : sortedInvoices.map((i, idx) => (
+                    <tr key={i.id} className="hover:bg-slate-50/50 transition-colors animate-fade-in" style={{ animationDelay: `${idx * 20}ms` }}>
                       <td>
-                        <div className="text-sm font-bold text-slate-800">{i.createdAt ? new Date(i.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }) : 'Today'}</div>
+                        <div className="text-[13px] font-black text-slate-900 tabular-nums">{i.createdAt ? new Date(i.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }) : 'Today'}</div>
                       </td>
-                      <td><code className="text-[10px] font-bold font-mono text-slate-400 bg-slate-50 px-2 py-0.5 rounded border border-slate-100">{i.number}</code></td>
+                      <td><code className="text-[11px] font-black font-tabular text-slate-500 bg-slate-100 px-3 py-1 rounded-xl border border-slate-200">{i.number}</code></td>
                       <td>
-                        <div className="font-bold text-slate-800 cursor-pointer hover:text-[var(--primary)] transition-colors" onClick={() => { setActivePatientId(i.patientId); setView('patients'); }}>
-                          {patientName(i.patientId, patients) || 'Unknown File'}
+                        <div className="font-black text-slate-800 cursor-pointer hover:text-emerald-600 transition-colors" onClick={() => { setActivePatientId(i.patientId); setView('patients'); }}>
+                          {patientName(i.patientId, patients) || 'Identity Shard Restricted'}
                         </div>
-                        <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5">REF-{i.patientId?.slice(0, 8).toUpperCase()}</div>
+                        <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-1">MRN: {(i.patientId || 'X').slice(0, 10).toUpperCase()}</div>
                       </td>
-                      <td className="font-bold text-slate-900">{currency(i.total)}</td>
+                      <td className="font-black text-slate-900 tabular-nums text-sm">{currency(i.total)}</td>
                       <td>
-                        <span className={`px-2 py-1 rounded text-[10px] font-black uppercase tracking-widest border ${i.status === 'paid' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100'}`}>
-                          {i.status === 'paid' ? 'Settled' : 'Outstanding'}
-                        </span>
+                        <div className="flex items-center gap-2">
+                           <span className={`w-2 h-2 rounded-full ${i.status === 'paid' ? 'bg-emerald-500' : 'bg-amber-400'}`}></span>
+                           <span className={`text-[10px] font-black uppercase tracking-widest border px-3 py-1 rounded-full ${i.status === 'paid' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100'}`}>
+                             {i.status === 'paid' ? 'Settled' : 'Unresolved'}
+                           </span>
+                        </div>
                       </td>
                       <td className="text-right">
-                        <div className="flex justify-end gap-2">
+                        <div className="flex justify-end gap-3">
                           {i.status !== 'paid' && (
-                            <button className="px-3 py-1.5 bg-[var(--primary-soft)] text-[var(--primary)] hover:bg-[var(--primary-hover)]/10 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all border border-[var(--primary)]/10" onClick={() => onMarkPaid(i.id)}>
+                            <button className="clinical-btn bg-slate-900 text-white px-5 !min-h-[40px] rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg border-none" onClick={() => onMarkPaid(i.id)}>
                               Settle
                             </button>
                           )}
                           <button 
-                            className="p-1.5 text-slate-400 hover:text-[var(--primary)] hover:bg-slate-50 rounded-lg transition-all" 
+                            className="p-2.5 bg-slate-50 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all border border-transparent hover:border-emerald-100" 
                             onClick={() => printInvoice(i, patients, tenant)}
-                            title="Print Transaction Record"
+                            title="Authorize Receipt Protocol"
                           >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9V2h12v7" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 14h12v8H6z" /></svg>
+                            <Printer className="w-4 h-4" />
                           </button>
                         </div>
                       </td>

@@ -2,6 +2,18 @@ import { useState } from 'react';
 import PatientSearch from '../components/PatientSearch.jsx';
 import AppointmentActions from '../components/AppointmentActions.jsx';
 import { patientName, userName } from '../utils/format.js';
+import '../styles/critical-care.css';
+import { 
+  Calendar, 
+  Clock, 
+  Users, 
+  Activity, 
+  UserPlus, 
+  ShieldCheck, 
+  Clock3,
+  ChevronRight,
+  Plus
+} from 'lucide-react';
 
 export default function AppointmentsPage({
   activeUser, session, patients, providers, walkins, appointments, users,
@@ -12,153 +24,171 @@ export default function AppointmentsPage({
   const isPatient = activeUser.role === 'Patient';
 
   return (
-    <div className="page-shell-premium">
-      <div className="action-bar-premium">
-        <div className="panel-title-group">
-          <h2 className="panel-title-text">Scheduling Intelligence</h2>
-          <p className="panel-subtitle-text">Resource Co-ordination & Flow</p>
+    <div className="page-shell-premium animate-fade-in">
+      <div className="page-header-premium mb-8">
+        <div>
+          <h1 className="flex items-center gap-3">
+             Scheduling & Resource Node
+             <span className="text-[10px] bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-200 uppercase tracking-tighter font-black">Clinical Flow active</span>
+          </h1>
+          <p className="dim-label">Organizational co-ordination and longitudinal event scheduling</p>
         </div>
-        <div className="premium-tab-bar">
+        <div className="flex bg-white/50 backdrop-blur-sm p-1 rounded-2xl border border-slate-200 shadow-sm gap-1">
           <button 
-            className={`premium-tab-item ${activeTab === 'appointments' ? 'active' : ''}`}
+            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'appointments' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
             onClick={() => setActiveTab('appointments')}
           >
-            Clinical Schedule
+            <Calendar className="w-3.5 h-3.5 mr-2" /> Clinical Schedule
           </button>
           {!isPatient && (
             <button 
-              className={`premium-tab-item ${activeTab === 'walkins' ? 'active' : ''}`}
+              className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'walkins' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
               onClick={() => setActiveTab('walkins')}
             >
-              Reception Queue
+              <Users className="w-3.5 h-3.5 mr-2" /> Reception Queue
             </button>
           )}
         </div>
       </div>
 
-      <div className="grid-workspace">
-        {/* LEFT COLUMN: BOOKING FORMS */}
-        <main className="col-span-8 space-y-8">
+      <div className="grid grid-cols-12 gap-8">
+        {/* MAIN WORKFLOW: BOOKING FORMS */}
+        <main className="col-span-12 lg:col-span-8 space-y-8">
           {activeTab === 'appointments' ? (
-            <article className="premium-panel">
-              <div className="panel-header-standard">
-                <div className="panel-title-group">
-                  <h3 className="panel-title-text">{isPatient ? 'Secure Slot Reservation' : 'Clinical Encounter Booking'}</h3>
-                  <p className="panel-subtitle-text">{isPatient ? 'Consultation Window Selection' : 'Scheduled Medical Interaction'}</p>
-                </div>
-              </div>
+            <article className="clinical-card">
+              <header className="mb-10 text-center lg:text-left">
+                 <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest text-lg">
+                    {isPatient ? 'Secure Slot Reservation' : 'Clinical Encounter Booking'}
+                 </h3>
+                 <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                    {isPatient ? 'Consultation Window Selection' : 'Scheduled Medical Interaction Node'}
+                 </p>
+              </header>
 
-              <form className="p-10 space-y-8" onSubmit={isPatient ? onSelfAppointment : onCreateAppointment}>
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="space-y-6">
+              <form className="space-y-10" onSubmit={isPatient ? onSelfAppointment : onCreateAppointment}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="space-y-8">
                     {!isPatient && (
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Patient Identity</label>
-                        <PatientSearch tenantId={session?.tenantId} />
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Step 01 / Identity Verification</label>
+                        <div className="p-1 bg-slate-50 border border-slate-100 rounded-2xl">
+                           <PatientSearch tenantId={session?.tenantId} />
+                        </div>
                       </div>
                     )}
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Clinical Specialist</label>
-                      <select name="providerId" className="input-field h-[54px]" required>
-                        <option value="">Select Practitioner...</option>
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Step 02 / Clinical Specialist</label>
+                      <select name="providerId" className="input-field h-[60px] bg-slate-50 border-none rounded-2xl font-black text-slate-800" required>
+                        <option value="">Select Authorized Practitioner...</option>
                         {providers.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
                       </select>
                     </div>
                   </div>
 
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                  <div className="space-y-8">
+                    <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Commencement</label>
-                        <input name="start" type="datetime-local" className="input-field py-4" required />
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Commencement</label>
+                        <input name="start" type="datetime-local" className="input-field py-4 bg-slate-50 border-none rounded-2xl font-black tabular-nums" required />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Conclusion</label>
-                        <input name="end" type="datetime-local" className="input-field py-4" required />
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Conclusion</label>
+                        <input name="end" type="datetime-local" className="input-field py-4 bg-slate-50 border-none rounded-2xl font-black tabular-nums" required />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Encounter Objective</label>
-                      <input name="reason" className="input-field py-4" placeholder="Immediate clinical requirement..." required />
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Encounter Objective</label>
+                      <input name="reason" className="input-field py-5 bg-slate-50 border-none rounded-2xl" placeholder="Immediate clinical requirement narrative..." required />
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-8 border-t border-slate-100">
-                  <button type="submit" className="btn-primary w-full py-4 text-xs uppercase tracking-widest shadow-lg">
-                    {isPatient ? 'Submit Reservation' : 'Authorize Entry'}
+                <div className="pt-10 border-t border-slate-50">
+                  <button type="submit" className="clinical-btn bg-slate-900 text-white w-full py-6 text-xs shadow-2xl hover:bg-slate-800 transition-all rounded-2xl font-black tracking-[0.2em]">
+                    {isPatient ? 'SUBMIT SLOT RESERVATION' : 'AUTHORIZE ENCOUNTER ENTRY'}
                   </button>
                 </div>
               </form>
             </article>
           ) : (
-            <article className="premium-panel">
-              <div className="panel-header-standard">
-                <div className="panel-title-group">
-                  <h3 className="panel-title-text">Direct Reception Entry</h3>
-                  <p className="panel-subtitle-text">Unscheduled Queue Placement</p>
-                </div>
-              </div>
+            <article className="clinical-card">
+              <header className="mb-10 text-center lg:text-left">
+                 <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest text-lg">Direct Reception Entry</h3>
+                 <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-widest">Unscheduled Queue Shard Placement</p>
+              </header>
 
-              <form className="p-10 space-y-8" onSubmit={onCreateWalkin}>
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="space-y-4">
+              <form className="space-y-10" onSubmit={onCreateWalkin}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="space-y-8">
                     <div className="space-y-2">
-                      <label className="panel-subtitle-text">Full Name</label>
-                      <input name="name" className="input-field" placeholder="Patient Identity" required />
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Legal Identity</label>
+                      <input name="name" className="input-field py-4 bg-slate-50 border-none rounded-2xl" placeholder="Full Patient Name" required />
                     </div>
                     <div className="space-y-2">
-                      <label className="panel-subtitle-text">Contact Number</label>
-                      <input name="phone" className="input-field" placeholder="Emergency Mobile" required />
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Secure Contact</label>
+                      <input name="phone" className="input-field py-4 bg-slate-50 border-none rounded-2xl" placeholder="Emergency Mobile Node" required />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="panel-subtitle-text mb-1 block">Objective</label>
-                    <textarea name="reason" className="input-field h-[104px] py-4" placeholder="Immediate requirement..." required />
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Clinical Reasoning</label>
+                    <textarea name="reason" className="input-field h-[148px] py-5 bg-slate-50 border-none rounded-2xl resize-none font-medium" placeholder="Immediate requirement narrative..." required />
                   </div>
                 </div>
-                <div className="pt-8 border-t border-slate-100">
-                  <button type="submit" className="btn btn-primary px-10 rounded-xl">Initialize Queue Status</button>
+                <div className="pt-10 border-t border-slate-50">
+                  <button type="submit" className="clinical-btn bg-emerald-600 text-white px-12 py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-100 hover:bg-emerald-700 transition-all border-none">
+                     Initialize Queue Status Node
+                  </button>
                 </div>
               </form>
             </article>
           )}
         </main>
 
-        {/* RIGHT COLUMN: LEDGER & QUEUE */}
-        <aside className="col-span-4 space-y-8">
-          <section className="premium-panel">
-            <div className="panel-header-standard">
-              <h3 className="panel-subtitle-text">Encounter Ledger</h3>
-              <span className="text-xs font-bold text-[var(--primary)]">{appointments.length} Slots</span>
-            </div>
-            <div className="max-h-[600px] overflow-y-auto divide-y divide-slate-50">
+        {/* MONITORING PILLAR: LEDGER & QUEUE */}
+        <aside className="col-span-12 lg:col-span-4 space-y-8">
+          <section className="clinical-card !p-0 overflow-hidden">
+            <header className="p-6 border-b border-slate-50 flex items-center justify-between bg-slate-900">
+               <div>
+                  <h3 className="text-[10px] font-black text-emerald-500/60 uppercase tracking-[0.2em]">Encounter Ledger</h3>
+                  <p className="text-xs font-black text-white mt-1 tabular-nums">{appointments.length} Slots Locked</p>
+               </div>
+               <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/30">
+                  <Clock3 className="w-5 h-5" />
+               </div>
+            </header>
+            
+            <div className="max-h-[600px] overflow-y-auto divide-y divide-slate-50 scrollbar-hide">
               {appointments.length === 0 ? (
-                <div className="p-12 text-center text-slate-400 text-sm italic">Ledger empty</div>
+                <div className="p-16 text-center">
+                   <Clock className="w-10 h-10 text-slate-100 mx-auto mb-4" />
+                   <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Registry cleared.</p>
+                </div>
               ) : (
                 appointments.sort((a, b) => new Date(a.start) - new Date(b.start)).map((a, idx) => (
-                  <div key={a.id} className={`p-4 hover:bg-slate-50 transition-all slide-up ${a.status} border-b border-slate-50/50`} style={{ animationDelay: `${idx * 40}ms` }}>
+                  <div key={a.id} className="p-6 hover:bg-slate-50 transition-all group border-l-4 border-transparent hover:border-indigo-500 animate-fade-in" style={{ animationDelay: `${idx * 40}ms` }}>
                     <div className="flex items-start gap-4">
-                      <div className="text-center min-w-[56px] pt-1">
-                        <div className="text-[11px] font-black text-slate-900 leading-none">{new Date(a.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-                        <div className="text-[9px] font-black text-slate-400 uppercase mt-1 tracking-widest">{new Date(a.start).toLocaleDateString([], { month: 'short', day: 'numeric' })}</div>
+                      <div className="text-center min-w-[64px]">
+                        <div className="text-xs font-black text-slate-900 tabular-nums">{new Date(a.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                        <div className="text-[9px] font-black text-slate-400 uppercase mt-1 tracking-tighter">{new Date(a.start).toLocaleDateString([], { month: 'short', day: 'numeric' })}</div>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-sm font-bold text-slate-900 hover:text-[var(--primary)] cursor-pointer truncate tracking-tight" onClick={() => { setActivePatientId(a.patientId); setView('patients'); }}>
+                        <div className="text-[13px] font-black text-slate-800 hover:text-indigo-600 transition-colors cursor-pointer truncate" onClick={() => { setActivePatientId(a.patientId); setView('patients'); }}>
                           {patientName(a.patientId, patients)}
                         </div>
-                        <div className="text-[9px] font-black text-slate-400 uppercase mt-0.5 tracking-widest">WITH {userName(a.providerId, users)}</div>
-                        <div className="mt-2 flex items-center gap-2">
-                           <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest border ${
+                        <div className="text-[9px] font-black text-slate-400 uppercase mt-1 tracking-widest flex items-center gap-1.5">
+                           <Activity className="w-2.5 h-2.5 opacity-50" /> WITH {userName(a.providerId, users)}
+                        </div>
+                        <div className="mt-4 flex items-center gap-2">
+                           <span className={`px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter border ${
                              a.status === 'completed' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
                              a.status === 'scheduled' ? 'bg-blue-50 text-blue-600 border-blue-100' :
-                             a.status === 'checked_in' ? 'bg-indigo-50 text-indigo-600 border-indigo-100 shadow-[0_0_8px_rgba(99,102,241,0.2)]' :
+                             a.status === 'checked_in' ? 'bg-indigo-50 text-indigo-600 border-indigo-100 shadow-[0_4px_12px_rgba(99,102,241,0.1)]' :
                              'bg-slate-50 text-slate-500 border-slate-100'
                            }`}>{a.status.replace('_', ' ')}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="mt-3 pt-3 border-t border-slate-50 flex justify-end">
+                    <div className="mt-6 pt-4 border-t border-slate-50 flex justify-end">
                       <AppointmentActions
                         appointment={a}
                         user={activeUser}
@@ -173,28 +203,36 @@ export default function AppointmentsPage({
           </section>
 
           {!isPatient && (
-            <section className="premium-panel border-l-4 border-l-warning">
-              <div className="panel-header-standard">
-                <h3 className="panel-subtitle-text">Reception Queue</h3>
-                <span className="text-xs font-bold text-warning">{walkins.length} Active</span>
-              </div>
+            <section className="clinical-card !p-0 overflow-hidden border-l-4 border-l-amber-500">
+              <header className="p-6 border-b border-slate-50 flex items-center justify-between">
+                 <div>
+                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Reception Shard</h3>
+                    <p className="text-sm font-black text-slate-900 mt-1 tabular-nums">{walkins.length} Active in Queue</p>
+                 </div>
+                 <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center">
+                    <UserPlus className="w-4 h-4" />
+                 </div>
+              </header>
               <div className="max-h-[300px] overflow-y-auto divide-y divide-slate-50">
                 {walkins.length === 0 ? (
-                  <div className="p-8 text-center text-slate-300 text-xs italic">Queue cleared</div>
+                  <div className="p-12 text-center">
+                     <Users className="w-8 h-8 text-slate-100 mx-auto mb-4 opacity-30" />
+                     <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Queue cleared.</p>
+                  </div>
                 ) : (
                   walkins.map((w, idx) => (
-                  <div key={w.id} className="p-4 flex items-center gap-4 slide-up hover:bg-slate-50 border-b border-slate-50/50" style={{ animationDelay: `${idx * 40}ms` }}>
-                    <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-black text-xs border border-amber-100 shadow-sm">
+                  <div key={w.id} className="p-5 flex items-center gap-4 hover:bg-slate-50 transition-all group animate-fade-in" style={{ animationDelay: `${idx * 40}ms` }}>
+                    <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-black text-xs shadow-lg">
                       {(w.name || 'P')[0].toUpperCase()}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm font-bold text-slate-900 truncate tracking-tight">{w.name}</div>
-                      <div className="text-[10px] font-medium text-slate-500 truncate mt-0.5">{w.reason}</div>
+                      <div className="text-sm font-black text-slate-900 truncate">{w.name}</div>
+                      <div className="text-[10px] font-bold text-slate-400 truncate mt-0.5 uppercase tracking-tighter">{w.reason}</div>
                     </div>
                     {w.status !== 'converted' ? (
-                      <button onClick={() => onConvertWalkin(w.id)} className="btn-primary px-3 py-1.5 text-[10px] uppercase tracking-widest shadow-md">ADMIT</button>
+                      <button onClick={() => onConvertWalkin(w.id)} className="clinical-btn bg-slate-100 text-slate-600 hover:bg-emerald-600 hover:text-white px-5 !min-h-[36px] text-[9px] font-black uppercase tracking-widest rounded-lg transition-all border-none">ADMIT</button>
                     ) : (
-                      <span className="text-[10px] font-black text-slate-300 px-3 py-1.5 bg-slate-50 rounded-lg border border-slate-100">LOGGED</span>
+                      <span className="text-[9px] font-black text-slate-300 px-4 py-1.5 bg-slate-50 rounded-lg border border-slate-100 tracking-widest">LOGGED</span>
                     )}
                   </div>
                   ))
@@ -207,5 +245,3 @@ export default function AppointmentsPage({
     </div>
   );
 }
-
-

@@ -3,6 +3,19 @@ import MetricCard from '../components/MetricCard.jsx';
 import ComparisonChart from '../components/ComparisonChart.jsx';
 import { currency } from '../utils/format.js';
 import { api } from '../api.js';
+import '../styles/critical-care.css'; // Importing the Life-Saving Design System
+import { 
+  Users, 
+  Activity, 
+  Clock, 
+  TrendingUp, 
+  AlertCircle, 
+  Package, 
+  Stethoscope, 
+  Calendar, 
+  Pill, 
+  FileText 
+} from 'lucide-react';
 
 export default function DashboardPage({ metrics, activeUser, setView }) {
   const [reportData, setReportData] = useState(null);
@@ -50,61 +63,10 @@ export default function DashboardPage({ metrics, activeUser, setView }) {
   }
 
   const quickActions = [
-    {
-      label: 'Register Patient',
-      description: 'Create a new patient profile',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="8.5" cy="7" r="4"></circle>
-          <line x1="20" y1="8" x2="20" y2="14"></line>
-          <line x1="23" y1="11" x2="17" y2="11"></line>
-        </svg>
-      ),
-      view: 'patients',
-      colorClass: 'qa-icon'
-    },
-    {
-      label: 'Schedule Appointment',
-      description: 'Book an OPD / follow-up',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
-      ),
-      view: 'appointments',
-      colorClass: 'qa-icon'
-    },
-    {
-      label: 'Dispense Medicine',
-      description: 'Issue drugs from pharmacy',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path>
-          <path d="m8.5 8.5 7 7"></path>
-        </svg>
-      ),
-      view: 'pharmacy',
-      colorClass: 'qa-icon'
-    },
-    {
-      label: 'Issue Invoice',
-      description: 'Generate billing document',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-          <polyline points="14 2 14 8 20 8"></polyline>
-          <line x1="16" y1="13" x2="8" y2="13"></line>
-          <line x1="16" y1="17" x2="8" y2="17"></line>
-          <polyline points="10 9 9 9 8 9"></polyline>
-        </svg>
-      ),
-      view: 'billing',
-      colorClass: 'qa-icon'
-    }
+    { label: 'Register Patient', icon: Users, view: 'patients', desc: 'New admission' },
+    { label: 'Schedule', icon: Calendar, view: 'appointments', desc: 'OPD booking' },
+    { label: 'Dispense', icon: Pill, view: 'pharmacy', desc: 'Drug issuance' },
+    { label: 'Billing', icon: FileText, view: 'billing', desc: 'Invoicing' }
   ];
 
   const hasAnyAlerts =
@@ -112,174 +74,196 @@ export default function DashboardPage({ metrics, activeUser, setView }) {
     lowStockAlerts.length > 0;
 
   return (
-    <div className="dashboard-shell dashboard-shell--dark">
-      <div className="page-header-premium mb-4">
+    <div className="page-shell-premium animate-fade-in" style={{ paddingBottom: '40px' }}>
+      {/* 1. SURGICAL CALM HEADER (Cognitive Clarity) */}
+      <div className="page-header-premium mb-8">
         <div>
-          <h1>Operational Intelligence</h1>
-          <p>{today} • Institutional Oversight</p>
+          <h1 className="flex items-center gap-3">
+            Clinical Command Center
+            <span className="text-[10px] font-black bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full uppercase tracking-tighter border border-emerald-200">System Ready</span>
+          </h1>
+          <p className="dim-label">{today} • Institutional Oversight Node</p>
         </div>
         <div className="flex gap-4">
-          <div className="flex bg-slate-100/50 p-1 rounded-xl border border-slate-200">
-            <div className="px-4 py-2 border-r border-slate-200">
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-0.5">Census</span>
-              <span className="text-xs font-bold text-slate-800">{reportData?.periodical?.activeAdmissions || 0} In-patient</span>
-            </div>
-            <div className="px-4 py-2">
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-0.5">Diagnostics</span>
-              <span className="text-xs font-bold text-slate-800">{reportData?.periodical?.activeLabTests || 0} Tests Active</span>
-            </div>
-          </div>
+           {/* No-click critical counts */}
+           <div className="flex bg-white/50 backdrop-blur-sm p-1 rounded-2xl border border-slate-200 shadow-sm">
+              <div className="px-5 py-2 border-r border-slate-100">
+                 <span className="vital-label">Census</span>
+                 <span className="text-sm font-black tabular-nums">{reportData?.periodical?.activeAdmissions || 0} Admitted</span>
+              </div>
+              <div className="px-5 py-2">
+                 <span className="vital-label">Labs Active</span>
+                 <span className="text-sm font-black tabular-nums">{reportData?.periodical?.activeLabTests || 0} Pending</span>
+              </div>
+           </div>
         </div>
       </div>
 
-      {/* METRICS GRID */}
-      <div className="grid grid-cols-4 gap-4 mb-4">
-        <MetricCard label="Total Patients" value={metrics.patients?.toLocaleString() || 0} icon="patients" accent="blue" trend="+4%" />
-        <MetricCard label="Visits" value={metrics.appointments || 0} icon="appointments" accent="emerald" trend="+12%" />
-        <MetricCard label="Triage" value={metrics.walkins || 0} icon="walkins" accent="amber" trend="Stable" />
-        <MetricCard label="Revenue" value={currency(metrics.revenue || 0)} icon="revenue" accent="rose" trend="+8.2%" />
-      </div>
+      {/* 2. VITALS MONITOR (High-Stress Priority Data) */}
+      <section className="vitals-monitor mb-10">
+        <div className="vital-node vital-node--safe shadow-sm group hover:scale-[1.02] transition-transform">
+           <div className="flex justify-between items-start">
+              <span className="vital-label">Clinical Load</span>
+              <Users className="w-4 h-4 text-emerald-500 opacity-50" />
+           </div>
+           <span className="vital-value tabular-nums mt-1">{metrics.patients?.toLocaleString() || 0}</span>
+           <p className="text-[10px] font-bold text-emerald-600 mt-2 flex items-center gap-1">
+              <TrendingUp className="w-3 h-3" /> Stabilized Volume
+           </p>
+        </div>
 
-      {/* MAIN */}
-      <main className="dashboard-main-layout">
-        {/* COLUMN 1: ANALYTICS */}
-        <section className="dashboard-column dashboard-column--analytics">
-          <section className="premium-panel premium-panel--analytics">
-            <div className="panel-header-standard">
-              <div className="panel-title-group">
-                <h3 className="panel-title-text font-bold">Clinical & Financial Analytics</h3>
-                <p className="panel-subtitle-text font-medium mt-1">Institutional Node Performance</p>
+        <div className="vital-node vital-node--safe shadow-sm group hover:scale-[1.02] transition-transform">
+           <div className="flex justify-between items-start">
+              <span className="vital-label">Total Visits</span>
+              <Activity className="w-4 h-4 text-emerald-500 opacity-50" />
+           </div>
+           <span className="vital-value tabular-nums mt-1">{metrics.appointments || 0}</span>
+           <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">Active session log</p>
+        </div>
+
+        <div className="vital-node vital-node--warning shadow-sm group hover:scale-[1.02] transition-transform">
+           <div className="flex justify-between items-start">
+              <span className="vital-label">Triage Queue</span>
+              <Clock className="w-4 h-4 text-amber-500 opacity-50" />
+           </div>
+           <span className="vital-value tabular-nums mt-1">{metrics.walkins || 0}</span>
+           <p className="text-[10px] font-bold text-amber-600 mt-2 uppercase tracking-widest">Awaiting assessment</p>
+        </div>
+
+        <div className="vital-node vital-node--safe shadow-sm group hover:scale-[1.02] transition-transform">
+           <div className="flex justify-between items-start">
+              <span className="vital-label">Revenue Share</span>
+              <TrendingUp className="w-4 h-4 text-emerald-500 opacity-50" />
+           </div>
+           <span className="vital-value tabular-nums mt-1 text-lg" style={{ fontSize: '1.75rem' }}>{currency(metrics.revenue || 0)}</span>
+           <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">Fiscal reconciliation</p>
+        </div>
+      </section>
+
+      {/* 3. MAIN WORKFLOW (No Decoration, High Clarity) */}
+      <div className="grid grid-cols-12 gap-8">
+        {/* Analytics Pillar */}
+        <div className="col-span-12 lg:col-span-8 space-y-8">
+           <article className="clinical-card">
+              <div className="flex justify-between items-center mb-8 pb-4 border-b border-slate-50">
+                 <div>
+                    <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Trajectory Analytics</h3>
+                    <p className="text-[10px] font-medium text-slate-400">Longitudinal performance stream</p>
+                 </div>
+                 <select className="bg-slate-50 border-none rounded-lg px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                    <option>Last 14 Clinical Cycles</option>
+                 </select>
               </div>
-            </div>
 
-            <div className="panel-body panel-body--charts">
-              {loading ? (
-                <div className="chart-grid chart-grid--compact">
-                  <div className="chart-skeleton" />
-                  <div className="chart-skeleton" />
-                </div>
-              ) : reportData ? (
-                <div className="chart-grid chart-grid--compact">
-                  <ComparisonChart
-                    title="Patient Volume (14d)"
-                    data={reportData?.dailyActivity || []}
-                    dataKey="appointments"
-                    color="var(--medflow-accent)"
-                    type="bar"
-                  />
-                  <ComparisonChart
-                    title="Revenue Stream (14d)"
-                    data={reportData?.dailyActivity || []}
-                    dataKey="revenue"
-                    color="var(--medflow-accent)"
-                    formatValue={(val) => currency(val)}
-                  />
-                </div>
-              ) : (
-                <div className="panel-empty panel-empty--charts">
-                  <p className="panel-empty-title">No data</p>
-                </div>
-              )}
-            </div>
-          </section>
-        </section>
-
-        {/* COLUMN 2: ACTIVE ALERTS */}
-        <section className="dashboard-column dashboard-column--alerts">
-          <section className="premium-panel system-intel">
-            <div className="panel-header">
-              <div className="panel-header-main">
-                <div className="panel-header-text">
-                  <h2 className="panel-title">Active Alerts</h2>
-                  <p className="panel-subtitle">Immediate attention</p>
-                </div>
+              <div className="panel-body">
+                {loading ? (
+                  <div className="grid grid-cols-2 gap-8 h-48">
+                    <div className="bg-slate-50 rounded-2xl animate-pulse"></div>
+                    <div className="bg-slate-50 rounded-2xl animate-pulse"></div>
+                  </div>
+                ) : reportData ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <ComparisonChart
+                      title="Clinical Volume"
+                      data={reportData?.dailyActivity || []}
+                      dataKey="appointments"
+                      color="#10B981"
+                      type="bar"
+                    />
+                    <ComparisonChart
+                      title="Financial Velocity"
+                      data={reportData?.dailyActivity || []}
+                      dataKey="revenue"
+                      color="#6366F1"
+                      formatValue={(val) => currency(val)}
+                    />
+                  </div>
+                ) : (
+                  <div className="h-48 flex items-center justify-center text-slate-300 italic">No historical stream detected.</div>
+                )}
               </div>
-            </div>
+           </article>
 
-            <div className="alert-strip">
-              {/* Critical labs */}
-              {reportData?.criticalAlerts?.length > 0 &&
-                reportData.criticalAlerts.map((alert) => (
-                  <div key={alert.id} className="alert-item alert-item--critical">
-                    <div className="alert-icon-shell">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                      </svg>
-                    </div>
-                    <div className="alert-content-enhanced">
-                      <div className="alert-top">
-                        <span className="alert-title">{alert.patientName}</span>
-                      </div>
-                      <div className="alert-bottom">
-                        <span className="alert-meta">{alert.testName}</span>
-                      </div>
-                    </div>
+           {/* Quick Actions (Mandatory 48px Touch Targets) */}
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {quickActions.map(action => (
+                <button 
+                  key={action.view}
+                  onClick={() => setView(action.view)}
+                  className="clinical-card group hover:border-emerald-200 hover:shadow-md transition-all text-left flex flex-col p-6 h-full"
+                >
+                   <div className="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center mb-4 group-hover:bg-emerald-50 group-hover:text-emerald-500 transition-colors">
+                      <action.icon className="w-5 h-5" />
+                   </div>
+                   <span className="text-xs font-black text-slate-900 uppercase tracking-widest">{action.label}</span>
+                   <p className="text-[9px] font-bold text-slate-400 mt-1 uppercase group-hover:text-emerald-600/60 transition-colors">{action.desc}</p>
+                </button>
+              ))}
+           </div>
+        </div>
+
+        {/* Alerts Pillar (Urgency Anchors) */}
+        <div className="col-span-12 lg:col-span-4 space-y-8">
+           <article className="clinical-card border-l-4 border-l-rose-500 shadow-lg">
+              <div className="flex items-center gap-3 mb-8">
+                 <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center">
+                    <AlertCircle className="w-5 h-5" />
+                 </div>
+                 <div>
+                    <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Active Alerts</h3>
+                    <p className="text-[10px] font-bold text-rose-600/60 uppercase">Immediate Intervention</p>
+                 </div>
+              </div>
+
+              <div className="space-y-4">
+                {reportData?.criticalAlerts?.map(alert => (
+                  <div key={alert.id} className="p-4 bg-rose-50 rounded-2xl border border-rose-100 flex gap-4 animate-fade-in">
+                     <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 shrink-0 pulse-critical"></div>
+                     <div>
+                        <div className="text-xs font-black text-rose-900 lowercase first-letter:uppercase">{alert.patientName}</div>
+                        <div className="text-[10px] font-bold text-rose-700/70 uppercase tracking-widest mt-1">Ref: {alert.testName}</div>
+                     </div>
                   </div>
                 ))}
 
-              {/* Low stock */}
-              {lowStockAlerts.length > 0 &&
-                lowStockAlerts.map((alert, i) => {
-                  const isCritical = alert.alertLevel === 'CRITICAL';
-                  return (
-                    <div key={alert.drugId || i} className={'alert-item ' + (isCritical ? 'alert-item--critical' : 'alert-item--warning')}>
-                      <div className="alert-icon-shell alert-icon-shell--warning">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="m7.5 4.27 9 5.15" />
-                          <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                          <path d="m3.3 7 8.7 5 8.7-5" />
-                          <path d="M12 22V12" />
-                        </svg>
-                      </div>
-                      <div className="alert-content-enhanced">
-                        <div className="alert-top">
-                          <span className="alert-title">{alert.drugName}</span>
-                        </div>
-                        <div className="alert-bottom">
-                          <span className="alert-meta">{alert.quantityRemaining} left</span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                {lowStockAlerts.map((alert, i) => (
+                  <div key={i} className="p-4 bg-amber-50 rounded-2xl border border-amber-100 flex gap-3">
+                     <Package className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                     <div>
+                        <div className="text-xs font-black text-amber-900 lowercase first-letter:uppercase">{alert.drugName}</div>
+                        <div className="text-[10px] font-bold text-amber-700/70 uppercase tracking-widest mt-1">Remaining: {alert.quantityRemaining} units</div>
+                     </div>
+                  </div>
+                ))}
 
-              {!hasAnyAlerts && (
-                <div className="alert-empty">
-                  <span className="alert-empty-title">Clear</span>
-                </div>
-              )}
-            </div>
-          </section>
-        </section>
-
-        {/* COLUMN 3: QUICK ACTIONS */}
-        <section className="dashboard-column dashboard-column--actions">
-          <section className="premium-panel premium-panel--actions">
-            <div className="panel-header">
-              <div className="panel-header-text">
-                <h2 className="panel-title">Quick Actions</h2>
+                {!hasAnyAlerts && (
+                   <div className="py-12 text-center">
+                      <CheckCircle2 className="w-8 h-8 text-emerald-100 mx-auto mb-4" />
+                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Clinical stream stabilizes.</p>
+                   </div>
+                )}
               </div>
-            </div>
-            <div className="grid grid-cols-2 gap-2 p-4">
-              {quickActions.map((action) => (
-                <button
-                  key={action.view}
-                  type="button"
-                  onClick={() => setView(action.view)}
-                  className="flex items-center gap-3 p-3 bg-slate-50 border border-slate-100 rounded-xl hover:bg-white hover:shadow-md transition-all group"
-                >
-                  <div className={`p-2 rounded-lg bg-white text-[var(--primary)] shadow-sm group-hover:scale-110 transition-transform`}>
-                    {action.icon}
-                  </div>
-                  <div className="text-left">
-                    <span className="block text-xs font-bold text-slate-800 tracking-tight">{action.label}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </section>
-        </section>
-      </main>
+           </article>
+
+           <article className="clinical-card border-l-4 border-l-indigo-500">
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Strategic Context</h3>
+              <div className="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+                 <p className="text-xs font-medium text-indigo-900 leading-relaxed italic">
+                    "Baseline clinical metrics indicate high retention. Node stability maintaining 99.9% uptime. Cross-reference with pathology shards recommended."
+                 </p>
+              </div>
+           </article>
+        </div>
+      </div>
     </div>
+  );
+}
+
+function CheckCircle2(props) {
+  return (
+    <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
   );
 }

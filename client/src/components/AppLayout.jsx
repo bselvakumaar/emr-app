@@ -32,6 +32,8 @@ import {
   Bed
 } from "lucide-react";
 import { ActionMenu, NotificationSystem, SmartSearch, StatusIndicator } from "./UXEnhanced.jsx";
+import "../styles/critical-care.css";
+
 
 const navIcons = {
   superadmin: <ShieldCheck className="w-5 h-5" />,
@@ -272,7 +274,8 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
   );
 
   return (
-    <div className="app-root">
+    <div className="app-root medical-bg-light">
+
       {mobileOpen && (
         <div className="fixed inset-0 z-[100] bg-slate-950/45 backdrop-blur-sm lg:hidden">
           <div className="absolute inset-0" onClick={() => setMobileOpen(false)} />
