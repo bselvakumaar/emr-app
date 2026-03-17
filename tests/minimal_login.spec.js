@@ -21,10 +21,10 @@ test('Minimal Login Test', async ({ page }) => {
     await page.locator('select[name="tenantId"]').selectOption({ label: TENANT_1_NAME });
 
     console.log('6. Filling email...');
-    await page.getByPlaceholder('Email address').fill(STAFF.email);
+    await page.getByPlaceholder('name@hospital.org').fill(STAFF.email);
 
     console.log('7. Filling password...');
-    await page.getByPlaceholder('Password').fill(STAFF.password);
+    await page.getByPlaceholder('Enter your secure password').fill(STAFF.password);
 
     console.log('8. Clicking Sign In...');
     await page.getByRole('button', { name: 'Sign In' }).click();

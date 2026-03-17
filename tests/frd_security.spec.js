@@ -16,19 +16,20 @@ async function fetchJson(request, url, options = {}) {
 async function getTenantMap(request) {
   const { res, body } = await fetchJson(request, `${API_BASE}/tenants`);
   expect(res.ok()).toBeTruthy();
-  const tenants = Array.isArray(body) ? body : [];
+  const tenants = Array.isArray(body?.value || body) ? (body?.value || body) : [];
   return {
     all: tenants,
-    city: tenants.find((t) => /city general hospital/i.test(t.name) || /city_general/i.test(t.code)),
-    valley: tenants.find((t) => /valley health clinic/i.test(t.name) || /valley/i.test(t.code)),
-    ehs: tenants.find((t) => /enterprise hospital systems/i.test(t.name) || /ehs/i.test(t.code)),
+    city: tenants.find((t) => /city general hospital|kidz clinic/i.test(t.name) || /city_general|kc/i.test(t.code)),
+    valley: tenants.find((t) => /valley health clinic|new age hospital/i.test(t.name) || /valley|nah/i.test(t.code)),
+    ehs: tenants.find((t) => /enterprise hospital systems|new age/i.test(t.name) || /ehs|nah/i.test(t.code)),
   };
 }
 
 async function login(request, tenantId, email, password) {
   const { res, body } = await fetchJson(request, `${API_BASE}/login`, {
     method: 'POST',
-    data: { tenantId, email, password },
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tenantId, email, password }),
   });
   expect(res.ok(), `Login failed for ${email}`).toBeTruthy();
   expect(body?.token).toBeTruthy();

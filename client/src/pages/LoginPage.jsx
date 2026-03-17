@@ -212,6 +212,7 @@ export default function LoginPage({ onLogin, tenants }) {
               <label className="block text-sm font-bold text-[var(--text-main)] mb-2">Organization</label>
               <div className="relative">
                 <select
+                  name="tenantId"
                   className="clinical-select px-4 py-4 pr-12 text-sm font-semibold appearance-none"
                   value={credentials.tenantId}
                   onChange={(e) => handleTenantChange(e.target.value)}

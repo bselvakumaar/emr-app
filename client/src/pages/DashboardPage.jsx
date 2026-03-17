@@ -5,7 +5,7 @@ import {
   DepartmentDistributionChart,
   AppointmentStatusChart,
   BedOccupancyChart
-} from '../components/ChartComponents.jsx';
+} from '../components/EChartsComponents.jsx';
 import { currency } from '../utils/format.js';
 import { api } from '../api.js';
 import '../styles/critical-care.css'; // Importing the Life-Saving Design System
@@ -158,7 +158,7 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
   return (
     <div className="page-content bg-gray-50">
       {/* 1. PROFESSIONAL HEADER WITH DYNAMIC TITLE */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-3">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{getCurrentViewTitle()}</h1>
@@ -217,55 +217,55 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
         </div>
       </div>
 
-      {/* Key Metrics Row - elevated cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      {/* Key Metrics Row - centered elevated cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <div className="dashboard-card metric-card">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex justify-center mb-3">
             <div className="bg-teal-100 rounded-lg p-3">
               <Users className="w-6 h-6 text-teal-600" />
             </div>
-            <span className="text-xs text-teal-600 font-medium">+12%</span>
           </div>
           <p className="metric-value">{realtimeMetrics.totalPatients}</p>
           <p className="metric-label">Total Patients</p>
+          <span className="text-xs text-teal-600 font-medium">+12%</span>
         </div>
 
         <div className="dashboard-card metric-card">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex justify-center mb-3">
             <div className="bg-blue-100 rounded-lg p-3">
               <Calendar className="w-6 h-6 text-blue-600" />
             </div>
-            <span className="text-xs text-blue-600 font-medium">+8%</span>
           </div>
           <p className="metric-value">{realtimeMetrics.totalAppointments}</p>
           <p className="metric-label">Appointments</p>
+          <span className="text-xs text-blue-600 font-medium">+8%</span>
         </div>
 
         <div className="dashboard-card metric-card">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex justify-center mb-3">
             <div className="bg-indigo-100 rounded-lg p-3">
               <DollarSign className="w-6 h-6 text-indigo-600" />
             </div>
-            <span className="text-xs text-indigo-600 font-medium">+15%</span>
           </div>
           <p className="metric-value">${(realtimeMetrics.totalRevenue / 1000).toFixed(0)}K</p>
           <p className="metric-label">Revenue</p>
+          <span className="text-xs text-indigo-600 font-medium">+15%</span>
         </div>
 
         <div className="dashboard-card metric-card">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex justify-center mb-3">
             <div className="bg-rose-100 rounded-lg p-3">
               <AlertCircle className="w-6 h-6 text-rose-600" />
             </div>
-            <span className="text-xs text-rose-600 font-medium">3 urgent</span>
           </div>
           <p className="metric-value">{hasAnyAlerts ? '3' : '0'}</p>
           <p className="metric-label">Critical Alerts</p>
+          <span className="text-xs text-rose-600 font-medium">3 urgent</span>
         </div>
       </div>
 
       {/* Quick Actions - Clean White Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
         {quickActions.map((action, index) => (
           <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
             <div className="bg-blue-100 rounded-lg p-3 w-12 h-12 mx-auto mb-4 flex items-center justify-center">
@@ -278,7 +278,7 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
       </div>
 
       {/* Charts Grid - rich clinical visuals */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4 h-80">
         {/* Patient Flow Chart */}
         <div className="dashboard-card">
           <div className="chart-container">
@@ -337,7 +337,7 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
       </div>
 
       {/* Bottom Section - Additional Clean Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
         {/* Appointment Requests */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-6">
@@ -382,28 +382,28 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
 
         {/* Patient Statistics */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-6">
+          <div className="text-center mb-6">
             <h3 className="text-lg font-semibold text-gray-900">Patient Statistics</h3>
-            <div className="bg-purple-100 rounded-lg p-3">
+            <div className="bg-purple-100 rounded-lg p-3 w-12 h-12 mx-auto flex items-center justify-center mt-4">
               <Users className="w-6 h-6 text-purple-600" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="text-center p-3 bg-gray-50 rounded-lg">
               <p className="text-2xl font-bold text-purple-600">{realtimeMetrics.patientStats?.new_patients || 0}</p>
-              <p className="text-xs text-gray-600 mt-1">New Patients</p>
+              <p className="text-xs text-gray-600 mt-2">New Patients</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
               <p className="text-2xl font-bold text-blue-600">{realtimeMetrics.patientStats?.returning_patients || 0}</p>
-              <p className="text-xs text-gray-600 mt-1">Returning</p>
+              <p className="text-xs text-gray-600 mt-2">Returning</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
               <p className="text-2xl font-bold text-green-600">{realtimeMetrics.patientStats?.discharged_today || 0}</p>
-              <p className="text-xs text-gray-600 mt-1">Discharged</p>
+              <p className="text-xs text-gray-600 mt-2">Discharged</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
               <p className="text-2xl font-bold text-orange-600">{realtimeMetrics.patientStats?.admitted_today || 0}</p>
-              <p className="text-xs text-gray-600 mt-1">Admitted</p>
+              <p className="text-xs text-gray-600 mt-2">Admitted</p>
             </div>
           </div>
         </div>
@@ -432,7 +432,7 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
       </div>
 
       {/* Additional Cards Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Patient Visits */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-6">
