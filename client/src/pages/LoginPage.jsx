@@ -64,7 +64,7 @@ export default function LoginPage({ onLogin, tenants }) {
 
   const demoCredentials = {
     superadmin: {
-      label: 'Platform Administration',
+      label: 'Platform Services',
       email: 'superadmin@emr.local',
       password: 'Admin@123'
     },
@@ -218,7 +218,7 @@ export default function LoginPage({ onLogin, tenants }) {
                   onChange={(e) => handleTenantChange(e.target.value)}
                 >
                   <option value="">Select platform or facility</option>
-                  <option value="superadmin">Healthcare Platform</option>
+                  <option value="superadmin">Platform Services</option>
                   {tenantOptions.map((tenant) => (
                     <option key={tenant.id} value={tenant.code || tenant.id}>
                       {tenant.name}

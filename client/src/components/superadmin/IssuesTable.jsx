@@ -2,32 +2,45 @@ import React from 'react';
 
 export default function IssuesTable({ issues }) {
   return (
-    <section className="mb-8">
-      <h2 className="text-lg font-bold mb-2">Issues Reported</h2>
-      <table className="min-w-full bg-white rounded-xl shadow">
-        <thead>
-          <tr className="text-xs text-gray-500 uppercase">
-            <th className="p-3">Tenant</th>
-            <th className="p-3">Title</th>
-            <th className="p-3">Severity</th>
-            <th className="p-3">Status</th>
-            <th className="p-3">Created</th>
-            <th className="p-3">Updated</th>
-          </tr>
-        </thead>
-        <tbody>
-          {issues.map((iss, i) => (
-            <tr key={i} className="text-sm text-gray-700 text-center border-t">
-              <td className="p-3">{iss.tenant}</td>
-              <td className="p-3">{iss.title}</td>
-              <td className="p-3">{iss.severity}</td>
-              <td className="p-3">{iss.status}</td>
-              <td className="p-3">{iss.created}</td>
-              <td className="p-3">{iss.updated}</td>
+    <article className="clinical-card mb-8">
+      <div className="p-6 border-b border-slate-50 flex items-center justify-between">
+         <div>
+            <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Issues Reported</h3>
+            <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase">Infrastructure fault reports</p>
+         </div>
+      </div>
+      <div className="premium-table-container">
+        <table className="premium-table">
+          <thead>
+            <tr>
+              <th>Tenant</th>
+              <th>Title</th>
+              <th>Severity</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Updated</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
+          </thead>
+          <tbody className="divide-y divide-slate-50">
+            {issues.length === 0 ? (
+              <tr><td colSpan="6" className="text-center py-8 text-[10px] font-black uppercase text-slate-400">No active issues recorded</td></tr>
+            ) : issues.map((iss, i) => (
+              <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                <td><div className="font-black text-slate-900">{iss.tenant}</div></td>
+                <td><div className="text-[11px] font-medium text-slate-700">{iss.title}</div></td>
+                <td>
+                  <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-tighter border ${iss.severity === 'critical' ? 'bg-rose-50 text-rose-600 border-rose-200' : 'bg-amber-50 text-amber-600 border-amber-200'}`}>
+                    {iss.severity}
+                  </span>
+                </td>
+                <td><span className="text-[10px] font-bold text-slate-500 uppercase">{iss.status}</span></td>
+                <td><div className="text-[10px] text-slate-500">{iss.created}</div></td>
+                <td><div className="text-[10px] text-slate-500">{iss.updated}</div></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </article>
   );
 }

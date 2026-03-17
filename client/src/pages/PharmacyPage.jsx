@@ -172,25 +172,25 @@ export default function PharmacyPage({ tenant, onDispense }) {
               </div>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full">
+            <div className="premium-table-container">
+              <table className="premium-table">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-100">
-                    <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Medication Entity</th>
-                    <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Patient Account</th>
-                    <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Dosage / Unit</th>
-                    <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Protocol</th>
-                    <th className="px-8 py-5 text-right text-[10px] font-black uppercase tracking-widest text-slate-400">Actions</th>
+                  <tr>
+                    <th>Medication Entity</th>
+                    <th>Patient Account</th>
+                    <th>Dosage / Unit</th>
+                    <th>Protocol</th>
+                    <th style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-50">
                   {loading ? (
-                    <tr><td colSpan="5" className="px-8 py-20 text-center text-slate-400 animate-pulse">Synchronizing with clinical ledger...</td></tr>
+                    <tr><td colSpan="5" className="text-center py-20 text-slate-400 animate-pulse">Synchronizing with clinical ledger...</td></tr>
                   ) : filteredQueue.length === 0 ? (
-                    <tr><td colSpan="5" className="px-8 py-20 text-center text-slate-400 italic">No prescriptions detected in fulfillment pool.</td></tr>
+                    <tr><td colSpan="5" className="text-center py-20 text-slate-400 italic">No prescriptions detected in fulfillment pool.</td></tr>
                   ) : filteredQueue.map(item => (
                     <tr key={item.item_id} className="hover:bg-slate-50/50 transition-colors group">
-                      <td className="px-8 py-6">
+                      <td>
                         <div className="flex items-center gap-4">
                           <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center font-black">
                             {item.generic_name?.[0] || 'M'}
@@ -201,21 +201,21 @@ export default function PharmacyPage({ tenant, onDispense }) {
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-6">
+                      <td>
                         <div className="text-sm font-bold text-slate-800">{item.patient_name}</div>
                         <div className="text-[10px] text-slate-400 font-black uppercase mt-0.5">REF: {item.patient_id?.slice(0, 8)}</div>
                       </td>
-                      <td className="px-8 py-6">
+                      <td>
                          <div className="text-sm font-black text-slate-900">{item.quantity_prescribed} {item.unit || 'units'}</div>
                       </td>
-                      <td className="px-8 py-6">
+                      <td>
                         <span className={`px-2 py-1 rounded text-[10px] font-black uppercase tracking-widest border ${
                           item.status === 'ready' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100'
                         }`}>
                           {item.status || 'Pending'}
                         </span>
                       </td>
-                      <td className="px-8 py-6 text-right">
+                      <td className="text-right">
                          <div className="flex justify-end gap-2">
                             <button 
                               onClick={() => setShowDispenseModal(item)}
@@ -265,36 +265,36 @@ export default function PharmacyPage({ tenant, onDispense }) {
                       Export Inventory Shard
                    </button>
                 </header>
-                <div className="overflow-x-auto">
-                   <table className="w-full">
-                      <thead className="bg-slate-50 border-b border-slate-100">
+                <div className="premium-table-container">
+                   <table className="premium-table">
+                      <thead>
                          <tr>
-                            <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Medication Entity</th>
-                            <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Current Stock</th>
-                            <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Reorder Shard</th>
-                            <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Status</th>
-                            <th className="px-8 py-5 text-right text-[10px] font-black uppercase tracking-widest text-slate-400">Action</th>
+                            <th>Medication Entity</th>
+                            <th>Current Stock</th>
+                            <th>Reorder Shard</th>
+                            <th>Status</th>
+                            <th style={{ textAlign: 'right' }}>Action</th>
                          </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100">
+                      <tbody className="divide-y divide-slate-50">
                          {[
                             { name: 'Paracetamol 500mg', brand: 'Calpol', stock: 120, reorder: 50, status: 'stable' },
                             { name: 'Amoxicillin 250mg', brand: 'Mox', stock: 12, reorder: 30, status: 'critical' },
                             { name: 'Insulin Glargine', brand: 'Lantus', stock: 45, reorder: 20, status: 'stable' }
                          ].map((item, idx) => (
                            <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                             <td className="px-8 py-6">
+                             <td>
                                 <div className="text-sm font-black text-slate-800">{item.name}</div>
                                 <div className="text-[10px] text-slate-400 font-bold uppercase">{item.brand}</div>
                              </td>
-                             <td className="px-8 py-6 text-sm font-black tabular-nums">{item.stock} Units</td>
-                             <td className="px-8 py-6 text-sm font-bold text-slate-400 tabular-nums">{item.reorder}</td>
-                             <td className="px-8 py-6">
+                             <td className="text-sm font-black tabular-nums">{item.stock} Units</td>
+                             <td className="text-sm font-bold text-slate-400 tabular-nums">{item.reorder}</td>
+                             <td>
                                 <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${item.status === 'critical' ? 'bg-rose-50 text-rose-600 border border-rose-100' : 'bg-emerald-50 text-emerald-600 border border-emerald-100'}`}>
                                    {item.status}
                                 </span>
                              </td>
-                             <td className="px-8 py-6 text-right">
+                             <td className="text-right">
                                 <button className="p-2.5 rounded-xl bg-slate-50 text-slate-400 hover:text-slate-900 transition-all">
                                    <ArrowRight className="w-4 h-4" />
                                 </button>
@@ -371,31 +371,31 @@ export default function PharmacyPage({ tenant, onDispense }) {
                       </div>
                    </header>
                    <div className="premium-table-container">
-                      <table className="w-full">
+                      <table className="premium-table">
                          <thead>
-                            <tr className="bg-slate-50 border-b border-slate-100">
-                               <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">PO Ref / Date</th>
-                               <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Vendor Node</th>
-                               <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Quantum (Val)</th>
-                               <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Status</th>
+                            <tr>
+                               <th>PO Ref / Date</th>
+                               <th>Vendor Node</th>
+                               <th>Quantum (Val)</th>
+                               <th>Status</th>
                             </tr>
                          </thead>
-                         <tbody className="divide-y divide-slate-100">
+                         <tbody className="divide-y divide-slate-50">
                             {[
                                { ref: 'PO-2024-001', date: 'Mar 12', vendor: 'PharmaCorp', amount: 45000, status: 'Inward Pending' },
                                { ref: 'PO-2024-002', date: 'Mar 14', vendor: 'BioSystems', amount: 12500, status: 'authorized' },
                                { ref: 'PO-2024-003', date: 'Mar 15', vendor: 'PharmaCorp', amount: 8200, status: 'cancelled' }
                             ].map((po, idx) => (
                                <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                                  <td className="px-8 py-6">
+                                  <td>
                                      <div className="text-sm font-black text-slate-900">{po.ref}</div>
                                      <div className="text-[10px] text-slate-400 font-bold uppercase">{po.date}, 2024</div>
                                   </td>
-                                  <td className="px-8 py-6">
+                                  <td>
                                      <div className="text-sm font-bold text-slate-700">{po.vendor}</div>
                                   </td>
-                                  <td className="px-8 py-6 text-sm font-black tabular-nums">{currency(po.amount)}</td>
-                                  <td className="px-8 py-6">
+                                  <td className="text-sm font-black tabular-nums">{currency(po.amount)}</td>
+                                  <td>
                                      <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
                                         po.status === 'authorized' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
                                         po.status === 'cancelled' ? 'bg-rose-50 text-rose-600 border border-rose-100' :

@@ -1730,7 +1730,15 @@ app.post('/api/lab/orders/:id/results', requireTenant, async (req, res) => {
 // SUPPORT TICKETS (Operations)
 // =====================================================
 
-app.get('/api/support/tickets', requireTenant, async (req, res) => {
+app.get('/api/support/tickets', authenticate, (req, res, next) => {
+  // Allow Superadmin to see ALL tickets if no specific tenant is requested
+  const tenantId = req.query.tenantId || req.header('x-tenant-id');
+  if (req.user.role === 'Superadmin' && !tenantId) {
+    req.tenantId = null;
+    return next();
+  }
+  requireTenant(req, res, next);
+}, async (req, res) => {
   try {
     const tickets = await repo.getSupportTickets(req.tenantId);
     res.json(tickets);

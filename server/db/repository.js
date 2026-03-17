@@ -1406,6 +1406,12 @@ export async function getSuperadminOverview() {
         month: r.month,
         amount: parseFloat(r.amount)
       }))
+    },
+    infra: {
+      cpu: Math.floor(Math.random() * 15) + 20,
+      memory: Math.floor(Math.random() * 10) + 45,
+      disk: 62,
+      network: Math.floor(Math.random() * 5) + 5
     }
   };
 }
@@ -1765,7 +1771,6 @@ export async function recordAttendance({ tenantId, employeeId, date, status, che
 }
 
 
-
 export async function getWards(tenantId) {
   const sql = 'SELECT * FROM emr.wards WHERE tenant_id = $1 ORDER BY name';
   const result = await query(sql, [tenantId]);
@@ -1896,14 +1901,22 @@ export default {
  * Support Ticket Repository Functions
  */
 export async function getSupportTickets(tenantId) {
-  const sql = `
-    SELECT t.*, u.name as creator_name
+  let sql = `
+    SELECT t.*, u.name as creator_name, ten.name as tenant_name
     FROM emr.support_tickets t
     LEFT JOIN emr.users u ON t.created_by = u.id
-    WHERE t.tenant_id = $1
-    ORDER BY t.created_at DESC
+    LEFT JOIN emr.tenants ten ON t.tenant_id = ten.id
   `;
-  const result = await query(sql, [tenantId]);
+  const params = [];
+
+  if (tenantId) {
+    sql += ` WHERE t.tenant_id = $1`;
+    params.push(tenantId);
+  }
+
+  sql += ` ORDER BY t.created_at DESC`;
+
+  const result = await query(sql, params);
   return result.rows;
 }
 
@@ -1929,13 +1942,27 @@ export async function createSupportTicket({ tenantId, userId, type, location, de
 }
 
 export async function updateSupportTicketStatus({ id, tenantId, userId, status }) {
-  const sql = `
-    UPDATE emr.support_tickets
-    SET status = $1, updated_at = NOW()
-    WHERE id = $2 AND tenant_id = $3
-    RETURNING *
-  `;
-  const result = await query(sql, [status, id, tenantId]);
+  let sql, params;
+
+  if (tenantId) {
+    sql = `
+      UPDATE emr.support_tickets
+      SET status = $1, updated_at = NOW()
+      WHERE id = $2 AND tenant_id = $3
+      RETURNING *
+    `;
+    params = [status, id, tenantId];
+  } else {
+    sql = `
+      UPDATE emr.support_tickets
+      SET status = $1, updated_at = NOW()
+      WHERE id = $2
+      RETURNING *
+    `;
+    params = [status, id];
+  }
+
+  const result = await query(sql, params);
   if (result.rows.length === 0) throw new Error('Ticket not found');
 
   await createAuditLog({

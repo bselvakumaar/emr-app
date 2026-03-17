@@ -2,25 +2,34 @@ import React from 'react';
 
 export default function DashboardMetrics({ tenants, users, issues, tickets }) {
   return (
-    <section className="mb-8">
-      <h2 className="text-lg font-bold mb-2">Superadmin Dashboard</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl shadow p-4 text-center">
-          <div className="text-xs text-gray-500 mb-1">Active Tenants</div>
-          <div className="text-2xl font-black text-blue-700">{tenants}</div>
+    <section className="vitals-monitor mb-10">
+      <div className="vital-node vital-node--safe shadow-sm">
+        <div className="flex justify-between items-start">
+          <span className="vital-label">Active Tenants</span>
         </div>
-        <div className="bg-white rounded-xl shadow p-4 text-center">
-          <div className="text-xs text-gray-500 mb-1">Total Users</div>
-          <div className="text-2xl font-black text-blue-700">{users}</div>
+        <span className="vital-value tabular-nums mt-1">{tenants}</span>
+        <p className="text-[10px] font-black text-emerald-600 mt-2 uppercase tracking-tight">Facilities online</p>
+      </div>
+      <div className="vital-node shadow-sm" style={{ borderLeft: '4px solid #3b82f6' }}>
+        <div className="flex justify-between items-start">
+          <span className="vital-label">Global Users</span>
         </div>
-        <div className="bg-white rounded-xl shadow p-4 text-center">
-          <div className="text-xs text-gray-500 mb-1">Open Issues</div>
-          <div className="text-2xl font-black text-red-600">{issues}</div>
+        <span className="vital-value tabular-nums mt-1">{users}</span>
+        <p className="text-[10px] font-black text-blue-600 mt-2 uppercase tracking-tight">Active accounts</p>
+      </div>
+      <div className="vital-node vital-node--critical shadow-sm">
+        <div className="flex justify-between items-start">
+          <span className="vital-label">Open Issues</span>
         </div>
-        <div className="bg-white rounded-xl shadow p-4 text-center">
-          <div className="text-xs text-gray-500 mb-1">Open Tickets</div>
-          <div className="text-2xl font-black text-yellow-600">{tickets}</div>
+        <span className="vital-value tabular-nums mt-1">{issues}</span>
+        <p className="text-[10px] font-black text-rose-600 mt-2 uppercase tracking-tight">Requires attention</p>
+      </div>
+      <div className="vital-node vital-node--warning shadow-sm">
+        <div className="flex justify-between items-start">
+          <span className="vital-label">Pending Tickets</span>
         </div>
+        <span className="vital-value tabular-nums mt-1">{tickets}</span>
+        <p className="text-[10px] font-black text-amber-600 mt-2 uppercase tracking-tight">Awaiting support</p>
       </div>
     </section>
   );

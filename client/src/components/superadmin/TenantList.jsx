@@ -2,28 +2,37 @@ import React from 'react';
 
 export default function TenantList({ tenants, onSelect }) {
   return (
-    <section className="mb-8">
-      <h2 className="text-lg font-bold mb-2">Active Tenants</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-xl shadow">
+    <article className="clinical-card mb-8">
+      <div className="p-6 border-b border-slate-50 flex items-center justify-between">
+         <div>
+            <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Active Tenants</h3>
+            <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase">Facilities connected to platform</p>
+         </div>
+      </div>
+      <div className="premium-table-container">
+        <table className="premium-table">
           <thead>
-            <tr className="text-xs text-gray-500 uppercase">
-              <th className="p-3">Name</th>
-              <th className="p-3">Domain</th>
-              <th className="p-3">Status</th>
-              <th className="p-3">Created</th>
-              <th className="p-3">Actions</th>
+            <tr>
+              <th>Name</th>
+              <th>Domain</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-slate-50">
             {tenants.map((tenant, i) => (
-              <tr key={i} className="text-sm text-gray-700 text-center border-t">
-                <td className="p-3">{tenant.name}</td>
-                <td className="p-3">{tenant.domain}</td>
-                <td className="p-3">{tenant.status}</td>
-                <td className="p-3">{tenant.created}</td>
-                <td className="p-3">
-                  <button className="text-blue-600 hover:underline" onClick={() => onSelect(tenant)}>
+              <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                <td><div className="font-black text-slate-900">{tenant.name}</div></td>
+                <td><span className="text-[11px] font-mono text-slate-500">{tenant.domain}</span></td>
+                <td>
+                  <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-tighter border ${tenant.status === 'active' ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-slate-50 text-slate-500 border-slate-200'}`}>
+                    {tenant.status}
+                  </span>
+                </td>
+                <td><div className="text-[10px] text-slate-500">{tenant.created}</div></td>
+                <td>
+                  <button className="text-[10px] font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-800" onClick={() => onSelect(tenant)}>
                     View
                   </button>
                 </td>
@@ -32,6 +41,6 @@ export default function TenantList({ tenants, onSelect }) {
           </tbody>
         </table>
       </div>
-    </section>
+    </article>
   );
 }

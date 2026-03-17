@@ -548,7 +548,8 @@ export async function importPharmacyStock(tenantId, items) {
 // =====================================================
 
 export async function getSupportTickets(tenantId) {
-  return await apiRequest(`/support/tickets?tenantId=${tenantId}`);
+  const query = tenantId ? `?tenantId=${tenantId}` : '';
+  return await apiRequest(`/support/tickets${query}`);
 }
 
 export async function createSupportTicket(data) {

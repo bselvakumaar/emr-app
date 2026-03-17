@@ -19,7 +19,7 @@ export const moduleMeta = {
 };
 
 export const fallbackPermissions = {
-  Superadmin: ['superadmin', 'dashboard', 'reports'],
+  Superadmin: ['superadmin'],
   Admin: ['dashboard', 'appointments', 'patients', 'emr', 'billing', 'insurance', 'inventory', 'pharmacy', 'lab', 'employees', 'accounts', 'reports', 'admin', 'users'],
   Doctor: ['dashboard', 'appointments', 'patients', 'emr', 'reports'],
   Nurse: ['dashboard', 'appointments', 'patients', 'emr', 'inventory'],

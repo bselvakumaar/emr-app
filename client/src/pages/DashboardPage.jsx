@@ -278,58 +278,56 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
       </div>
 
       {/* Charts Grid - rich clinical visuals */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4 h-80">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
         {/* Patient Flow Chart */}
-        <div className="dashboard-card">
-          <div className="chart-container">
-            <div className="chart-header">
+        <div className="dashboard-card border border-gray-200 bg-white rounded-xl shadow-sm p-0 flex flex-col h-full overflow-hidden">
+          <div className="chart-container flex-1 flex flex-col p-4">
+            <div className="chart-header flex justify-between items-start mb-4">
               <div>
-                <h2 className="chart-title">Patient Flow</h2>
+                <h2 className="chart-title text-lg font-semibold text-gray-900">Patient Flow</h2>
                 <p className="text-xs text-gray-500 mt-1">Daily admission & discharge trends</p>
               </div>
               <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-full px-3 py-1">
                 Live cohort
               </span>
             </div>
-            <div className="chart-area">
+            <div className="chart-area flex-1 min-h-[250px] relative w-full">
               <PatientOverviewChart data={reportData?.patientData || []} />
             </div>
           </div>
         </div>
 
         {/* Department Status */}
-        <div className="dashboard-card">
-          <div className="chart-container">
-            <div className="chart-header">
+        <div className="dashboard-card border border-gray-200 bg-white rounded-xl shadow-sm p-0 flex flex-col h-full overflow-hidden">
+          <div className="chart-container flex-1 flex flex-col p-4">
+            <div className="chart-header flex justify-between items-start mb-4">
               <div>
-                <h2 className="chart-title">Department Status</h2>
+                <h2 className="chart-title text-lg font-semibold text-gray-900">Department Status</h2>
                 <p className="text-sm text-gray-600 mt-1">Current department occupancy</p>
               </div>
               <span className="text-[10px] font-semibold text-slate-700 bg-slate-50 border border-slate-200 rounded-full px-3 py-1">
                 Bed & service mix
               </span>
             </div>
-            <div className="chart-area">
-              <div className="h-72">
-                <DepartmentDistributionChart data={reportData?.departmentDistribution || []} />
-              </div>
+            <div className="chart-area flex-1 min-h-[250px] relative w-full">
+              <DepartmentDistributionChart data={reportData?.departmentDistribution || []} />
             </div>
           </div>
         </div>
 
         {/* Revenue Analytics */}
-        <div className="dashboard-card">
-          <div className="chart-container">
-            <div className="chart-header">
+        <div className="dashboard-card border border-gray-200 bg-white rounded-xl shadow-sm p-0 flex flex-col h-full overflow-hidden">
+          <div className="chart-container flex-1 flex flex-col p-4">
+            <div className="chart-header flex justify-between items-start mb-4">
               <div>
-                <h2 className="chart-title">Revenue Analytics</h2>
+                <h2 className="chart-title text-lg font-semibold text-gray-900">Revenue Analytics</h2>
                 <p className="text-sm text-gray-600 mt-1">Monthly financial performance</p>
               </div>
               <span className="text-[10px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-100 rounded-full px-3 py-1">
                 Collections trend
               </span>
             </div>
-            <div className="chart-area">
+            <div className="chart-area flex-1 min-h-[250px] relative w-full">
               <RevenueTrendChart data={reportData?.financialData || []} />
             </div>
           </div>

@@ -8,7 +8,7 @@ import TicketStatus from '../components/superadmin/TicketStatus.jsx';
 import InfraUsage from '../components/superadmin/InfraUsage.jsx';
 
 
-function SuperadminPage({ superOverview: propOverview, tenants = [], onCreateTenant, onCreateUser, issues = [], tickets = [], infra = {} }) {
+function SuperadminPage({ superOverview: propOverview, tenants = [], onCreateTenant, onCreateUser, issues = [], tickets = [], onResolveTicket, infra = {} }) {
   const superOverview = propOverview || {};
   // Example: issues, tickets, infra would be fetched or passed as props in a real app
 
@@ -21,7 +21,17 @@ function SuperadminPage({ superOverview: propOverview, tenants = [], onCreateTen
   };
 
   return (
-    <div className="intelligence-hub slide-up">
+    <div className="page-shell-premium animate-fade-in">
+      <div className="page-header-premium mb-8">
+        <div>
+          <h1 className="flex items-center gap-3">
+             Platform Services Dashboard
+             <span className="text-[10px] bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full border border-indigo-200 uppercase tracking-tighter font-black">Global Node</span>
+          </h1>
+          <p className="dim-label">Monitor global infrastructure and tenant operations across the platform.</p>
+        </div>
+      </div>
+
       <DashboardMetrics {...metrics} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
@@ -31,7 +41,7 @@ function SuperadminPage({ superOverview: propOverview, tenants = [], onCreateTen
         </div>
         <div className="lg:col-span-1 space-y-8">
           <InfraUsage {...infra} />
-          <TicketStatus tickets={tickets} />
+          <TicketStatus tickets={tickets} onResolveTicket={onResolveTicket} />
         </div>
       </div>
 

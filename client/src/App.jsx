@@ -46,6 +46,7 @@ export default function App() {
   const [inventory, setInventory] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [employeeLeaves, setEmployeeLeaves] = useState([]);
+  const [tickets, setTickets] = useState([]);
   const [superOverview, setSuperOverview] = useState(null);
   const [reportSummary, setReportSummary] = useState(null);
   const [insuranceProviders, setInsuranceProviders] = useState([]);
@@ -180,15 +181,17 @@ export default function App() {
   async function refreshSuperadmin() {
     console.log('DEBUG: refreshSuperadmin started');
     try {
-      const [overview, allUsers, allTenants] = await Promise.all([
+      const [overview, allUsers, allTenants, allTickets] = await Promise.all([
         api.getSuperadminOverview(),
         api.getUsers(),
-        api.getTenants()
+        api.getTenants(),
+        api.getSupportTickets()
       ]);
-      console.log('DEBUG: Superadmin data fetched', { overview, allUsers, allTenants });
+      console.log('DEBUG: Superadmin data fetched', { overview, allUsers, allTenants, allTickets });
       setSuperOverview(overview);
       setUsers(allUsers || []);
       setTenants(allTenants || []);
+      setTickets(allTickets || []);
     } catch (err) {
       console.error('DEBUG: refreshSuperadmin failed', err);
       setError('Failed to load platform data: ' + err.message);
@@ -325,6 +328,11 @@ export default function App() {
                 tenantId: fd.get('tenantId'), name: fd.get('name'), email: fd.get('email'), role: fd.get('role')
               }));
             }}
+            tickets={tickets}
+            onResolveTicket={async (id) => {
+               await withRefresh(() => api.updateSupportStatus(id, 'resolved'));
+            }}
+            infra={superOverview?.infra || {}}
           />
         )}
 
