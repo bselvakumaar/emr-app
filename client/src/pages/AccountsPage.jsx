@@ -400,7 +400,3 @@ export default function AccountsPage({ tenant }) {
     </div>
   );
 }
-
-        </div>
-    );
-}

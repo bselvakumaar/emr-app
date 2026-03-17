@@ -328,7 +328,7 @@ export default function App() {
           />
         )}
 
-        {view === 'dashboard' && <DashboardPage metrics={metrics} activeUser={activeUser} setView={setView} tenants={tenants} />}
+        {view === 'dashboard' && <DashboardPage metrics={metrics} activeUser={activeUser} setView={setView} tenant={session?.tenantId ? { id: session.tenantId, ...tenant } : null} />}
 
         {view === 'patients' && (
           <PatientsPage
@@ -608,7 +608,7 @@ export default function App() {
           />
         )}
 
-        {view === 'lab' && <LabPage tenant={tenant} activeUser={activeUser} />}
+        {view === 'lab' && <LabPage tenant={session?.tenantId ? { id: session.tenantId, code: session.tenantCode, ...session } : null} activeUser={activeUser} />}
 
         {view === 'users' && (
           <UsersPage 

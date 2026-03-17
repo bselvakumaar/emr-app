@@ -10,6 +10,7 @@
     "build": "vite build client --config client/vite.config.js",
     "preview": "vite preview client --config client/vite.config.js",
     "start": "node server/index.js",
+    "seed:nah": "node server/seed_nah_data.js",
     "test:integration": "node scripts/ensure_server.js && node scripts/integration_test.js",
     "test:e2e": "playwright test",
     "test:e2e:smoke": "playwright test tests/smoke_tests.spec.js tests/smoke_seeded_roles.spec.js",
@@ -28,6 +29,7 @@
     "pg": "^8.16.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "recharts": "^3.8.0",
     "serverless-http": "^4.0.0"
   },
   "devDependencies": {

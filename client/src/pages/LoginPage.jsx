@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import {
   Activity,
   AlertCircle,
@@ -9,8 +9,38 @@ import {
   HeartPulse,
   Lock,
   Mail,
-  ShieldCheck
+  ShieldCheck,
+  Users,
+  TrendingUp,
+  Zap
 } from 'lucide-react';
+
+const features = [
+  {
+    icon: HeartPulse,
+    title: 'Advanced Clinical Care',
+    description: 'Real-time patient monitoring with AI-powered diagnostics and seamless EMR integration.',
+    stats: '99.9% Uptime'
+  },
+  {
+    icon: Users,
+    title: 'Multi-Tenant Architecture',
+    description: 'Secure, isolated environments for each healthcare facility with enterprise-grade security.',
+    stats: '500+ Facilities'
+  },
+  {
+    icon: TrendingUp,
+    title: 'Analytics & Insights',
+    description: 'Comprehensive reporting dashboard with predictive analytics and operational intelligence.',
+    stats: 'Real-time Data'
+  },
+  {
+    icon: Zap,
+    title: 'Lightning Fast Performance',
+    description: 'Optimized workflows and instant access to critical patient information when you need it most.',
+    stats: '< 1s Response'
+  }
+];
 
 export default function LoginPage({ onLogin, tenants }) {
   const [credentials, setCredentials] = useState({
@@ -21,23 +51,26 @@ export default function LoginPage({ onLogin, tenants }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showDemoCredentials, setShowDemoCredentials] = useState(false);
+  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentFeatureIndex((prevIndex) => (prevIndex + 1) % features.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   const tenantOptions = useMemo(() => tenants || [], [tenants]);
 
   const demoCredentials = {
     superadmin: {
       label: 'Platform Administration',
-      email: 'superadmin@healthcare.com',
+      email: 'superadmin@emr.local',
       password: 'Admin@123'
     },
-    EHS: {
-      label: 'Enterprise Health Systems',
-      email: 'admin.ehs@healthcare.com',
-      password: 'Test@123'
-    },
-    city_general: {
-      label: 'City General Hospital',
-      email: 'admin.citygeneral@healthcare.com',
+    ehs: {
+      label: 'Enterprise Hospital Systems',
+      email: 'admin@ehs.local',
       password: 'Test@123'
     }
   };
@@ -83,50 +116,78 @@ export default function LoginPage({ onLogin, tenants }) {
   return (
     <div className="login-split-portal animate-fade-in">
       <section className="login-brand-panel">
-        <div className="relative z-10 max-w-2xl">
+        <div className="relative z-10 max-w-2xl text-center">
+          <div className="mb-8 mt-0">
+            <div className="w-40 h-40 mx-auto flex items-center justify-center">
+              <img src="/medflow_logo_8k.svg" alt="MedFlow EMR" className="w-full h-full" />
+            </div>
+            <p className="text-xs uppercase tracking-[0.28em] text-cyan-100/72 font-extrabold mt-3">MedFlow EMR</p>
+          </div>
+          
           <div className="clinical-chip !bg-white/10 !border-white/15 !text-white mb-8">
             <ShieldCheck className="w-4 h-4" />
             HIPAA-aware care operations workspace
           </div>
 
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-[72px] h-[72px] rounded-[28px] border border-white/16 bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-2xl">
-              <HeartPulse className="w-9 h-9 text-cyan-100" />
+          <div className="mb-12">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                {(() => {
+                  const Icon = features[currentFeatureIndex].icon;
+                  return <Icon className="w-8 h-8 text-white" />;
+                })()}
+              </div>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-cyan-100/72 font-extrabold">MedFlow EMR</p>
-              <h1 className="text-4xl md:text-5xl font-extrabold tracking-[-0.04em] text-white">Clinical systems built for calm, safe care delivery</h1>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.04em] text-white mb-4 transition-all duration-500">
+              {features[currentFeatureIndex].title}
+            </h2>
+            <p className="text-lg md:text-xl text-cyan-50/86 leading-8 mb-4 transition-all duration-500">
+              {features[currentFeatureIndex].description}
+            </p>
+            <div className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full">
+              <span className="text-sm font-bold text-cyan-100">{features[currentFeatureIndex].stats}</span>
             </div>
           </div>
 
-          <p className="max-w-xl text-lg md:text-xl text-cyan-50/86 leading-8">
-            A healthcare-first workspace for registration, scheduling, charting, billing, pharmacy, and operational oversight.
-          </p>
+          <div className="flex justify-center space-x-2 mb-8">
+            {features.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentFeatureIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentFeatureIndex 
+                    ? 'bg-white w-8' 
+                    : 'bg-white/30 hover:bg-white/50'
+                }`}
+              />
+            ))}
+          </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            <div className="rounded-[24px] border border-white/14 bg-white/10 p-5 backdrop-blur-sm">
-              <div className="w-11 h-11 rounded-2xl bg-white/12 flex items-center justify-center mb-4">
-                <BadgeCheck className="w-5 h-5 text-white" />
-              </div>
-              <h2 className="text-base font-bold text-white">Clinical reliability</h2>
-              <p className="mt-2 text-sm leading-6 text-cyan-50/78">Clear hierarchies, safer colors, and fast access to patient-critical workflows.</p>
-            </div>
-
-            <div className="rounded-[24px] border border-white/14 bg-white/10 p-5 backdrop-blur-sm">
-              <div className="w-11 h-11 rounded-2xl bg-white/12 flex items-center justify-center mb-4">
-                <FileCheck2 className="w-5 h-5 text-white" />
-              </div>
-              <h2 className="text-base font-bold text-white">Audit readiness</h2>
-              <p className="mt-2 text-sm leading-6 text-cyan-50/78">Professional visual language for regulated environments and multi-role accountability.</p>
-            </div>
-
-            <div className="rounded-[24px] border border-white/14 bg-white/10 p-5 backdrop-blur-sm">
-              <div className="w-11 h-11 rounded-2xl bg-white/12 flex items-center justify-center mb-4">
-                <Activity className="w-5 h-5 text-white" />
-              </div>
-              <h2 className="text-base font-bold text-white">Live operations</h2>
-              <p className="mt-2 text-sm leading-6 text-cyan-50/78">Built to support front desk, clinical teams, diagnostics, and financial coordination.</p>
-            </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={index}
+                  className={`rounded-[20px] border p-4 backdrop-blur-sm transition-all duration-300 cursor-pointer ${
+                    index === currentFeatureIndex
+                      ? 'border-white/30 bg-white/20'
+                      : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10'
+                  }`}
+                  onClick={() => setCurrentFeatureIndex(index)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-sm font-bold text-white">{feature.title}</h3>
+                      <p className="text-xs text-cyan-50/70">{feature.stats}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -206,7 +267,7 @@ export default function LoginPage({ onLogin, tenants }) {
               </div>
             )}
 
-            <button type="submit" disabled={isLoading} className="btn btn-primary w-full !h-14 !rounded-[18px]">
+            <button type="submit" disabled={isLoading} className="btn btn-primary w-full !h-14 !rounded-[18px] flex items-center justify-center gap-3">
               {isLoading ? (
                 <>
                   <span className="w-5 h-5 rounded-full border-2 border-white/70 border-t-transparent animate-spin" />
@@ -215,7 +276,7 @@ export default function LoginPage({ onLogin, tenants }) {
               ) : (
                 <>
                   Continue to workspace
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </>
               )}
             </button>

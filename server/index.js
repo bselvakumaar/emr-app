@@ -582,6 +582,139 @@ app.get('/api/superadmin/overview', authenticate, requireRole('Superadmin'), asy
 });
 
 // =====================================================
+// DASHBOARD METRICS
+// =====================================================
+
+app.get('/api/dashboard/metrics', requireTenant, requirePermission('dashboard'), async (req, res) => {
+  try {
+    const tenantId = req.tenantId;
+    
+    // Get real-time metrics from database
+    const [totalPatients, totalAppointments, totalRevenue, criticalAlerts] = await Promise.all([
+      query('SELECT COUNT(*) as count FROM emr.patients WHERE tenant_id = $1', [tenantId]),
+      query('SELECT COUNT(*) as count FROM emr.appointments WHERE tenant_id = $1 AND DATE(start_time) = CURRENT_DATE', [tenantId]),
+      query('SELECT COALESCE(SUM(amount), 0) as total FROM emr.invoices WHERE tenant_id = $1 AND DATE(created_at) = CURRENT_DATE', [tenantId]),
+      query('SELECT COUNT(*) as count FROM emr.service_requests WHERE tenant_id = $1 AND category = \'urgent\' AND status = \'pending\'', [tenantId])
+    ]);
+
+    const [patientStats, appointmentStats, bedOccupancy] = await Promise.all([
+      query(`
+        SELECT 
+          COUNT(CASE WHEN created_at >= CURRENT_DATE - INTERVAL '30 days' THEN 1 END) as new_patients,
+          COUNT(CASE WHEN created_at < CURRENT_DATE - INTERVAL '30 days' THEN 1 END) as returning_patients,
+          COUNT(CASE WHEN status = 'discharged' AND DATE(discharge_date) = CURRENT_DATE THEN 1 END) as discharged_today,
+          COUNT(CASE WHEN status = 'admitted' AND DATE(admission_date) = CURRENT_DATE THEN 1 END) as admitted_today
+        FROM emr.patients 
+        WHERE tenant_id = $1
+      `, [tenantId]),
+      
+      query(`
+        SELECT 
+          COUNT(CASE WHEN status = 'scheduled' AND DATE(start_time) = CURRENT_DATE THEN 1 END) as scheduled_today,
+          COUNT(CASE WHEN status = 'completed' AND DATE(start_time) = CURRENT_DATE THEN 1 END) as completed_today,
+          COUNT(CASE WHEN status = 'cancelled' AND DATE(start_time) = CURRENT_DATE THEN 1 END) as cancelled_today,
+          COUNT(CASE WHEN status = 'no-show' AND DATE(start_time) = CURRENT_DATE THEN 1 END) as no_show_today
+        FROM emr.appointments 
+        WHERE tenant_id = $1
+      `, [tenantId]),
+      
+      query(`
+        SELECT 
+          COUNT(CASE WHEN status = 'occupied' THEN 1 END) as occupied,
+          COUNT(CASE WHEN status = 'available' THEN 1 END) as available
+        FROM emr.beds 
+        WHERE tenant_id = $1
+      `, [tenantId])
+    ]);
+
+    // Get department distribution
+    const departmentResult = await query(`
+      SELECT department, COUNT(*) as count 
+      FROM emr.users 
+      WHERE tenant_id = $1 AND role = 'Doctor'
+      GROUP BY department
+    `, [tenantId]);
+
+    const departmentDistribution = departmentResult.rows.map(row => ({
+      label: row.department || 'General',
+      value: row.count,
+      color: getDepartmentColor(row.department)
+    }));
+
+    // Get available doctors
+    const doctorsResult = await query(`
+      SELECT id, name, department, status 
+      FROM emr.users 
+      WHERE tenant_id = $1 AND role = 'Doctor'
+      ORDER BY department
+    `, [tenantId]);
+
+    const doctors = doctorsResult.rows.map(doctor => ({
+      id: doctor.id,
+      name: doctor.name,
+      specialization: doctor.department,
+      status: doctor.status || 'Available'
+    }));
+
+    // Get today's visits
+    const visitsResult = await query(`
+      SELECT 
+        COUNT(CASE WHEN visit_type = 'opd' THEN 1 END) as opd_visits,
+        COUNT(CASE WHEN visit_type = 'emergency' THEN 1 END) as emergency_visits,
+        COUNT(CASE WHEN visit_type = 'followup' THEN 1 END) as followup_visits
+      FROM emr.patient_visits 
+      WHERE tenant_id = $1 AND DATE(visit_date) = CURRENT_DATE
+    `, [tenantId]);
+
+    const visits = visitsResult.rows[0] || { opd_visits: 0, emergency_visits: 0, followup_visits: 0 };
+
+    // Get appointment requests
+    const requestsResult = await query(`
+      SELECT 
+        COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending_approval,
+        COUNT(CASE WHEN status = 'confirmed' AND DATE(appointment_date) = CURRENT_DATE THEN 1 END) as today_schedule,
+        COUNT(CASE WHEN category = 'urgent' AND status = 'pending' THEN 1 END) as urgent_cases
+      FROM emr.appointments 
+      WHERE tenant_id = $1
+    `, [tenantId]);
+
+    const requests = requestsResult.rows[0] || { pending_approval: 0, today_schedule: 0, urgent_cases: 0 };
+
+    res.json({
+      totalPatients: parseInt(totalPatients.rows[0].count),
+      totalAppointments: parseInt(totalAppointments.rows[0].count),
+      totalRevenue: parseFloat(totalRevenue.rows[0].total) || 0,
+      criticalAlerts: parseInt(criticalAlerts.rows[0].count),
+      patientStats: patientStats.rows[0] || {},
+      appointmentStats: appointmentStats.rows[0] || {},
+      bedOccupancy: bedOccupancy.rows[0] || {},
+      departmentDistribution,
+      doctors,
+      visits,
+      requests,
+      lastUpdated: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('Error fetching dashboard metrics:', error);
+    res.status(500).json({ error: 'Failed to load dashboard metrics' });
+  }
+});
+
+// Helper function to get department colors
+function getDepartmentColor(department) {
+  const colors = {
+    'Cardiology': '#ef4444',
+    'Neurology': '#3b82f6', 
+    'Pediatrics': '#10b981',
+    'Orthopedics': '#f59e0b',
+    'Emergency': '#dc2626',
+    'General': '#6b7280'
+  };
+  return colors[department] || '#6b7280';
+}
+
+// =====================================================
 // PATIENTS
 // =====================================================
 

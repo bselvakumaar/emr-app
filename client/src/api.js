@@ -243,6 +243,18 @@ export async function getSuperadminOverview() {
 // PATIENTS
 // =====================================================
 
+export async function getPatients(tenantId, filters = {}) {
+  // Filter out null/undefined/empty string values
+  const queryParams = { tenantId };
+  if (filters.text) queryParams.text = filters.text;
+  if (filters.date) queryParams.date = filters.date;
+  if (filters.type) queryParams.type = filters.type;
+  if (filters.status) queryParams.status = filters.status;
+
+  const queryString = new URLSearchParams(queryParams).toString();
+  return await apiRequest(`/patients?${queryString}`);
+}
+
 export async function createPatient(data) {
   return await apiRequest('/patients', {
     method: 'POST',
