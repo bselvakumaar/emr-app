@@ -1,18 +1,21 @@
-import { Shield, Layout, Palette, Users, Save, Plus, Settings, Activity, Lock, Building } from 'lucide-react';
+import { Shield, Layout, Palette, Users, Save, Plus, Settings, Activity, Lock, Building, CreditCard } from 'lucide-react';
 import '../styles/critical-care.css';
 
 export default function AdminPage({ tenant, patients, onSaveSettings, onCreateUser }) {
   return (
     <div className="page-shell-premium animate-fade-in">
-      <div className="page-header-premium mb-8">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
         <div>
-          <h1 className="flex items-center gap-3">
-             Facility Governance Node
-             <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">System Root</span>
-          </h1>
-          <p className="dim-label">Organizational control and strategic tenant trajectory configuration</p>
+           <h1 className="flex items-center gap-3">
+              Facility Governance & Control
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">System Root</span>
+           </h1>
+           <p className="dim-label">Organizational control and strategic tenant trajectory configuration for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Administrative Integrity Verified • System wide overrides active
+           </p>
         </div>
-      </div>
+      </header>
 
       <div className="grid grid-cols-12 gap-8">
         {/* LEFT: STRATEGIC SETTINGS */}
@@ -62,6 +65,42 @@ export default function AdminPage({ tenant, patients, onSaveSettings, onCreateUs
                     <span className="text-xs font-black text-slate-700 uppercase tracking-tighter">Virtual Care Node</span>
                     <input name="featureTelehealth" type="checkbox" defaultChecked={tenant?.features?.telehealth} className="w-5 h-5 rounded-lg border-slate-300 text-indigo-600 focus:ring-indigo-500" />
                   </label>
+                </div>
+              </div>
+
+              <div className="pt-8 border-t border-slate-50">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shadow-sm">
+                    <CreditCard className="w-4 h-4" />
+                  </div>
+                  <h3 className="text-xs font-black text-slate-900 tracking-tight uppercase">Institutional Financial Settlement</h3>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Gateway Shard</label>
+                    <select name="billingProvider" className="input-field h-[56px] bg-slate-50 border-none rounded-2xl font-black text-slate-800" defaultValue={tenant?.billing_config?.provider || 'manual'}>
+                      <option value="manual">Manual Settlement (Standard)</option>
+                      <option value="stripe">Stripe Protocol</option>
+                      <option value="razorpay">Razorpay Shard</option>
+                      <option value="paypal">PayPal Institutional</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Settlement Currency</label>
+                    <select name="billingCurrency" className="input-field h-[56px] bg-slate-50 border-none rounded-2xl font-black text-slate-800" defaultValue={tenant?.billing_config?.currency || 'INR'}>
+                      <option>INR</option>
+                      <option>USD</option>
+                      <option>EUR</option>
+                      <option>GBP</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="mt-6 space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Institutional Gateway Key</label>
+                  <input name="billingKey" type="password" defaultValue={tenant?.billing_config?.gatewayKey || ''} placeholder="sk_test_••••••••••••••••" className="input-field py-5 bg-slate-50 border-none rounded-2xl font-mono text-xs" />
+                  <p className="text-[9px] font-bold text-slate-400 uppercase mt-2 tracking-widest italic">All transaction shards will route through this identity node.</p>
                 </div>
               </div>
 

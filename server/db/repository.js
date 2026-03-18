@@ -79,6 +79,36 @@ export async function getTenantFeatureStatus(tenantId) {
   return flags;
 }
 
+/**
+ * Update tenant subscription tier
+ */
+export async function setTenantTier(tenantId, tier) {
+  const sql = `
+    UPDATE emr.tenants 
+    SET subscription_tier = $1, updated_at = NOW() 
+    WHERE id = $2 
+    RETURNING *
+  `;
+  const result = await query(sql, [tier, tenantId]);
+  return result.rows[0];
+}
+
+/**
+ * Set custom feature flag override for a tenant
+ */
+export async function setTenantFeatureOverride(tenantId, featureFlag, enabled) {
+  const sql = `
+    INSERT INTO emr.tenant_features (tenant_id, feature_flag, enabled, updated_at)
+    VALUES ($1, $2, $3, NOW())
+    ON CONFLICT (tenant_id, feature_flag) 
+    DO UPDATE SET enabled = $3, updated_at = NOW()
+    RETURNING *
+  `;
+  const result = await query(sql, [tenantId, featureFlag, enabled]);
+  return result.rows[0];
+}
+
+
 // =====================================================
 // UTILITY FUNCTIONS
 // =====================================================
@@ -109,9 +139,9 @@ export async function createAuditLog({ tenantId, userId, userName, action, entit
 }
 
 /**
- * Update tenant settings including subscription tier
+ * Update tenant settings including subscription tier and billing config
  */
-export async function updateTenantSettings({ tenantId, displayName, theme, features, subscriptionTier }) {
+export async function updateTenantSettings({ tenantId, displayName, theme, features, subscriptionTier, billingConfig }) {
   const updates = [];
   const values = [];
   let paramIndex = 1;
@@ -135,6 +165,11 @@ export async function updateTenantSettings({ tenantId, displayName, theme, featu
   if (subscriptionTier !== undefined) {
     updates.push(`subscription_tier = $${paramIndex++}`);
     values.push(subscriptionTier);
+  }
+
+  if (billingConfig !== undefined) {
+    updates.push(`billing_config = $${paramIndex++}`);
+    values.push(JSON.stringify(billingConfig));
   }
 
   if (updates.length === 0) {
@@ -188,7 +223,7 @@ export async function generateInvoiceNumber(tenantId) {
 // =====================================================
 
 export async function getTenants() {
-  const result = await query('SELECT id, name, code, subdomain, theme, features, status, created_at, updated_at FROM emr.tenants ORDER BY name');
+  const result = await query('SELECT id, name, code, subdomain, theme, features, billing_config, status, created_at, updated_at, subscription_tier FROM emr.tenants ORDER BY name');
   return result.rows;
 }
 

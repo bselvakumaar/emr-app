@@ -21,17 +21,25 @@ export default function UsersPage({ users = [], activeUser, tenant, onUpdateUser
 
   return (
     <div className="page-shell-premium animate-fade-in">
-      <div className="page-header-premium">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
         <div>
-          <h1>Identity Registry</h1>
-          <p>Access Control & Personnel Authorization</p>
+           <h1 className="flex items-center gap-3">
+              Identity & Access Governance
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Security Node</span>
+           </h1>
+           <p className="dim-label">Personnel authorization, role-based access control, and identity lifecycle management for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Identity Logic Active • Multi-factor authentication ready
+           </p>
         </div>
-        <div className="flex gap-3">
-          <div className="flex bg-slate-100/50 p-1 rounded-xl border border-slate-200">
-             <div className="px-4 py-2 text-xs font-black uppercase text-[var(--primary)]">{filteredUsers.length} Identities Authorized</div>
-          </div>
+        <div className="flex items-center gap-3">
+           <div className="flex bg-white shadow-sm px-5 py-3 rounded-2xl border border-slate-200 overflow-hidden">
+              <span className="text-[11px] font-black uppercase text-slate-600 tracking-wider flex items-center gap-2">
+                <UserCheck className="w-4 h-4 text-emerald-500" /> {filteredUsers.length} Identities Active
+              </span>
+           </div>
         </div>
-      </div>
+      </header>
 
       <div className="action-bar-premium">
         <div className="flex-1 flex items-center gap-4">

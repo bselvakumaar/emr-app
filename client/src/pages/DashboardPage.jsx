@@ -8,6 +8,7 @@ import {
 } from '../components/EChartsComponents.jsx';
 import { currency } from '../utils/format.js';
 import { api } from '../api.js';
+import { exportToCSV } from '../utils/export.js';
 import '../styles/critical-care.css'; // Importing the Life-Saving Design System
 import { 
   Users,
@@ -144,6 +145,28 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
     }
   }
 
+  function handleTodayFilter() {
+    setLoading(true);
+    loadDashboardData().then(() => {
+      // Small delay for visual feedback that it's refreshing
+      setTimeout(() => setLoading(false), 500);
+    });
+  }
+
+  function handleExportReport() {
+    const csvData = [
+      ['Metric', 'Value'],
+      ['Total Patients', realtimeMetrics.totalPatients],
+      ['Appointments Today', realtimeMetrics.totalAppointments],
+      ['Revenue', currency(realtimeMetrics.totalRevenue)],
+      ['Critical Alerts', realtimeMetrics.criticalAlerts],
+      ['', ''],
+      ['Department', 'Occupancy'],
+      ...realtimeMetrics.departmentDistribution.map(d => [d.name, d.value])
+    ];
+    exportToCSV(csvData, `ShiftReport_${new Date().toLocaleDateString().replace(/\//g, '-')}.csv`);
+  }
+
   const quickActions = [
     { label: 'Register Patient', icon: Users, view: 'patients', desc: 'New admission' },
     { label: 'Schedule', icon: Calendar, view: 'appointments', desc: 'OPD booking' },
@@ -156,64 +179,50 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
     lowStockAlerts.length > 0;
 
   return (
-    <div className="page-content bg-gray-50">
-      {/* 1. PROFESSIONAL HEADER WITH DYNAMIC TITLE */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-3">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">{getCurrentViewTitle()}</h1>
-            <p className="text-gray-600 text-sm mt-1">Real-time overview of your healthcare facility</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
-              <Calendar className="w-4 h-4 inline mr-2" />
-              Today
-            </button>
-            <button className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
-              <FileText className="w-4 h-4 inline mr-2" />
-              Export Report
-            </button>
-          </div>
+    <div className="page-shell-premium animate-fade-in overflow-x-hidden">
+      {/* 1. CLINICAL GOVERNANCE HEADER */}
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
+        <div>
+           <h1 className="flex items-center gap-3">
+              Institutional Dashboard
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Clinical Node</span>
+           </h1>
+           <p className="dim-label">Monitor institutional health, revenue trends, and operational capacity for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> {today} • Platform Operational
+           </p>
         </div>
-        
-        {/* Navigation Menu */}
-        <div className="flex space-x-1 mt-4 pt-4 border-t border-gray-200">
+        <div className="flex items-center gap-4">
           <button 
-            onClick={() => setView('dashboard')} 
-            className="px-4 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 transition-colors"
+            onClick={handleTodayFilter}
+            className="clinical-btn !rounded-2xl shadow-xl shadow-blue-500/10 min-w-[120px]"
+            disabled={loading}
           >
-            Dashboard
+            <Activity className="w-4 h-4 mr-2" />
+            {loading ? 'Syncing...' : 'Sync Data'}
           </button>
           <button 
-            onClick={() => setView('patients')} 
-            className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-colors"
+            onClick={handleExportReport}
+            className="px-6 py-2.5 bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 transition-all text-xs font-black uppercase tracking-widest text-slate-600 shadow-sm flex items-center"
           >
-            Patients
+            <FileText className="w-4 h-4 mr-2" />
+            Export Shard
           </button>
-          <button 
-            onClick={() => setView('appointments')} 
-            className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-colors"
-          >
-            Appointments
-          </button>
-          <button 
-            onClick={() => setView('billing')} 
-            className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-colors"
-          >
-            Billing
-          </button>
-          <button 
-            onClick={() => setView('pharmacy')} 
-            className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-colors"
-          >
-            Pharmacy
-          </button>
-          <button 
-            onClick={() => setView('emr')} 
-            className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-colors"
-          >
-            EMR
-          </button>
+        </div>
+      </header>
+
+      {/* 2. NAVIGATION OVERLAYS */}
+      <div className="mb-10">
+        <div className="flex bg-slate-100/50 backdrop-blur-sm p-1.5 rounded-[22px] border border-slate-200 w-fit gap-1">
+          {['dashboard', 'patients', 'appointments', 'billing', 'pharmacy', 'emr'].map((v) => (
+             <button
+                key={v}
+                onClick={() => setView(v)}
+                className={`px-6 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${view === v ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}
+             >
+                {v}
+             </button>
+          ))}
         </div>
       </div>
 
@@ -221,8 +230,8 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <div className="dashboard-card metric-card">
           <div className="flex justify-center mb-3">
-            <div className="bg-teal-100 rounded-lg p-3">
-              <Users className="w-6 h-6 text-teal-600" />
+            <div className="bg-[var(--accent-soft)] rounded-lg p-3">
+              <Users className="w-6 h-6 text-[var(--clinical-blue)]" />
             </div>
           </div>
           <p className="metric-value">{realtimeMetrics.totalPatients}</p>
@@ -232,8 +241,8 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
 
         <div className="dashboard-card metric-card">
           <div className="flex justify-center mb-3">
-            <div className="bg-blue-100 rounded-lg p-3">
-              <Calendar className="w-6 h-6 text-blue-600" />
+            <div className="bg-[var(--primary-soft)] rounded-lg p-3">
+              <Calendar className="w-6 h-6 text-[var(--medical-navy)]" />
             </div>
           </div>
           <p className="metric-value">{realtimeMetrics.totalAppointments}</p>
@@ -243,8 +252,8 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
 
         <div className="dashboard-card metric-card">
           <div className="flex justify-center mb-3">
-            <div className="bg-indigo-100 rounded-lg p-3">
-              <DollarSign className="w-6 h-6 text-indigo-600" />
+            <div className="bg-[var(--clinical-accent-soft)] rounded-lg p-3">
+              <DollarSign className="w-6 h-6 text-[var(--clinical-accent)]" />
             </div>
           </div>
           <p className="metric-value">${(realtimeMetrics.totalRevenue / 1000).toFixed(0)}K</p>
@@ -254,8 +263,8 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
 
         <div className="dashboard-card metric-card">
           <div className="flex justify-center mb-3">
-            <div className="bg-rose-100 rounded-lg p-3">
-              <AlertCircle className="w-6 h-6 text-rose-600" />
+            <div className="bg-[var(--danger-soft)] rounded-lg p-3">
+              <AlertCircle className="w-6 h-6 text-[var(--danger)]" />
             </div>
           </div>
           <p className="metric-value">{hasAnyAlerts ? '3' : '0'}</p>
@@ -268,8 +277,8 @@ export default function DashboardPage({ metrics, activeUser, setView, tenant }) 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
         {quickActions.map((action, index) => (
           <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
-            <div className="bg-blue-100 rounded-lg p-3 w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-              <action.icon className="w-6 h-6 text-blue-600" />
+            <div className="bg-[var(--accent-soft)] rounded-lg p-3 w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+              <action.icon className="w-6 h-6 text-[var(--clinical-blue)]" />
             </div>
             <p className="text-sm font-medium text-gray-900">{action.label}</p>
             <p className="text-xs text-gray-600 mt-1">{action.desc}</p>

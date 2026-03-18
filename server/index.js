@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { testConnection } from './db/connection.js';
+import { testConnection, query } from './db/connection.js';
 import { hashPassword, comparePassword, generateToken } from './services/auth.service.js';
 import { authenticate, requireRole, requireTenant, requirePermission, restrictPatientAccess } from './middleware/auth.middleware.js';
 import { evaluateAllFeatures, featureGate, moduleGate } from './middleware/featureFlag.middleware.js';
@@ -241,7 +241,7 @@ app.post('/api/tenants', requireRole('Superadmin'), async (req, res) => {
 app.patch('/api/tenants/:id/settings', requireTenant, async (req, res) => {
   try {
     const { id } = req.params;
-    const { displayName, primaryColor, accentColor, featureInventory, featureTelehealth, subscriptionTier } = req.body;
+    const { displayName, primaryColor, accentColor, featureInventory, featureTelehealth, subscriptionTier, billingConfig } = req.body;
 
     const theme = (primaryColor || accentColor) ? {
       primary: primaryColor,
@@ -258,7 +258,8 @@ app.patch('/api/tenants/:id/settings', requireTenant, async (req, res) => {
       displayName,
       theme,
       features,
-      subscriptionTier
+      subscriptionTier,
+      billingConfig
     });
 
     if (!tenant) {
@@ -353,6 +354,74 @@ app.get('/api/tenants/:id/features', requireTenant, async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch feature flags' });
   }
 });
+
+// Admin endpoints for managing tenant-specific features (Superadmin only)
+app.get('/api/admin/tenants/:id/features', authenticate, requireRole('Superadmin'), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { getFeatureFlagStatus } = await import('./services/featureFlag.service.js');
+    const flags = await getFeatureFlagStatus(id);
+    res.json(flags);
+  } catch (error) {
+    console.error('Error fetching tenant features (admin):', error);
+    res.status(500).json({ error: 'Failed to fetch tenant features' });
+  }
+});
+
+app.patch('/api/admin/tenants/:id/tier', authenticate, requireRole('Superadmin'), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { tier } = req.body;
+    
+    if (!tier) return res.status(400).json({ error: 'tier is required' });
+    
+    const { setTenantTier } = await import('./db/repository.js');
+    const tenant = await setTenantTier(id, tier);
+    
+    await repo.createAuditLog({
+      userId: req.user.id,
+      userName: req.user.name,
+      action: 'tenant.tier_update',
+      entityName: 'tenant',
+      entityId: id,
+      details: { tier }
+    });
+    
+    res.json(tenant);
+  } catch (error) {
+    console.error('Error updating tenant tier:', error);
+    res.status(500).json({ error: 'Failed to update tier' });
+  }
+});
+
+app.post('/api/admin/tenants/:id/features', authenticate, requireRole('Superadmin'), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { featureFlag, enabled } = req.body;
+    
+    if (!featureFlag || typeof enabled !== 'boolean') {
+      return res.status(400).json({ error: 'featureFlag and enabled are required' });
+    }
+    
+    const { setTenantFeatureOverride } = await import('./db/repository.js');
+    const override = await setTenantFeatureOverride(id, featureFlag, enabled);
+    
+    await repo.createAuditLog({
+      userId: req.user.id,
+      userName: req.user.name,
+      action: 'tenant.feature_override',
+      entityName: 'tenant',
+      entityId: id,
+      details: { featureFlag, enabled }
+    });
+    
+    res.json(override);
+  } catch (error) {
+    console.error('Error updating tenant feature override:', error);
+    res.status(500).json({ error: 'Failed to update feature override' });
+  }
+});
+
 
 // Admin endpoints for managing kill switches (Superadmin only)
 app.get('/api/admin/kill-switches', authenticate, requireRole('Superadmin'), async (req, res) => {
@@ -1048,7 +1117,7 @@ app.post('/api/encounters', requireTenant, requirePermission('emr'), async (req,
       return res.status(400).json({ error: 'patientId, providerId, and type are required' });
     }
 
-    const validTypes = ['Out-patient', 'In-patient', 'Emergency'];
+    const validTypes = ['Out-patient', 'In-patient', 'Emergency', 'OPD', 'IPD'];
     if (!validTypes.includes(type)) {
       return res.status(400).json({ error: `Invalid encounter type: ${type}. Must be one of ${validTypes.join(', ')}` });
     }
@@ -1616,10 +1685,7 @@ app.get('/api/lab/orders', requireTenant, async (req, res) => {
     const params = [req.tenantId];
     if (status) { sql += ` AND sr.status = $2`; params.push(status); }
     sql += ' ORDER BY sr.created_at DESC LIMIT 100';
-    const { Pool } = await import('pg');
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
-    const result = await pool.query(sql, params);
-    await pool.end();
+    const result = await query(sql, params);
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching lab orders:', error);
@@ -1634,12 +1700,9 @@ app.post('/api/lab/orders', requireTenant, async (req, res) => {
     if (!patientId || !tests || !tests.length) {
       return res.status(400).json({ error: 'patientId and tests are required' });
     }
-    const { Pool } = await import('pg');
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
-    const client = await pool.connect();
     const orders = [];
     try {
-      await client.query('BEGIN');
+      await query('BEGIN');
       for (const test of tests) {
         const sql = `
           INSERT INTO emr.service_requests (
@@ -1648,19 +1711,16 @@ app.post('/api/lab/orders', requireTenant, async (req, res) => {
           ) VALUES ($1,$2,$3,$4,'lab',$5,$6,'pending',$7,$8)
           RETURNING *
         `;
-        const r = await client.query(sql, [
+        const r = await query(sql, [
           req.tenantId, patientId, encounterId || null, req.user.id,
           test.code || 'LAB', test.name || test.display, priority, notes || null
         ]);
         orders.push(r.rows[0]);
       }
-      await client.query('COMMIT');
+      await query('COMMIT');
     } catch (e) {
-      await client.query('ROLLBACK');
+      await query('ROLLBACK');
       throw e;
-    } finally {
-      client.release();
-      await pool.end();
     }
     res.status(201).json(orders);
   } catch (error) {
@@ -1676,13 +1736,10 @@ app.patch('/api/lab/orders/:id/status', requireTenant, async (req, res) => {
     const { status } = req.body;
     const valid = ['pending', 'in-progress', 'completed', 'cancelled'];
     if (!valid.includes(status)) return res.status(400).json({ error: 'Invalid status' });
-    const { Pool } = await import('pg');
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
-    const r = await pool.query(
+    const r = await query(
       `UPDATE emr.service_requests SET status = $1, updated_at = NOW() WHERE id = $2 AND tenant_id = $3 RETURNING *`,
       [status, id, req.tenantId]
     );
-    await pool.end();
     if (!r.rows.length) return res.status(404).json({ error: 'Order not found' });
     res.json(r.rows[0]);
   } catch (error) {
@@ -1696,10 +1753,9 @@ app.post('/api/lab/orders/:id/results', requireTenant, async (req, res) => {
   try {
     const { id } = req.params;
     const { results, notes, criticalFlag = false } = req.body;
-    const { Pool } = await import('pg');
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+    const poolQuery = async (s, p) => await query(s, p);
     // Store results as JSONB in notes / or in the diagnostic_reports table if available
-    const r = await pool.query(
+    const r = await poolQuery(
       `UPDATE emr.service_requests 
        SET status = 'completed', notes = $1, updated_at = NOW()
        WHERE id = $2 AND tenant_id = $3 RETURNING *`,

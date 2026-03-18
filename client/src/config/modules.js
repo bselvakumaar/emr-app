@@ -19,19 +19,19 @@ export const moduleMeta = {
 };
 
 export const fallbackPermissions = {
-  Superadmin: ['superadmin'],
-  Admin: ['dashboard', 'appointments', 'patients', 'emr', 'billing', 'insurance', 'inventory', 'pharmacy', 'lab', 'employees', 'accounts', 'reports', 'admin', 'users'],
-  Doctor: ['dashboard', 'appointments', 'patients', 'emr', 'reports'],
-  Nurse: ['dashboard', 'appointments', 'patients', 'emr', 'inventory'],
+  Superadmin: ['superadmin', 'dashboard', 'admin', 'reports', 'support'],
+  Admin: ['dashboard', 'appointments', 'patients', 'emr', 'inpatient', 'billing', 'insurance', 'inventory', 'pharmacy', 'lab', 'employees', 'accounts', 'reports', 'admin', 'users'],
+  Doctor: ['dashboard', 'appointments', 'patients', 'emr', 'inpatient', 'reports', 'lab', 'pharmacy'],
+  Nurse: ['dashboard', 'appointments', 'patients', 'emr', 'inpatient', 'inventory'],
   Lab: ['dashboard', 'patients', 'lab', 'reports'],
   Pharmacy: ['dashboard', 'pharmacy', 'inventory', 'reports'],
   'Support Staff': ['dashboard', 'inventory', 'support'],
-  'Front Office': ['dashboard', 'appointments', 'patients', 'billing'],
+  'Front Office': ['dashboard', 'appointments', 'patients', 'billing', 'inpatient'],
   Billing: ['dashboard', 'billing', 'accounts', 'insurance', 'reports'],
   Insurance: ['dashboard', 'insurance', 'reports'],
   HR: ['dashboard', 'employees', 'reports'],
   Accounts: ['dashboard', 'billing', 'accounts', 'insurance', 'reports'],
-  Management: ['dashboard', 'reports', 'employees', 'billing', 'accounts', 'insurance'],
+  Management: ['dashboard', 'reports', 'employees', 'billing', 'accounts', 'insurance', 'inpatient'],
   Inventory: ['dashboard', 'inventory', 'pharmacy', 'reports'],
   Auditor: ['dashboard', 'reports'],
   Patient: ['dashboard', 'appointments', 'patients']

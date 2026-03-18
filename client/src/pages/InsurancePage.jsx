@@ -196,19 +196,24 @@ export default function InsurancePage({ providers = [], claims = [], onCreatePro
   return (
     <div className="page-shell-premium animate-fade-in">
        {/* HEADER SECTION */}
-       <div className="page-header-premium mb-8">
-          <div>
-             <h1 className="flex items-center gap-4">
-                Insurance Registry
-                <span className="text-[10px] font-black bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full uppercase tracking-tighter shadow-sm border border-emerald-200">System Live</span>
-             </h1>
-             <p>Manage institutional payer relationships and clinical throughput capacity.</p>
-          </div>
-          <button className="btn-primary py-4 px-8 text-[10px] uppercase tracking-[0.2em] shadow-xl group" onClick={() => setShowRegister(true)}>
-             <Plus className="w-4 h-4 mr-3 group-hover:rotate-90 transition-transform duration-300" />
-             Provision New Payer
-          </button>
-       </div>
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
+        <div>
+           <h1 className="flex items-center gap-3">
+              Insurance & Payer Governance
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Fiscal Node</span>
+           </h1>
+           <p className="dim-label">Institutional payer relationships, coverage thresholds, and clinical claim ecosystems for {providers[0]?.tenant_name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Payer Connectivity Active • Claim endpoints operational
+           </p>
+        </div>
+        <div className="flex items-center gap-3">
+           <button className="clinical-btn !rounded-2xl px-8 shadow-xl shadow-blue-500/10 min-w-[200px]" onClick={() => setShowRegister(true)}>
+              <Plus className="w-4 h-4 mr-2" />
+              Provision New Payer
+           </button>
+        </div>
+      </header>
 
        {/* METRICS STRIP */}
        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">

@@ -25,31 +25,34 @@ export default function AppointmentsPage({
 
   return (
     <div className="page-shell-premium animate-fade-in">
-      <div className="page-header-premium mb-8">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
         <div>
-          <h1 className="flex items-center gap-3">
-             Scheduling & Resource Node
-             <span className="text-[10px] bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-200 uppercase tracking-tighter font-black">Clinical Flow active</span>
-          </h1>
-          <p className="dim-label">Organizational co-ordination and longitudinal event scheduling</p>
+           <h1 className="flex items-center gap-3">
+              Scheduling & Resource Node
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Clinical Flow</span>
+           </h1>
+           <p className="dim-label">Organizational co-ordination and longitudinal event scheduling for {session?.tenantName || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-blue-500" /> Operational Readiness • Clinical Flow active
+           </p>
         </div>
-        <div className="flex bg-white/50 backdrop-blur-sm p-1 rounded-2xl border border-slate-200 shadow-sm gap-1">
+        <div className="flex bg-white shadow-sm p-1.5 rounded-2xl border border-slate-200 gap-1 w-fit">
           <button 
-            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'appointments' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+            className={`clinical-btn !min-h-[44px] px-8 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'appointments' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
             onClick={() => setActiveTab('appointments')}
           >
             <Calendar className="w-3.5 h-3.5 mr-2" /> Clinical Schedule
           </button>
           {!isPatient && (
             <button 
-              className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'walkins' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+              className={`clinical-btn !min-h-[44px] px-8 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'walkins' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
               onClick={() => setActiveTab('walkins')}
             >
               <Users className="w-3.5 h-3.5 mr-2" /> Reception Queue
             </button>
           )}
         </div>
-      </div>
+      </header>
 
       <div className="grid grid-cols-12 gap-8">
         {/* MAIN WORKFLOW: BOOKING FORMS */}

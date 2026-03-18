@@ -44,17 +44,65 @@ export function ActionMenu({ trigger, actions = [], className = "" }) {
 }
 
 export function NotificationSystem() {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+
+  const notifications = [
+    { id: 1, title: "New Patient Admission", time: "5m ago", type: "info" },
+    { id: 2, title: "Lab Results Ready", time: "12m ago", type: "success" },
+    { id: 3, title: "Critical Stock Alert", time: "1h ago", type: "danger" }
+  ];
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (!rootRef.current?.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <button
-      type="button"
-      className="relative flex h-11 w-11 items-center justify-center text-[var(--text-muted)] transition-colors hover:text-[var(--text-main)]"
-      title="Notifications"
-    >
-      <Bell className="w-5 h-5" />
-      <span className="absolute right-1.5 top-1.5 inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-[var(--danger)] px-1 text-xs font-bold text-white">
-        2
-      </span>
-    </button>
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={`relative flex h-11 w-11 items-center justify-center rounded-xl transition-all ${open ? 'bg-[var(--accent-soft)] text-[var(--clinical-blue)]' : 'text-[var(--text-muted)] hover:bg-[var(--surface-muted)] hover:text-[var(--text-main)]'}`}
+        title="Notifications"
+      >
+        <Bell className="w-5 h-5" />
+        <span className="absolute right-1.5 top-1.5 inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-[var(--danger)] px-1 text-xs font-bold text-white">
+          {notifications.length}
+        </span>
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-full mt-3 z-[150] w-[320px] rounded-2xl border border-[var(--border)] bg-white shadow-2xl animate-fade-in overflow-hidden">
+          <div className="p-4 border-b border-[var(--border)] bg-[var(--surface-muted)] flex items-center justify-between">
+            <h3 className="font-bold text-sm text-[var(--text-main)]">Clinical Alerts</h3>
+            <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-soft)]">Live Stream</span>
+          </div>
+          <div className="max-h-[360px] overflow-y-auto">
+            {notifications.map((n) => (
+              <button
+                key={n.id}
+                className="w-full p-4 flex items-start gap-3 hover:bg-[var(--surface-muted)] transition-colors border-b border-[var(--border)] last:border-none text-left"
+              >
+                <div className={`mt-1 h-2 w-2 rounded-full shrink-0 ${n.type === 'danger' ? 'bg-[var(--danger)] shadow-[0_0_8px_var(--danger)]' : n.type === 'success' ? 'bg-[var(--success)] shadow-[0_0_8px_var(--success)]' : 'bg-[var(--clinical-blue)] shadow-[0_0_8px_var(--clinical-blue)]'}`} />
+                <div>
+                  <p className="text-sm font-bold text-[var(--text-main)] leading-tight">{n.title}</p>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-1 font-medium">{n.time}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+          <button className="w-full py-3 bg-[var(--primary-soft)] text-[var(--clinical-blue)] text-xs font-bold uppercase tracking-widest hover:bg-[var(--accent-soft)] transition-colors">
+            View All Notifications
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 

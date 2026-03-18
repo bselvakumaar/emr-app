@@ -332,6 +332,7 @@ export default function App() {
             onResolveTicket={async (id) => {
                await withRefresh(() => api.updateSupportStatus(id, 'resolved'));
             }}
+            onRefresh={refreshSuperadmin}
             infra={superOverview?.infra || {}}
           />
         )}
@@ -647,7 +648,13 @@ export default function App() {
                 primaryColor: fd.get('primaryColor'),
                 accentColor: fd.get('accentColor'),
                 featureInventory: fd.get('featureInventory') === 'on',
-                featureTelehealth: fd.get('featureTelehealth') === 'on'
+                featureTelehealth: fd.get('featureTelehealth') === 'on',
+                billingConfig: {
+                  provider: fd.get('billingProvider'),
+                  currency: fd.get('billingCurrency'),
+                  gatewayKey: fd.get('billingKey'),
+                  accountStatus: fd.get('billingKey') ? 'linked' : 'unlinked'
+                }
               }));
             }}
             onCreateUser={(e) => {

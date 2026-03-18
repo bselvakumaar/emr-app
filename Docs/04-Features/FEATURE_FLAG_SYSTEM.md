@@ -53,6 +53,7 @@ All feature flags follow the pattern: `permission-{module}-access`
 - `permission-hr_payroll-access`: HR and payroll features (employees module)
 - `permission-accounts-access`: Financial features (billing, accounts)
 - `permission-customer_support-access`: Support features
+- `permission-inpatient-access`: Advanced Clinical workflows (Inpatient admissions, Bed management)
 
 ### Module Mapping
 ```javascript
@@ -61,7 +62,7 @@ All feature flags follow the pattern: `permission-{module}-access`
   patients: 'permission-core_engine-access',
   appointments: 'permission-core_engine-access',
   emr: 'permission-core_engine-access',
-  inpatient: 'permission-core_engine-access',
+  inpatient: 'permission-inpatient-access',
   employees: 'permission-hr_payroll-access',
   billing: 'permission-accounts-access',
   accounts: 'permission-accounts-access',
@@ -75,16 +76,17 @@ All feature flags follow the pattern: `permission-{module}-access`
 ## Subscription Tiers
 
 ### Basic Tier
-- Core engine access only
-- Essential EMR functionality
+- Core Engine access
+- **Customer Support** access (Universal for all tiers)
 
 ### Professional Tier
-- Core engine access
-- Customer support features
+- Core Engine + Customer Support
+- **Inpatient Management** (High-complexity clinical)
 
 ### Enterprise Tier
-- All features enabled
-- Core engine, HR payroll, accounts, customer support
+- All features enabled:
+  - Core Engine + Customer Support + Inpatient
+  - **HR/Payroll** and **Institutional Accounts/Billing**
 
 ## Usage Examples
 

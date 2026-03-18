@@ -89,34 +89,36 @@ export default function RoleManagementPage({ tenant, activeUser }) {
   return (
     <div className="page-shell-premium animate-fade-in">
       {/* HEADER SECTION */}
-      <div className="page-header-premium mb-8">
-        <div className="flex items-center gap-5">
-           <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-white shadow-xl shadow-slate-900/20 border border-white/10 ring-4 ring-slate-100">
-              <Shield className="w-7 h-7" />
-           </div>
-           <div>
-              <h1 className="tracking-tight">Role Governance Registry</h1>
-              <p className="dim-label uppercase tracking-[0.2em] font-black text-[10px]">Access Control & Operational Permissions Management</p>
-           </div>
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
+        <div>
+           <h1 className="flex items-center gap-3">
+              Role Governance & Access Control
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Security Node</span>
+           </h1>
+           <p className="dim-label">Access control, operational permissions, and institutional role definitions for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Security Integrity Validated • Permissions sync operational
+           </p>
         </div>
         <div className="flex gap-3">
           <button
-            className="btn-premium flex items-center gap-2"
+            className="clinical-btn bg-slate-900 text-white px-8 !rounded-2xl shadow-xl shadow-slate-900/10"
             onClick={() => {
               setEditingRole(null);
               setShowCreateModal(true);
             }}
           >
-            <Plus className="w-4 h-4" /> Add Protocol Role
+            <Plus className="w-4 h-4 mr-2" />
+            Provision New Protocol
           </button>
           <button
-            className="p-3 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-slate-900 transition-all shadow-sm"
+            className="p-3 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-slate-900 transition-all shadow-sm"
             onClick={fetchRoles}
           >
             <RefreshCcw className="w-4 h-4" />
           </button>
         </div>
-      </div>
+      </header>
 
       {/* FILTER BAR */}
       <div className="action-bar-premium mb-8">

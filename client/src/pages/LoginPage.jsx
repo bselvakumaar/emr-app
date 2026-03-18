@@ -118,39 +118,39 @@ export default function LoginPage({ onLogin, tenants }) {
     <div className="login-split-portal animate-fade-in">
       <section className="login-brand-panel">
         <div className="relative z-10 max-w-2xl text-center">
-          <div className="mb-8 mt-0">
-            <div className="w-40 h-40 mx-auto flex items-center justify-center">
+          <div className="mb-4 mt-0">
+            <div className="w-24 h-24 mx-auto flex items-center justify-center">
               <img src="/medflow_logo_8k.svg" alt={BRAND.name} className="w-full h-full" />
             </div>
-            <p className="text-xs uppercase tracking-[0.28em] text-cyan-100/72 font-extrabold mt-3">{BRAND.name}</p>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-white/40 font-black mt-2">{BRAND.name}</p>
           </div>
           
-          <div className="clinical-chip !bg-white/10 !border-white/15 !text-white mb-8">
+          <div className="clinical-chip !bg-white/10 !border-white/15 !text-white mb-6">
             <ShieldCheck className="w-4 h-4" />
-            HIPAA-aware care operations workspace
+            Operational Healthcare Lifecycle Platform
           </div>
 
-          <div className="mb-12">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+          <div className="mb-6">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
                 {(() => {
                   const Icon = features[currentFeatureIndex].icon;
-                  return <Icon className="w-8 h-8 text-white" />;
+                  return <Icon className="w-6 h-6 text-white" />;
                 })()}
               </div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.04em] text-white mb-4 transition-all duration-500">
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-[-0.04em] text-white mb-2 transition-all duration-500">
               {features[currentFeatureIndex].title}
             </h2>
-            <p className="text-lg md:text-xl text-cyan-50/86 leading-8 mb-4 transition-all duration-500">
+            <p className="text-base text-white/80 leading-relaxed mb-3 transition-all duration-500">
               {features[currentFeatureIndex].description}
             </p>
-            <div className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full">
-              <span className="text-sm font-bold text-cyan-100">{features[currentFeatureIndex].stats}</span>
+            <div className="inline-flex items-center px-3 py-1 bg-white/10 rounded-full">
+              <span className="text-xs font-bold text-white/90">{features[currentFeatureIndex].stats}</span>
             </div>
           </div>
 
-          <div className="flex justify-center space-x-2 mb-8">
+          <div className="flex justify-center space-x-2 mb-6">
             {features.map((_, index) => (
               <button
                 key={index}
@@ -164,7 +164,7 @@ export default function LoginPage({ onLogin, tenants }) {
             ))}
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 md:grid-cols-2">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
@@ -183,7 +183,7 @@ export default function LoginPage({ onLogin, tenants }) {
                     </div>
                     <div className="text-left">
                       <h3 className="text-sm font-bold text-white">{feature.title}</h3>
-                      <p className="text-xs text-cyan-50/70">{feature.stats}</p>
+                      <p className="text-xs text-white/60">{feature.stats}</p>
                     </div>
                   </div>
                 </div>
@@ -195,16 +195,16 @@ export default function LoginPage({ onLogin, tenants }) {
 
       <section className="login-form-panel">
         <div className="login-pro-card">
-          <div className="mb-8">
-            <div className="clinical-chip mb-4">
+          <div className="mb-6">
+            <div className="clinical-chip mb-3">
               <Lock className="w-4 h-4 text-[var(--primary)]" />
               Secure staff sign-in
             </div>
-            <h2 className="text-[1.55rem] md:text-[1.75rem] font-extrabold tracking-[-0.03em] text-[var(--primary)] whitespace-nowrap">
+            <h2 className="text-2xl md:text-3xl font-black tracking-tight text-[var(--primary)] font-display">
               {BRAND.slogan}
             </h2>
-            <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
-              Choose your organization and sign in with your assigned staff credentials.
+            <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+              Choose your organization and sign in with your staff credentials.
             </p>
           </div>
 
@@ -284,7 +284,7 @@ export default function LoginPage({ onLogin, tenants }) {
             </button>
           </form>
 
-          <div className="mt-8 rounded-[22px] border border-[var(--border)] bg-[var(--surface-muted)] p-5">
+          <div className="mt-6 rounded-[22px] border border-[var(--border)] bg-[var(--surface-muted)] p-4">
             <button
               type="button"
               onClick={() => setShowDemoCredentials((prev) => !prev)}

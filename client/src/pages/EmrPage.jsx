@@ -171,7 +171,26 @@ export default function EmrPage({ tenant, patients, providers, encounters, onCre
   };
 
   return (
-    <div className="view-container animate-fade-in">
+    <div className="page-shell-premium animate-fade-in">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
+        <div>
+           <h1 className="flex items-center gap-3">
+              EMR Clinical Workspace
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Clinical Node</span>
+           </h1>
+           <p className="dim-label">Longitudinal health recording, clinical assessments, and electronic prescription authorizing for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Clinical Integrity Validated • Diagnostic sync operational
+           </p>
+        </div>
+        <div className="flex items-center gap-3">
+           <div className="flex bg-white shadow-sm px-5 py-3 rounded-2xl border border-slate-200 overflow-hidden">
+              <span className="text-[11px] font-black uppercase text-slate-600 tracking-wider flex items-center gap-2">
+                <Activity className="w-4 h-4 text-emerald-500" /> {activeEncounters.length} Active Encounters
+              </span>
+           </div>
+        </div>
+      </header>
       {/* Patient context bar */}
       <div className="mb-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -211,7 +230,7 @@ export default function EmrPage({ tenant, patients, providers, encounters, onCre
               </div>
               <div>
                 <p className="text-sm font-semibold text-emerald-900">
-                  Clinical record committed for {patientName(lastSaved.patientId, patients)}
+                   Clinical record committed for {patientName(lastSaved.patientId, patients)}
                 </p>
                 <p className="text-xs text-emerald-700">
                   You can authorize the prescription output or return to the clinical hub.
@@ -256,10 +275,13 @@ export default function EmrPage({ tenant, patients, providers, encounters, onCre
              <Activity className="w-4 h-4" /> Active Registry
           </button>
           <button className={`premium-tab-item ${activeTab === 'history' ? 'active' : ''}`} onClick={() => setActiveTab('history')}>
-             <History className="w-4 h-4" /> Persistence
+             <History className="w-4 h-4" /> Persistence Ledger
           </button>
           <button className={`premium-tab-item ${activeTab === 'new' ? 'active' : ''}`} onClick={() => setActiveTab('new')}>
-             <Plus className="w-4 h-4" /> Initiated Assessment
+             <Plus className="w-4 h-4" /> New Assessment
+          </button>
+          <button className="premium-tab-item !text-rose-600 bg-rose-50/50 hover:bg-rose-100/50 border-rose-100" onClick={() => { setActiveTab('new'); setTimeout(() => { const sel = document.querySelector('select[name="type"]'); if(sel) { sel.value = "Emergency"; sel.scrollIntoView(); } }, 100); }}>
+             <AlertCircle className="w-4 h-4" /> Emergency Shard
           </button>
         </div>
       </div>
@@ -407,61 +429,117 @@ export default function EmrPage({ tenant, patients, providers, encounters, onCre
                    {/* Search/Filter would go here */}
                 </div>
               </header>
-
               <div className="premium-table-container">
                 <table className="premium-table">
                   <thead>
                     <tr>
                       <th className="tracking-[0.2em]">Temporal Node</th>
                       <th className="tracking-[0.2em]">Subject Identity</th>
-                      <th className="tracking-[0.2em]">Department</th>
-                      <th className="tracking-[0.2em]">Clinical Outcome</th>
-                      <th style={{ textAlign: 'right' }} className="tracking-[0.2em]">Governance</th>
+                      <th className="tracking-[0.2em]">Clinical Department</th>
+                      <th className="tracking-[0.2em]">Diagnosis & Narrative Shard</th>
+                      <th style={{ textAlign: 'right' }} className="tracking-[0.2em]">Case Extract</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">
                     {(activeTab === 'active' ? activeEncounters : pastEncounters).length === 0 ? (
                       <tr><td colSpan="5" className="text-center py-32">
                          <FileText className="w-12 h-12 text-slate-100 mx-auto mb-4" />
-                         <p className="text-xs font-black text-slate-300 uppercase tracking-[0.2em]">No clinical event logs detected.</p>
+                         <p className="text-xs font-black text-slate-300 uppercase tracking-[0.2em]">No clinical event logs detected in the persistence node.</p>
                       </td></tr>
                     ) : (activeTab === 'active' ? activeEncounters : pastEncounters).map((e, idx) => {
                       const pat = patients.find(p => p.id === (e.patient_id || e.patientId));
                       return (
                         <tr key={e.id} className="hover:bg-slate-50/50 transition-colors animate-fade-in" style={{ animationDelay: `${idx * 30}ms` }}>
                           <td>
-                            <div className="text-sm font-black text-slate-900 tabular-nums">{new Date(e.created_at || e.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</div>
+                            <div className="text-sm font-black text-slate-900 tabular-nums">{new Date(e.created_at || e.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
                             <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5">{new Date(e.created_at || e.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                           </td>
                           <td>
                             <div className="flex items-center gap-3">
-                               <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400">{(pat?.firstName || 'P')[0]}</div>
+                               <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[10px] font-black italic">{(pat?.firstName || 'P')[0]}</div>
                                <div>
                                   <div className="font-black text-slate-900 cursor-pointer hover:text-emerald-600 transition-colors" onClick={() => { setSelectedPatientId(e.patient_id || e.patientId); setActiveTab('new'); }}>
-                                    {pat ? `${pat.firstName} ${pat.lastName}` : (e.patientName || 'Unknown')}
+                                    {pat ? `${pat.firstName} ${pat.lastName}` : (e.patientName || 'Unknown Identity')}
                                   </div>
-                                  <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5">MRN: {pat?.mrn || 'NEW_NODE'}</div>
+                                  <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5">MRN-${pat?.mrn || 'NEW_NODE'}</div>
                                </div>
                             </div>
                           </td>
                           <td>
-                            <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-slate-100 text-slate-600 border border-slate-200`}>
+                            <span className={`px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border ${e.encounter_type === 'Emergency' ? 'bg-rose-50 text-rose-600 border-rose-100' : 'bg-slate-50 text-slate-500 border-slate-100'}`}>
                               {e.encounter_type || e.type}
                             </span>
                           </td>
                           <td>
-                             <div className="max-w-xs truncate text-[13px] font-medium text-slate-600">{e.diagnosis || 'Clinical Assessment Ongoing...'}</div>
+                             <div className="max-w-md">
+                                <div className="text-[13px] font-black text-slate-800 truncate">{e.diagnosis || 'Active Clinical Assessment...'}</div>
+                                <div className="text-[10px] font-medium text-slate-400 mt-1 line-clamp-1 italic">{e.notes || 'No institutional narrative recorded.'}</div>
+                             </div>
                           </td>
                           <td className="text-right">
                             <div className="flex justify-end gap-2">
-                              <button className="p-2 rounded-xl bg-slate-50 text-slate-400 hover:text-emerald-600 transition-all border border-transparent hover:border-emerald-100" title="Generate Rx" onClick={() => printPrescription(e, pat || { firstName: 'Patient' }, [], providers.find(p => p.id === (e.provider_id || e.providerId)), tenant)}>
+                              <button className="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-white border border-slate-100 hover:border-slate-200 rounded-xl transition-all group" title="Institutional Case Summary" onClick={() => {
+                                const win = window.open('', '_blank', 'width=900,height=1000');
+                                win.document.write(`
+                                  <style>
+                                    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+                                    body { font-family: 'Inter', sans-serif; padding: 60px; background: #f8fafc; color: #1e293b; }
+                                    .card { background: white; padding: 50px; border-radius: 32px; border: 1px solid #e2e8f0; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05); }
+                                    .label { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 8px; }
+                                    .value { font-size: 15px; font-weight: 700; color: #1e293b; }
+                                    .header { border-bottom: 2px solid #10b981; padding-bottom: 30px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+                                  </style>
+                                  <div class="card">
+                                    <div class="header">
+                                      <div>
+                                        <div class="label">Institutional Clinical Record</div>
+                                        <h1 style="margin:0; font-size: 32px; font-weight: 900; letter-spacing: -0.04em;">${pat?.firstName} ${pat?.lastName}</h1>
+                                        <div class="value" style="color:#64748b;">MRN-${pat?.mrn} • ${e.type} Node</div>
+                                      </div>
+                                      <div style="text-align:right">
+                                        <div class="label">Authorization Date</div>
+                                        <div class="value">${new Date().toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'})}</div>
+                                      </div>
+                                    </div>
+                                    
+                                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px;">
+                                      <div>
+                                        <div class="label">Diagnostic Assessment</div>
+                                        <div class="value" style="font-size: 20px; line-height: 1.4;">${e.diagnosis}</div>
+                                      </div>
+                                      <div>
+                                        <div class="label">Clinical Vitals Node</div>
+                                        <div style="display:flex; gap: 20px;">
+                                          <div style="padding:15px; background:#f1f5f9; border-radius:16px; flex:1;">
+                                            <div class="label" style="font-size:8px;">BP mmHg</div>
+                                            <div class="value">${e.bp || '--'}</div>
+                                          </div>
+                                          <div style="padding:15px; background:#f1f5f9; border-radius:16px; flex:1;">
+                                            <div class="label" style="font-size:8px;">Pulse BPM</div>
+                                            <div class="value">${e.hr || '--'}</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div style="margin-bottom: 50px;">
+                                      <div class="label">Physician Narrative Shard</div>
+                                      <div class="value" style="font-weight: 500; line-height: 1.8; color: #475569; background: #fdfdfd; padding: 25px; border-radius: 20px; border: 1px solid #f1f5f9;">${e.notes || 'No institutional narrative available for this shard.'}</div>
+                                    </div>
+
+                                    <div style="text-align:center; padding-top: 40px; border-top: 1px dashed #e2e8f0; color: #94a3b8; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;">
+                                      End of Institutional Clinical Extract • Document Reference ${e.id ? e.id.toUpperCase().slice(0,8) : 'TEMP'}
+                                    </div>
+                                  </div>
+                                `);
+                                win.document.close();
+                              }}>
+                                 <FileText className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600" />
+                                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-indigo-600">Summary Extract</span>
+                              </button>
+                              <button className="p-2.5 rounded-xl bg-slate-50 text-slate-400 hover:text-emerald-600 transition-all border border-slate-100 hover:border-emerald-100" title="Generate Rx" onClick={() => printPrescription(e, pat || { firstName: 'Patient' }, [], providers.find(p => p.id === (e.provider_id || e.providerId)), tenant)}>
                                  <Printer className="w-4 h-4" />
                               </button>
-                               {e.status === 'open' && (
-                                <button className="p-2 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 transition-all border border-transparent hover:border-indigo-100" title="Edit Assessment" onClick={() => { setSelectedPatientId(e.patient_id || e.patientId); setActiveTab('new'); }}>
-                                   <FileText className="w-4 h-4" />
-                                </button>
-                              )}
                             </div>
                           </td>
                         </tr>

@@ -42,6 +42,8 @@ const navIcons = {
   superadmin: ShieldCheck,
   dashboard: LayoutDashboard,
   users: UserCircle,
+  tenants: Grid2X2,
+  ticketing: Bell,
   patients: Users,
   appointments: Calendar,
   emr: History,
@@ -73,8 +75,12 @@ const moduleDescriptions = {
   reports: "Utilization, revenue, and performance insights",
   admin: "Facility settings, users, and access controls",
   lab: "Orders, samples, and result tracking",
-  superadmin: "Platform governance and multi-tenant administration",
-  support: "Operational support and issue management"
+  superadmin: "Platform Hub",
+  dashboard: "Platform Metrics & Trends",
+  tenants: "Multi-tenant Governance",
+  support: "Support Channels",
+  ticketing: "Issue Resolution",
+  admin: "Infrastructural Config"
 };
 
 function formatRole(role) {
@@ -232,8 +238,8 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
                       width: '5px',
                       height: '5px',
                       borderRadius: '50%',
-                      background: '#00A3E0',
-                      boxShadow: '0 0 8px #00A3E0'
+                      background: 'var(--clinical-blue)',
+                      boxShadow: '0 0 8px var(--clinical-blue)'
                     }}
                   />
                 )}
@@ -273,8 +279,8 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
                         width: '5px',
                         height: '5px',
                         borderRadius: '50%',
-                        background: '#00A3E0',
-                        boxShadow: '0 0 8px #00A3E0'
+                      background: 'var(--clinical-blue)',
+                      boxShadow: '0 0 8px var(--clinical-blue)'
                       }}
                     />
                   )}
@@ -304,7 +310,7 @@ export default function AppLayout({ tenant, activeUser, allowedViews, view, setV
               width: '40px',
               height: '40px',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+               background: 'linear-gradient(135deg, var(--medical-navy), var(--clinical-blue))',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

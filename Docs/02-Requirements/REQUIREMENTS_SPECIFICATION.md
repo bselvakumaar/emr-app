@@ -68,6 +68,8 @@ The system encompasses the full patient journey from registration and appointmen
 - **REQ-BIL-02**: **Payment Processing**. Record payments (Cash, Card, UPI, Insurance) and track due balances.
 - **REQ-BIL-03**: **Discharge Settlement**. Support IPD discharge settlement workflow prior to discharge completion.
 - **REQ-BIL-04**: **Insurance Claims**. Capture policy numbers, claim numbers, and claim amounts.
+- **REQ-BIL-05**: **Tenant Payment Gateway**. Tenants must be able to configure their own institutional payment gateways (Stripe, Razorpay, etc.) for patient/insurance settlements, independent of the platform's billing.
+
 
 ### 2.7 Insurance Registry
 - **REQ-INS-01**: **Provider Registry**. Create and maintain insurance providers by tenant.
@@ -95,6 +97,15 @@ The system encompasses the full patient journey from registration and appointmen
 - **REQ-ADM-02**: **Tenant User Creation**. Admin can create users under tenant scope.
 - **REQ-SUP-01**: **Platform Oversight**. Superadmin can view global metrics and tenant summaries.
 - **REQ-SUP-02**: **Tenant Provisioning**. Superadmin can create tenant entries and bootstrap access.
+- **REQ-SUP-03**: **Feature Governance**. Superadmin can manage subscription tiers (Basic, Professional, Enterprise) and granular feature flag overrides for any tenant through a centralized governance interface.
+
+### 2.12 Subscription Tiers & Feature Gating
+- **REQ-FEATURE-01**: **Tier-Based Modules**. The system must automatically enable/disable modules based on the tenant's tier:
+  - **Free**: Core EMR + Customer Support (excluding Pharmacy/Lab).
+  - **Basic**: Core EMR + Customer Support + **Pharmacy & Lab**.
+  - **Professional**: Core EMR + Customer Support + Pharmacy/Lab + **Inpatient Management**.
+  - **Enterprise**: All modules including **HR/Payroll** and **Advanced Accounts**.
+- **REQ-FEATURE-02**: **Downgrade Safeguard Protocol**. Any attempt to move a tenant to a lower subscription tier must trigger a formal confirmation warning and require a mandatory "Communication Note" from the Superadmin documenting the tenant's consent and awareness of possible data accessibility trade-offs.
 
 ### 2.12 End-to-End Validation Dataset
 - **REQ-DATA-01**: System must support seeded validation datasets for at least two tenants.

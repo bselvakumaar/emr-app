@@ -63,11 +63,11 @@ export const PatientOverviewChart = ({ data = [] }) => {
       left: 'center'
     },
     grid: {
-      top: 70,
-      left: 50,
-      right: 20,
-      bottom: 40,
-      containLabel: false,
+      top: 40,
+      left: 35,
+      right: 15,
+      bottom: 30,
+      containLabel: true,
       backgroundColor: 'transparent'
     },
     xAxis: {
@@ -292,35 +292,39 @@ export const DepartmentDistributionChart = ({ data = [] }) => {
       formatter: (params) => `${params.name}<br/>${params.value} beds (${params.percent}%)`
     },
     legend: {
+      orient: 'vertical',
+      right: 10,
+      top: 'center',
       data: chartData.map(d => d.name),
       textStyle: {
         color: HEALTHCARE_COLORS.mutedText,
-        fontSize: 11,
-        fontWeight: 500
+        fontSize: 10,
+        fontWeight: 600
       },
-      bottom: 10,
-      left: 'center',
-      orient: 'horizontal'
+      icon: 'circle'
     },
     series: [
       {
         data: chartData,
         type: 'pie',
-        radius: ['30%', '70%'],
-        center: ['50%', '50%'],
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.2)'
-          }
+        radius: ['45%', '85%'],
+        center: ['35%', '50%'],
+        avoidLabelOverlap: true,
+        itemStyle: {
+          borderRadius: 8,
+          borderColor: '#fff',
+          borderWidth: 2
         },
         label: {
-          show: true,
-          color: HEALTHCARE_COLORS.darkText,
-          fontSize: 11,
-          fontWeight: 600,
-          formatter: (params) => `${params.name}\n${params.value}`
+          show: false // Hide labels on lines as they cause shrinking
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 14,
+            fontWeight: 'bold',
+            formatter: '{b}\n{c}'
+          }
         }
       }
     ]

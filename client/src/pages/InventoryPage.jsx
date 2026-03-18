@@ -6,13 +6,18 @@ export default function InventoryPage({ inventory, onAddItem, onRestock }) {
 
   return (
     <div className="page-shell-premium animate-fade-in">
-      <div className="page-header-premium">
-        <div className="max-w-3xl">
-          <div className="px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded text-[9px] font-black uppercase tracking-widest inline-block mb-3 border border-indigo-100">Supply Chain Oversight</div>
-          <h1>Asset Logistics</h1>
-          <p className="mt-2">Monitor clinical inventory, reorder thresholds, and asset registration with a cleaner operational view.</p>
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
+        <div>
+           <h1 className="flex items-center gap-3">
+              Asset Logistics & Supply Chain
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Inventory Node</span>
+           </h1>
+           <p className="dim-label">Monitor clinical inventory, reorder thresholds, and asset registration with high-fidelity logistics tracking.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-indigo-500" /> Operational Readiness • Supply Chain oversight active
+           </p>
         </div>
-      </div>
+      </header>
 
       <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <MetricCard

@@ -46,35 +46,33 @@ export default function EmployeesPage({ tenant }) {
 
   return (
     <div className="page-shell-premium animate-fade-in">
-      <div className="page-header-premium mb-8">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
         <div>
-          <h1 className="flex items-center gap-3">
-             Human Capital Intelligence
-             <span className="text-[10px] bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full border border-emerald-200 uppercase tracking-tighter font-black">Staffing Node</span>
-          </h1>
-          <p className="dim-label">Organizational personnel management and credentialing ledger</p>
+           <h1 className="flex items-center gap-3">
+              Human Capital & Workforce Hub
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Staffing Node</span>
+           </h1>
+           <p className="dim-label">Organizational personnel management, payroll distribution, and credentialing for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Personnel Integrity Validated • Workforce sync operational
+           </p>
         </div>
-        <div className="flex bg-white/50 backdrop-blur-sm p-1 rounded-2xl border border-slate-200 shadow-sm gap-1">
-          <button 
-            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'roster' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
-            onClick={() => setActiveTab('roster')}
-          >
-            Roster
-          </button>
-          <button 
-            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'attendance' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
-            onClick={() => setActiveTab('attendance')}
-          >
-            Attendance
-          </button>
-          <button 
-            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'payroll' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
-            onClick={() => setActiveTab('payroll')}
-          >
-            Payroll
-          </button>
+        <div className="flex bg-white shadow-sm p-1.5 rounded-2xl border border-slate-200 gap-1 w-fit">
+          {[
+            { id: 'roster', label: 'Workforce Roster', icon: Users },
+            { id: 'attendance', label: 'Attendance Log', icon: Clock },
+            { id: 'payroll', label: 'Payroll Ledger', icon: Wallet }
+          ].map(tab => (
+            <button 
+              key={tab.id}
+              className={`clinical-btn !min-h-[44px] px-8 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab.id ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              <tab.icon className="w-3.5 h-3.5 mr-2" /> {tab.label}
+            </button>
+          ))}
         </div>
-      </div>
+      </header>
 
       <section className="vitals-monitor mb-10">
         <div className="vital-node vital-node--safe shadow-sm">

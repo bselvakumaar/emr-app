@@ -106,29 +106,30 @@ export default function PatientsPage({
   return (
     <div className="page-shell-premium animate-fade-in">
       {/* 1. CLINICAL HEADER */}
-      <header className="page-header-premium mb-10">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
         <div>
-          <h1 className="flex items-center gap-3">
-             Master Clinical Registry
-             <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Central Node</span>
-          </h1>
-          <p className="dim-label">Centralized identity governance and longitudinal record management</p>
+           <h1 className="flex items-center gap-3">
+              Master Clinical Registry
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Identity Node</span>
+           </h1>
+           <p className="dim-label">Centralized identity governance and longitudinal record management for {tenant?.name || 'Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Identity Logic Active • Centralized Registry Operational
+           </p>
         </div>
-        <div className="flex items-center gap-6">
-           <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl border border-slate-200 shadow-sm gap-1">
-             <button 
-               className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'registry' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
-               onClick={() => setActiveTab('registry')}
-             >
-               <ClipboardList className="w-3.5 h-3.5 mr-2" /> Registry
-             </button>
-             <button 
-               className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'onboard' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
-               onClick={() => setActiveTab('onboard')}
-             >
-               <UserPlus className="w-3.5 h-3.5 mr-2" /> New Admission
-             </button>
-           </div>
+        <div className="flex bg-white shadow-sm p-1.5 rounded-2xl border border-slate-200 gap-1 w-fit">
+          <button 
+            className={`clinical-btn !min-h-[44px] px-8 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'registry' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+            onClick={() => setActiveTab('registry')}
+          >
+            <ClipboardList className="w-3.5 h-3.5 mr-2" /> Registry Status
+          </button>
+          <button 
+            className={`clinical-btn !min-h-[44px] px-8 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'onboard' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+            onClick={() => setActiveTab('onboard')}
+          >
+            <UserPlus className="w-3.5 h-3.5 mr-2" /> New Registration
+          </button>
         </div>
       </header>
 
@@ -137,11 +138,11 @@ export default function PatientsPage({
         <section className="space-y-8">
           <div className="flex flex-col md:flex-row gap-6 items-stretch">
              <div className="flex-1 relative group">
-                <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
+                <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[var(--clinical-blue)] transition-colors" />
                 <input 
                   type="text" 
                   placeholder="Query identity by name, MRN, or diagnostic shard..." 
-                  className="input-field pl-16 py-6 bg-white border-2 border-slate-50 rounded-3xl shadow-sm focus:shadow-xl focus:border-emerald-100 transition-all font-medium text-slate-800 placeholder:text-slate-300 w-full"
+                  className="input-field pl-16 py-6 bg-white border-2 border-slate-50 rounded-3xl shadow-sm focus:shadow-xl focus:border-[var(--clinical-blue)]/20 transition-all font-medium text-slate-800 placeholder:text-slate-300 w-full"
                   value={query}
                   onChange={e => setQuery(e.target.value)}
                 />
@@ -192,7 +193,7 @@ export default function PatientsPage({
                       >
                         <td className="!py-6">
                            <div className="flex items-center gap-4">
-                              <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center font-black text-slate-400 group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-all">
+                              <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center font-black text-slate-400 group-hover:bg-[var(--accent-soft)] group-hover:text-[var(--clinical-blue)] transition-all">
                                  {p.firstName?.charAt(0)}{p.lastName?.charAt(0)}
                               </div>
                               <div>
@@ -214,7 +215,7 @@ export default function PatientsPage({
                         <td className="text-right">
                            <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
                               <button className="p-2.5 bg-white text-slate-400 hover:text-slate-900 rounded-xl border border-slate-100 shadow-sm transition-all"><FileText className="w-4 h-4" /></button>
-                              <button className="p-2.5 bg-slate-900 text-white hover:bg-emerald-600 rounded-xl shadow-md transition-all"><ChevronRight className="w-4 h-4" /></button>
+                              <button className="p-2.5 bg-[var(--medical-navy)] text-white hover:bg-[var(--clinical-accent)] rounded-xl shadow-md transition-all"><ChevronRight className="w-4 h-4" /></button>
                            </div>
                         </td>
                       </tr>
@@ -232,10 +233,10 @@ export default function PatientsPage({
            <article className="col-span-12 lg:col-span-8 clinical-card p-12 animate-slide-up">
               <header className="mb-12 flex justify-between items-end">
                  <div>
-                    <h3 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Registry Admission Protocol</h3>
+                    <h3 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Registry Onboarding Protocol</h3>
                     <p className="dim-label uppercase tracking-widest text-[10px] mt-2 font-black">Identity Provisioning Protocol • Central Node</p>
                  </div>
-                 <div className="w-14 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center shadow-2xl">
+                 <div className="w-14 h-14 bg-[var(--medical-navy)] text-white rounded-2xl flex items-center justify-center shadow-2xl">
                     <UserPlus className="w-7 h-7" />
                  </div>
               </header>
@@ -243,7 +244,7 @@ export default function PatientsPage({
               <form className="space-y-12" onSubmit={handleOnboard}>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div className="space-y-6">
-                       <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-600">Clinical Identity</h4>
+                       <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--clinical-accent)]">Clinical Identity</h4>
                        <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Forename</label>
                           <input name="firstName" className="input-field h-[60px] bg-slate-50 border-none rounded-2xl font-black text-slate-800 px-6" required />
@@ -289,33 +290,48 @@ export default function PatientsPage({
 
                  <div className="pt-10 border-t border-slate-50 flex justify-end gap-6 items-center">
                     <button type="button" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 hover:text-rose-500 transition-colors" onClick={() => setActiveTab('registry')}>Abort Procedure</button>
-                    <button type="submit" className="clinical-btn bg-slate-900 text-white px-12 py-6 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl hover:bg-slate-800 transition-all border-none">
+                    <button type="submit" className="clinical-btn bg-[var(--medical-navy)] text-white px-12 py-6 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl hover:opacity-90 transition-all border-none">
                        COMMIT TO CLINICAL REGISTRY
                     </button>
                  </div>
               </form>
            </article>
 
-           <aside className="col-span-12 lg:col-span-4 space-y-8">
-              <div className="clinical-card bg-slate-900 text-white relative overflow-hidden group h-full">
+            <aside className="col-span-12 lg:col-span-4 space-y-8">
+              <div className="clinical-card !bg-[var(--medical-navy)] text-white relative overflow-hidden group h-full border-none shadow-2xl">
                  <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full -mr-24 -mt-24 blur-3xl group-hover:scale-110 transition-transform"></div>
                  <header className="relative z-10 mb-10">
-                    <h3 className="text-sm font-black uppercase tracking-[0.2em] text-emerald-400">Registry Integrity</h3>
+                    <h3 className="text-sm font-black uppercase tracking-[0.2em] text-[var(--clinical-accent)]">Registry Integrity</h3>
                     <p className="text-[10px] text-white/40 font-black uppercase mt-2">Global Service Status</p>
                  </header>
                  
-                 <div className="space-y-6 relative z-10">
-                    <div className="flex items-center gap-4">
-                       <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50"></div>
-                       <div className="text-[11px] font-black uppercase tracking-widest">Biometric Shard Sync: Nominal</div>
+                 <div className="space-y-8 relative z-10">
+                    <div className="flex items-center gap-5 group/item">
+                       <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover/item:bg-emerald-500/20 group-hover/item:border-emerald-500/40 transition-all">
+                          <Activity className="w-5 h-5 text-emerald-400" />
+                       </div>
+                       <div>
+                          <p className="text-[10px] text-white/40 font-black uppercase tracking-tighter mb-1">Biometric Identification</p>
+                          <div className="text-[11px] font-black uppercase tracking-widest text-white/90">Shard Sync: Nominal</div>
+                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                       <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50"></div>
-                       <div className="text-[11px] font-black uppercase tracking-widest">Encryption Layer: AES-256 Active</div>
+                    <div className="flex items-center gap-5 group/item">
+                       <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover/item:bg-emerald-500/20 group-hover/item:border-emerald-500/40 transition-all">
+                          <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                       </div>
+                       <div>
+                          <p className="text-[10px] text-white/40 font-black uppercase tracking-tighter mb-1">Defense Protocol</p>
+                          <div className="text-[11px] font-black uppercase tracking-widest text-white/90">Encryption: AES-256 Active</div>
+                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                       <div className="w-2 h-2 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"></div>
-                       <div className="text-[11px] font-black uppercase tracking-widest">Network Latency: 12ms</div>
+                    <div className="flex items-center gap-5 group/item">
+                       <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover/item:bg-blue-500/20 group-hover/item:border-blue-500/40 transition-all">
+                          <Clock className="w-5 h-5 text-blue-400" />
+                       </div>
+                       <div>
+                          <p className="text-[10px] text-white/40 font-black uppercase tracking-tighter mb-1">Global Latency</p>
+                          <div className="text-[11px] font-black uppercase tracking-widest text-white/90">Response: 12ms</div>
+                       </div>
                     </div>
                  </div>
 

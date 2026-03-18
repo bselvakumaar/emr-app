@@ -84,7 +84,28 @@ This document is the canonical technical design reference for the EMR applicatio
 - `emr.tenant_features`
 - `emr.global_kill_switches`
 
-## 8. Documentation Boundaries
+## 8. Multi-Tier Governance Architecture
+Access to high-level modules is controlled through a cumulative tiering system:
+- **Pricing Shards**: 
+  - Free: ₹0/month
+  - Basic: ₹2,500/month
+  - Professional: ₹7,500/month
+  - Enterprise: ₹15,000/month
+- **Feature Computation**: Determined by `Subscription Tier` + `Manual Overrides` - `Global Killswitches`.
+- **Infrastructure Implementation**:
+  - `server/services/featureFlag.service.js`: Backend evaluation and default tier mappings.
+  - `client/src/services/featureFlag.service.js`: Frontend gatekeeping and cache management.
+  - `emr.tenant_feature_status`: A SQL view providing real-time evaluation of a tenant's effective permissions.
+
+## 9. Institutional Financial Sharding
+The system isolates Platform-level and Tenant-level payments:
+- **Platform Layer**: Managed by Superadmin; controls tenant subscription lifecycle.
+- **Tenant Layer**: Configured by Tenant Admins; routes patient payments directly to the hospital's gateway.
+- **Implementation**:
+  - `billing_config` (JSONB) in `emr.tenants` stores provider, currency, and gateway keys per tenant.
+  - `AdminPage.jsx`: Secured interface for Tenant Admins to provision their specific gateway nodes.
+
+## 10. Documentation Boundaries
 - `TECHNICAL_DESIGN.md` (this file): canonical architecture and design decisions.
 - `TECHNICAL_HANDBOOK.md`: implementation and change workflows for developers.
 - `DATA_FLOW_DIAGRAMS.md`: diagrams and sequence/flow visuals aligned to current API.

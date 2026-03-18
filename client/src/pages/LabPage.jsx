@@ -49,28 +49,31 @@ export default function LabPage({ tenant, activeUser }) {
 
   return (
     <div className="page-shell-premium animate-fade-in">
-      <div className="page-header-premium mb-8">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
         <div>
-          <h1 className="flex items-center gap-3">
-             Diagnostic Intelligence Hub
-             <span className="text-[10px] bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full border border-indigo-200 uppercase tracking-tighter font-black">Laboratory Node</span>
-          </h1>
-          <p className="dim-label">Pathological stream and automated diagnostic result ledger</p>
+           <h1 className="flex items-center gap-3">
+              Laboratory & Diagnostic Hub
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Clinical Node</span>
+           </h1>
+           <p className="dim-label">Institutional pathology streams, diagnostic result ledgers, and automated findings for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldAlert className="w-3 h-3 text-indigo-500" /> Lab Integrity Verified • Diagnostic feeds operational
+           </p>
         </div>
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
            {/* No-click critical counts */}
-           <div className="flex bg-white/50 backdrop-blur-sm p-1 rounded-2xl border border-slate-200 shadow-sm">
-              <div className="px-5 py-2 border-r border-slate-100">
-                 <span className="vital-label">Awaiting Samples</span>
-                 <span className="text-sm font-black tabular-nums">{stats.pending} Shards</span>
+           <div className="flex bg-white shadow-sm rounded-2xl border border-slate-200 overflow-hidden">
+              <div className="px-5 py-3 border-r border-slate-100 bg-slate-50/50">
+                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Awaiting Samples</span>
+                 <span className="text-sm font-black text-slate-900 tabular-nums">{stats.pending} Shards</span>
               </div>
-              <div className="px-5 py-2">
-                 <span className="vital-label">Critical Findings</span>
+              <div className="px-5 py-3 bg-white">
+                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Critical Findings</span>
                  <span className="text-sm font-black text-rose-600 tabular-nums">{stats.critical} Nodes</span>
               </div>
            </div>
         </div>
-      </div>
+      </header>
 
       {/* SYSTEM STATUS GRID */}
       <section className="vitals-monitor mb-10">

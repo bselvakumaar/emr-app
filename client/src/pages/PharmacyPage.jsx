@@ -81,18 +81,24 @@ export default function PharmacyPage({ tenant, onDispense }) {
 
   return (
     <div className="page-shell-premium animate-fade-in">
-      <div className="page-header-premium mb-8">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
         <div>
-          <h1>Pharmacy Services</h1>
-          <p>Institutional medication dispensing and inventory logistics.</p>
+           <h1 className="flex items-center gap-3">
+              Pharmacy Dispatch & Logistics
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Clinical Node</span>
+           </h1>
+           <p className="dim-label">Institutional medication dispensing, prescription fulfillment, and inventory monitoring for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Dispensation Integrity Validated • Real-time Procurement active
+           </p>
         </div>
-        <div className="flex gap-3">
-          <button className="btn-primary py-4 px-8 text-[10px] uppercase tracking-widest shadow-xl">
+        <div className="flex items-center gap-3">
+          <button className="clinical-btn !rounded-2xl px-8 shadow-xl shadow-blue-500/10 min-w-[180px]">
              <Plus className="w-4 h-4 mr-2" />
              New Prescription
           </button>
         </div>
-      </div>
+      </header>
 
       {/* Metrics Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">

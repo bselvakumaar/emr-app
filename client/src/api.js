@@ -731,6 +731,11 @@ apiClient.createDischargeInvoice = (encounterId, data) => apiRequest(`/inpatient
 apiClient.autoBillItem = (tenantId, data) => apiRequest('/billing/auto-bill', { method: 'POST', body: JSON.stringify({ tenantId, ...data }) });
 apiClient.simulatePaymentGateway = (amount, currency) => new Promise((resolve) => setTimeout(() => resolve({ success: true, transactionId: `TXN-${Math.random().toString(36).substr(2, 9).toUpperCase()}` }), 1500));
 
+// Superadmin Feature Management
+apiClient.getAdminTenantFeatures = (tenantId) => apiRequest(`/admin/tenants/${tenantId}/features`);
+apiClient.updateTenantTier = (tenantId, tier) => apiRequest(`/admin/tenants/${tenantId}/tier`, { method: 'PATCH', body: JSON.stringify({ tier }) });
+apiClient.updateTenantFeatureOverride = (tenantId, featureFlag, enabled) => apiRequest(`/admin/tenants/${tenantId}/features`, { method: 'POST', body: JSON.stringify({ featureFlag, enabled }) });
+
 // Generic HTTP methods (for direct usage)
 apiClient.get = (url) => apiRequest(url);
 apiClient.post = (url, body) => apiRequest(url, { method: 'POST', body: JSON.stringify(body) });

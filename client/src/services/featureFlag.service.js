@@ -6,7 +6,9 @@ export const FEATURE_FLAGS = {
   CORE_ENGINE_ACCESS: 'permission-core_engine-access',
   HR_PAYROLL_ACCESS: 'permission-hr_payroll-access',
   ACCOUNTS_ACCESS: 'permission-accounts-access',
-  CUSTOMER_SUPPORT_ACCESS: 'permission-customer_support-access'
+  CUSTOMER_SUPPORT_ACCESS: 'permission-customer_support-access',
+  INPATIENT_ACCESS: 'permission-inpatient-access',
+  PHARMACY_LAB_ACCESS: 'permission-pharmacy_lab-access'
 };
 
 // Module to flag mapping
@@ -15,11 +17,12 @@ export const MODULE_FLAG_MAPPING = {
   patients: FEATURE_FLAGS.CORE_ENGINE_ACCESS,
   appointments: FEATURE_FLAGS.CORE_ENGINE_ACCESS,
   emr: FEATURE_FLAGS.CORE_ENGINE_ACCESS,
-  inpatient: FEATURE_FLAGS.CORE_ENGINE_ACCESS,
+  inpatient: FEATURE_FLAGS.INPATIENT_ACCESS,
   employees: FEATURE_FLAGS.HR_PAYROLL_ACCESS,
   billing: FEATURE_FLAGS.ACCOUNTS_ACCESS,
   accounts: FEATURE_FLAGS.ACCOUNTS_ACCESS,
-  pharmacy: FEATURE_FLAGS.CORE_ENGINE_ACCESS,
+  pharmacy: FEATURE_FLAGS.PHARMACY_LAB_ACCESS,
+  lab: FEATURE_FLAGS.PHARMACY_LAB_ACCESS,
   inventory: FEATURE_FLAGS.CORE_ENGINE_ACCESS,
   reports: FEATURE_FLAGS.CORE_ENGINE_ACCESS,
   support: FEATURE_FLAGS.CUSTOMER_SUPPORT_ACCESS

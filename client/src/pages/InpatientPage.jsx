@@ -12,8 +12,13 @@ import {
   ChevronRight,
   Stethoscope,
   Grid,
-  Plus
+  Plus,
+  UserPlus,
+  Search,
+  Users,
+  ShieldAlert
 } from 'lucide-react';
+import PatientSearch from '../components/PatientSearch.jsx';
 
 export default function InpatientPage({ tenant, providers, onDischarge }) {
   const [encounters, setEncounters] = useState([]);
@@ -102,29 +107,38 @@ export default function InpatientPage({ tenant, providers, onDischarge }) {
 
   return (
     <div className="page-shell-premium animate-fade-in">
-      <div className="page-header-premium mb-8">
+      <header className="page-header-premium mb-10 pb-6 border-b border-gray-100">
         <div>
-          <h1 className="flex items-center gap-3">
-             Institutional Care Terminal
-             <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Clinical Live Feed</span>
-          </h1>
-          <p className="dim-label">Active inpatient management and automatic infrastructure allocation stabilizer</p>
+           <h1 className="flex items-center gap-3">
+              Institutional Inpatient Care Hub
+              <span className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded-full border border-white/10 uppercase tracking-tighter font-black">Clinical Node</span>
+           </h1>
+           <p className="dim-label">Active inpatient management, bed allocation, and discharge infrastructure for {tenant?.name || 'Authorized Facility'}.</p>
+           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 flex items-center gap-2">
+              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Census Integrity Validated • Live Ward updates Active
+           </p>
         </div>
-        <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl border border-slate-200 shadow-sm gap-1">
+        <div className="flex bg-white shadow-sm p-1.5 rounded-2xl border border-slate-200 gap-1 w-fit">
           <button 
-            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'ledger' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+            className={`clinical-btn !min-h-[44px] px-8 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'ledger' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
             onClick={() => setActiveTab('ledger')}
           >
             Admission Ledger
           </button>
           <button 
-            className={`clinical-btn !min-h-[40px] px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'occupancy' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+            className={`clinical-btn !min-h-[44px] px-8 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'occupancy' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
             onClick={() => setActiveTab('occupancy')}
           >
             Occupancy Map
           </button>
+          <button 
+            className={`clinical-btn !min-h-[44px] px-8 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'admit' ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
+            onClick={() => setActiveTab('admit')}
+          >
+            <UserPlus className="w-3.5 h-3.5 mr-2" /> New Admission
+          </button>
         </div>
-      </div>
+      </header>
 
       <section className="vitals-monitor mb-10">
         <div className="vital-node vital-node--safe shadow-sm">
@@ -150,10 +164,144 @@ export default function InpatientPage({ tenant, providers, onDischarge }) {
               <span className="vital-label">Emergency Shards</span>
               <AlertTriangle className="w-4 h-4 text-rose-500 opacity-50" />
            </div>
-           <span className="vital-value tabular-nums mt-1">01</span>
+           <span className="vital-value tabular-nums mt-1">{encounters.filter(e => e.type === 'Emergency').length}</span>
            <p className="text-[10px] font-black text-rose-600 mt-2 uppercase">High Priority Shift</p>
         </div>
       </section>
+
+      {/* ALERT NODE */}
+      {metrics.active > (metrics.critical * 0.8) && (
+        <article className="mb-10 p-6 bg-rose-50 border border-rose-100 rounded-3xl flex items-center gap-6 animate-pulse">
+           <div className="w-12 h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center shrink-0 shadow-lg">
+              <ShieldAlert className="w-6 h-6" />
+           </div>
+           <div className="flex-1">
+              <h4 className="text-sm font-black text-rose-900 uppercase tracking-tight">Facility Capacity Breach IMMINENT</h4>
+              <p className="text-[11px] font-medium text-rose-700 mt-1">Institutional load exceeds 80% saturation. Diversion protocols should be considered for non-stabilization influx.</p>
+           </div>
+           <button className="clinical-btn bg-white text-rose-600 border-none px-6 rounded-xl text-[10px]" onClick={() => setActiveTab('occupancy')}>Audit Map</button>
+        </article>
+      )}
+
+      {activeTab === 'admit' && (
+        <section className="animate-fade-in grid grid-cols-12 gap-8">
+           <article className="col-span-12 lg:col-span-8 clinical-card p-12">
+              <header className="mb-12 border-b border-slate-50 pb-8 flex justify-between items-end">
+                 <div>
+                    <h3 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Bed Allocation Protocol</h3>
+                    <p className="dim-label uppercase tracking-widest text-[10px] mt-2 font-black">Subject Admission & Infrastructure Binding • Facility Node</p>
+                 </div>
+                 <div className="w-14 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center shadow-2xl">
+                    <BedIcon className="w-7 h-7" />
+                 </div>
+              </header>
+              
+              <form className="space-y-12" onSubmit={async (e) => {
+                e.preventDefault();
+                const fd = new FormData(e.target);
+                try {
+                  setLoading(true);
+                  const patientId = fd.get('patientId');
+                  const bedId = fd.get('bedId');
+                  const wardId = fd.get('wardId');
+                  const type = fd.get('type') || 'In-patient';
+
+                  // 1. Create Encounter
+                  await api.createEncounter({
+                    tenantId: tenant.id,
+                    userId: providers[0]?.id, // Default to first provider if not chosen
+                    patientId,
+                    providerId: fd.get('providerId') || providers[0]?.id,
+                    type,
+                    complaint: fd.get('notes') || 'In-patient Admission',
+                    diagnosis: 'Assessment Pending',
+                    notes: `Admitted to ${wards.find(w => w.id === wardId)?.name}, Bed: ${bedId}`
+                  });
+
+                  // Refresh data
+                  window.location.reload();
+                } catch (err) {
+                  alert('ADMISSION BREACH: ' + err.message);
+                } finally {
+                  setLoading(false);
+                }
+              }}>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                   <div className="space-y-8">
+                      <div className="space-y-2">
+                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Subject Identity Search</label>
+                         <div className="p-1 bg-slate-50 rounded-2xl border border-slate-100">
+                            <PatientSearch tenantId={tenant?.id} />
+                         </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Admitting Physician Shard</label>
+                        <select name="providerId" className="input-field h-[60px] bg-slate-50 border-none font-black text-slate-800 rounded-2xl" required>
+                          {providers.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                        </select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Admission Shard Type</label>
+                        <select name="type" className="input-field h-[60px] bg-slate-50 border-none font-black text-slate-800 rounded-2xl">
+                          <option value="In-patient">Routine Admission (IPD)</option>
+                          <option value="Emergency">Emergency Stabilization (ER)</option>
+                        </select>
+                      </div>
+                   </div>
+
+                   <div className="space-y-8">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Target Clinical Ward</label>
+                        <select name="wardId" className="input-field h-[60px] bg-slate-50 border-none font-black text-slate-800 rounded-2xl" required>
+                          {wards.map(w => <option key={w.id} value={w.id}>{w.name} ({w.type})</option>)}
+                        </select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Infrastructure Node (Bed)</label>
+                        <input name="bedId" placeholder="e.g. Unit-01, ICU-B-04" className="input-field h-[60px] bg-slate-50 border-none font-black text-slate-800 rounded-2xl" required />
+                        <p className="text-[9px] font-black text-slate-400 uppercase mt-2 italic px-1">Verify occupancy map before assignment.</p>
+                      </div>
+
+                      <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-start gap-4">
+                         <ShieldCheck className="w-5 h-5 text-emerald-500 mt-0.5" />
+                         <p className="text-[11px] font-medium text-slate-500 leading-relaxed italic">
+                           All facility admissions are logged into the institutional persistence ledger for automatic billing cycles.
+                         </p>
+                      </div>
+                   </div>
+                 </div>
+
+                 <div className="pt-10 border-t border-slate-50 flex justify-end gap-6 items-center">
+                    <button type="button" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 hover:text-rose-500 transition-colors" onClick={() => setActiveTab('ledger')}>Abort Protocol</button>
+                    <button type="submit" className="clinical-btn bg-slate-900 text-white px-12 py-6 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl hover:bg-emerald-600 transition-all border-none">
+                       CONFIRM CLINICAL ADMISSION
+                    </button>
+                 </div>
+              </form>
+           </article>
+
+           <aside className="col-span-12 lg:col-span-4 space-y-8">
+              <div className="clinical-card bg-emerald-50/50 border-emerald-100">
+                 <h4 className="text-[10px] font-black uppercase tracking-widest text-emerald-700 mb-6">Facility Status</h4>
+                 <div className="space-y-6">
+                    <div className="flex justify-between items-center text-[11px] font-black uppercase">
+                       <span className="text-slate-400">Available Beds</span>
+                       <span className="text-emerald-700">{metrics.critical - metrics.active}</span>
+                    </div>
+                    <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                       <div className="bg-emerald-500 h-full" style={{ width: `${(metrics.active / (metrics.critical || 1)) * 100}%` }}></div>
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-400 leading-relaxed">
+                       Operating at {((metrics.active / (metrics.critical || 1)) * 100).toFixed(0)}% facility saturation.
+                    </div>
+                 </div>
+              </div>
+           </aside>
+        </section>
+      )}
 
       {activeTab === 'ledger' && (
         <main className="clinical-card !p-0 overflow-hidden">
